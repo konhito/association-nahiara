@@ -97,13 +97,14 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: '/logo.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
       { url: '/favicon.ico', sizes: 'any' },
     ],
     apple: [
-      { url: '/logo.svg', type: 'image/svg+xml' },
+      { url: '/apple-touch-icon.png', type: 'image/png', sizes: '180x180' },
     ],
-    shortcut: '/logo.svg',
+    shortcut: '/favicon.ico',
     other: [
       {
         rel: 'mask-icon',
@@ -223,10 +224,11 @@ export default function RootLayout({ children }) {
         <meta httpEquiv="Content-Language" content="en,es,fr,de,zh" />
         
         {/* Favicon - Nahiara Logo */}
-        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
-        <link rel="alternate icon" href="/logo.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/logo.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="mask-icon" href="/logo.svg" color="#22c55e" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         
         {/* PWA / Mobile App Install Support */}
         <meta name="mobile-web-app-capable" content="yes" />
