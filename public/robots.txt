@@ -1,0 +1,18 @@
+# Robots.txt for International Association for the Defense of Flowers
+# https://asociacionnahiara.org
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://asociacionnahiara.org/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Block specific bots if needed
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
