@@ -534,33 +534,32 @@ ${t('landing.visionText')}
               </p>
             </div>
             
-            <div className="space-y-6">
-              {/* 3D Archive */}
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 group">
-                <div className="flex items-start space-x-4">
-                  <div className="w-14 h-14 bg-slate-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md">
-                    <Globe className="w-7 h-7 text-slate-700" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-slate-900 mb-2" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em' }}>
-                      {t('landing.interactive3DArchive')}
-                    </h3>
-                    <p className="text-sm text-slate-600 leading-relaxed mb-4" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', lineHeight: '1.6' }}>
-                      {t('landing.archiveDesc2')}
-                    </p>
-                    <a
-                      href="https://www.aquamundi.org/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-slate-700 to-slate-800 text-white text-sm font-medium rounded-lg hover:from-slate-800 hover:to-slate-900 transition-all duration-200 shadow-md hover:shadow-lg"
-                      style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em', fontWeight: '600' }}
-                    >
-                      {t('landing.startExploring')}
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </a>
-                  </div>
+            {/* 3D Archive - Featured Section */}
+            <div className="bg-white rounded-2xl p-8 sm:p-10 shadow-xl border-2 border-slate-200 hover:shadow-2xl transition-all duration-300 group mb-8">
+              <div className="text-center mb-6">
+                <div className="w-20 h-20 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <Globe className="w-10 h-10 text-slate-700" />
                 </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
+                  {t('landing.interactive3DArchive')}
+                </h3>
+                <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto mb-6" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', lineHeight: '1.7' }}>
+                  {t('landing.archiveDesc2')}
+                </p>
+                <a
+                  href="https://www.aquamundi.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-slate-700 to-slate-800 text-white text-base font-semibold rounded-lg hover:from-slate-800 hover:to-slate-900 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                  style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em' }}
+                >
+                  {t('landing.explore3DArchive')}
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </a>
               </div>
+            </div>
+
+            <div className="space-y-6">
 
               {/* Book Details */}
               <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 group">
@@ -597,7 +596,7 @@ ${t('landing.visionText')}
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
                 {t('landing.joinGlobalCommunity')}
               </h2>
-              <div className="w-24 h-1 bg-green-500 mx-auto"></div>
+              <div className="w-24 h-1 bg-slate-700 mx-auto"></div>
             </div>
             <div className="bg-white rounded-2xl p-8 sm:p-10 border border-slate-200 shadow-xl">
               <p className="text-lg text-slate-700 leading-relaxed text-center max-w-3xl mx-auto mb-8" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', lineHeight: '1.7' }}>
@@ -653,17 +652,17 @@ ${t('landing.visionText')}
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-16 px-6 bg-gray-50">
+        <section id="contact" className="py-16 px-6 bg-white">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
                 {t('landing.getInTouch')}
               </h2>
-              <div className="w-24 h-1 bg-green-500 mx-auto"></div>
+              <div className="w-24 h-1 bg-slate-700 mx-auto mb-8"></div>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-6 max-w-3xl mx-auto">
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group w-full md:w-auto md:flex-1">
                 <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Mail className="w-8 h-8 text-slate-700" />
                 </div>
@@ -677,7 +676,7 @@ ${t('landing.visionText')}
                 </a>
               </div>
               
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group w-full md:w-auto md:flex-1">
                 <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <MessageCircle className="w-8 h-8 text-slate-700" />
                 </div>
@@ -693,8 +692,8 @@ ${t('landing.visionText')}
                 </a>
               </div>
               
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
-                <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group w-full md:w-auto md:flex-1">
+                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <MapPin className="w-8 h-8 text-slate-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-slate-900 mb-2" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>Location</h3>
