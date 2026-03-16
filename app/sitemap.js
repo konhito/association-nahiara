@@ -14,6 +14,7 @@ export default function sitemap() {
           fr: `${baseUrl}?lang=fr`,
           de: `${baseUrl}?lang=de`,
           zh: `${baseUrl}?lang=zh`,
+          it: `${baseUrl}?lang=it`,
         },
       },
     },

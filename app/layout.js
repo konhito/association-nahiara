@@ -71,7 +71,7 @@ export const metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    alternateLocale: ['es_ES', 'fr_FR', 'de_DE', 'zh_CN'],
+    alternateLocale: ['es_ES', 'fr_FR', 'de_DE', 'zh_CN', 'it_IT'],
     url: siteConfig.url,
     siteName: siteConfig.name,
     title: `${siteConfig.name} | Proveneya & Nahiara`,
@@ -93,6 +93,7 @@ export const metadata = {
       'fr': `${siteConfig.url}?lang=fr`,
       'de': `${siteConfig.url}?lang=de`,
       'zh': `${siteConfig.url}?lang=zh`,
+      'it': `${siteConfig.url}?lang=it`,
     },
   },
   icons: {
@@ -158,7 +159,7 @@ const structuredData = {
         "@type": "ContactPoint",
         "telephone": siteConfig.socials.whatsapp,
         "contactType": "customer service",
-        "availableLanguage": ["English", "Spanish", "French", "German", "Chinese"]
+        "availableLanguage": ["English", "Spanish", "French", "German", "Chinese", "Italian"]
       }
     },
     {
@@ -170,7 +171,7 @@ const structuredData = {
       "publisher": {
         "@id": `${siteConfig.url}/#organization`
       },
-      "inLanguage": ["en", "es", "fr", "de", "zh"]
+      "inLanguage": ["en", "es", "fr", "de", "zh", "it"]
     },
     {
       "@type": "WebPage",
@@ -198,7 +199,7 @@ const structuredData = {
       },
       "description": "An illustrated literary journey through the world's most beautiful flowers, featuring 195 national flowers and their guardian pollinators.",
       "genre": ["Fantasy", "Environmental", "Educational"],
-      "inLanguage": ["en", "es", "fr", "de", "zh"],
+      "inLanguage": ["en", "es", "fr", "de", "zh", "it"],
       "publisher": {
         "@id": `${siteConfig.url}/#organization`
       }
@@ -221,7 +222,7 @@ export default function RootLayout({ children }) {
       <head>
         {/* Prevent browser translation */}
         <meta name="google" content="notranslate" />
-        <meta httpEquiv="Content-Language" content="en,es,fr,de,zh" />
+        <meta httpEquiv="Content-Language" content="en,es,fr,de,zh,it" />
         
         {/* Favicon - Nahiara Logo */}
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

@@ -21,6 +21,9 @@ const countryToLocale = {
   'SC': 'fr', 'HT': 'fr', 'RW': 'fr', 'BI': 'fr',
   // German-speaking countries
   'DE': 'de', 'AT': 'de', 'LI': 'de',
+
+  // Italian-speaking countries
+  'IT': 'it', 'SM': 'it', 'VA': 'it',
   // Chinese-speaking regions
   'CN': 'zh', 'TW': 'zh', 'HK': 'zh', 'MO': 'zh', 'SG': 'zh',
 };
@@ -253,6 +256,7 @@ function LanguageSwitcher({ currentLocale }) {
     { code: 'fr', name: 'Français', flag: '🇫🇷' },
     { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
     { code: 'zh', name: '中文', flag: '🇨🇳' },
+    { code: 'it', name: 'Italiano', flag: '🇮🇹' },
   ];
 
   const currentLang = languages.find(l => l.code === currentLocale) || languages[0];
