@@ -275,7 +275,7 @@ function LanguageSwitcher({ currentLocale }) {
       </button>
       
       {isOpen && (
-        <div className="absolute bottom-full left-0 mb-2 bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden min-w-[160px]">
+        <div className="absolute bottom-full left-0 mb-2 bg-white rounded-lg shadow-2xl border border-slate-200 overflow-hidden min-w-[160px]" style={{ zIndex: 9999 }}>
           {languages.map((lang) => (
             <button
               key={lang.code}
@@ -284,7 +284,7 @@ function LanguageSwitcher({ currentLocale }) {
                 setIsOpen(false);
               }}
               className={`w-full flex items-center gap-2 px-4 py-2 hover:bg-slate-100 transition-colors ${
-                lang.code === currentLocale ? 'bg-white text-slate-700' : 'text-slate-700'
+                lang.code === currentLocale ? 'bg-slate-50 font-semibold text-slate-900' : 'text-slate-700'
               }`}
             >
               <span>{lang.flag}</span>
@@ -333,8 +333,11 @@ function LandingContent() {
           return;
         }
 
-        // Clear any existing locale cookie for fresh detection
-        document.cookie = 'NEXT_LOCALE=;path=/;max-age=0;samesite=lax';
+        // Read any existing locale cookie
+        const existingCookie = document.cookie
+          .split('; ')
+          .find(row => row.startsWith('NEXT_LOCALE='));
+        const existingLocale = existingCookie ? existingCookie.split('=')[1] : null;
 
         // Detect location from IP
         const location = await detectLocationFromIP();
@@ -342,8 +345,13 @@ function LandingContent() {
         if (location && location.country) {
           const detectedLocale = countryToLocale[location.country] || defaultLocale;
           
-          // Set the locale cookie
-          document.cookie = `NEXT_LOCALE=${detectedLocale};path=/;max-age=${60 * 60 * 24};samesite=lax`;
+          // Only update and reload if the detected locale differs from current
+          if (detectedLocale !== existingLocale) {
+            document.cookie = `NEXT_LOCALE=${detectedLocale};path=/;max-age=${60 * 60 * 24};samesite=lax`;
+            // Reload so the translation hook picks up the newly-set locale cookie
+            window.location.reload();
+            return;
+          }
         }
       } catch (error) {
         console.error('Error detecting locale:', error);
@@ -710,7 +718,7 @@ ${t('landing.visionText')}
         </section>
 
         {/* Footer with Language Switcher */}
-        <footer className="relative py-12 px-6 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white border-t border-gray-700 overflow-hidden" role="contentinfo">
+        <footer className="relative py-12 px-6 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white border-t border-gray-700" role="contentinfo">
           {/* Decorative pattern overlay */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-0 w-full h-full" style={{
