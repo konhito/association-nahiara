@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef, Suspense } from "react";
+import Link from "next/link";
 import { Download, Mail, MessageCircle, Globe, BookOpen, ArrowRight, X, MapPin, Phone, Building2, Users, Heart, Sparkles, Award, Shield } from "lucide-react";
 import { useTranslation, locales, defaultLocale, changeLanguage } from "../lib/useTranslation";
 import { detectLocationFromIP } from "../lib/geolocation";
@@ -275,7 +276,7 @@ function LanguageSwitcher({ currentLocale }) {
       </button>
       
       {isOpen && (
-        <div className="absolute bottom-full left-0 mb-2 bg-white rounded-lg shadow-2xl border border-slate-200 overflow-hidden min-w-[160px]" style={{ zIndex: 9999 }}>
+        <div className="absolute bottom-full left-0 mb-2 bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden min-w-[160px]">
           {languages.map((lang) => (
             <button
               key={lang.code}
@@ -284,7 +285,7 @@ function LanguageSwitcher({ currentLocale }) {
                 setIsOpen(false);
               }}
               className={`w-full flex items-center gap-2 px-4 py-2 hover:bg-slate-100 transition-colors ${
-                lang.code === currentLocale ? 'bg-slate-50 font-semibold text-slate-900' : 'text-slate-700'
+                lang.code === currentLocale ? 'bg-white text-slate-700' : 'text-slate-700'
               }`}
             >
               <span>{lang.flag}</span>
@@ -333,11 +334,8 @@ function LandingContent() {
           return;
         }
 
-        // Read any existing locale cookie
-        const existingCookie = document.cookie
-          .split('; ')
-          .find(row => row.startsWith('NEXT_LOCALE='));
-        const existingLocale = existingCookie ? existingCookie.split('=')[1] : null;
+        // Clear any existing locale cookie for fresh detection
+        document.cookie = 'NEXT_LOCALE=;path=/;max-age=0;samesite=lax';
 
         // Detect location from IP
         const location = await detectLocationFromIP();
@@ -345,13 +343,8 @@ function LandingContent() {
         if (location && location.country) {
           const detectedLocale = countryToLocale[location.country] || defaultLocale;
           
-          // Only update and reload if the detected locale differs from current
-          if (detectedLocale !== existingLocale) {
-            document.cookie = `NEXT_LOCALE=${detectedLocale};path=/;max-age=${60 * 60 * 24};samesite=lax`;
-            // Reload so the translation hook picks up the newly-set locale cookie
-            window.location.reload();
-            return;
-          }
+          // Set the locale cookie
+          document.cookie = `NEXT_LOCALE=${detectedLocale};path=/;max-age=${60 * 60 * 24};samesite=lax`;
         }
       } catch (error) {
         console.error('Error detecting locale:', error);
@@ -495,6 +488,16 @@ ${t('landing.visionText')}
                 >
                   {t('landing.contactUs')}
                 </button>
+              </div>
+              <div className="mt-4 animate-fade-in">
+                <Link
+                  href="/evento-dibuja-flor"
+                  className="inline-flex items-center rounded-lg border border-emerald-300 bg-emerald-50 px-5 py-2.5 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100"
+                  style={{ fontFamily: "Inter, system-ui, -apple-system, sans-serif" }}
+                >
+                  Evento: Dibuja la Flor de Tu Pais
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </div>
             </div>
           </div>
@@ -718,7 +721,7 @@ ${t('landing.visionText')}
         </section>
 
         {/* Footer with Language Switcher */}
-        <footer className="relative py-12 px-6 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white border-t border-gray-700" role="contentinfo">
+        <footer className="relative py-12 px-6 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white border-t border-gray-700 overflow-hidden" role="contentinfo">
           {/* Decorative pattern overlay */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-0 w-full h-full" style={{
