@@ -2,7 +2,7 @@
   "landing": {
     "heroTitle": "Internationale Vereinigung zur Verteidigung der Blumen",
     "heroSubtitle": "Proveneya & Nahiara",
-    "heroTagline": "\"Wo die Menschheit blüht, wird die Natur wiedergeboren.\" 🌸",
+    "heroTagline": "Wo die Menschheit blüht, wird die Natur wiedergeboren.",
     "contactUs": "Kontaktiere uns",
     "explore3DArchive": "3D-Archiv erkunden",
     "description": "Eine literarische Saga und ein Transmedia-Ökosystem, das 195 Nationalblumen und ihre Bestäuber durch innovative Formate vereint: ein illustriertes Buch, ein fesselndes Kartenspiel, ein umfassendes 3D-Blumenarchiv und interaktive Roboterausstellungen.",
@@ -57,6 +57,14 @@
     "emailOpened": "E-Mail geöffnet!",
     "emailOpenedText": "Ihr E-Mail-Client sollte jetzt mit einer vorausgefüllten Nachricht geöffnet sein. Einfach senden!",
     "loading": "Lädt...",
-    "pleaseWait": "Bitte warten Sie, während wir Ihr Erlebnis vorbereiten."
+    "pleaseWait": "Bitte warten Sie, während wir Ihr Erlebnis vorbereiten.",
+    "ecosystem": "Digitales Ökosystem",
+    "exploreUniverse": "Erkunden Sie Unser Universum",
+    "globalGallery": "Globale Zeichnungsgalerie",
+    "galleryDesc": "34 einzigartige Perspektiven auf die Blume ihres Landes.",
+    "exploreCollection": "Sammlung Erkunden",
+    "territoriesTitle": "Territorien",
+    "pressRoom": "Presseraum",
+    "pressDesc": "Nachrichten und Interviews"
   }
 }

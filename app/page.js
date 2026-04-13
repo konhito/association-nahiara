@@ -1,9 +1,12 @@
 "use client";
-import { useState, useEffect, useRef, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense, useCallback } from "react";
 import Link from "next/link";
-import { Download, Mail, MessageCircle, Globe, BookOpen, ArrowRight, X, MapPin, Phone, Building2, Users, Heart, Sparkles, Award, Shield } from "lucide-react";
+import dynamic from "next/dynamic";
+import { Download, Mail, MessageCircle, Globe, BookOpen, ArrowRight, X, MapPin, Phone, Building2, Users, Heart, Sparkles, Award, Shield, ChevronDown, Flower2, TreePine, Leaf, Bird } from "lucide-react";
 import { useTranslation, locales, defaultLocale, changeLanguage } from "../lib/useTranslation";
 import { detectLocationFromIP } from "../lib/geolocation";
+
+const GLSLHills = dynamic(() => import('./components/GLSLHills'), { ssr: false });
 
 // Country to locale mapping
 const countryToLocale = {
@@ -32,7 +35,7 @@ const countryToLocale = {
 // Global flag to prevent multiple 3D logo instances
 let logoInstanceCount = 0;
 
-// 3D Logo Component
+// ─── 3D Logo Component (UNCHANGED) ───
 function Logo3D() {
   const canvasRef = useRef();
   const sceneRef = useRef();
@@ -247,7 +250,7 @@ function Logo3D() {
   );
 }
 
-// Language Switcher Component
+// ─── Language Switcher Component ───
 function LanguageSwitcher({ currentLocale }) {
   const [isOpen, setIsOpen] = useState(false);
   
@@ -266,17 +269,16 @@ function LanguageSwitcher({ currentLocale }) {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors"
+        className="flex items-center gap-2 px-4 py-2.5 rounded-full glass text-sm font-medium transition-all duration-300 hover:shadow-md"
+        style={{ color: 'var(--foreground)' }}
       >
-        <span>{currentLang.flag}</span>
+        <span className="text-lg">{currentLang.flag}</span>
         <span>{currentLang.name}</span>
-        <svg className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
+        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       
       {isOpen && (
-        <div className="absolute bottom-full left-0 mb-2 bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden min-w-[160px]">
+        <div className="absolute bottom-full left-0 mb-2 glass rounded-xl shadow-xl overflow-hidden min-w-[180px] border border-white/20">
           {languages.map((lang) => (
             <button
               key={lang.code}
@@ -284,11 +286,14 @@ function LanguageSwitcher({ currentLocale }) {
                 changeLanguage(lang.code);
                 setIsOpen(false);
               }}
-              className={`w-full flex items-center gap-2 px-4 py-2 hover:bg-slate-100 transition-colors ${
-                lang.code === currentLocale ? 'bg-white text-slate-700' : 'text-slate-700'
+              className={`w-full flex items-center gap-3 px-4 py-2.5 transition-all duration-200 text-sm ${
+                lang.code === currentLocale
+                  ? 'bg-white/60 font-semibold'
+                  : 'hover:bg-white/40'
               }`}
+              style={{ color: 'var(--foreground)' }}
             >
-              <span>{lang.flag}</span>
+              <span className="text-lg">{lang.flag}</span>
               <span>{lang.name}</span>
             </button>
           ))}
@@ -298,7 +303,146 @@ function LanguageSwitcher({ currentLocale }) {
   );
 }
 
-// Landing Content Component
+// ─── Intersection Observer Hook for scroll animations ───
+function useReveal() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('visible');
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.15, rootMargin: '-40px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return ref;
+}
+
+// ─── Section Header Component (DrCode-style) ───
+function SectionHeader({ eyebrow, title, subtitle, align = 'center' }) {
+  const ref = useReveal();
+  return (
+    <div ref={ref} className={`reveal mb-14 md:mb-20 ${align === 'center' ? 'text-center' : 'text-left'}`}>
+      {eyebrow && (
+        <p className="type-eyebrow mb-3 sm:mb-4">{eyebrow}</p>
+      )}
+      <h2 className="type-section-title mb-4 text-[var(--foreground)]">
+        {title}
+      </h2>
+      {subtitle && (
+        <p className={`type-body-lg mx-auto text-[var(--muted-foreground)] ${align === 'center' ? 'text-center' : ''}`}>
+          {subtitle}
+        </p>
+      )}
+      <div className="section-divider mt-6" />
+    </div>
+  );
+}
+
+
+// ─── Navbar Component ───
+function Navbar({ scrolled, onContactClick, locale }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  
+  const navLinks = [
+    { id: 'story', label: locale === 'es' ? 'Historia' : 'Story' },
+    { id: 'journey', label: locale === 'es' ? 'Experiencia' : 'Experience' },
+    { id: 'community', label: locale === 'es' ? 'Comunidad' : 'Community' },
+    { id: 'contact', label: locale === 'es' ? 'Contacto' : 'Contact' },
+  ];
+
+  return (
+    <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+      scrolled
+        ? 'navbar-glass shadow-[0_1px_0_rgba(15,29,21,0.05)]'
+        : 'bg-transparent'
+    }`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3.5">
+        <div className="flex items-center justify-between gap-3">
+          {/* Logo / Brand */}
+          <a href="#" className="flex items-center gap-2.5 min-h-[44px] rounded-lg focus:outline-none">
+            <Flower2 className="w-7 h-7 text-[var(--brand)]" strokeWidth={2} />
+            <span style={{ fontFamily: 'Outfit, Inter, sans-serif', fontWeight: 700, fontSize: 'clamp(1.1rem, 0.8vw + 0.95rem, 1.4rem)', letterSpacing: '-0.03em', color: 'var(--foreground)' }}>
+              IADF
+            </span>
+          </a>
+
+          {/* Desktop Nav Links */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map(link => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                className="text-[0.9375rem] font-medium text-[var(--muted-foreground)] transition-colors duration-200 hover:text-[var(--foreground)] py-1"
+                style={{ letterSpacing: '-0.01em' }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* CTA + mobile toggle */}
+          <div className="flex items-center gap-2">
+            {/* Mobile toggle */}
+            <button
+              onClick={() => setMobileOpen(o => !o)}
+              className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-lg transition-colors hover:bg-[var(--muted)]"
+              aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            >
+              {mobileOpen ? <X className="h-5 w-5" /> : (
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
+
+            <button
+              onClick={onContactClick}
+              className="hidden md:inline-flex btn-primary"
+            >
+              {locale === 'es' ? 'Contactar' : 'Get in Touch'}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="md:hidden navbar-glass border-t border-[var(--border)]">
+          <div className="max-w-7xl mx-auto px-4 py-3 sm:px-6">
+            <div className="flex flex-col gap-0.5">
+              {navLinks.map(link => (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  onClick={() => setMobileOpen(false)}
+                  className="flex min-h-[44px] items-center rounded-lg px-3 text-[var(--foreground)] font-medium transition-colors hover:bg-[var(--muted)]"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <button
+                onClick={() => { onContactClick(); setMobileOpen(false); }}
+                className="mt-2 btn-primary w-full"
+              >
+                {locale === 'es' ? 'Contactar' : 'Get in Touch'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+}
+
+
+// ─── Landing Content Component ───
 function LandingContent() {
   const { t, locale, isLoading } = useTranslation();
   const [showContactModal, setShowContactModal] = useState(false);
@@ -311,6 +455,8 @@ function LandingContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [localeReady, setLocaleReady] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Contact info
   const contactInfo = {
@@ -318,6 +464,19 @@ function LandingContent() {
     phone: "+34 625 50 18 67",
     location: "FLOR_∞ - 28.1235° N, 15.4363° W - Gran Canaria"
   };
+
+  // Mount animation
+  useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Scroll detect for navbar
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Auto-detect language from IP on initial load
   useEffect(() => {
@@ -437,227 +596,282 @@ ${t('landing.visionText')}
     URL.revokeObjectURL(url);
   };
 
+  // Entrance animation helper
+  const entrance = (index = 0) => ({
+    opacity: mounted ? 1 : 0,
+    transform: mounted ? 'translateY(0)' : 'translateY(24px)',
+    transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${240 + index * 100}ms, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${240 + index * 100}ms`,
+  });
+
   return (
     <>
-      <main className="min-h-screen bg-white text-slate-900 relative" style={{ fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }} role="main">
-        {/* Organic Background Pattern - decorative */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div className="absolute top-0 left-0 w-full h-full opacity-5">
-            <div className="absolute top-20 left-10 w-64 h-64 bg-slate-100 rounded-full blur-3xl opacity-10"></div>
-            <div className="absolute bottom-20 right-20 w-80 h-80 bg-slate-100 rounded-full blur-3xl opacity-10"></div>
-            <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-slate-100 rounded-full blur-3xl opacity-10 transform -translate-x-1/2 -translate-y-1/2"></div>
-          </div>
-        </div>
+      <main className="min-h-screen relative" style={{ fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }} role="main">
+        
+        {/* ─── Navbar ─── */}
+        <Navbar scrolled={scrolled} onContactClick={() => setShowContactModal(true)} locale={locale} />
 
-        {/* Header / Hero Section */}
-        <header className="relative py-16 px-4 bg-white overflow-hidden" role="banner">
-          {/* Decorative elements */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-slate-100 rounded-full blur-3xl opacity-10 -translate-y-1/2 translate-x-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-100 rounded-full blur-3xl opacity-10 translate-y-1/2 -translate-x-1/2"></div>
+        {/* ═══════════════════════════════════════════════════════════════
+            HERO SECTION — Full-screen, DrCode-style with 3D logo
+        ═══════════════════════════════════════════════════════════════ */}
+        <header className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden" style={{ minHeight: '100dvh' }} role="banner">
+          {/* Animated 3D background */}
+          <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.85]">
+            <GLSLHills cameraZ={125} speed={0.4} planeSize={256} />
+          </div>
           
-          <div className="relative max-w-4xl mx-auto">
-            <div className="text-center">
-              <figure className="mb-6 flex justify-center animate-fade-in" aria-label="Association Logo">
-                <Logo3D key="main-logo" />
-              </figure>
-              
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight animate-slide-in" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
+          {/* Grid pattern overlay */}
+          <div className="pointer-events-none absolute inset-0 grid-pattern" aria-hidden="true" />
+          
+          {/* Radial glow */}
+          <div className="pointer-events-none absolute inset-0 radial-glow-top" aria-hidden="true" />
+
+          {/* Content */}
+          <div className="pointer-events-none relative z-10 space-y-6 px-6 text-center max-w-4xl mx-auto">
+            {/* 3D Logo */}
+            <figure className="mb-2 flex justify-center" style={entrance(0)} aria-label="Association Logo">
+              <Logo3D key="main-logo" />
+            </figure>
+
+            {/* Eyebrow */}
+            <p className="type-eyebrow" style={entrance(1)}>
+              {locale === 'es' ? 'Defensa Internacional de las Flores' : 'International Flower Defense'}
+            </p>
+
+            {/* Main Heading */}
+            <h1 className="type-display text-[var(--foreground)]" style={entrance(2)}>
+              <span className="block italic text-[0.72em] font-light leading-[1.1] text-[var(--muted-foreground)]">
                 {t('landing.heroTitle')}
-              </h1>
-              <p className="text-lg sm:text-xl md:text-2xl text-slate-700 mb-4 font-medium animate-fade-in" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em' }} role="doc-subtitle">
+              </span>
+              <span className="font-semibold gradient-text-nature" style={{ WebkitTextFillColor: 'transparent' }}>
                 {t('landing.heroSubtitle')}
-              </p>
-              <p className="text-base sm:text-lg text-slate-700 mb-8 leading-relaxed max-w-2xl mx-auto animate-fade-in" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', fontWeight: '400', fontStyle: 'italic' }}>
-                {t('landing.heroTagline')}
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto animate-scale-in">
-                <a
-                  href="https://www.aquamundi.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white font-semibold rounded-lg hover:from-slate-800 hover:to-slate-900 transition-all duration-200 text-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                  style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em' }}
-                >
-                  {t('landing.explore3DArchive')}
-                </a>
-                <button
-                  onClick={() => setShowContactModal(true)}
-                  className="px-6 py-3 border-2 border-slate-700 text-slate-700 font-semibold rounded-lg hover:bg-white transition-all duration-200 shadow-sm hover:shadow-md"
-                  style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em' }}
-                >
-                  {t('landing.contactUs')}
-                </button>
-              </div>
-              <div className="mt-4 animate-fade-in">
-                <Link
-                  href="/evento-dibuja-flor"
-                  className="inline-flex items-center rounded-lg border border-emerald-300 bg-emerald-50 px-5 py-2.5 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100"
-                  style={{ fontFamily: "Inter, system-ui, -apple-system, sans-serif" }}
-                >
-                  Evento: Dibuja la Flor de Tu Pais
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </div>
+              </span>
+            </h1>
+
+            {/* Lede */}
+            <p className="type-body-lg mx-auto text-[var(--muted-foreground)]" style={entrance(3)}>
+              {t('landing.heroTagline')}
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pointer-events-auto pt-4" style={entrance(4)}>
+              <a
+                href="https://www.aquamundi.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                {t('landing.explore3DArchive')}
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </a>
+              <button
+                onClick={() => setShowContactModal(true)}
+                className="btn-secondary"
+              >
+                {t('landing.contactUs')}
+              </button>
             </div>
+
+
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float" style={entrance(6)}>
+            <ChevronDown className="w-6 h-6 text-[var(--muted-foreground)]" />
           </div>
         </header>
 
-        {/* Book Story Section */}
-        <article className="py-12 px-4 bg-white" aria-labelledby="story-heading">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 id="story-heading" className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
-                {t('landing.storyBehindBook')}
-              </h2>
-              <div className="w-16 h-1 bg-slate-700 mx-auto" aria-hidden="true"></div>
-            </div>
-            <div className="bg-white rounded-xl p-6 sm:p-8 border border-slate-200 shadow-lg">
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed text-center max-w-3xl mx-auto mb-6" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', lineHeight: '1.7' }}>
-                {t('landing.storyText')}
-              </p>
-              <div className="text-center">
-                <div className="flex flex-wrap justify-center gap-3">
-                  <span className="inline-flex items-center px-4 py-2 bg-white text-slate-700 rounded-full text-xs font-semibold shadow-md hover:shadow-lg transition-shadow duration-200" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
-                    <Sparkles className="w-3 h-3 mr-1.5 text-slate-600" />
-                    {t('landing.literarySaga')}
-                  </span>
-                  <span className="inline-flex items-center px-4 py-2 bg-white text-slate-700 rounded-full text-xs font-semibold shadow-md hover:shadow-lg transition-shadow duration-200" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
-                    <Globe className="w-3 h-3 mr-1.5 text-slate-600" />
-                    {t('landing.globalImpact')}
-                  </span>
-                  <span className="inline-flex items-center px-4 py-2 bg-white text-slate-700 rounded-full text-xs font-semibold shadow-md hover:shadow-lg transition-shadow duration-200" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
-                    <Heart className="w-3 h-3 mr-1.5 text-indigo-600" />
-                    {t('landing.flowers195')}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </article>
+        {/* ═══════════════════════════════════════════════════════════════
+            STORY SECTION
+        ═══════════════════════════════════════════════════════════════ */}
+        <section id="story" className="relative overflow-hidden py-20 md:py-28 lg:py-32 px-6" aria-labelledby="story-heading">
+          {/* Decorative blobs */}
+          <div className="pointer-events-none absolute -left-32 top-1/4 h-64 w-64 rounded-full bg-[var(--brand)]/8 blur-3xl" aria-hidden="true" />
+          <div className="pointer-events-none absolute -right-24 bottom-0 h-56 w-56 rounded-full bg-[var(--accent-violet)]/8 blur-3xl" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 grid-pattern" aria-hidden="true" />
 
-        {/* Digital Experience Section */}
-        <section className="py-12 px-4 bg-white" aria-labelledby="journey-heading">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 id="journey-heading" className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
-                {t('landing.continueJourney')}
-              </h2>
-              <div className="w-16 h-1 bg-slate-700 mx-auto" aria-hidden="true"></div>
-              <p className="text-base sm:text-lg text-slate-600 mt-4 max-w-2xl mx-auto" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
-                {t('landing.journeyText')}
-              </p>
-            </div>
-            
-            {/* 3D Archive - Featured Section */}
-            <div className="bg-white rounded-2xl p-8 sm:p-10 shadow-xl border-2 border-slate-200 hover:shadow-2xl transition-all duration-300 group mb-8">
-              <div className="text-center mb-6">
-                <div className="w-20 h-20 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <Globe className="w-10 h-10 text-slate-700" />
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
-                  {t('landing.interactive3DArchive')}
-                </h3>
-                <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto mb-6" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', lineHeight: '1.7' }}>
-                  {t('landing.archiveDesc2')}
+          <div className="relative max-w-5xl mx-auto">
+            <SectionHeader
+              eyebrow={locale === 'es' ? 'Nuestra Historia' : 'Our Story'}
+              title={t('landing.storyBehindBook')}
+              subtitle={null}
+            />
+
+            <div className="relative">
+              {/* Main story card */}
+              <StoryCard>
+                <p className="type-body-lg mx-auto text-center text-[var(--muted-foreground)] mb-8" style={{ maxWidth: '60ch' }}>
+                  {t('landing.storyText')}
                 </p>
-                <a
-                  href="https://www.aquamundi.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-slate-700 to-slate-800 text-white text-base font-semibold rounded-lg hover:from-slate-800 hover:to-slate-900 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                  style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em' }}
-                >
-                  {t('landing.explore3DArchive')}
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </a>
-              </div>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {[
+                    { icon: Sparkles, label: t('landing.literarySaga'), color: 'var(--brand)' },
+                    { icon: Globe, label: t('landing.globalImpact'), color: 'var(--brand)' },
+                    { icon: Heart, label: t('landing.flowers195'), color: 'var(--accent-violet)' },
+                  ].map((chip, i) => {
+                    const ChipIcon = chip.icon;
+                    return (
+                      <span key={i} className="inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold glass-card" style={{ color: 'var(--foreground)' }}>
+                        <ChipIcon className="w-3.5 h-3.5 mr-2" style={{ color: chip.color }} />
+                        {chip.label}
+                      </span>
+                    );
+                  })}
+                </div>
+              </StoryCard>
             </div>
+          </div>
+        </section>
 
-            <div className="space-y-6">
+        {/* ═══════════════════════════════════════════════════════════════
+            BENTO GRID EXPERIENCES (DrCode Style, Typography + Layout)
+        ═══════════════════════════════════════════════════════════════ */}
+        <section id="journey" className="relative overflow-hidden py-24 md:py-32 px-6" aria-labelledby="journey-heading">
+          <div className="pointer-events-none absolute inset-0 radial-glow-center" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 dot-pattern opacity-50" aria-hidden="true" />
 
-              {/* Book Details */}
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 group">
-                <div className="flex items-start space-x-4">
-                  <div className="w-14 h-14 bg-slate-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-md">
-                    <BookOpen className="w-7 h-7 text-slate-700" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-slate-900 mb-2" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em' }}>
-                      {t('landing.completeSaga')}
+          <div className="relative max-w-7xl mx-auto">
+            <RevealWrap className="mb-16 text-center">
+              <p className="type-eyebrow text-[var(--accent-violet)] mb-4">
+                {t('landing.ecosystem')}
+              </p>
+              <h2 id="journey-heading" className="type-display text-4xl sm:text-5xl md:text-6xl text-[var(--foreground)] tracking-tight">
+                {t('landing.exploreUniverse')}
+              </h2>
+            </RevealWrap>
+
+            {/* True Bento Grid (CSS Grid) */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[280px]">
+              
+              {/* Highlight Card 1: 3D Archive */}
+              <RevealWrap className="md:col-span-2 md:row-span-2 group relative block overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[#fafdf9]/80 backdrop-blur-xl shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative h-full flex flex-col justify-between p-8 md:p-12 z-10">
+                  <div>
+                    <h3 className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 leading-[1.1] mb-6">
+                      {t('landing.interactive3DArchive')}
                     </h3>
-                    <p className="text-sm text-slate-600 leading-relaxed mb-4" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', lineHeight: '1.6' }}>
-                      {t('landing.sagaDesc')}
+                    <p className="text-lg text-gray-600 max-w-md">
+                      {t('landing.archiveDesc2')}
                     </p>
-                    <button
-                      onClick={() => setShowContactModal(true)}
-                      className="inline-flex items-center px-5 py-2.5 border-2 border-slate-700 text-slate-700 text-sm font-medium rounded-lg hover:bg-white transition-all duration-200 shadow-sm hover:shadow-md"
-                      style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.01em', fontWeight: '600' }}
-                    >
-                      {t('landing.learnMore')}
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </button>
+                  </div>
+                  <div>
+                    <a href="https://www.aquamundi.org/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-gray-900 text-white rounded-full px-8 py-4 font-semibold text-lg hover:scale-105 hover:bg-gray-800 transition-all shadow-xl">
+                      {t('landing.explore3DArchive')}
+                    </a>
                   </div>
                 </div>
-              </div>
+                {/* Abstract shape decoration instead of icons */}
+                <div className="absolute -bottom-24 -right-24 w-[400px] h-[400px] bg-gradient-radial from-emerald-200/40 to-transparent blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-700" />
+              </RevealWrap>
+
+              {/* Gallery of Drawings */}
+              <RevealWrap className="md:col-span-2 md:row-span-1 group relative block overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--ink)] shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
+                <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 via-transparent to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.1) 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+                <Link href="/galeria-dibujos" className="relative h-full flex flex-col justify-center p-8 z-10 text-white">
+                  <h3 className="text-3xl font-semibold tracking-tight mb-3">
+                    {t('landing.globalGallery')}
+                  </h3>
+                  <p className="text-white/70 text-lg max-w-md">
+                    {t('landing.galleryDesc')}
+                  </p>
+                  <div className="mt-6 flex items-center text-emerald-400 font-semibold uppercase tracking-wider text-sm group-hover:text-emerald-300 transition-colors">
+                    {t('landing.exploreCollection')} →
+                  </div>
+                </Link>
+              </RevealWrap>
+
+              {/* Territories */}
+              <RevealWrap className="md:col-span-1 md:row-span-1 group relative block overflow-hidden rounded-[2rem] border border-[var(--border)] bg-gradient-to-br from-[#f1f8f6] to-[#e6f4ef] shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-300/30 blur-2xl rounded-full mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Link href="/territories" className="relative h-full flex flex-col justify-end p-8 z-10">
+                  <div className="mb-4">
+                    <span className="inline-block px-3 py-1 rounded-full bg-emerald-900/10 text-emerald-800 text-xs font-bold uppercase tracking-widest mb-3">
+                      ITC
+                    </span>
+                    <h3 className="text-2xl font-semibold tracking-tight text-emerald-950 leading-tight">
+                      {t('landing.territoriesTitle')}
+                    </h3>
+                  </div>
+                </Link>
+              </RevealWrap>
+
+              {/* Press Room */}
+              <RevealWrap className="md:col-span-1 md:row-span-1 group relative block overflow-hidden rounded-[2rem] border border-[var(--border)] bg-white shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-gray-100 to-transparent" />
+                <Link href="/press" className="relative h-full flex flex-col justify-end p-8 z-10">
+                  <h3 className="text-2xl font-semibold tracking-tight text-gray-900 leading-tight mb-2">
+                    {t('landing.pressRoom')}
+                  </h3>
+                  <p className="text-sm text-gray-500 font-medium">
+                    {t('landing.pressDesc')}
+                  </p>
+                </Link>
+              </RevealWrap>
+
+              {/* Evento Pasado (Dibuja la Flor Recap) */}
+              <RevealWrap className="md:col-span-4 md:row-span-1 group relative block overflow-hidden rounded-[2rem] border border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
+                <div className="absolute inset-0 bg-white/40" />
+                <Link href="/evento-dibuja-flor" className="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-10 z-10 gap-6">
+                  <div className="flex-1">
+                    <span className="inline-block px-3 py-1 rounded-full bg-emerald-600 text-white text-xs font-bold uppercase tracking-widest mb-3">
+                      {{
+                        es: "Evento Comunitario",
+                        en: "Community Event",
+                        de: "Gemeinschaftsereignis",
+                        fr: "Événement Communautaire",
+                        it: "Evento Comunitario",
+                        zh: "社区活动"
+                      }[locale] || "Community Event"}
+                    </span>
+                    <h3 className="text-3xl font-bold tracking-tight text-emerald-900 leading-tight mb-2" style={{ fontFamily: '"Playfair Display", serif' }}>
+                      {{
+                        es: "Dibuja la Flor de Tu País — Resumen del 11 de Abril",
+                        en: "Draw the Flower of Your Country — April 11 Recap",
+                        de: "Zeichne die Blume deines Landes — Zusammenfassung 11. April",
+                        fr: "Dessine la Fleur de Ton Pays — Résumé du 11 Avril",
+                        it: "Disegna il Fiore del Tuo Paese — Riepilogo dell'11 Aprile",
+                        zh: "画出你国家的花 — 4月11日回顾"
+                      }[locale] || "Draw the Flower of Your Country — April 11 Recap"}
+                    </h3>
+                  </div>
+                  <div className="hidden md:flex min-w-[120px] justify-end">
+                    <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </Link>
+              </RevealWrap>
+
             </div>
           </div>
         </section>
 
-        {/* Community Section */}
-        <section className="py-16 px-6 bg-white">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
-                {t('landing.joinGlobalCommunity')}
-              </h2>
-              <div className="w-24 h-1 bg-slate-700 mx-auto"></div>
-            </div>
-            <div className="bg-white rounded-2xl p-8 sm:p-10 border border-slate-200 shadow-xl">
-              <p className="text-lg text-slate-700 leading-relaxed text-center max-w-3xl mx-auto mb-8" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', lineHeight: '1.7' }}>
-                {t('landing.communityText')}
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <span className="inline-flex items-center px-5 py-2.5 bg-white text-slate-700 rounded-full text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
-                  <Users className="w-4 h-4 mr-2 text-blue-600" />
-                  {t('landing.globalCommunity')}
-                </span>
-                <span className="inline-flex items-center px-5 py-2.5 bg-white text-slate-700 rounded-full text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
-                  <Award className="w-4 h-4 mr-2 text-slate-600" />
-                  {t('landing.educationalImpact')}
-                </span>
-                <span className="inline-flex items-center px-5 py-2.5 bg-white text-slate-700 rounded-full text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
-                  <Shield className="w-4 h-4 mr-2 text-slate-600" />
-                  {t('landing.conservationFocus')}
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* ═══════════════════════════════════════════════════════════════
+            SHARE / CTA SECTION
+        ═══════════════════════════════════════════════════════════════ */}
+        <section className="relative overflow-hidden py-20 md:py-28 lg:py-32 px-6">
+          <div className="pointer-events-none absolute inset-0 radial-glow-top" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 grid-pattern" aria-hidden="true" />
 
-        {/* Share Section */}
-        <section className="py-16 px-6 bg-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
-              {t('landing.shareExperience')}
-            </h2>
-            <div className="w-24 h-1 bg-slate-700 mx-auto mb-8"></div>
-            <p className="text-lg text-slate-700 mb-8 leading-relaxed max-w-2xl mx-auto" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', lineHeight: '1.7' }}>
-              {t('landing.shareText')}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="relative max-w-4xl mx-auto text-center">
+            <SectionHeader
+              eyebrow={locale === 'es' ? 'Comparte' : 'Share'}
+              title={t('landing.shareExperience')}
+              subtitle={t('landing.shareText')}
+            />
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 stagger-children">
               <button
                 onClick={() => setShowContactModal(true)}
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-slate-700 to-slate-800 text-white font-medium rounded-lg hover:from-slate-800 hover:to-slate-900 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}
+                className="btn-primary"
               >
                 <MessageCircle className="mr-2 w-5 h-5" />
                 {t('landing.getInTouch')}
               </button>
               <button
                 onClick={handlePressKitDownload}
-                className="inline-flex items-center px-6 py-3 border-2 border-slate-300 text-slate-700 font-medium rounded-lg hover:bg-white transition-all duration-200 shadow-sm hover:shadow-md"
-                style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}
+                className="btn-secondary"
               >
                 <Download className="mr-2 w-5 h-5" />
                 {t('landing.downloadResources')}
@@ -666,273 +880,391 @@ ${t('landing.visionText')}
           </div>
         </section>
 
-        {/* Contact Section */}
-        <section id="contact" className="py-16 px-6 bg-white">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif', letterSpacing: '-0.02em' }}>
-                {t('landing.getInTouch')}
-              </h2>
-              <div className="w-24 h-1 bg-slate-700 mx-auto mb-8"></div>
-            </div>
-            
-            <div className="flex flex-col md:flex-row justify-center items-center gap-6 max-w-3xl mx-auto">
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group w-full md:w-auto md:flex-1">
-                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <Mail className="w-8 h-8 text-slate-700" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>Email</h3>
-                <a 
-                  href={`mailto:${contactInfo.email}`}
-                  className="text-slate-600 hover:text-slate-700 transition-colors text-sm notranslate inline-block"
-                  translate="no"
-                >
-                  {contactInfo.email}
-                </a>
-              </div>
-              
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group w-full md:w-auto md:flex-1">
-                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <MessageCircle className="w-8 h-8 text-slate-700" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>WhatsApp</h3>
-                <a 
-                  href={`https://wa.me/${contactInfo.phone.replace(/\s+/g, '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-slate-600 hover:text-slate-700 transition-colors text-sm notranslate inline-block"
-                  translate="no"
-                >
-                  {contactInfo.phone}
-                </a>
-              </div>
-              
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-200 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group w-full md:w-auto md:flex-1">
-                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <MapPin className="w-8 h-8 text-slate-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>Location</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">
-                  {contactInfo.location}
-                </p>
-              </div>
+        {/* ═══════════════════════════════════════════════════════════════
+            CONTACT SECTION
+        ═══════════════════════════════════════════════════════════════ */}
+        <section id="contact" className="relative overflow-hidden py-20 md:py-28 lg:py-32 px-6 bg-[var(--muted)]">
+          <div className="pointer-events-none absolute inset-0 dot-pattern" aria-hidden="true" />
+          <div className="relative max-w-5xl mx-auto">
+            <SectionHeader
+              eyebrow={locale === 'es' ? 'Contacto' : 'Contact'}
+              title={t('landing.getInTouch')}
+            />
+
+            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto stagger-children">
+              {[
+                {
+                  icon: Mail,
+                  title: 'Email',
+                  value: contactInfo.email,
+                  href: `mailto:${contactInfo.email}`,
+                  color: 'var(--brand)',
+                },
+                {
+                  icon: MessageCircle,
+                  title: 'WhatsApp',
+                  value: contactInfo.phone,
+                  href: `https://wa.me/${contactInfo.phone.replace(/\s+/g, '')}`,
+                  external: true,
+                  color: 'var(--brand)',
+                },
+                {
+                  icon: MapPin,
+                  title: locale === 'es' ? 'Ubicación' : 'Location',
+                  value: contactInfo.location,
+                  color: 'var(--accent-violet)',
+                },
+              ].map((item, i) => (
+                <ContactCard key={i} {...item} />
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Footer with Language Switcher */}
-        <footer className="relative py-12 px-6 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white border-t border-gray-700 overflow-hidden" role="contentinfo">
-          {/* Decorative pattern overlay */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-full h-full" style={{
-              backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(51, 65, 85, 0.1) 10px, rgba(51, 65, 85, 0.1) 20px)'
-            }}></div>
-          </div>
-          <div className="relative max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-              <div className="flex flex-col items-center md:items-start">
-                <p className="text-gray-300 text-sm mb-2">
-                  © {new Date().getFullYear()} International Association for the Defense of Flowers
-                </p>
-                <p className="text-gray-400 text-xs">
-                  All rights reserved.
+        {/* ═══════════════════════════════════════════════════════════════
+            FOOTER — DrCode-style minimal
+        ═══════════════════════════════════════════════════════════════ */}
+        <footer className="relative py-12 px-6 bg-[var(--ink)] text-white overflow-hidden" role="contentinfo">
+          <div className="pointer-events-none absolute inset-0 opacity-[0.04]" style={{
+            backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)',
+            backgroundSize: '4rem 4rem',
+          }} />
+          <div className="relative max-w-6xl mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+              <div className="flex flex-col items-center md:items-start gap-3">
+                <div className="flex items-center gap-2.5">
+                  <Flower2 className="w-6 h-6 text-emerald-400" />
+                  <span className="font-bold text-lg tracking-tight" style={{ fontFamily: 'Outfit, Inter, sans-serif' }}>IADF</span>
+                </div>
+                <p className="text-white/50 text-sm max-w-xs text-center md:text-left">
+                  {locale === 'es'
+                    ? 'Asociación Internacional para la Defensa de las Flores. Donde la humanidad florece, la naturaleza renace.'
+                    : 'International Association for the Defense of Flowers. Where humanity blooms, nature is reborn.'}
                 </p>
               </div>
-              <nav aria-label="Language selection">
+
+              <div className="flex flex-col items-center md:items-end gap-4">
                 <LanguageSwitcher currentLocale={locale} />
-              </nav>
+                <div className="flex gap-6 text-sm text-white/40">
+                  <Link href="/press" className="hover:text-white/80 transition-colors">{locale === 'es' ? 'Prensa' : 'Press'}</Link>
+                  <Link href="/territories" className="hover:text-white/80 transition-colors">{locale === 'es' ? 'Territorios' : 'Territories'}</Link>
+                  <a href={`mailto:${contactInfo.email}`} className="hover:text-white/80 transition-colors">{locale === 'es' ? 'Contacto' : 'Contact'}</a>
+                </div>
+                <p className="text-white/30 text-xs">
+                  © {new Date().getFullYear()} International Association for the Defense of Flowers
+                </p>
+              </div>
             </div>
           </div>
         </footer>
       </main>
 
-        {/* Contact Modal */}
-        {showContactModal && (
-          <div 
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
-            onClick={(e) => {
-              if (e.target === e.currentTarget) {
-                setShowContactModal(false);
-              }
-            }}
-          >
-            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto border border-slate-200 animate-scale-in">
-              <div className="flex items-center justify-between p-6 border-b border-slate-200 bg-white">
-                <h3 className="text-xl font-bold text-slate-900" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
-                  {t('landing.getInTouch')}
-                </h3>
-                <button
-                  onClick={() => setShowContactModal(false)}
-                  className="text-slate-400 hover:text-slate-600 transition-colors p-1 hover:bg-slate-100 rounded-full"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-
-              <div className="p-6">
-                <p className="text-slate-600 mb-6 text-center">
-                  {t('landing.responseTime')}
-                </p>
-
-                <form onSubmit={handleContactSubmit} className="mb-6 p-4 bg-white rounded-lg border border-slate-200">
-                  <h4 className="font-semibold text-slate-900 mb-4 text-center">
-                    {t('landing.sendMessage')}
-                  </h4>
-                  
-                  <div className="space-y-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">
-                        {t('landing.name')} *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        required
-                        value={contactForm.name}
-                        onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
-                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent"
-                        placeholder={t('landing.yourName')}
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                        {t('landing.email')} *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        required
-                        value={contactForm.email}
-                        onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
-                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent"
-                        placeholder={t('landing.yourEmail')}
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-                        {t('landing.subject')}
-                      </label>
-                      <input
-                        type="text"
-                        id="subject"
-                        value={contactForm.subject}
-                        onChange={(e) => setContactForm({...contactForm, subject: e.target.value})}
-                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent"
-                        placeholder={t('landing.whatIsThisAbout')}
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                        {t('landing.message')} *
-                      </label>
-                      <textarea
-                        id="message"
-                        required
-                        rows={4}
-                        value={contactForm.message}
-                        onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
-                        placeholder={t('landing.tellUsAbout')}
-                      />
-                    </div>
-                    
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full bg-slate-700 text-white py-2 px-4 rounded-lg hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting 
-                        ? t('landing.openingEmail')
-                        : t('landing.sendMessageBtn')
-                      }
-                    </button>
-                  </div>
-                </form>
-
-                <div className="relative mb-6">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-300" />
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-slate-500">
-                      {t('landing.or')}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <a
-                    href={`mailto:${contactInfo.email}`}
-                    className="flex items-center p-4 bg-white border border-slate-200 rounded-lg hover:bg-white transition-all duration-200 shadow-sm hover:shadow-md group"
-                  >
-                    <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-200 shadow-sm">
-                      <Mail className="w-6 h-6 text-slate-700" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-slate-900">
-                        {t('landing.sendEmail')}
-                      </h4>
-                      <p className="text-sm text-slate-600 notranslate" translate="no">{contactInfo.email}</p>
-                    </div>
-                  </a>
-
-                  <a
-                    href={`https://wa.me/${contactInfo.phone.replace(/\s+/g, '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center p-4 bg-white border border-slate-200 rounded-lg hover:bg-white transition-all duration-200 shadow-sm hover:shadow-md group"
-                  >
-                    <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-200 shadow-sm">
-                      <MessageCircle className="w-6 h-6 text-slate-700" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-slate-900">
-                        {t('landing.whatsapp')}
-                      </h4>
-                      <p className="text-sm text-slate-600 notranslate" translate="no">{contactInfo.phone}</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Success Message */}
-        {showSuccessMessage && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-            <div className="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6 text-center">
-              <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-slate-900 mb-2">
-                {t('landing.emailOpened')}
+      {/* ═══ Contact Modal ═══ */}
+      {showContactModal && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowContactModal(false);
+          }}
+        >
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+          <div className="relative glass rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto animate-scale-in border border-white/30">
+            <div className="flex items-center justify-between p-6 border-b border-[var(--border)]">
+              <h3 className="text-xl font-bold text-[var(--foreground)]" style={{ fontFamily: 'Outfit, Inter, sans-serif' }}>
+                {t('landing.getInTouch')}
               </h3>
-              <p className="text-slate-600 text-sm">
-                {t('landing.emailOpenedText')}
+              <button
+                onClick={() => setShowContactModal(false)}
+                className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors p-1.5 hover:bg-[var(--muted)] rounded-full"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-6">
+              <p className="text-[var(--muted-foreground)] mb-6 text-center text-sm">
+                {t('landing.responseTime')}
               </p>
+
+              <form onSubmit={handleContactSubmit} className="mb-6">
+                <h4 className="font-semibold text-[var(--foreground)] mb-4 text-center text-sm type-label" style={{ textTransform: 'none', letterSpacing: '0' }}>
+                  {t('landing.sendMessage')}
+                </h4>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-[var(--foreground)] mb-1.5">
+                      {t('landing.name')} *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      required
+                      value={contactForm.name}
+                      onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
+                      className="w-full px-4 py-2.5 border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-[var(--brand)]/30 focus:border-[var(--brand)] bg-white transition-all duration-200 text-sm"
+                      placeholder={t('landing.yourName')}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-[var(--foreground)] mb-1.5">
+                      {t('landing.email')} *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      required
+                      value={contactForm.email}
+                      onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
+                      className="w-full px-4 py-2.5 border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-[var(--brand)]/30 focus:border-[var(--brand)] bg-white transition-all duration-200 text-sm"
+                      placeholder={t('landing.yourEmail')}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-medium text-[var(--foreground)] mb-1.5">
+                      {t('landing.subject')}
+                    </label>
+                    <input
+                      type="text"
+                      id="subject"
+                      value={contactForm.subject}
+                      onChange={(e) => setContactForm({...contactForm, subject: e.target.value})}
+                      className="w-full px-4 py-2.5 border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-[var(--brand)]/30 focus:border-[var(--brand)] bg-white transition-all duration-200 text-sm"
+                      placeholder={t('landing.whatIsThisAbout')}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-[var(--foreground)] mb-1.5">
+                      {t('landing.message')} *
+                    </label>
+                    <textarea
+                      id="message"
+                      required
+                      rows={4}
+                      value={contactForm.message}
+                      onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
+                      className="w-full px-4 py-2.5 border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-[var(--brand)]/30 focus:border-[var(--brand)] bg-white transition-all duration-200 resize-none text-sm"
+                      placeholder={t('landing.tellUsAbout')}
+                    />
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full btn-primary rounded-lg"
+                    style={{ borderRadius: 'var(--radius)' }}
+                  >
+                    {isSubmitting 
+                      ? t('landing.openingEmail')
+                      : t('landing.sendMessageBtn')
+                    }
+                  </button>
+                </div>
+              </form>
+
+              <div className="relative mb-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-[var(--border)]" />
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-3 bg-white text-[var(--muted-foreground)] rounded">
+                    {t('landing.or')}
+                  </span>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <a
+                  href={`mailto:${contactInfo.email}`}
+                  className="flex items-center p-4 glass-card rounded-xl group"
+                >
+                  <div className="w-11 h-11 bg-[var(--brand)]/10 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-200">
+                    <Mail className="w-5 h-5 text-[var(--brand)]" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-[var(--foreground)] text-sm">
+                      {t('landing.sendEmail')}
+                    </h4>
+                    <p className="text-xs text-[var(--muted-foreground)] notranslate" translate="no">{contactInfo.email}</p>
+                  </div>
+                </a>
+
+                <a
+                  href={`https://wa.me/${contactInfo.phone.replace(/\s+/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center p-4 glass-card rounded-xl group"
+                >
+                  <div className="w-11 h-11 bg-[var(--brand)]/10 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-200">
+                    <MessageCircle className="w-5 h-5 text-[var(--brand)]" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-[var(--foreground)] text-sm">
+                      {t('landing.whatsapp')}
+                    </h4>
+                    <p className="text-xs text-[var(--muted-foreground)] notranslate" translate="no">{contactInfo.phone}</p>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
-        )}
+        </div>
+      )}
+
+      {/* Success Message */}
+      {showSuccessMessage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+          <div className="relative glass rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center animate-scale-in">
+            <div className="w-16 h-16 bg-[var(--brand)]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-[var(--brand)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-[var(--foreground)] mb-2">
+              {t('landing.emailOpened')}
+            </h3>
+            <p className="text-[var(--muted-foreground)] text-sm">
+              {t('landing.emailOpenedText')}
+            </p>
+          </div>
+        </div>
+      )}
     </>
   );
 }
 
+// ─── Scroll Reveal Wrapper ───
+function RevealWrap({ children, className = '' }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('visible');
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.1, rootMargin: '-30px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return <div ref={ref} className={`reveal ${className}`}>{children}</div>;
+}
+
+// ─── Sub-components ───
+
+function StoryCard({ children }) {
+  return (
+    <RevealWrap className="glass-card rounded-2xl p-8 sm:p-10 md:p-12 animate-border-glow">
+      {children}
+    </RevealWrap>
+  );
+}
+
+function BentoCard({ children, className = '', featured = false }) {
+  return (
+    <RevealWrap className={`glass-card rounded-2xl p-7 md:p-8 relative overflow-hidden ${featured ? 'border-[var(--brand)]/15' : ''} ${className}`}>
+      {featured && (
+        <div className="absolute inset-0 pointer-events-none opacity-[0.02]" style={{
+          background: 'linear-gradient(135deg, var(--brand), transparent 60%)'
+        }} />
+      )}
+      {children}
+    </RevealWrap>
+  );
+}
+
+function FeatureCard({ icon: Icon, label, desc, color }) {
+  return (
+    <RevealWrap className="glass-card rounded-2xl p-6 text-center group">
+      <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:scale-110"
+        style={{ background: `color-mix(in srgb, ${color} 10%, transparent)` }}>
+        <Icon className="w-6 h-6" style={{ color }} />
+      </div>
+      <h3 className="type-card-title text-[var(--foreground)] mb-2 text-base">{label}</h3>
+      <p className="text-sm text-[var(--muted-foreground)]">{desc}</p>
+    </RevealWrap>
+  );
+}
+
+function BannerCard({ children }) {
+  return (
+    <RevealWrap className="relative mx-auto max-w-3xl overflow-hidden rounded-2xl border border-[var(--border)] bg-white/80 backdrop-blur-sm px-8 py-10 text-center shadow-[0_20px_60px_-40px_rgba(34,133,90,0.16)] md:px-12 md:py-12">
+      <div className="absolute inset-0 rounded-2xl animate-border-glow pointer-events-none" style={{ border: '1.5px solid rgba(34,133,90,0.2)' }} />
+      <div className="relative z-[1]">
+        {children}
+      </div>
+    </RevealWrap>
+  );
+}
+
+function ContactCard({ icon: Icon, title, value, href, external, color }) {
+  const inner = (
+    <RevealWrap className="glass-card rounded-2xl p-6 text-center group cursor-pointer">
+      <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:scale-110"
+        style={{ background: `color-mix(in srgb, ${color} 10%, transparent)` }}>
+        <Icon className="w-6 h-6" style={{ color }} />
+      </div>
+      <h3 className="font-semibold text-[var(--foreground)] mb-1.5 text-sm">{title}</h3>
+      <p className="text-[var(--muted-foreground)] text-sm notranslate leading-relaxed" translate="no" style={{ wordBreak: 'break-all' }}>
+        {value}
+      </p>
+    </RevealWrap>
+  );
+
+  if (href) {
+    return (
+      <a href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+        {inner}
+      </a>
+    );
+  }
+  return inner;
+}
+
+function PressCard({ locale }) {
+  return (
+    <RevealWrap>
+      <Link href="/press" className="group relative block overflow-hidden rounded-2xl border border-[var(--border)] shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1.5">
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--ink)] via-gray-800 to-gray-900 z-10 transition-opacity group-hover:opacity-95" />
+        <div className="relative z-20 p-10 sm:p-14 text-white">
+          <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-6 border border-white/20 group-hover:scale-110 transition-transform duration-500">
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+          </div>
+          <h3 className="type-subhead text-white mb-3">
+            {locale === 'es' ? "Sala de Prensa" : "Press Room"}
+          </h3>
+          <p className="text-white/70 font-medium mb-6 max-w-md">
+            {locale === 'es' ? "Entrevista en Con Acento Planeta y contenidos" : "Con Acento Planeta interview and contents"}
+          </p>
+          <span className="inline-flex items-center text-sm font-bold uppercase tracking-wider text-white/60 group-hover:text-white transition-colors">
+            {locale === 'es' ? "Abrir Sala" : "Open Room"}
+            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </span>
+        </div>
+      </Link>
+    </RevealWrap>
+  );
+}
+
+
 // Loading fallback component
 function LandingLoading() {
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--background)' }}>
       <div className="text-center">
-        <div className="w-16 h-16 border-4 border-slate-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-        <h2 className="text-xl font-bold text-slate-800 mb-2" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
+        <div className="w-12 h-12 border-3 border-[var(--border)] border-t-[var(--brand)] rounded-full animate-spin mx-auto mb-5" style={{ borderWidth: '3px' }}></div>
+        <h2 className="text-lg font-semibold text-[var(--foreground)] mb-1" style={{ fontFamily: 'Outfit, Inter, sans-serif' }}>
           Loading...
         </h2>
-        <p className="text-slate-600">Please wait while we prepare your experience.</p>
+        <p className="text-sm text-[var(--muted-foreground)]">Please wait while we prepare your experience.</p>
       </div>
     </div>
   );

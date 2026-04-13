@@ -53,7 +53,7 @@ export default async function Image() {
             <ellipse cx="75" cy="80" rx="15" ry="8" fill="#478B48" transform="rotate(-45, 75, 80)" />
           </svg>
         </div>
-        
+
         {/* Title */}
         <div
           style={{
@@ -68,7 +68,7 @@ export default async function Image() {
         >
           International Association for the Defense of Flowers
         </div>
-        
+
         {/* Subtitle */}
         <div
           style={{
@@ -80,7 +80,7 @@ export default async function Image() {
         >
           Proveneya & Nahiara
         </div>
-        
+
         {/* Tagline */}
         <div
           style={{
@@ -91,9 +91,9 @@ export default async function Image() {
             maxWidth: '800px',
           }}
         >
-          "Where humanity blooms, nature is reborn." 🌸
+          Where humanity blooms, nature is reborn.
         </div>
-        
+
         {/* Bottom badge */}
         <div
           style={{

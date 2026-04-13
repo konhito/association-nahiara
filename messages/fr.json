@@ -2,7 +2,7 @@
   "landing": {
     "heroTitle": "Association Internationale pour la Défense des Fleurs",
     "heroSubtitle": "Proveneya & Nahiara",
-    "heroTagline": "\"Là où l'humanité fleurit, la nature renaît.\" 🌸",
+    "heroTagline": "Là où l'humanité fleurit, la nature renaît.",
     "contactUs": "Contactez-nous",
     "explore3DArchive": "Explorer l'Archive 3D",
     "description": "Une saga littéraire et un écosystème transmédia qui unit 195 fleurs nationales et leurs pollinisateurs à travers des formats innovants : un livre illustré, un jeu de cartes captivant, une archive florale 3D complète et des expositions robotiques interactives.",
@@ -57,6 +57,14 @@
     "emailOpened": "E-mail Ouvert !",
     "emailOpenedText": "Votre client de messagerie devrait maintenant être ouvert avec un message pré-rempli. Il suffit d'appuyer sur envoyer !",
     "loading": "Chargement...",
-    "pleaseWait": "Veuillez patienter pendant que nous préparons votre expérience."
+    "pleaseWait": "Veuillez patienter pendant que nous préparons votre expérience.",
+    "ecosystem": "Écosystème Numérique",
+    "exploreUniverse": "Explorez Notre Univers",
+    "globalGallery": "Galerie Mondiale de Dessins",
+    "galleryDesc": "34 perspectives uniques sur la fleur de leur pays.",
+    "exploreCollection": "Explorer la Collection",
+    "territoriesTitle": "Territoires",
+    "pressRoom": "Salle de Presse",
+    "pressDesc": "Actualités et interviews"
   }
 }

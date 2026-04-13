@@ -1,22 +1,29 @@
 export default function sitemap() {
   const baseUrl = 'https://asociacionnahiara.org';
   
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1,
-      alternates: {
-        languages: {
-          en: `${baseUrl}`,
-          es: `${baseUrl}?lang=es`,
-          fr: `${baseUrl}?lang=fr`,
-          de: `${baseUrl}?lang=de`,
-          zh: `${baseUrl}?lang=zh`,
-          it: `${baseUrl}?lang=it`,
-        },
+  const routes = [
+    '',
+    '/galeria-dibujos',
+    '/evento-dibuja-flor',
+    '/dibuja-la-flor-de-tu-pais',
+    '/territories',
+    '/press'
+  ];
+
+  return routes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: route === '' ? 'weekly' : 'monthly',
+    priority: route === '' ? 1 : 0.8,
+    alternates: {
+      languages: {
+        en: `${baseUrl}${route}`,
+        es: `${baseUrl}${route}?lang=es`,
+        fr: `${baseUrl}${route}?lang=fr`,
+        de: `${baseUrl}${route}?lang=de`,
+        zh: `${baseUrl}${route}?lang=zh`,
+        it: `${baseUrl}${route}?lang=it`,
       },
     },
-  ];
+  }));
 }

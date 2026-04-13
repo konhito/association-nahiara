@@ -2,7 +2,7 @@
   "landing": {
     "heroTitle": "国际花卉保护协会",
     "heroSubtitle": "Proveneya & Nahiara",
-    "heroTagline": "\"人性盛开之处，自然重生。\" 🌸",
+    "heroTagline": "人性盛开之处，自然重生。",
     "contactUs": "联系我们",
     "explore3DArchive": "探索3D档案",
     "description": "一个文学传奇和跨媒体生态系统，通过创新形式将195种国花及其传粉者联系在一起：插图书籍、引人入胜的卡牌游戏、全面的3D花卉档案和互动机器人展览。",
@@ -57,6 +57,14 @@
     "emailOpened": "邮件已打开！",
     "emailOpenedText": "您的邮件客户端现在应该已打开，并预填了消息。只需点击发送！",
     "loading": "加载中...",
-    "pleaseWait": "请稍候，我们正在准备您的体验。"
+    "pleaseWait": "请稍候，我们正在准备您的体验。",
+    "ecosystem": "数字生态系统",
+    "exploreUniverse": "探索我们的宇宙",
+    "globalGallery": "全球绘画画廊",
+    "galleryDesc": "34个关于他们国家花卉的独特视角。",
+    "exploreCollection": "探索收藏",
+    "territoriesTitle": "领土",
+    "pressRoom": "新闻中心",
+    "pressDesc": "新闻与采访"
   }
 }
