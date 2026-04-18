@@ -223,14 +223,14 @@ export default function RootLayout({ children }) {
         {/* Prevent browser translation */}
         <meta name="google" content="notranslate" />
         <meta httpEquiv="Content-Language" content="en,es,fr,de,zh,it" />
-        
+
         {/* Favicon - Nahiara Logo */}
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="mask-icon" href="/logo.svg" color="#22c55e" />
         <link rel="shortcut icon" href="/favicon.ico" />
-        
+
         {/* PWA / Mobile App Install Support */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -240,16 +240,16 @@ export default function RootLayout({ children }) {
         <meta name="msapplication-TileColor" content="#22c55e" />
         <meta name="msapplication-TileImage" content="/logo.svg" />
         <link rel="manifest" href="/manifest.json" />
-        
+
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-        
+
         {/* DNS Prefetch for external resources */}
         <link rel="dns-prefetch" href="https://ipapi.co" />
         <link rel="dns-prefetch" href="https://ip-api.com" />
-        
+
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
@@ -262,6 +262,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div style={{ background: 'linear-gradient(135deg, #0f1d15, #166534)', color: 'white', padding: '10px 16px', textAlign: 'center', position: 'sticky', top: 0, zIndex: 99999, boxShadow: '0 4px 16px -4px rgba(15,29,21,0.2)', fontFamily: 'Inter, system-ui, sans-serif' }}>
+          <a href="https://osm.org/go/xUbU0viAP?layers=H&m=" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', backgroundColor: 'white', color: '#e11d48', fontWeight: 'bold', padding: '4px 12px', borderRadius: '999px', fontSize: '0.85rem', textDecoration: 'none', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', marginBottom: '8px' }}>
+            📍 Ver ubicación exacta en el mapa (Passeig de Fabra i Puig 370)
+          </a>
           <p style={{ fontWeight: 700, margin: '0 0 2px 0', fontSize: '0.95rem', letterSpacing: '-0.01em' }}>🌹 Sant Jordi 2026 — Barcelona, April 23rd | Passeig de Fabra i Puig 370, Nou Barris 🌹</p>
           <p style={{ margin: 0, fontSize: '0.85rem', opacity: 0.85, fontWeight: 500 }}>We will be there in person, with the book and the card game!</p>
         </div>
