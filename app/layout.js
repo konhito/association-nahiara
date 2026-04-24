@@ -261,14 +261,29 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div style={{ background: 'linear-gradient(135deg, #0f1d15, #166534)', color: 'white', padding: '10px 16px', textAlign: 'center', position: 'sticky', top: 0, zIndex: 99999, boxShadow: '0 4px 16px -4px rgba(15,29,21,0.2)', fontFamily: 'Inter, system-ui, sans-serif' }}>
-          <a href="https://osm.org/go/xUbU0viAP?layers=H&m=" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', backgroundColor: 'white', color: '#e11d48', fontWeight: 'bold', padding: '4px 12px', borderRadius: '999px', fontSize: '0.85rem', textDecoration: 'none', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', marginBottom: '8px' }}>
-            📍 Ver ubicación exacta en el mapa (Passeig de Fabra i Puig 370)
-          </a>
-          <a href="/sant-jordi-2026" style={{ display: 'block', textDecoration: 'none', color: 'inherit', cursor: 'pointer', borderRadius: '8px', padding: '4px 0' }}>
-            <div style={{ fontWeight: 700, margin: '0 0 4px 0', fontSize: '0.95rem', letterSpacing: '-0.01em' }}>🌹 Gràcies / Thank you — Sant Jordi 2026, Barcelona, April 23rd · Passeig de Fabra i Puig 370, Nou Barris 🌹</div>
-            <div style={{ fontSize: '0.85rem', opacity: 0.9, fontWeight: 500 }}>Photo gallery, press, and more · Galería, prensa y más — tap to open →</div>
-          </a>
+        <div
+          role="status"
+          style={{
+            background: '#f8fafc',
+            color: '#0f172a',
+            padding: '14px 16px',
+            textAlign: 'center',
+            position: 'sticky',
+            top: 0,
+            zIndex: 99999,
+            boxShadow: '0 1px 0 0 #e2e8f0',
+            fontFamily: 'Inter, system-ui, sans-serif',
+            lineHeight: 1.55,
+            fontSize: '0.9rem',
+          }}
+        >
+          <div style={{ maxWidth: 40 * 16, margin: '0 auto' }}>
+            <p style={{ margin: '0 0 10px 0' }}>
+              <span style={{ fontWeight: 600 }}>¡Un millón de gracias a quienes visitaron nuestro stand en el Sant Jordi 2026!</span>
+            </p>
+            <p style={{ margin: '0 0 8px 0' }}>Ha sido increíble compartir el Universo Nahiara con vosotros en Barcelona.</p>
+            <p style={{ margin: 0 }}>¡Hasta el año que viene! 🌸</p>
+          </div>
         </div>
         {children}
       </body>
