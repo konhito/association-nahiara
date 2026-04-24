@@ -265,8 +265,10 @@ export default function RootLayout({ children }) {
           <a href="https://osm.org/go/xUbU0viAP?layers=H&m=" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', backgroundColor: 'white', color: '#e11d48', fontWeight: 'bold', padding: '4px 12px', borderRadius: '999px', fontSize: '0.85rem', textDecoration: 'none', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', marginBottom: '8px' }}>
             📍 Ver ubicación exacta en el mapa (Passeig de Fabra i Puig 370)
           </a>
-          <p style={{ fontWeight: 700, margin: '0 0 2px 0', fontSize: '0.95rem', letterSpacing: '-0.01em' }}>🌹 Sant Jordi 2026 — Barcelona, April 23rd | Passeig de Fabra i Puig 370, Nou Barris 🌹</p>
-          <p style={{ margin: 0, fontSize: '0.85rem', opacity: 0.85, fontWeight: 500 }}>We will be there in person, with the book and the card game!</p>
+          <a href="/sant-jordi-2026" style={{ display: 'block', textDecoration: 'none', color: 'inherit', cursor: 'pointer', borderRadius: '8px', padding: '4px 0' }}>
+            <div style={{ fontWeight: 700, margin: '0 0 4px 0', fontSize: '0.95rem', letterSpacing: '-0.01em' }}>🌹 Gràcies / Thank you — Sant Jordi 2026, Barcelona, April 23rd · Passeig de Fabra i Puig 370, Nou Barris 🌹</div>
+            <div style={{ fontSize: '0.85rem', opacity: 0.9, fontWeight: 500 }}>Photo gallery, press, and more · Galería, prensa y más — tap to open →</div>
+          </a>
         </div>
         {children}
       </body>

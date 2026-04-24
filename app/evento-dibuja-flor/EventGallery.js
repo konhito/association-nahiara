@@ -69,7 +69,13 @@ function Lightbox({ photo, onClose, onPrev, onNext, current, total }) {
 /* ─────────────────────────────────────────────
    Main gallery component (exported)
    ───────────────────────────────────────────── */
-export default function EventGallery({ photos, videos }) {
+export default function EventGallery({
+  photos,
+  videos,
+  galleryTitle,
+  gallerySubtitle,
+  loadMoreLabel,
+}) {
   const [activeIdx, setActiveIdx] = useState(null);
   const [visibleCount, setVisibleCount] = useState(12);
   const galleryRef = useRef(null);
@@ -82,6 +88,10 @@ export default function EventGallery({ photos, videos }) {
   const showMore = () => setVisibleCount((c) => Math.min(c + 12, photos.length));
 
   const visiblePhotos = photos.slice(0, visibleCount);
+  const title = galleryTitle ?? "📸 Galería de fotos";
+  const subtitle =
+    gallerySubtitle ?? `${photos.length} fotografías del evento · Haz clic para ampliar`;
+  const remaining = photos.length - visibleCount;
 
   return (
     <>
@@ -92,10 +102,10 @@ export default function EventGallery({ photos, videos }) {
             className="text-2xl font-bold text-slate-900 sm:text-3xl"
             style={{ fontFamily: "Archivo, sans-serif" }}
           >
-            📸 Galería de fotos
+            {title}
           </h2>
           <p className="mt-2 text-slate-500" style={{ fontFamily: "Rubik, sans-serif" }}>
-            {photos.length} fotografías del evento · Haz clic para ampliar
+            {subtitle}
           </p>
         </div>
 
@@ -133,7 +143,9 @@ export default function EventGallery({ photos, videos }) {
               className="inline-flex items-center gap-2 rounded-xl border border-emerald-300 bg-white px-6 py-3 text-sm font-bold text-emerald-700 transition-all duration-300 hover:bg-emerald-50 hover:shadow-lg hover:shadow-emerald-100/40"
               style={{ fontFamily: "Comfortaa, cursive" }}
             >
-              Ver más fotos ({photos.length - visibleCount} restantes)
+              {loadMoreLabel
+                ? loadMoreLabel(remaining)
+                : `Ver más fotos (${remaining} restantes)`}
             </button>
           </div>
         )}

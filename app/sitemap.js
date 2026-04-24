@@ -7,7 +7,8 @@ export default function sitemap() {
     '/evento-dibuja-flor',
     '/dibuja-la-flor-de-tu-pais',
     '/territories',
-    '/press'
+    '/press',
+    '/sant-jordi-2026'
   ];
 
   return routes.map((route) => ({
