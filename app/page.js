@@ -809,40 +809,70 @@ ${t('landing.visionText')}
                 </Link>
               </RevealWrap>
 
-              {/* Evento Pasado (Dibuja la Flor Recap) */}
-              <RevealWrap className="md:col-span-4 md:row-span-1 group relative block overflow-hidden rounded-[2rem] border border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
-                <div className="absolute inset-0 bg-white/40" />
-                <Link href="/evento-dibuja-flor" className="relative flex flex-col md:flex-row items-center justify-between p-8 md:p-10 z-10 gap-6">
-                  <div className="flex-1">
-                    <span className="inline-block px-3 py-1 rounded-full bg-emerald-600 text-white text-xs font-bold uppercase tracking-widest mb-3">
-                      {{
-                        es: "Evento Comunitario",
-                        en: "Community Event",
-                        de: "Gemeinschaftsereignis",
-                        fr: "Événement Communautaire",
-                        it: "Evento Comunitario",
-                        zh: "社区活动"
-                      }[locale] || "Community Event"}
+              {/* Frankfurt Event */}
+              <RevealWrap className="md:col-span-2 md:row-span-1 group relative block overflow-hidden rounded-[2rem] border border-[var(--border)] bg-gradient-to-br from-blue-50 to-indigo-50 shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-300/30 blur-2xl rounded-full mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Link href="/eventos/frankfurt-buchmesse-2025" className="relative h-full flex flex-col justify-between p-8 z-10 w-full">
+                   <div className="mb-4">
+                    <span className="inline-block px-3 py-1 rounded-full bg-blue-900/10 text-blue-800 text-xs font-bold uppercase tracking-widest mb-3">
+                         {{
+                        es: "Evento",
+                        en: "Event",
+                        de: "Ereignis",
+                        fr: "Événement",
+                        it: "Evento",
+                        zh: "活动"
+                      }[locale] || "Event"} / Oct 2025
                     </span>
-                    <h3 className="text-3xl font-bold tracking-tight text-emerald-900 leading-tight mb-2" style={{ fontFamily: '"Playfair Display", serif' }}>
-                      {{
-                        es: "Dibuja la Flor de Tu País — Resumen del 11 de Abril",
-                        en: "Draw the Flower of Your Country — April 11 Recap",
-                        de: "Zeichne die Blume deines Landes — Zusammenfassung 11. April",
-                        fr: "Dessine la Fleur de Ton Pays — Résumé du 11 Avril",
-                        it: "Disegna il Fiore del Tuo Paese — Riepilogo dell'11 Aprile",
-                        zh: "画出你国家的花 — 4月11日回顾"
-                      }[locale] || "Draw the Flower of Your Country — April 11 Recap"}
+                    <h3 className="text-2xl font-bold tracking-tight text-blue-950 leading-tight">
+                        Frankfurter Buchmesse 2025
                     </h3>
                   </div>
-                  <div className="hidden md:flex min-w-[120px] justify-end">
-                    <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </div>
+                 <div className="flex items-center text-blue-600 font-semibold uppercase tracking-wider text-sm transition-colors group-hover:text-blue-800 mt-auto">
+                    {{
+                         es: "Ver galería",
+                         en: "View gallery",
+                         de: "Galerie ansehen",
+                         fr: "Voir la galerie",
+                         it: "Vedi galleria",
+                         zh: "查看图库"
+                       }[locale] || "View gallery"} →
                   </div>
                 </Link>
               </RevealWrap>
 
+              {/* Istanbul Event */}
+              <RevealWrap className="md:col-span-2 md:row-span-1 group relative block overflow-hidden rounded-[2rem] border border-[var(--border)] bg-gradient-to-br from-emerald-50 to-teal-50 shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
+                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-300/30 blur-2xl rounded-full mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <Link href="/eventos/estambul-istanbul-book-fair-2025" className="relative h-full flex flex-col justify-between p-8 z-10 w-full">
+                 <div className="mb-4">
+                    <span className="inline-block px-3 py-1 rounded-full bg-emerald-900/10 text-emerald-800 text-xs font-bold uppercase tracking-widest mb-3">
+                      {{
+                        es: "Evento",
+                        en: "Event",
+                        de: "Ereignis",
+                        fr: "Événement",
+                        it: "Evento",
+                        zh: "活动"
+                      }[locale] || "Event"} / Dec 2025
+                    </span>
+                    <h3 className="text-2xl font-bold tracking-tight text-emerald-950 leading-tight">
+                         42ª Feria Internacional del Libro de Estambul
+                    </h3>
+                  </div>
+                   <div className="flex items-center text-emerald-600 font-semibold uppercase tracking-wider text-sm transition-colors group-hover:text-emerald-800">
+                       {{
+                         es: "Ver galería",
+                         en: "View gallery",
+                         de: "Galerie ansehen",
+                         fr: "Voir la galerie",
+                         it: "Vedi galleria",
+                         zh: "查看图库"
+                       }[locale] || "View gallery"} →
+                  </div>
+                </Link>
+              </RevealWrap>
+              
             </div>
           </div>
         </section>
