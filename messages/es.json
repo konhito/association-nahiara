@@ -65,6 +65,35 @@
     "exploreCollection": "Explorar Colección",
     "territoriesTitle": "Territorios",
     "pressRoom": "Sala de Prensa",
-    "pressDesc": "Noticias y entrevistas"
+    "pressDesc": "Noticias y entrevistas",
+    "plateI": "Lámina I.",
+    "plateII": "Lámina II.",
+    "featureEvent": "Evento Destacado",
+    "santJordiTitle": "Sant Jordi 2026",
+    "santJordiDesc": "Descubre la iniciativa global que une literatura, rosas artificiales elaboradas de manera sostenible y conservación botánica.",
+    "exploreEvent": "Explorar Evento",
+    "manifestQuote": "Donde la humanidad florece, la naturaleza renace.",
+    "iadfManifest": "— Manifiesto IADF",
+    "exhibitionsAndRooms": "Exposiciones y Salas",
+    "frankfurtEvent": "Evento",
+    "frankfurtDate": "Oct 2025",
+    "istanbulEvent": "Evento",
+    "istanbulDate": "Dic 2025",
+    "pressLocation": "Ubicación"
+  },
+  "press": {
+    "backToHome": "Volver al inicio",
+    "pressRoomTitle": "Sala de Prensa",
+    "pressRoomDesc": "Últimas entrevistas, comunicados oficiales y apariciones en medios de la Asociación.",
+    "interviewDesc": "Entrevista exclusiva en español con Matías Gonzalez sobre el ecosistema transmedia y los valores fundamentales de la Asociación Nahiara. El audio a continuación es una grabación en bruto de la sesión para el disfrute directo y sin publicidad de nuestra comunidad.",
+    "listenRecording": "Escuchar el archivo (Audio)",
+    "originalBroadcast": "¿Prefieres escuchar la transmisión original?",
+    "officialEpisode": "Escuchar episodio oficial en iVoox",
+    "facebookReel": "Facebook Reel",
+    "initiativeOverview": "Recorrido de la iniciativa",
+    "initiativeOverviewDesc": "Echa un vistazo rápido a los momentos destacados y la historia detrás de nuestro proyecto en Facebook.",
+    "watchReel": "Ver Reel en Facebook",
+    "podcastTitle": "Entrevista Podcast - 09 Abril, 2026",
+    "conAcento": "Con Acento Planeta - Matías Gonzalez"
   }
 }

@@ -65,6 +65,35 @@
     "exploreCollection": "Explorer la Collection",
     "territoriesTitle": "Territoires",
     "pressRoom": "Salle de Presse",
-    "pressDesc": "Actualités et interviews"
+    "pressDesc": "Actualités et interviews",
+    "plateI": "Planche I.",
+    "plateII": "Planche II.",
+    "featureEvent": "Événement Phare",
+    "santJordiTitle": "Sant Jordi 2026",
+    "santJordiDesc": "Découvrez l'initiative mondiale qui unit la littérature, les roses artificielles fabriquées de manière durable et la conservation botanique.",
+    "exploreEvent": "Explorer l'Événement",
+    "manifestQuote": "Où l'humanité s'épanouit, la nature renaît.",
+    "iadfManifest": "— Manifeste IADF",
+    "exhibitionsAndRooms": "Expositions et Salles",
+    "frankfurtEvent": "Événement",
+    "frankfurtDate": "Oct 2025",
+    "istanbulEvent": "Événement",
+    "istanbulDate": "Déc 2025",
+    "pressLocation": "Emplacement"
+  },
+  "press": {
+    "backToHome": "Retour à l'accueil",
+    "pressRoomTitle": "Salle de Presse",
+    "pressRoomDesc": "Dernières interviews, annonces officielles et apparitions dans les médias.",
+    "interviewDesc": "Interview exclusive en espagnol de Matías Gonzalez sur l'écosystème transmédia et les valeurs fondamentales de l'Asociación Nahiara. L'audio ci-dessous est un enregistrement brut pour l'écoute sans publicité de notre communauté.",
+    "listenRecording": "Écouter l'enregistrement (Audio)",
+    "originalBroadcast": "Vous préférez écouter l'émission originale?",
+    "officialEpisode": "Écouter l'épisode officiel sur iVoox",
+    "facebookReel": "Facebook Reel",
+    "initiativeOverview": "Aperçu de l'initiative",
+    "initiativeOverviewDesc": "Jetez un coup d'œil rapide aux points forts et à l'histoire derrière notre projet sur Facebook.",
+    "watchReel": "Regarder le Reel sur Facebook",
+    "podcastTitle": "Interview Podcast - 09 Avril 2026",
+    "conAcento": "Con Acento Planeta - Matías Gonzalez"
   }
 }

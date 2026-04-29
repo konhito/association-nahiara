@@ -266,7 +266,7 @@ function LanguageSwitcher({ currentLocale }) {
   const currentLang = languages.find(l => l.code === currentLocale) || languages[0];
 
   return (
-    <div className="relative">
+    <div className="relative z-[100]">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 px-4 py-2.5 rounded-full glass text-sm font-medium transition-all duration-300 hover:shadow-md"
@@ -680,273 +680,237 @@ ${t('landing.visionText')}
           </div>
         </header>
 
-        {/* ═══════════════════════════════════════════════════════════════
-            STORY SECTION
-        ═══════════════════════════════════════════════════════════════ */}
-        <section id="story" className="relative overflow-hidden py-20 md:py-28 lg:py-32 px-6" aria-labelledby="story-heading">
-          {/* Decorative blobs */}
-          <div className="pointer-events-none absolute -left-32 top-1/4 h-64 w-64 rounded-full bg-[var(--brand)]/8 blur-3xl" aria-hidden="true" />
-          <div className="pointer-events-none absolute -right-24 bottom-0 h-56 w-56 rounded-full bg-[var(--accent-violet)]/8 blur-3xl" aria-hidden="true" />
-          <div className="pointer-events-none absolute inset-0 grid-pattern" aria-hidden="true" />
+        <section id="story" className="relative py-24 md:py-32 px-6 bg-[#f8f5f0]" aria-labelledby="story-heading">
+          {/* Subtle ornate borders */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#1a3a2f]/30 to-transparent" aria-hidden="true" />
+          <div className="absolute inset-x-0 bottom-0 h-px bg-[#1a3a2f]/10" aria-hidden="true" />
+          
+          <div className="relative max-w-4xl mx-auto">
+            <header className="mb-16 md:mb-24 text-center">
+              <Leaf className="w-6 h-6 text-[#9b7b3d] mx-auto mb-6 opacity-60" strokeWidth={1} />
+              <span className="block text-sm uppercase tracking-[0.2em] text-[#9b7b3d] mb-4 font-medium">
+                {locale === 'es' ? 'Nuestra Historia' : 'Our Story'}
+              </span>
+              <h2 id="story-heading" className="text-4xl md:text-6xl font-normal text-[#1a3a2f] leading-tight" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                {t('landing.storyBehindBook')}
+              </h2>
+            </header>
+            <div className="md:px-12 relative">
+              <p className="text-lg md:text-2xl text-[#2d4f40] leading-loose mb-16" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                <span className="float-left text-7xl leading-[0.8] pr-3 pt-2 text-[#9b7b3d] font-normal" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                  {t('landing.storyText').charAt(0)}
+                </span>
+                {t('landing.storyText').substring(1)}
+              </p>
+              
+              {/* Elegant divider */}
+              <div className="flex justify-center items-center gap-4 mb-16">
+                <div className="h-px w-24 bg-[#9b7b3d]/30" />
+                <div className="w-1.5 h-1.5 bg-[#9b7b3d]/50 rotate-45" />
+                <div className="h-px w-24 bg-[#9b7b3d]/30" />
+              </div>
 
-          <div className="relative max-w-5xl mx-auto">
-            <SectionHeader
-              eyebrow={locale === 'es' ? 'Nuestra Historia' : 'Our Story'}
-              title={t('landing.storyBehindBook')}
-              subtitle={null}
-            />
-
-            <div className="relative">
-              {/* Main story card */}
-              <StoryCard>
-                <p className="type-body-lg mx-auto text-center text-[var(--muted-foreground)] mb-8" style={{ maxWidth: '60ch' }}>
-                  {t('landing.storyText')}
-                </p>
-                <div className="flex flex-wrap justify-center gap-3">
-                  {[
-                    { icon: Sparkles, label: t('landing.literarySaga'), color: 'var(--brand)' },
-                    { icon: Globe, label: t('landing.globalImpact'), color: 'var(--brand)' },
-                    { icon: Heart, label: t('landing.flowers195'), color: 'var(--accent-violet)' },
-                  ].map((chip, i) => {
-                    const ChipIcon = chip.icon;
-                    return (
-                      <span key={i} className="inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold glass-card" style={{ color: 'var(--foreground)' }}>
-                        <ChipIcon className="w-3.5 h-3.5 mr-2" style={{ color: chip.color }} />
-                        {chip.label}
-                      </span>
-                    );
-                  })}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+                <div className="relative">
+                  <span className="block text-[0.65rem] uppercase tracking-[0.3em] text-[#9b7b3d] mb-3 font-semibold">01</span>
+                  <BookOpen className="w-5 h-5 text-[#1a3a2f]/40 mb-3 mx-auto md:mx-0" strokeWidth={1.5} />
+                  <h3 className="text-sm font-bold text-[#1a3a2f] uppercase tracking-widest mb-3">{t('landing.literarySaga')}</h3>
+                  <p className="text-sm text-[#3b5e4d] leading-relaxed">A story transcending borders, connecting cultures through a shared narrative.</p>
                 </div>
-              </StoryCard>
+                <div className="relative">
+                  <span className="block text-[0.65rem] uppercase tracking-[0.3em] text-[#9b7b3d] mb-3 font-semibold">02</span>
+                  <Globe className="w-5 h-5 text-[#1a3a2f]/40 mb-3 mx-auto md:mx-0" strokeWidth={1.5} />
+                  <h3 className="text-sm font-bold text-[#1a3a2f] uppercase tracking-widest mb-3">{t('landing.globalImpact')}</h3>
+                  <p className="text-sm text-[#3b5e4d] leading-relaxed">An international framework uniting educators, publishers, and biodiversity advocates.</p>
+                </div>
+                <div className="relative">
+                  <span className="block text-[0.65rem] uppercase tracking-[0.3em] text-[#9b7b3d] mb-3 font-semibold">03</span>
+                  <Flower2 className="w-5 h-5 text-[#1a3a2f]/40 mb-3 mx-auto md:mx-0" strokeWidth={1.5} />
+                  <h3 className="text-sm font-bold text-[#1a3a2f] uppercase tracking-widest mb-3">{t('landing.flowers195')}</h3>
+                  <p className="text-sm text-[#3b5e4d] leading-relaxed">Representing the flora of exactly 195 nations in a meticulously illustrated archive.</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ═══════════════════════════════════════════════════════════════
-            BENTO GRID EXPERIENCES (DrCode Style, Typography + Layout)
-        ═══════════════════════════════════════════════════════════════ */}
-        <section id="journey" className="relative overflow-hidden py-24 md:py-32 px-6" aria-labelledby="journey-heading">
-          <div className="pointer-events-none absolute inset-0 radial-glow-center" aria-hidden="true" />
-          <div className="pointer-events-none absolute inset-0 dot-pattern opacity-50" aria-hidden="true" />
+        {/* --- LITERARY INTERLUDE COMPONENT --- */}
+        <section className="relative py-20 md:py-32 px-6 bg-[#1a3a2f] text-[#f8f5f0] flex flex-col items-center justify-center text-center">
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #f8f5f0 1.5px, transparent 0)', backgroundSize: '32px 32px' }} />
+          <div className="relative max-w-4xl mx-auto px-4 border-y border-[#9b7b3d]/30 py-16 md:py-24">
+            <Bird className="w-8 h-8 text-[#9b7b3d] mx-auto mb-10 opacity-80" strokeWidth={1} />
+            <blockquote className="text-2xl md:text-5xl leading-relaxed md:leading-[1.4] font-light text-[#f8f5f0]/90 italic" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+              &ldquo;{t('landing.manifestQuote')}&rdquo;
+            </blockquote>
+            <cite className="block mt-10 text-xs uppercase tracking-[0.2em] text-[#9b7b3d] font-semibold not-italic">
+              — IADF Manifest
+            </cite>
+          </div>
+        </section>
 
-          <div className="relative max-w-7xl mx-auto">
-            <RevealWrap className="mb-16 text-center">
-              <p className="type-eyebrow text-[var(--accent-violet)] mb-4">
+        <section id="journey" className="relative py-24 md:py-32 px-6 bg-[#f4ebd9] border-b border-[#1a3a2f]/10" aria-labelledby="journey-heading">
+          <div className="relative max-w-6xl mx-auto">
+            <header className="mb-20 text-center md:text-left">
+              <span className="block text-sm uppercase tracking-[0.2em] text-[#9b7b3d] mb-4 font-medium">
                 {t('landing.ecosystem')}
-              </p>
-              <h2 id="journey-heading" className="type-display text-4xl sm:text-5xl md:text-6xl text-[var(--foreground)] tracking-tight">
+              </span>
+              <h2 id="journey-heading" className="text-4xl md:text-5xl text-[#1a3a2f]" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
                 {t('landing.exploreUniverse')}
               </h2>
-            </RevealWrap>
+            </header>
 
-            {/* True Bento Grid (CSS Grid) */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[280px]">
-              
-              {/* Highlight Card 1: 3D Archive */}
-              <RevealWrap className="md:col-span-2 md:row-span-2 group relative block overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[#fafdf9]/80 backdrop-blur-xl shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative h-full flex flex-col justify-between p-8 md:p-12 z-10">
-                  <div>
-                    <h3 className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900 leading-[1.1] mb-6">
-                      {t('landing.interactive3DArchive')}
-                    </h3>
-                    <p className="text-lg text-gray-600 max-w-md">
-                      {t('landing.archiveDesc2')}
-                    </p>
-                  </div>
-                  <div>
-                    <a href="https://www.aquamundi.org/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-gray-900 text-white rounded-full px-8 py-4 font-semibold text-lg hover:scale-105 hover:bg-gray-800 transition-all shadow-xl">
-                      {t('landing.explore3DArchive')}
-                    </a>
-                  </div>
+            <div className="flex flex-col border-y border-[#1a3a2f]/20 divide-y divide-[#1a3a2f]/20 mt-12">
+              {/* Added Plate Number Accents */}
+              <div className="group flex flex-col md:flex-row md:items-center justify-between py-12 px-4 hover:bg-[#1a3a2f]/5 transition-colors duration-300">
+                <div className="max-w-2xl">
+                  <span className="block text-xs uppercase tracking-[0.2em] text-[#9b7b3d] mb-2 font-bold select-none">{t('landing.plateI')}</span>
+                  <h3 className="text-3xl md:text-4xl text-[#1a3a2f] mb-4" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                    {t('landing.interactive3DArchive')}
+                  </h3>
+                  <p className="text-[#3b5e4d] text-lg">
+                    {t('landing.archiveDesc2')}
+                  </p>
                 </div>
-                {/* Abstract shape decoration instead of icons */}
-                <div className="absolute -bottom-24 -right-24 w-[400px] h-[400px] bg-gradient-radial from-emerald-200/40 to-transparent blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-700" />
-              </RevealWrap>
+                <div className="mt-6 md:mt-0">
+                  <a href="https://www.aquamundi.org/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm uppercase tracking-widest font-bold text-[#1a3a2f] group-hover:text-[#9b7b3d] transition-colors border-b-2 border-transparent group-hover:border-[#9b7b3d] pb-1">
+                    {t('landing.explore3DArchive')} <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </a>
+                </div>
+              </div>
 
-              {/* Gallery of Drawings */}
-              <RevealWrap className="md:col-span-2 md:row-span-1 group relative block overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--ink)] shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
-                <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 via-transparent to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.1) 1px, transparent 0)', backgroundSize: '24px 24px' }} />
-                <Link href="/galeria-dibujos" className="relative h-full flex flex-col justify-center p-8 z-10 text-white">
-                  <h3 className="text-3xl font-semibold tracking-tight mb-3">
+              <Link href="/galeria-dibujos" className="block group flex flex-col md:flex-row md:items-center justify-between py-12 px-4 hover:bg-[#1a3a2f]/5 transition-colors duration-300">
+                <div className="max-w-2xl">
+                  <span className="block text-xs uppercase tracking-[0.2em] text-[#9b7b3d] mb-2 font-bold select-none">{t('landing.plateII')}</span>
+                  <h3 className="text-3xl md:text-4xl text-[#1a3a2f] mb-4" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
                     {t('landing.globalGallery')}
                   </h3>
-                  <p className="text-white/70 text-lg max-w-md">
+                  <p className="text-[#3b5e4d] text-lg">
                     {t('landing.galleryDesc')}
                   </p>
-                  <div className="mt-6 flex items-center text-emerald-400 font-semibold uppercase tracking-wider text-sm group-hover:text-emerald-300 transition-colors">
-                    {t('landing.exploreCollection')} →
-                  </div>
-                </Link>
-              </RevealWrap>
-
-              {/* Territories */}
-              <RevealWrap className="md:col-span-1 md:row-span-1 group relative block overflow-hidden rounded-[2rem] border border-[var(--border)] bg-gradient-to-br from-[#f1f8f6] to-[#e6f4ef] shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-300/30 blur-2xl rounded-full mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <Link href="/territories" className="relative h-full flex flex-col justify-end p-8 z-10">
-                  <div className="mb-4">
-                    <span className="inline-block px-3 py-1 rounded-full bg-emerald-900/10 text-emerald-800 text-xs font-bold uppercase tracking-widest mb-3">
-                      ITC
-                    </span>
-                    <h3 className="text-2xl font-semibold tracking-tight text-emerald-950 leading-tight">
-                      {t('landing.territoriesTitle')}
-                    </h3>
-                  </div>
-                </Link>
-              </RevealWrap>
-
-              {/* Press Room */}
-              <RevealWrap className="md:col-span-1 md:row-span-1 group relative block overflow-hidden rounded-[2rem] border border-[var(--border)] bg-white shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-gray-100 to-transparent" />
-                <Link href="/press" className="relative h-full flex flex-col justify-end p-8 z-10">
-                  <h3 className="text-2xl font-semibold tracking-tight text-gray-900 leading-tight mb-2">
-                    {t('landing.pressRoom')}
-                  </h3>
-                  <p className="text-sm text-gray-500 font-medium">
-                    {t('landing.pressDesc')}
-                  </p>
-                </Link>
-              </RevealWrap>
-
-              {/* Frankfurt Event */}
-              <RevealWrap className="md:col-span-2 md:row-span-1 group relative block overflow-hidden rounded-[2rem] border border-[var(--border)] bg-gradient-to-br from-blue-50 to-indigo-50 shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-300/30 blur-2xl rounded-full mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <Link href="/eventos/frankfurt-buchmesse-2025" className="relative h-full flex flex-col justify-between p-8 z-10 w-full">
-                   <div className="mb-4">
-                    <span className="inline-block px-3 py-1 rounded-full bg-blue-900/10 text-blue-800 text-xs font-bold uppercase tracking-widest mb-3">
-                         {{
-                        es: "Evento",
-                        en: "Event",
-                        de: "Ereignis",
-                        fr: "Événement",
-                        it: "Evento",
-                        zh: "活动"
-                      }[locale] || "Event"} / Oct 2025
-                    </span>
-                    <h3 className="text-2xl font-bold tracking-tight text-blue-950 leading-tight">
-                        Frankfurter Buchmesse 2025
-                    </h3>
-                  </div>
-                 <div className="flex items-center text-blue-600 font-semibold uppercase tracking-wider text-sm transition-colors group-hover:text-blue-800 mt-auto">
-                    {{
-                         es: "Ver galería",
-                         en: "View gallery",
-                         de: "Galerie ansehen",
-                         fr: "Voir la galerie",
-                         it: "Vedi galleria",
-                         zh: "查看图库"
-                       }[locale] || "View gallery"} →
-                  </div>
-                </Link>
-              </RevealWrap>
-
-              {/* Istanbul Event */}
-              <RevealWrap className="md:col-span-2 md:row-span-1 group relative block overflow-hidden rounded-[2rem] border border-[var(--border)] bg-gradient-to-br from-emerald-50 to-teal-50 shadow-lg transition-all hover:shadow-2xl hover:-translate-y-1">
-                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-300/30 blur-2xl rounded-full mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <Link href="/eventos/estambul-istanbul-book-fair-2025" className="relative h-full flex flex-col justify-between p-8 z-10 w-full">
-                 <div className="mb-4">
-                    <span className="inline-block px-3 py-1 rounded-full bg-emerald-900/10 text-emerald-800 text-xs font-bold uppercase tracking-widest mb-3">
-                      {{
-                        es: "Evento",
-                        en: "Event",
-                        de: "Ereignis",
-                        fr: "Événement",
-                        it: "Evento",
-                        zh: "活动"
-                      }[locale] || "Event"} / Dec 2025
-                    </span>
-                    <h3 className="text-2xl font-bold tracking-tight text-emerald-950 leading-tight">
-                         42ª Feria Internacional del Libro de Estambul
-                    </h3>
-                  </div>
-                   <div className="flex items-center text-emerald-600 font-semibold uppercase tracking-wider text-sm transition-colors group-hover:text-emerald-800">
-                       {{
-                         es: "Ver galería",
-                         en: "View gallery",
-                         de: "Galerie ansehen",
-                         fr: "Voir la galerie",
-                         it: "Vedi galleria",
-                         zh: "查看图库"
-                       }[locale] || "View gallery"} →
-                  </div>
-                </Link>
-              </RevealWrap>
+                </div>
+                <div className="mt-6 md:mt-0">
+                  <span className="inline-flex items-center text-sm uppercase tracking-widest font-bold text-[#1a3a2f] group-hover:text-[#9b7b3d] transition-colors border-b-2 border-transparent group-hover:border-[#9b7b3d] pb-1">
+                    {t('landing.exploreCollection')} <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </Link>
               
+              {/* Sant Jordi Featured Block */}
+              <Link href="/sant-jordi-2026" className="block group flex flex-col md:flex-row md:items-center justify-between py-12 px-4 bg-[#1a3a2f] text-[#f8f5f0] hover:bg-[#0f241d] transition-colors duration-500">
+                <div className="max-w-2xl">
+                  <span className="block text-xs uppercase tracking-[0.2em] text-[#9b7b3d] mb-2 font-bold select-none">{t('landing.featureEvent')}</span>
+                  <div className="flex items-center gap-3 mb-4">
+                    <TreePine className="w-6 h-6 text-[#9b7b3d]" />
+                    <h3 className="text-3xl md:text-4xl" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                      Sant Jordi 2026
+                    </h3>
+                  </div>
+                  <p className="text-[#f8f5f0]/80 text-lg leading-relaxed max-w-xl">
+                    {t('landing.santJordiDesc')}
+                  </p>
+                </div>
+                <div className="mt-8 md:mt-0">
+                  <span className="inline-flex items-center text-sm uppercase tracking-[0.2em] font-semibold text-[#f8f5f0] group-hover:text-[#9b7b3d] transition-colors pb-1 border-b border-[#f8f5f0]/30 group-hover:border-[#9b7b3d]">
+                    {t('landing.exploreEvent')} <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </Link>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 border-b border-[#1a3a2f]/20 divide-y md:divide-y-0 md:divide-x divide-[#1a3a2f]/20">
+              <Link href="/press" className="block p-8 hover:bg-[#1a3a2f]/5 transition-colors group">
+                <span className="block text-xs uppercase tracking-widest text-[#9b7b3d] mb-4">Press</span>
+                <h3 className="text-2xl text-[#1a3a2f] mb-6" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                  {t('landing.pressRoom')}
+                </h3>
+                <span className="inline-flex items-center text-xs uppercase tracking-widest font-bold text-[#3b5e4d] group-hover:text-[#1a3a2f]">
+                  Open <ArrowRight className="ml-1 w-3 h-3 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+
+              <Link href="/eventos/frankfurt-buchmesse-2025" className="block p-8 hover:bg-[#1a3a2f]/5 transition-colors group">
+                <span className="block text-xs uppercase tracking-widest text-[#9b7b3d] mb-4">
+                  {{ es: "Evento", en: "Event", de: "Ereignis", fr: "Événement" }[locale] || "Event"}
+                </span>
+                <h3 className="text-2xl text-[#1a3a2f] mb-6" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                  Frankfurter Buchmesse
+                </h3>
+                <span className="inline-flex items-center text-xs uppercase tracking-widest font-bold text-[#3b5e4d] group-hover:text-[#1a3a2f]">
+                  {{ es: "Oct 2025", en: "Oct 2025" }[locale] || "Oct 2025"} <ArrowRight className="ml-1 w-3 h-3 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+
+              <Link href="/eventos/estambul-istanbul-book-fair-2025" className="block p-8 hover:bg-[#1a3a2f]/5 transition-colors group">
+                 <span className="block text-xs uppercase tracking-widest text-[#9b7b3d] mb-4">
+                  {{ es: "Evento", en: "Event", de: "Ereignis", fr: "Événement" }[locale] || "Event"}
+                </span>
+                <h3 className="text-2xl text-[#1a3a2f] mb-6" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                  Feria de Estambul
+                </h3>
+                <span className="inline-flex items-center text-xs uppercase tracking-widest font-bold text-[#3b5e4d] group-hover:text-[#1a3a2f]">
+                  {{ es: "Dec 2025", en: "Dec 2025" }[locale] || "Dec 2025"} <ArrowRight className="ml-1 w-3 h-3 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+
+              <Link href="/territories" className="block p-8 hover:bg-[#1a3a2f]/5 transition-colors group">
+                <span className="block text-xs uppercase tracking-widest text-[#9b7b3d] mb-4">ITC</span>
+                <h3 className="text-2xl text-[#1a3a2f] mb-6" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                  {t('landing.territoriesTitle')}
+                </h3>
+                <span className="inline-flex items-center text-xs uppercase tracking-widest font-bold text-[#3b5e4d] group-hover:text-[#1a3a2f]">
+                  Explore <ArrowRight className="ml-1 w-3 h-3 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* ═══════════════════════════════════════════════════════════════
-            SHARE / CTA SECTION
-        ═══════════════════════════════════════════════════════════════ */}
-        <section className="relative overflow-hidden py-20 md:py-28 lg:py-32 px-6">
-          <div className="pointer-events-none absolute inset-0 radial-glow-top" aria-hidden="true" />
-          <div className="pointer-events-none absolute inset-0 grid-pattern" aria-hidden="true" />
-
+        <section id="contact" className="relative py-24 md:py-32 px-6 bg-[#f8f5f0]">
           <div className="relative max-w-4xl mx-auto text-center">
-            <SectionHeader
-              eyebrow={locale === 'es' ? 'Comparte' : 'Share'}
-              title={t('landing.shareExperience')}
-              subtitle={t('landing.shareText')}
-            />
+            <Flower2 className="w-8 h-8 text-[#9b7b3d] mx-auto mb-10 opacity-80" strokeWidth={1.5} />
+            <h2 className="text-3xl md:text-5xl text-[#1a3a2f] mb-6 leading-tight" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+              {t('landing.shareExperience')}
+            </h2>
+            <p className="text-lg md:text-xl text-[#3b5e4d] mb-16 max-w-2xl mx-auto" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+              {t('landing.shareText')}
+            </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 stagger-children">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20 md:mb-32">
               <button
                 onClick={() => setShowContactModal(true)}
-                className="btn-primary"
+                className="px-8 py-4 bg-[#1a3a2f] text-[#f8f5f0] text-xs uppercase tracking-[0.15em] font-medium hover:bg-[#0f241d] transition-colors rounded-none"
               >
-                <MessageCircle className="mr-2 w-5 h-5" />
                 {t('landing.getInTouch')}
               </button>
               <button
                 onClick={handlePressKitDownload}
-                className="btn-secondary"
+                className="px-8 py-4 bg-transparent border border-[#1a3a2f] text-[#1a3a2f] text-xs uppercase tracking-[0.15em] font-medium hover:bg-[#1a3a2f]/5 transition-colors rounded-none"
               >
-                <Download className="mr-2 w-5 h-5" />
                 {t('landing.downloadResources')}
               </button>
             </div>
-          </div>
-        </section>
 
-        {/* ═══════════════════════════════════════════════════════════════
-            CONTACT SECTION
-        ═══════════════════════════════════════════════════════════════ */}
-        <section id="contact" className="relative overflow-hidden py-20 md:py-28 lg:py-32 px-6 bg-[var(--muted)]">
-          <div className="pointer-events-none absolute inset-0 dot-pattern" aria-hidden="true" />
-          <div className="relative max-w-5xl mx-auto">
-            <SectionHeader
-              eyebrow={locale === 'es' ? 'Contacto' : 'Contact'}
-              title={t('landing.getInTouch')}
-            />
-
-            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto stagger-children">
-              {[
-                {
-                  icon: Mail,
-                  title: 'Email',
-                  value: contactInfo.email,
-                  href: `mailto:${contactInfo.email}`,
-                  color: 'var(--brand)',
-                },
-                {
-                  icon: MessageCircle,
-                  title: 'WhatsApp',
-                  value: contactInfo.phone,
-                  href: `https://wa.me/${contactInfo.phone.replace(/\s+/g, '')}`,
-                  external: true,
-                  color: 'var(--brand)',
-                },
-                {
-                  icon: MapPin,
-                  title: locale === 'es' ? 'Ubicación' : 'Location',
-                  value: contactInfo.location,
-                  color: 'var(--accent-violet)',
-                },
-              ].map((item, i) => (
-                <ContactCard key={i} {...item} />
-              ))}
+            <div className="grid md:grid-cols-3 gap-12 text-left border-t border-[#1a3a2f]/20 pt-16">
+              <div>
+                <h4 className="text-[#9b7b3d] text-xs uppercase tracking-[0.2em] font-bold mb-4">Email</h4>
+                <a href={`mailto:${contactInfo.email}`} className="text-[#1a3a2f] text-sm hover:text-[#9b7b3d] transition-colors underline decoration-[#1a3a2f]/20 underline-offset-4">
+                  {contactInfo.email}
+                </a>
+              </div>
+              <div>
+                <h4 className="text-[#9b7b3d] text-xs uppercase tracking-[0.2em] font-bold mb-4">WhatsApp</h4>
+                <a href={`https://wa.me/${contactInfo.phone.replace(/\s+/g, '')}`} target="_blank" rel="noopener noreferrer" className="text-[#1a3a2f] text-sm hover:text-[#9b7b3d] transition-colors underline decoration-[#1a3a2f]/20 underline-offset-4">
+                  {contactInfo.phone}
+                </a>
+              </div>
+              <div>
+                 <h4 className="text-[#9b7b3d] text-xs uppercase tracking-[0.2em] font-bold mb-4">
+                   {t('landing.pressLocation')}
+                 </h4>
+                 <p className="text-[#1a3a2f] text-sm whitespace-pre-line leading-relaxed">
+                   {contactInfo.location}
+                 </p>
+              </div>
             </div>
           </div>
         </section>
@@ -954,7 +918,7 @@ ${t('landing.visionText')}
         {/* ═══════════════════════════════════════════════════════════════
             FOOTER — DrCode-style minimal
         ═══════════════════════════════════════════════════════════════ */}
-        <footer className="relative py-12 px-6 bg-[var(--ink)] text-white overflow-hidden" role="contentinfo">
+        <footer className="relative py-12 px-6 bg-[var(--ink)] text-white" role="contentinfo">
           <div className="pointer-events-none absolute inset-0 opacity-[0.04]" style={{
             backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)',
             backgroundSize: '4rem 4rem',

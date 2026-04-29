@@ -65,6 +65,35 @@
     "exploreCollection": "探索收藏",
     "territoriesTitle": "领土",
     "pressRoom": "新闻中心",
-    "pressDesc": "新闻与采访"
+    "pressDesc": "新闻与采访",
+    "plateI": "图版 I.",
+    "plateII": "图版 II.",
+    "featureEvent": "特色活动",
+    "santJordiTitle": "Sant Jordi 2026",
+    "santJordiDesc": "探索将文学、可持续制作的人造玫瑰和植物保护结合在一起的全球倡议。",
+    "exploreEvent": "探索活动",
+    "manifestQuote": "人类绽放之处，自然重生。",
+    "iadfManifest": "— IADF 宣言",
+    "exhibitionsAndRooms": "展览与文化室",
+    "frankfurtEvent": "活动",
+    "frankfurtDate": "2025年10月",
+    "istanbulEvent": "活动",
+    "istanbulDate": "2025年12月",
+    "pressLocation": "地点"
+  },
+  "press": {
+    "backToHome": "返回首页",
+    "pressRoomTitle": "新闻中心",
+    "pressRoomDesc": "最新采访、官方公告和媒体露面。",
+    "interviewDesc": "与 Matías Gonzalez 就跨媒体生态系统和 Nahiara 协会的核心价值进行的独家西班牙语采访。以下音频是原始录音，供我们社区无广告不间断收听。",
+    "listenRecording": "收听录音 (音频)",
+    "originalBroadcast": "更喜欢收听原版广播？",
+    "officialEpisode": "在 iVoox 上收听官方剧集",
+    "facebookReel": "Facebook Reel",
+    "initiativeOverview": "倡议概述",
+    "initiativeOverviewDesc": "在Facebook上快速浏览我们项目的精彩瞬间和背后的故事。",
+    "watchReel": "在Facebook上观看 Reel",
+    "podcastTitle": "播客采访 - 2026年4月9日",
+    "conAcento": "Con Acento Planeta - Matías Gonzalez"
   }
 }

@@ -65,6 +65,35 @@
     "exploreCollection": "Explore Collection",
     "territoriesTitle": "Territories",
     "pressRoom": "Press Room",
-    "pressDesc": "News and interviews"
+    "pressDesc": "News and interviews",
+    "plateI": "Plate I.",
+    "plateII": "Plate II.",
+    "featureEvent": "Feature Event",
+    "santJordiTitle": "Sant Jordi 2026",
+    "santJordiDesc": "Discover the global initiative uniting literature, sustainably crafted artificial roses, and botanical conservation.",
+    "exploreEvent": "Explore Event",
+    "manifestQuote": "Where humanity blooms, nature is reborn.",
+    "iadfManifest": "— IADF Manifest",
+    "exhibitionsAndRooms": "Exhibitions & Rooms",
+    "frankfurtEvent": "Event",
+    "frankfurtDate": "Oct 2025",
+    "istanbulEvent": "Event",
+    "istanbulDate": "Dec 2025",
+    "pressLocation": "Location"
+  },
+  "press": {
+    "backToHome": "Back to Home",
+    "pressRoomTitle": "Press Room",
+    "pressRoomDesc": "Latest interviews, official announcements, and media appearances.",
+    "interviewDesc": "Exclusive Spanish interview with Matías Gonzalez on the transmedia ecosystem and the core values of Asociación Nahiara. The audio below is a raw recording for our community's ad-free uninterrupted listening.",
+    "listenRecording": "Listen to the recording (Audio)",
+    "originalBroadcast": "Prefer to listen to the original broadcast?",
+    "officialEpisode": "Listen to official episode on iVoox",
+    "facebookReel": "Facebook Reel",
+    "initiativeOverview": "Initiative Overview",
+    "initiativeOverviewDesc": "Take a quick look at the highlights and the story behind our project on Facebook.",
+    "watchReel": "Watch Reel on Facebook",
+    "podcastTitle": "Podcast Interview - April 09, 2026",
+    "conAcento": "Con Acento Planeta - Matías Gonzalez"
   }
 }
