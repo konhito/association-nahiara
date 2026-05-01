@@ -732,7 +732,7 @@ ${t('landing.visionText')}
                   title: t('landing.project2Title'),
                   description: t('landing.project2Description'),
                   cta: t('landing.project2Cta'),
-                  href: "/"
+                  href: "https://aquamundi.org/game"
                 },
                 {
                   label: t('landing.project3Label'),
