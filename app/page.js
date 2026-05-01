@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef, Suspense, useCallback } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { Download, Mail, MessageCircle, Globe, BookOpen, ArrowRight, X, MapPin, Phone, Building2, Users, Heart, Sparkles, Award, Shield, ChevronDown, Flower2, TreePine, Leaf, Bird } from "lucide-react";
+import { Download, Mail, MessageCircle, ArrowRight, X, MapPin, Phone, Building2, Users, Heart, Sparkles, Award, Shield, ChevronDown, Flower2, Leaf } from "lucide-react";
 import { useTranslation, locales, defaultLocale, changeLanguage } from "../lib/useTranslation";
 import { detectLocationFromIP } from "../lib/geolocation";
 
@@ -351,10 +351,11 @@ function Navbar({ scrolled, onContactClick, locale }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   
   const navLinks = [
-    { id: 'story', label: locale === 'es' ? 'Historia' : 'Story' },
-    { id: 'journey', label: locale === 'es' ? 'Experiencia' : 'Experience' },
-    { id: 'community', label: locale === 'es' ? 'Comunidad' : 'Community' },
-    { id: 'contact', label: locale === 'es' ? 'Contacto' : 'Contact' },
+    { id: 'story', label: locale === 'es' ? 'Historia' : 'Story', type: 'anchor' },
+    { id: 'journey', label: locale === 'es' ? 'Experiencia' : 'Experience', type: 'anchor' },
+    { id: 'community', label: locale === 'es' ? 'Comunidad' : 'Community', type: 'anchor' },
+    { id: 'academic-alliances', label: locale === 'es' ? 'Alianzas' : 'Alliances', type: 'route', href: '/alianzas-academicas-e-institucionales' },
+    { id: 'contact', label: locale === 'es' ? 'Contacto' : 'Contact', type: 'anchor' },
   ];
 
   return (
@@ -367,7 +368,7 @@ function Navbar({ scrolled, onContactClick, locale }) {
         <div className="flex items-center justify-between gap-3">
           {/* Logo / Brand */}
           <a href="#" className="flex items-center gap-2.5 min-h-[44px] rounded-lg focus:outline-none">
-            <Flower2 className="w-7 h-7 text-[var(--brand)]" strokeWidth={2} />
+            <img src="/NahiaraLogo.svg" alt="Nahiara Logo" className="w-7 h-7 object-contain" />
             <span style={{ fontFamily: 'Outfit, Inter, sans-serif', fontWeight: 700, fontSize: 'clamp(1.1rem, 0.8vw + 0.95rem, 1.4rem)', letterSpacing: '-0.03em', color: 'var(--foreground)' }}>
               IADF
             </span>
@@ -378,7 +379,7 @@ function Navbar({ scrolled, onContactClick, locale }) {
             {navLinks.map(link => (
               <a
                 key={link.id}
-                href={`#${link.id}`}
+                href={link.type === 'route' ? link.href : `#${link.id}`}
                 className="text-[0.9375rem] font-medium text-[var(--muted-foreground)] transition-colors duration-200 hover:text-[var(--foreground)] py-1"
                 style={{ letterSpacing: '-0.01em' }}
               >
@@ -420,7 +421,7 @@ function Navbar({ scrolled, onContactClick, locale }) {
               {navLinks.map(link => (
                 <a
                   key={link.id}
-                  href={`#${link.id}`}
+                  href={link.type === 'route' ? link.href : `#${link.id}`}
                   onClick={() => setMobileOpen(false)}
                   className="flex min-h-[44px] items-center rounded-lg px-3 text-[var(--foreground)] font-medium transition-colors hover:bg-[var(--muted)]"
                 >
@@ -688,143 +689,104 @@ ${t('landing.visionText')}
           <div className="relative max-w-4xl mx-auto">
             <header className="mb-16 md:mb-24 text-center">
               <Leaf className="w-6 h-6 text-[#9b7b3d] mx-auto mb-6 opacity-60" strokeWidth={1} />
-              <span className="block text-sm uppercase tracking-[0.2em] text-[#9b7b3d] mb-4 font-medium">
-                {locale === 'es' ? 'Nuestra Historia' : 'Our Story'}
-              </span>
+              <span className="block text-sm uppercase tracking-[0.2em] text-[#9b7b3d] mb-4 font-medium">{t('landing.aboutLabel')}</span>
               <h2 id="story-heading" className="text-4xl md:text-6xl font-normal text-[#1a3a2f] leading-tight" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
-                {t('landing.storyBehindBook')}
+                {t('landing.aboutTitle')}
               </h2>
+              <p className="text-xl md:text-2xl text-[#2d4f40] mt-6">{t('landing.aboutSubtitle')}</p>
             </header>
             <div className="md:px-12 relative">
-              <p className="text-lg md:text-2xl text-[#2d4f40] leading-loose mb-16" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
-                <span className="float-left text-7xl leading-[0.8] pr-3 pt-2 text-[#9b7b3d] font-normal" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
-                  {t('landing.storyText').charAt(0)}
-                </span>
-                {t('landing.storyText').substring(1)}
+              <p className="text-lg md:text-2xl text-[#2d4f40] leading-loose mb-10" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                {t('landing.aboutBody1')}
               </p>
-              
-              {/* Elegant divider */}
-              <div className="flex justify-center items-center gap-4 mb-16">
-                <div className="h-px w-24 bg-[#9b7b3d]/30" />
-                <div className="w-1.5 h-1.5 bg-[#9b7b3d]/50 rotate-45" />
-                <div className="h-px w-24 bg-[#9b7b3d]/30" />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
-                <div className="relative">
-                  <span className="block text-[0.65rem] uppercase tracking-[0.3em] text-[#9b7b3d] mb-3 font-semibold">01</span>
-                  <BookOpen className="w-5 h-5 text-[#1a3a2f]/40 mb-3 mx-auto md:mx-0" strokeWidth={1.5} />
-                  <h3 className="text-sm font-bold text-[#1a3a2f] uppercase tracking-widest mb-3">{t('landing.literarySaga')}</h3>
-                  <p className="text-sm text-[#3b5e4d] leading-relaxed">A story transcending borders, connecting cultures through a shared narrative.</p>
-                </div>
-                <div className="relative">
-                  <span className="block text-[0.65rem] uppercase tracking-[0.3em] text-[#9b7b3d] mb-3 font-semibold">02</span>
-                  <Globe className="w-5 h-5 text-[#1a3a2f]/40 mb-3 mx-auto md:mx-0" strokeWidth={1.5} />
-                  <h3 className="text-sm font-bold text-[#1a3a2f] uppercase tracking-widest mb-3">{t('landing.globalImpact')}</h3>
-                  <p className="text-sm text-[#3b5e4d] leading-relaxed">An international framework uniting educators, publishers, and biodiversity advocates.</p>
-                </div>
-                <div className="relative">
-                  <span className="block text-[0.65rem] uppercase tracking-[0.3em] text-[#9b7b3d] mb-3 font-semibold">03</span>
-                  <Flower2 className="w-5 h-5 text-[#1a3a2f]/40 mb-3 mx-auto md:mx-0" strokeWidth={1.5} />
-                  <h3 className="text-sm font-bold text-[#1a3a2f] uppercase tracking-widest mb-3">{t('landing.flowers195')}</h3>
-                  <p className="text-sm text-[#3b5e4d] leading-relaxed">Representing the flora of exactly 195 nations in a meticulously illustrated archive.</p>
-                </div>
-              </div>
+              <p className="text-lg md:text-2xl text-[#2d4f40] leading-loose mb-10" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                {t('landing.aboutBody2')}
+              </p>
+              <p className="text-lg md:text-2xl text-[#2d4f40] leading-loose" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                {t('landing.aboutBody3')}
+              </p>
             </div>
-          </div>
-        </section>
-
-        {/* --- LITERARY INTERLUDE COMPONENT --- */}
-        <section className="relative py-20 md:py-32 px-6 bg-[#1a3a2f] text-[#f8f5f0] flex flex-col items-center justify-center text-center">
-          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #f8f5f0 1.5px, transparent 0)', backgroundSize: '32px 32px' }} />
-          <div className="relative max-w-4xl mx-auto px-4 border-y border-[#9b7b3d]/30 py-16 md:py-24">
-            <Bird className="w-8 h-8 text-[#9b7b3d] mx-auto mb-10 opacity-80" strokeWidth={1} />
-            <blockquote className="text-2xl md:text-5xl leading-relaxed md:leading-[1.4] font-light text-[#f8f5f0]/90 italic" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
-              &ldquo;{t('landing.manifestQuote')}&rdquo;
-            </blockquote>
-            <cite className="block mt-10 text-xs uppercase tracking-[0.2em] text-[#9b7b3d] font-semibold not-italic">
-              — IADF Manifest
-            </cite>
           </div>
         </section>
 
         <section id="journey" className="relative py-24 md:py-32 px-6 bg-[#f4ebd9] border-b border-[#1a3a2f]/10" aria-labelledby="journey-heading">
           <div className="relative max-w-6xl mx-auto">
             <header className="mb-20 text-center md:text-left">
-              <span className="block text-sm uppercase tracking-[0.2em] text-[#9b7b3d] mb-4 font-medium">
-                {t('landing.ecosystem')}
-              </span>
+              <span className="block text-sm uppercase tracking-[0.2em] text-[#9b7b3d] mb-4 font-medium">{t('landing.projectsLabel')}</span>
               <h2 id="journey-heading" className="text-4xl md:text-5xl text-[#1a3a2f]" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
-                {t('landing.exploreUniverse')}
+                {t('landing.projectsTitle')}
               </h2>
             </header>
 
-            <div className="flex flex-col border-y border-[#1a3a2f]/20 divide-y divide-[#1a3a2f]/20 mt-12">
-              {/* Added Plate Number Accents */}
-              <div className="group flex flex-col md:flex-row md:items-center justify-between py-12 px-4 hover:bg-[#1a3a2f]/5 transition-colors duration-300">
-                <div className="max-w-2xl">
-                  <span className="block text-xs uppercase tracking-[0.2em] text-[#9b7b3d] mb-2 font-bold select-none">{t('landing.plateI')}</span>
-                  <h3 className="text-3xl md:text-4xl text-[#1a3a2f] mb-4" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
-                    {t('landing.interactive3DArchive')}
-                  </h3>
-                  <p className="text-[#3b5e4d] text-lg">
-                    {t('landing.archiveDesc2')}
-                  </p>
-                </div>
-                <div className="mt-6 md:mt-0">
-                  <a href="https://www.aquamundi.org/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm uppercase tracking-widest font-bold text-[#1a3a2f] group-hover:text-[#9b7b3d] transition-colors border-b-2 border-transparent group-hover:border-[#9b7b3d] pb-1">
-                    {t('landing.explore3DArchive')} <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </a>
-                </div>
-              </div>
-
-              <Link href="/galeria-dibujos" className="block group flex flex-col md:flex-row md:items-center justify-between py-12 px-4 hover:bg-[#1a3a2f]/5 transition-colors duration-300">
-                <div className="max-w-2xl">
-                  <span className="block text-xs uppercase tracking-[0.2em] text-[#9b7b3d] mb-2 font-bold select-none">{t('landing.plateII')}</span>
-                  <h3 className="text-3xl md:text-4xl text-[#1a3a2f] mb-4" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
-                    {t('landing.globalGallery')}
-                  </h3>
-                  <p className="text-[#3b5e4d] text-lg">
-                    {t('landing.galleryDesc')}
-                  </p>
-                </div>
-                <div className="mt-6 md:mt-0">
-                  <span className="inline-flex items-center text-sm uppercase tracking-widest font-bold text-[#1a3a2f] group-hover:text-[#9b7b3d] transition-colors border-b-2 border-transparent group-hover:border-[#9b7b3d] pb-1">
-                    {t('landing.exploreCollection')} <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Link>
-              
-              {/* Sant Jordi Featured Block */}
-              <Link href="/sant-jordi-2026" className="block group flex flex-col md:flex-row md:items-center justify-between py-12 px-4 bg-[#1a3a2f] text-[#f8f5f0] hover:bg-[#0f241d] transition-colors duration-500">
-                <div className="max-w-2xl">
-                  <span className="block text-xs uppercase tracking-[0.2em] text-[#9b7b3d] mb-2 font-bold select-none">{t('landing.featureEvent')}</span>
-                  <div className="flex items-center gap-3 mb-4">
-                    <TreePine className="w-6 h-6 text-[#9b7b3d]" />
-                    <h3 className="text-3xl md:text-4xl" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
-                      Sant Jordi 2026
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+              {[
+                {
+                  label: t('landing.project1Label'),
+                  title: t('landing.project1Title'),
+                  description: t('landing.project1Description'),
+                  cta: t('landing.project1Cta'),
+                  href: "/"
+                },
+                {
+                  label: t('landing.project2Label'),
+                  title: t('landing.project2Title'),
+                  description: t('landing.project2Description'),
+                  cta: t('landing.project2Cta'),
+                  href: "/"
+                },
+                {
+                  label: t('landing.project3Label'),
+                  title: t('landing.project3Title'),
+                  description: t('landing.project3Description'),
+                  cta: t('landing.project3Cta'),
+                  href: "https://www.aquamundi.org"
+                },
+                {
+                  label: t('landing.project4Label'),
+                  title: t('landing.project4Title'),
+                  description: t('landing.project4Description'),
+                  cta: t('landing.project4Cta'),
+                  href: "/dibuja-la-flor-de-tu-pais"
+                },
+                {
+                  label: t('landing.project5Label'),
+                  title: t('landing.project5Title'),
+                  description: t('landing.project5Description'),
+                  cta: t('landing.project5Cta'),
+                  href: "/press"
+                }
+              ].map((project) => (
+                <article key={project.title} className="border border-[#1a3a2f]/15 bg-[#f8f5f0] p-8 md:p-10 flex flex-col justify-between min-h-[280px]">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-[#9b7b3d] mb-4 font-semibold">{project.label}</p>
+                    <h3 className="text-2xl md:text-3xl text-[#1a3a2f] mb-4" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+                      {project.title}
                     </h3>
+                    <p className="text-[#3b5e4d] leading-relaxed">{project.description}</p>
                   </div>
-                  <p className="text-[#f8f5f0]/80 text-lg leading-relaxed max-w-xl">
-                    {t('landing.santJordiDesc')}
-                  </p>
-                </div>
-                <div className="mt-8 md:mt-0">
-                  <span className="inline-flex items-center text-sm uppercase tracking-[0.2em] font-semibold text-[#f8f5f0] group-hover:text-[#9b7b3d] transition-colors pb-1 border-b border-[#f8f5f0]/30 group-hover:border-[#9b7b3d]">
-                    {t('landing.exploreEvent')} <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Link>
+                  <div className="mt-8">
+                    {project.href.startsWith('http') ? (
+                      <a href={project.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm uppercase tracking-[0.12em] font-semibold text-[#1a3a2f] hover:text-[#9b7b3d] transition-colors">
+                        {project.cta}
+                      </a>
+                    ) : (
+                      <Link href={project.href} className="inline-flex items-center text-sm uppercase tracking-[0.12em] font-semibold text-[#1a3a2f] hover:text-[#9b7b3d] transition-colors">
+                        {project.cta}
+                      </Link>
+                    )}
+                  </div>
+                </article>
+              ))}
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 border-b border-[#1a3a2f]/20 divide-y md:divide-y-0 md:divide-x divide-[#1a3a2f]/20">
               <Link href="/press" className="block p-8 hover:bg-[#1a3a2f]/5 transition-colors group">
-                <span className="block text-xs uppercase tracking-widest text-[#9b7b3d] mb-4">Press</span>
+                <span className="block text-xs uppercase tracking-widest text-[#9b7b3d] mb-4">{locale === 'es' ? 'Prensa' : 'Press'}</span>
                 <h3 className="text-2xl text-[#1a3a2f] mb-6" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
                   {t('landing.pressRoom')}
                 </h3>
                 <span className="inline-flex items-center text-xs uppercase tracking-widest font-bold text-[#3b5e4d] group-hover:text-[#1a3a2f]">
-                  Open <ArrowRight className="ml-1 w-3 h-3 transition-transform group-hover:translate-x-1" />
+                  {locale === 'es' ? 'Abrir' : 'Open'} <ArrowRight className="ml-1 w-3 h-3 transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
 
@@ -853,12 +815,12 @@ ${t('landing.visionText')}
               </Link>
 
               <Link href="/territories" className="block p-8 hover:bg-[#1a3a2f]/5 transition-colors group">
-                <span className="block text-xs uppercase tracking-widest text-[#9b7b3d] mb-4">ITC</span>
+                <span className="block text-xs uppercase tracking-widest text-[#9b7b3d] mb-4">{locale === 'es' ? 'Territorios' : 'ITC'}</span>
                 <h3 className="text-2xl text-[#1a3a2f] mb-6" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
                   {t('landing.territoriesTitle')}
                 </h3>
                 <span className="inline-flex items-center text-xs uppercase tracking-widest font-bold text-[#3b5e4d] group-hover:text-[#1a3a2f]">
-                  Explore <ArrowRight className="ml-1 w-3 h-3 transition-transform group-hover:translate-x-1" />
+                  {locale === 'es' ? 'Explorar' : 'Explore'} <ArrowRight className="ml-1 w-3 h-3 transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
             </div>
@@ -927,7 +889,7 @@ ${t('landing.visionText')}
             <div className="flex flex-col md:flex-row justify-between items-center gap-8">
               <div className="flex flex-col items-center md:items-start gap-3">
                 <div className="flex items-center gap-2.5">
-                  <Flower2 className="w-6 h-6 text-emerald-400" />
+                  <img src="/NahiaraLogo.svg" alt="Nahiara Logo" className="w-6 h-6 object-contain" />
                   <span className="font-bold text-lg tracking-tight" style={{ fontFamily: 'Outfit, Inter, sans-serif' }}>IADF</span>
                 </div>
                 <p className="text-white/50 text-sm max-w-xs text-center md:text-left">

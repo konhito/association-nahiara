@@ -261,30 +261,6 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div
-          role="status"
-          style={{
-            background: '#f8fafc',
-            color: '#0f172a',
-            padding: '14px 16px',
-            textAlign: 'center',
-            position: 'sticky',
-            top: 0,
-            zIndex: 99999,
-            boxShadow: '0 1px 0 0 #e2e8f0',
-            fontFamily: 'Inter, system-ui, sans-serif',
-            lineHeight: 1.55,
-            fontSize: '0.9rem',
-          }}
-        >
-          <div style={{ maxWidth: 40 * 16, margin: '0 auto' }}>
-            <p style={{ margin: '0 0 10px 0' }}>
-              <span style={{ fontWeight: 600 }}>¡Un millón de gracias a quienes visitaron nuestro stand en el Sant Jordi 2026!</span>
-            </p>
-            <p style={{ margin: '0 0 8px 0' }}>Ha sido increíble compartir el Universo Nahiara con vosotros en Barcelona.</p>
-            <p style={{ margin: 0 }}>¡Hasta el año que viene! 🌸</p>
-          </div>
-        </div>
         {children}
       </body>
     </html>

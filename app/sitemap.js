@@ -6,6 +6,7 @@ export default function sitemap() {
     '/galeria-dibujos',
     '/evento-dibuja-flor',
     '/dibuja-la-flor-de-tu-pais',
+    '/alianzas-academicas-e-institucionales',
     '/territories',
     '/press',
     '/sant-jordi-2026'
