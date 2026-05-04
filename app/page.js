@@ -614,7 +614,7 @@ ${t('landing.visionText')}
         {/* ═══════════════════════════════════════════════════════════════
             HERO SECTION — Full-screen, DrCode-style with 3D logo
         ═══════════════════════════════════════════════════════════════ */}
-        <header className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden" style={{ minHeight: '100dvh' }} role="banner">
+        <header className="hero-banner relative flex w-full flex-col items-center justify-center overflow-hidden" role="banner">
           {/* Animated 3D background */}
           <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.85]">
             <GLSLHills cameraZ={125} speed={0.4} planeSize={256} />
@@ -627,7 +627,7 @@ ${t('landing.visionText')}
           <div className="pointer-events-none absolute inset-0 radial-glow-top" aria-hidden="true" />
 
           {/* Content */}
-          <div className="pointer-events-none relative z-10 space-y-6 px-6 text-center max-w-4xl mx-auto">
+          <div className="hero-content pointer-events-none relative z-10 space-y-6 px-6 text-center max-w-4xl mx-auto">
             {/* 3D Logo */}
             <figure className="mb-2 flex justify-center" style={entrance(0)} aria-label="Association Logo">
               <Logo3D key="main-logo" />

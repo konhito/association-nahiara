@@ -410,3 +410,51 @@ h1, h2, h3, h4, h5, h6 {
   animation: glow-pulse 4s ease-in-out infinite;
   pointer-events: none;
 }
+
+.hero-banner {
+  min-height: 100svh;
+  min-height: 100dvh;
+  padding-top: clamp(6.5rem, 11svh, 8.5rem);
+  padding-bottom: clamp(1.5rem, 4svh, 2.75rem);
+}
+
+.hero-content {
+  width: min(100%, 64rem);
+}
+
+.hero-logo-wrap {
+  width: 12rem;
+  height: 12rem;
+  min-height: 12rem;
+}
+
+@media (max-height: 820px) {
+  .hero-banner {
+    padding-top: clamp(6.25rem, 10svh, 7.5rem);
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-logo-wrap {
+    width: 10rem;
+    height: 10rem;
+    min-height: 10rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .hero-banner {
+    justify-content: flex-start;
+    padding-top: max(6.25rem, env(safe-area-inset-top) + 5.25rem);
+    padding-bottom: 1.75rem;
+  }
+
+  .hero-content {
+    row-gap: 1rem;
+  }
+
+  .hero-logo-wrap {
+    width: 8rem;
+    height: 8rem;
+    min-height: 8rem;
+  }
+}
