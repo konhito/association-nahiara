@@ -135,5 +135,158 @@
     "visitLpu": "Visitar www.lpu.in",
     "futureTitle": "Próximas alianzas",
     "futureBody": "Este espacio está diseñado para crecer con nuevas colaboraciones académicas e institucionales a medida que el proyecto se expanda internacionalmente."
+  },
+  "archive": {
+    "navLabel": "El Archivo Floral",
+    "backToArchive": "Volver al Archivo Floral",
+    "eyebrow": "Asociación Internacional en Defensa de las Flores",
+    "title": "El Archivo Floral",
+    "subtitle": "La referencia mundial sobre flores nacionales: historia, declaración oficial, representación filatélica y estado de conservación. Los 195 países.",
+    "statCountries": "Países indexados",
+    "statProfiles": "Perfiles completos publicados",
+    "statSeries": "Colección de lanzamiento",
+    "launchLabel": "Serie 001 — Países de lanzamiento",
+    "allCountries": "Los 195 Países",
+    "searchPlaceholder": "Busca por país, flor o código SAN…",
+    "filterAll": "Todos los perfiles",
+    "filterComplete": "Completos",
+    "filterPending": "En preparación",
+    "contentPending": "Contenido en preparación",
+    "viewProfile": "Ver perfil",
+    "noResults": "Ningún país coincide con tu búsqueda.",
+    "footerNote": "El Archivo Floral es una publicación en curso de la Asociación Internacional en Defensa de las Flores. Se publican nuevos perfiles semanalmente.",
+    "declarationLabel": "Declaración oficial",
+    "conservationLabel": "Conservación",
+    "cardGameLabel": "Juego de cartas",
+    "bookLabel": "Libro",
+    "historyLabel": "Historia de la flor",
+    "stampLabel": "Sello filatélico",
+    "stampPending": "Imagen del sello pendiente de verificación de dominio público o licencia.",
+    "notFound": "Perfil no encontrado",
+    "notFoundDesc": "Este perfil de país no existe aún o está siendo preparado por nuestro equipo editorial.",
+    "returnToArchive": "Volver al Archivo Floral"
+  },
+  "archivePage": {
+    "nav": {
+      "home": "Inicio",
+      "title": "El Archivo Floral"
+    },
+    "overview": {
+      "kicker": "Mesa editorial",
+      "title": "Una publicacion que recorre el patrimonio floral vivo pais por pais.",
+      "description": "Este archivo funciona como una mesa editorial activa. Los dossiers se publican solo despues de verificaciones botanicas, revision de fuentes y control de derechos.",
+      "stats": {
+        "mapped": "Mapa indexado",
+        "published": "Dossiers publicados",
+        "prep": "En preparacion",
+        "completion": "Cobertura inicial"
+      },
+      "rail": {
+        "kicker": "Serie 001",
+        "title": "Cobertura inicial por continente",
+        "link": "Abrir navegador de publicacion"
+      }
+    },
+    "series": {
+      "kicker": "Serie documental completa",
+      "title": "Flores que cambiaron el mundo",
+      "description": "Los Bloques I a V presentan una ruta documental bilingue y verificada, desde el origen simbolico hasta la urgencia actual de conservacion.",
+      "contextLine": "Bloques I - V · Edicion bilingue ES / EN",
+      "blockLabel": "Bloque",
+      "signoffLink": "Continuar al navegador de paises",
+      "footnote": "Investigacion documental de la Asociacion Internacional en Defensa de las Flores.",
+      "blocks": {
+        "I": {
+          "title": "El origen simbolico",
+          "altTitle": "The symbolic origin",
+          "summary": "Las flores representaban naciones mucho antes de los estados modernos."
+        },
+        "II": {
+          "title": "El silencio tambien habla",
+          "altTitle": "The silence also speaks",
+          "summary": "Los paises sin flor oficial revelan fracturas historicas y politicas."
+        },
+        "III": {
+          "title": "El archivo de papel",
+          "altTitle": "The paper archive",
+          "summary": "La filatelia construyo el archivo visual mas amplio de identidad floral."
+        },
+        "IV": {
+          "title": "Cuando el simbolo se enfrenta a la extincion",
+          "altTitle": "When the symbol faces extinction",
+          "summary": "La crisis de biodiversidad amenaza flores nacionales y polinizadores."
+        },
+        "V": {
+          "title": "El jardin que aun podemos salvar",
+          "altTitle": "The garden we can still save",
+          "summary": "Gobiernos, ciencia y ciudadania definen el futuro vivo de este simbolo."
+        }
+      }
+    },
+    "features": {
+      "one": {
+        "kicker": "Indice listo para busqueda",
+        "title": "Buscar por pais, flor o codigo SAN",
+        "description": "El explorador inicial acepta nombres historicos, nombres cientificos e identificadores codificados en un solo campo."
+      },
+      "two": {
+        "kicker": "Tarjetas visuales",
+        "title": "Cada pais de lanzamiento tiene perfil visual",
+        "description": "Los ocho primeros dossiers incluyen imagen floral, estado de conservacion y metadatos editoriales para revision directa."
+      },
+      "three": {
+        "kicker": "Continuidad de archivo",
+        "title": "Disenado para escalar a 195 paises",
+        "description": "El mismo sistema de tarjetas del lanzamiento esta alineado con la cola completa de publicacion y el ciclo semanal."
+      }
+    },
+    "explorer": {
+      "kicker": "Explorador Serie 001",
+      "title": "Paises de lanzamiento con dossiers florales buscables",
+      "description": "Recorre los ocho paises iniciales con un explorador movil mas limpio, con busqueda, filtro por continente y filtro de conservacion.",
+      "searchLabel": "Buscar pais, flor, nombre cientifico o SAN",
+      "searchPlaceholder": "Prueba: Peru, Cantuta, Gloriosa, SAN-00834",
+      "continentLabel": "Continente",
+      "allContinents": "Todos los continentes",
+      "conservationLabel": "Conservacion",
+      "allConservation": "Todos los niveles",
+      "resultCount": "dossiers de lanzamiento visibles",
+      "viewDossier": "Ver dossier",
+      "status": {
+        "good": "Estable",
+        "vulnerable": "Vulnerable",
+        "endangered": "En peligro"
+      }
+    },
+    "navigator": {
+      "kicker": "Navegador",
+      "title": "195 paises, agrupados para navegar",
+      "description": "El registro completo esta estructurado desde el primer dia. Los perfiles publicados son enlaces activos, y los paises pendientes permanecen visibles dentro de la cola editorial."
+    },
+    "protocol": {
+      "kicker": "Protocolo editorial",
+      "title": "Ciclo de publicacion verificado",
+      "description": "Cada dossier sigue una secuencia editorial fija antes de su publicacion. La cola inferior muestra paises en preparacion para proximas entregas.",
+      "queueTitle": "Vista previa de la cola",
+      "steps": {
+        "one": {
+          "title": "Captura de fuentes",
+          "description": "Las fuentes de designacion nacional, registros filatelicos y notas botanicas se integran en una sola ficha de trabajo."
+        },
+        "two": {
+          "title": "Revision cientifica",
+          "description": "La nomenclatura cientifica y la consistencia taxonomica se verifican antes de pasar a produccion."
+        },
+        "three": {
+          "title": "Control de derechos",
+          "description": "Las imagenes y sellos se publican solo cuando la licencia y los derechos de origen estan claros."
+        },
+        "four": {
+          "title": "Edicion multilingue",
+          "description": "La redaccion ES, EN y DE se alinea para que cada dossier salga como una publicacion coherente."
+        }
+      }
+    },
+    "footerNote": "El Archivo Floral se mantiene como una publicacion de largo recorrido de la Asociacion Internacional en Defensa de las Flores."
   }
 }

@@ -452,6 +452,12 @@ function Navbar({ scrolled, onContactClick, locale }) {
       href: "/alianzas-academicas-e-institucionales",
     },
     {
+      id: "archive",
+      label: locale === "es" ? "Archivo" : "Archive",
+      type: "route",
+      href: "/archive",
+    },
+    {
       id: "contact",
       label: locale === "es" ? "Contacto" : "Contact",
       type: "anchor",
@@ -755,23 +761,6 @@ ${t("landing.visionText")}
           locale={locale}
         />
 
-        <section className="relative z-30 px-4 pt-20 pb-3 sm:px-6">
-          <div className="mx-auto max-w-6xl rounded-lg border border-[#1a3a2f]/15 bg-[#f8f5f0] px-4 py-2.5 text-sm text-[#1a3a2f]">
-            <span className="font-semibold">
-              Feria del Libro Santa Lucía de Tirajana 2026:
-            </span>{" "}
-            8 mayo (10:30–13:30) y 10 mayo (10:00–12:00), Plaza de los
-            Algodoneros, Vecindario.{" "}
-            <a
-              href="https://maps.google.com/?q=27.848513,-15.4430242"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold underline decoration-[#1a3a2f]/40 underline-offset-2 hover:text-[#9b7b3d]"
-            >
-              Ubicación
-            </a>
-          </div>
-        </section>
 
         {/* ═══════════════════════════════════════════════════════════════
             HERO SECTION — Full-screen, DrCode-style with 3D logo
@@ -844,15 +833,10 @@ ${t("landing.visionText")}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center pointer-events-auto pt-4"
               style={entrance(4)}
             >
-              <a
-                href="https://www.aquamundi.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
+              <Link href="/archive" className="btn-primary">
                 {t("landing.explore3DArchive")}
                 <ArrowRight className="ml-2 w-4 h-4" />
-              </a>
+              </Link>
               <button
                 onClick={() => setShowContactModal(true)}
                 className="btn-secondary"
@@ -984,7 +968,7 @@ ${t("landing.visionText")}
                   title: t("landing.project3Title"),
                   description: t("landing.project3Description"),
                   cta: t("landing.project3Cta"),
-                  href: "https://www.aquamundi.org",
+                  href: "/archive",
                 },
                 {
                   label: t("landing.project4Label"),

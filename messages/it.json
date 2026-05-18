@@ -135,5 +135,128 @@
     "visitLpu": "Visita www.lpu.in",
     "futureTitle": "Prossime alleanze",
     "futureBody": "Questa sezione è progettata per crescere con nuove collaborazioni accademiche e istituzionali man mano che il progetto si espande a livello internazionale."
+  },
+  "archivePage": {
+    "nav": {
+      "home": "Home",
+      "title": "Archivio floreale"
+    },
+    "overview": {
+      "kicker": "Redazione archivio",
+      "title": "Una pubblicazione che segue il patrimonio floreale vivo paese per paese.",
+      "description": "Questo archivio funziona come una redazione attiva. I dossier vengono pubblicati solo dopo verifica botanica, controllo delle fonti e validazione dei diritti.",
+      "stats": {
+        "mapped": "Registro mappato",
+        "published": "Dossier pubblicati",
+        "prep": "In preparazione",
+        "completion": "Copertura di lancio"
+      },
+      "rail": {
+        "kicker": "Serie 001",
+        "title": "Copertura iniziale per continente",
+        "link": "Apri il navigatore di pubblicazione"
+      }
+    },
+    "series": {
+      "kicker": "Serie documentaria completa",
+      "title": "Flowers That Changed the World",
+      "description": "I blocchi I-V presentano un percorso documentario bilingue e verificato, dalle origini simboliche all'urgenza attuale di conservazione.",
+      "contextLine": "Blocchi I - V · Edizione bilingue ES / EN",
+      "blockLabel": "Blocco",
+      "signoffLink": "Continua al navigatore dei paesi",
+      "footnote": "Ricerca documentaria della International Association in Defence of Flowers.",
+      "blocks": {
+        "I": {
+          "title": "L'origine simbolica",
+          "altTitle": "El origen simbolico",
+          "summary": "I fiori rappresentavano gia le nazioni prima degli stati moderni."
+        },
+        "II": {
+          "title": "Anche il silenzio parla",
+          "altTitle": "El silencio tambien habla",
+          "summary": "I paesi senza fiore ufficiale mostrano fratture storiche e politiche."
+        },
+        "III": {
+          "title": "L'archivio di carta",
+          "altTitle": "El archivo de papel",
+          "summary": "La filatelia ha costruito il piu ampio archivio visivo dell'identita floreale."
+        },
+        "IV": {
+          "title": "Quando il simbolo affronta l'estinzione",
+          "altTitle": "Cuando el simbolo se enfrenta a la extincion",
+          "summary": "La crisi della biodiversita minaccia fiori nazionali e impollinatori."
+        },
+        "V": {
+          "title": "Il giardino che possiamo ancora salvare",
+          "altTitle": "El jardin que aun podemos salvar",
+          "summary": "Governi, scienza e cittadini definiscono il futuro vivo di questo simbolo."
+        }
+      }
+    },
+    "features": {
+      "one": {
+        "kicker": "Indice pronto alla ricerca",
+        "title": "Cerca per paese, fiore o codice SAN",
+        "description": "L'esploratore di lancio accetta nomi storici, nomi scientifici e identificatori codificati nello stesso campo."
+      },
+      "two": {
+        "kicker": "Schede visive dossier",
+        "title": "Ogni paese di lancio ha un profilo visivo",
+        "description": "Gli otto dossier iniziali includono immagine del fiore, segnale di conservazione e metadati editoriali per revisione diretta."
+      },
+      "three": {
+        "kicker": "Continuita archivio",
+        "title": "Pensato per scalare a 195 paesi",
+        "description": "Lo stesso sistema di schede del lancio e allineato con la coda editoriale completa e il ciclo settimanale."
+      }
+    },
+    "explorer": {
+      "kicker": "Esploratore Serie 001",
+      "title": "Paesi di lancio con dossier floreali ricercabili",
+      "description": "Esplora gli otto paesi iniziali con un esploratore mobile piu pulito, ricerca testuale, filtro continente e filtro conservazione.",
+      "searchLabel": "Cerca paese, fiore, nome scientifico o SAN",
+      "searchPlaceholder": "Prova: Peru, Cantuta, Gloriosa, SAN-00834",
+      "continentLabel": "Continente",
+      "allContinents": "Tutti i continenti",
+      "conservationLabel": "Conservazione",
+      "allConservation": "Tutti i livelli",
+      "resultCount": "dossier di lancio mostrati",
+      "viewDossier": "Apri dossier",
+      "status": {
+        "good": "Stabile",
+        "vulnerable": "Vulnerabile",
+        "endangered": "In pericolo"
+      }
+    },
+    "navigator": {
+      "kicker": "Navigatore",
+      "title": "195 paesi, organizzati per la consultazione",
+      "description": "Il registro completo e strutturato fin dal primo giorno. I profili pubblicati sono link attivi, mentre i paesi in attesa restano visibili nella coda editoriale."
+    },
+    "protocol": {
+      "kicker": "Protocollo editoriale",
+      "title": "Ciclo di pubblicazione verificato",
+      "description": "Ogni dossier segue una sequenza editoriale fissa prima della pubblicazione. La coda sotto mostra i paesi in preparazione per i prossimi rilasci.",
+      "queueTitle": "Anteprima coda in arrivo",
+      "steps": {
+        "one": {
+          "title": "Raccolta fonti",
+          "description": "Fonti di designazione nazionale, riferimenti filatelici e note botaniche vengono raccolti in un unico foglio di lavoro."
+        },
+        "two": {
+          "title": "Revisione scientifica",
+          "description": "Nomenclatura scientifica e coerenza tassonomica vengono verificate prima della produzione."
+        },
+        "three": {
+          "title": "Controllo diritti",
+          "description": "Immagini e francobolli vengono pubblicati solo quando licenza e diritti di origine sono chiari."
+        },
+        "four": {
+          "title": "Editing multilingue",
+          "description": "I testi ES, EN e DE vengono allineati affinche ogni dossier esca come pubblicazione coerente."
+        }
+      }
+    },
+    "footerNote": "L'Archivio floreale e mantenuto come pubblicazione di lungo periodo della International Association for the Defense of Flowers."
   }
 }

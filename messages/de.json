@@ -135,5 +135,158 @@
     "visitLpu": "www.lpu.in besuchen",
     "futureTitle": "Kommende Partnerschaften",
     "futureBody": "Dieser Bereich ist darauf ausgelegt, mit neuen akademischen und institutionellen Kooperationen zu wachsen, während sich das Projekt international erweitert."
+  },
+  "archive": {
+    "navLabel": "Das Blumenarchiv",
+    "backToArchive": "Zurück zum Blumenarchiv",
+    "eyebrow": "Asociación Internacional en Defensa de las Flores",
+    "title": "Das Blumenarchiv",
+    "subtitle": "Die weltweite Referenz zu Nationalblumen — Geschichte, offizielle Erklärung, philatelistische Darstellung und Erhaltungsstatus. Alle 195 Länder.",
+    "statCountries": "Länder indexiert",
+    "statProfiles": "Vollständige Profile veröffentlicht",
+    "statSeries": "Startkollection",
+    "launchLabel": "Serie 001 — Startländer",
+    "allCountries": "Alle 195 Länder",
+    "searchPlaceholder": "Suche nach Land, Blume oder SAN…",
+    "filterAll": "Alle Profile",
+    "filterComplete": "Vollständig",
+    "filterPending": "In Vorbereitung",
+    "contentPending": "Inhalt in Vorbereitung",
+    "viewProfile": "Profil ansehen",
+    "noResults": "Kein Land entspricht Ihrer Suche.",
+    "footerNote": "Das Blumenarchiv ist eine laufende Publikation der Asociación Internacional en Defensa de las Flores. Neue Profile werden wöchentlich veröffentlicht.",
+    "declarationLabel": "Offizielle Erklärung",
+    "conservationLabel": "Erhaltung",
+    "cardGameLabel": "Kartenspiel",
+    "bookLabel": "Buch",
+    "historyLabel": "Geschichte der Blume",
+    "stampLabel": "Philatelistischer Stempel",
+    "stampPending": "Stempelbild ausstehend — Überprüfung von Gemeinfreiheit oder Lizenz erforderlich.",
+    "notFound": "Profil nicht gefunden",
+    "notFoundDesc": "Dieses Länderprofil existiert noch nicht oder wird gerade von unserem Redaktionsteam vorbereitet.",
+    "returnToArchive": "Zurück zum Blumenarchiv"
+  },
+  "archivePage": {
+    "nav": {
+      "home": "Start",
+      "title": "Das Blumenarchiv"
+    },
+    "overview": {
+      "kicker": "Archivredaktion",
+      "title": "Eine Publikation, die das lebendige Blumen-Erbe Land fur Land dokumentiert.",
+      "description": "Dieses Archiv arbeitet als redaktioneller Schreibtisch. Dossiers werden erst nach botanischer Prufung, Quellencheck und Rechteklarung veroffentlicht.",
+      "stats": {
+        "mapped": "Kartierter Bestand",
+        "published": "Veroffentlichte Dossiers",
+        "prep": "In Vorbereitung",
+        "completion": "Startabdeckung"
+      },
+      "rail": {
+        "kicker": "Serie 001",
+        "title": "Startabdeckung nach Kontinent",
+        "link": "Publikationsnavigator offnen"
+      }
+    },
+    "series": {
+      "kicker": "Vollstandige Dokumentarserie",
+      "title": "Flowers That Changed the World",
+      "description": "Block I bis V zeigen einen verifizierten zweisprachigen Dokumentarpfad von symbolischen Ursprungen bis zur heutigen Schutzdringlichkeit.",
+      "contextLine": "Blocke I - V · Zweisprachige Ausgabe ES / EN",
+      "blockLabel": "Block",
+      "signoffLink": "Zum Landernavigator weiter",
+      "footnote": "Dokumentarische Recherche der International Association in Defence of Flowers.",
+      "blocks": {
+        "I": {
+          "title": "Der symbolische Ursprung",
+          "altTitle": "El origen simbolico",
+          "summary": "Blumen reprasentierten Nationen lange vor modernen Staaten."
+        },
+        "II": {
+          "title": "Auch das Schweigen spricht",
+          "altTitle": "El silencio tambien habla",
+          "summary": "Lander ohne offizielle Blume zeigen historische und politische Bruchlinien."
+        },
+        "III": {
+          "title": "Das Papierarchiv",
+          "altTitle": "El archivo de papel",
+          "summary": "Die Philatelie baute das breiteste visuelle Archiv floraler Identitat auf."
+        },
+        "IV": {
+          "title": "Wenn das Symbol vom Aussterben bedroht ist",
+          "altTitle": "Cuando el simbolo se enfrenta a la extincion",
+          "summary": "Die Biodiversitatskrise bedroht Nationalblumen und Bestauer."
+        },
+        "V": {
+          "title": "Der Garten, den wir noch retten konnen",
+          "altTitle": "El jardin que aun podemos salvar",
+          "summary": "Staaten, Wissenschaft und Burger bestimmen die lebendige Zukunft dieses Symbols."
+        }
+      }
+    },
+    "features": {
+      "one": {
+        "kicker": "Suchbereiter Index",
+        "title": "Suche nach Land, Blume oder SAN-Code",
+        "description": "Der Start-Explorer akzeptiert historische Namen, wissenschaftliche Namen und codierte Kennungen im selben Feld."
+      },
+      "two": {
+        "kicker": "Visuelle Dossier-Karten",
+        "title": "Jedes Startland hat ein visuelles Profil",
+        "description": "Die ersten acht Dossiers enthalten Blumenbild, Schutzsignal und redaktionelle Metadaten fur die direkte Prufung."
+      },
+      "three": {
+        "kicker": "Archiv-Kontinuitat",
+        "title": "Skaliert auf alle 195 Lander",
+        "description": "Dasselbe Kartensystem der Startlander ist mit der gesamten Publikationswarteschlange und dem Wochenzyklus abgestimmt."
+      }
+    },
+    "explorer": {
+      "kicker": "Serie-001-Explorer",
+      "title": "Startlander mit durchsuchbaren Blumen-Dossiers",
+      "description": "Durchsuche die ersten acht Lander in einem klareren mobilen Explorer mit Textsuche, Kontinentfilter und Schutzstatusfilter.",
+      "searchLabel": "Land, Blume, wissenschaftlicher Name oder SAN suchen",
+      "searchPlaceholder": "Beispiel: Peru, Cantuta, Gloriosa, SAN-00834",
+      "continentLabel": "Kontinent",
+      "allContinents": "Alle Kontinente",
+      "conservationLabel": "Schutzstatus",
+      "allConservation": "Alle Stufen",
+      "resultCount": "Startdossiers angezeigt",
+      "viewDossier": "Dossier ansehen",
+      "status": {
+        "good": "Stabil",
+        "vulnerable": "Gefahrdet",
+        "endangered": "Stark gefahrdet"
+      }
+    },
+    "navigator": {
+      "kicker": "Navigator",
+      "title": "195 Lander, gruppiert fur die Navigation",
+      "description": "Das gesamte Register ist von Anfang an strukturiert. Veroffentlichte Profile sind aktiv verlinkt, wahrend ausstehende Lander als redaktionelle Warteschlange sichtbar bleiben."
+    },
+    "protocol": {
+      "kicker": "Publikationsprotokoll",
+      "title": "Verifizierter Veroffentlichungszyklus",
+      "description": "Jedes Dossier durchlauft vor der Veroffentlichung eine feste redaktionelle Sequenz. Die Warteschlange unten zeigt derzeit vorbereitete Lander.",
+      "queueTitle": "Vorschau der Warteschlange",
+      "steps": {
+        "one": {
+          "title": "Quellenaufnahme",
+          "description": "Nationale Benennungsquellen, Markenbelege und botanische Notizen werden in einem Arbeitsblatt zusammengefuhrt."
+        },
+        "two": {
+          "title": "Wissenschaftliche Prufung",
+          "description": "Wissenschaftliche Benennung und taxonomische Konsistenz werden gepruft, bevor ein Profil in die Produktion geht."
+        },
+        "three": {
+          "title": "Rechteprufung",
+          "description": "Bilder und Markenmaterial werden nur freigegeben, wenn Lizenz und Herkunftsrechte eindeutig sind."
+        },
+        "four": {
+          "title": "Mehrsprachige Redaktion",
+          "description": "ES-, EN- und DE-Texte werden so abgestimmt, dass jedes Dossier als koharente Publikation erscheint."
+        }
+      }
+    },
+    "footerNote": "Das Blumenarchiv wird als Langzeitpublikation der International Association for the Defense of Flowers gefuhrt."
   }
 }

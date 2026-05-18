@@ -135,5 +135,128 @@
     "visitLpu": "Visiter www.lpu.in",
     "futureTitle": "Alliances à venir",
     "futureBody": "Cet espace est conçu pour évoluer avec de nouvelles collaborations académiques et institutionnelles à mesure que le projet se développe à l'international."
+  },
+  "archivePage": {
+    "nav": {
+      "home": "Accueil",
+      "title": "Archive florale"
+    },
+    "overview": {
+      "kicker": "Bureau editorial",
+      "title": "Une publication qui suit le patrimoine floral vivant pays par pays.",
+      "description": "Cette archive fonctionne comme un bureau editorial actif. Les dossiers sont publies seulement apres verification botanique, controle des sources et validation des droits.",
+      "stats": {
+        "mapped": "Registre cartographie",
+        "published": "Dossiers publies",
+        "prep": "En preparation",
+        "completion": "Couverture de lancement"
+      },
+      "rail": {
+        "kicker": "Serie 001",
+        "title": "Couverture initiale par continent",
+        "link": "Ouvrir le navigateur de publication"
+      }
+    },
+    "series": {
+      "kicker": "Serie documentaire complete",
+      "title": "Flowers That Changed the World",
+      "description": "Les blocs I a V presentent un parcours documentaire bilingue et verifie, des origines symboliques a l'urgence actuelle de conservation.",
+      "contextLine": "Blocs I - V · Edition bilingue ES / EN",
+      "blockLabel": "Bloc",
+      "signoffLink": "Continuer vers le navigateur des pays",
+      "footnote": "Recherche documentaire de l'International Association in Defence of Flowers.",
+      "blocks": {
+        "I": {
+          "title": "L'origine symbolique",
+          "altTitle": "El origen simbolico",
+          "summary": "Les fleurs representaient deja des nations bien avant les Etats modernes."
+        },
+        "II": {
+          "title": "Le silence parle aussi",
+          "altTitle": "El silencio tambien habla",
+          "summary": "Les pays sans fleur officielle revelent des fractures historiques et politiques."
+        },
+        "III": {
+          "title": "L'archive de papier",
+          "altTitle": "El archivo de papel",
+          "summary": "La philatelie a construit la plus vaste archive visuelle de l'identite florale."
+        },
+        "IV": {
+          "title": "Quand le symbole fait face a l'extinction",
+          "altTitle": "Cuando el simbolo se enfrenta a la extincion",
+          "summary": "La crise de biodiversite menace les fleurs nationales et les pollinisateurs."
+        },
+        "V": {
+          "title": "Le jardin que nous pouvons encore sauver",
+          "altTitle": "El jardin que aun podemos salvar",
+          "summary": "Gouvernements, science et citoyens definissent l'avenir vivant de ce symbole."
+        }
+      }
+    },
+    "features": {
+      "one": {
+        "kicker": "Index pret a chercher",
+        "title": "Chercher par pays, fleur ou code SAN",
+        "description": "L'explorateur de lancement accepte les noms historiques, scientifiques et les identifiants codes dans un seul champ."
+      },
+      "two": {
+        "kicker": "Cartes visuelles",
+        "title": "Chaque pays de lancement a un profil visuel",
+        "description": "Les huit premiers dossiers incluent image florale, signal de conservation et metadonnees editoriales pour revue directe."
+      },
+      "three": {
+        "kicker": "Continuite d'archive",
+        "title": "Concu pour evoluer vers 195 pays",
+        "description": "Le meme systeme de cartes du lancement est aligne avec la file editoriale complete et le cycle hebdomadaire."
+      }
+    },
+    "explorer": {
+      "kicker": "Explorateur Serie 001",
+      "title": "Pays de lancement avec dossiers floraux recherchables",
+      "description": "Parcourez les huit premiers pays avec un explorateur mobile plus clair, recherche texte, filtre continent et filtre conservation.",
+      "searchLabel": "Chercher pays, fleur, nom scientifique ou SAN",
+      "searchPlaceholder": "Exemple: Peru, Cantuta, Gloriosa, SAN-00834",
+      "continentLabel": "Continent",
+      "allContinents": "Tous les continents",
+      "conservationLabel": "Conservation",
+      "allConservation": "Tous les niveaux",
+      "resultCount": "dossiers de lancement affiches",
+      "viewDossier": "Voir le dossier",
+      "status": {
+        "good": "Stable",
+        "vulnerable": "Vulnerable",
+        "endangered": "En danger"
+      }
+    },
+    "navigator": {
+      "kicker": "Navigateur",
+      "title": "195 pays, organises pour la navigation",
+      "description": "Le registre complet est structure des le premier jour. Les profils publies sont des liens actifs, tandis que les pays en attente restent visibles dans la file editoriale."
+    },
+    "protocol": {
+      "kicker": "Protocole de publication",
+      "title": "Cycle de publication verifie",
+      "description": "Chaque dossier suit une sequence editoriale fixe avant publication. La file ci-dessous montre les pays actuellement prepares pour les prochaines livraisons.",
+      "queueTitle": "Apercu de la file a venir",
+      "steps": {
+        "one": {
+          "title": "Collecte des sources",
+          "description": "Les sources de designation nationale, les references philateliques et les notes botaniques sont regroupees dans une meme fiche de travail."
+        },
+        "two": {
+          "title": "Revision scientifique",
+          "description": "La nomenclature scientifique et la coherence taxonomique sont verifiees avant passage en production."
+        },
+        "three": {
+          "title": "Controle des droits",
+          "description": "Les images et timbres sont publies uniquement lorsque la licence et les droits d'origine sont clairs."
+        },
+        "four": {
+          "title": "Edition multilingue",
+          "description": "Les textes ES, EN et DE sont alignes afin que chaque dossier sorte comme une publication coherente."
+        }
+      }
+    },
+    "footerNote": "L'Archive florale est maintenue comme une publication de long terme de l'International Association for the Defense of Flowers."
   }
 }

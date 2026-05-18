@@ -1,31 +1,43 @@
+const LAUNCH_SLUGS = [
+  'spain', 'germany', 'peru', 'scotland',
+  'pakistan', 'jamaica', 'tanzania', 'nicaragua',
+];
+
 export default function sitemap() {
   const baseUrl = 'https://asociacionnahiara.org';
-  
-  const routes = [
-    '',
-    '/galeria-dibujos',
-    '/evento-dibuja-flor',
-    '/dibuja-la-flor-de-tu-pais',
-    '/alianzas-academicas-e-institucionales',
-    '/territories',
-    '/press',
-    '/sant-jordi-2026'
+
+  const staticRoutes = [
+    { path: '', freq: 'weekly', priority: 1 },
+    { path: '/archive', freq: 'weekly', priority: 0.95 },
+    { path: '/galeria-dibujos', freq: 'monthly', priority: 0.8 },
+    { path: '/evento-dibuja-flor', freq: 'monthly', priority: 0.8 },
+    { path: '/dibuja-la-flor-de-tu-pais', freq: 'monthly', priority: 0.8 },
+    { path: '/alianzas-academicas-e-institucionales', freq: 'monthly', priority: 0.7 },
+    { path: '/territories', freq: 'monthly', priority: 0.8 },
+    { path: '/press', freq: 'monthly', priority: 0.75 },
+    { path: '/sant-jordi-2026', freq: 'monthly', priority: 0.75 },
   ];
 
-  return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
+  const archiveProfiles = LAUNCH_SLUGS.map(slug => ({
+    path: `/archive/${slug}`,
+    freq: 'monthly',
+    priority: 0.9,
+  }));
+
+  const allRoutes = [...staticRoutes, ...archiveProfiles];
+
+  return allRoutes.map(({ path, freq, priority }) => ({
+    url: `${baseUrl}${path}`,
     lastModified: new Date(),
-    changeFrequency: route === '' ? 'weekly' : 'monthly',
-    priority: route === '' ? 1 : 0.8,
+    changeFrequency: freq,
+    priority,
     alternates: {
       languages: {
-        en: `${baseUrl}${route}`,
-        es: `${baseUrl}${route}?lang=es`,
-        fr: `${baseUrl}${route}?lang=fr`,
-        de: `${baseUrl}${route}?lang=de`,
-        zh: `${baseUrl}${route}?lang=zh`,
-        it: `${baseUrl}${route}?lang=it`,
+        en: `${baseUrl}${path}`,
+        es: `${baseUrl}${path}?lang=es`,
+        de: `${baseUrl}${path}?lang=de`,
       },
     },
   }));
 }
+

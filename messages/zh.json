@@ -135,5 +135,128 @@
     "visitLpu": "访问 www.lpu.in",
     "futureTitle": "未来合作",
     "futureBody": "该页面将随着项目的国际扩展持续新增更多学术与机构合作伙伴。"
+  },
+  "archivePage": {
+    "nav": {
+      "home": "Home",
+      "title": "Flower Archive"
+    },
+    "overview": {
+      "kicker": "Archive Desk",
+      "title": "A publication that tracks living floral heritage country by country.",
+      "description": "This archive works as an editorial desk. Dossiers are published only after botanical verification, source review, and rights checks.",
+      "stats": {
+        "mapped": "Mapped ledger",
+        "published": "Published dossiers",
+        "prep": "In preparation",
+        "completion": "Launch completion"
+      },
+      "rail": {
+        "kicker": "Series 001",
+        "title": "Launch coverage by continent",
+        "link": "Open publication navigator"
+      }
+    },
+    "series": {
+      "kicker": "Complete documentary series",
+      "title": "Flowers That Changed the World",
+      "description": "Blocks I to V present a verified bilingual documentary path from symbolic origins to current conservation urgency.",
+      "contextLine": "Blocks I - V · Bilingual edition ES / EN",
+      "blockLabel": "Block",
+      "signoffLink": "Continue to country archive navigator",
+      "footnote": "Documentary research by the International Association in Defence of Flowers.",
+      "blocks": {
+        "I": {
+          "title": "The symbolic origin",
+          "altTitle": "El origen simbolico",
+          "summary": "Flowers represented nations long before modern states were formed."
+        },
+        "II": {
+          "title": "The silence also speaks",
+          "altTitle": "El silencio tambien habla",
+          "summary": "Countries without an official flower reveal historical and political fractures."
+        },
+        "III": {
+          "title": "The paper archive",
+          "altTitle": "El archivo de papel",
+          "summary": "Philately built the broadest visual archive of floral identity."
+        },
+        "IV": {
+          "title": "When the symbol faces extinction",
+          "altTitle": "Cuando el simbolo se enfrenta a la extincion",
+          "summary": "The biodiversity crisis threatens national flowers and pollinators."
+        },
+        "V": {
+          "title": "The garden we can still save",
+          "altTitle": "El jardin que aun podemos salvar",
+          "summary": "Governments, science, and citizens define the living future of this symbol."
+        }
+      }
+    },
+    "features": {
+      "one": {
+        "kicker": "Search-ready index",
+        "title": "Find by country, flower, or SAN code",
+        "description": "The launch explorer accepts historical names, scientific names, and coded identifiers from the same field."
+      },
+      "two": {
+        "kicker": "Visual dossier cards",
+        "title": "Every launch country has a visual profile",
+        "description": "The initial eight dossiers include flower imagery, conservation signal, and editorial metadata for direct review."
+      },
+      "three": {
+        "kicker": "Cross-archive continuity",
+        "title": "Built to scale to all 195 countries",
+        "description": "The same card system used for launch countries is aligned with the full publication queue and weekly release cycle."
+      }
+    },
+    "explorer": {
+      "kicker": "Series 001 Explorer",
+      "title": "Launch countries with searchable floral dossiers",
+      "description": "Browse the first eight countries through a cleaner mobile-first explorer with text search, continent filter, and conservation filter.",
+      "searchLabel": "Search country, flower, scientific name, or SAN",
+      "searchPlaceholder": "Try: Peru, Cantuta, Gloriosa, SAN-00834",
+      "continentLabel": "Continent",
+      "allContinents": "All continents",
+      "conservationLabel": "Conservation",
+      "allConservation": "All levels",
+      "resultCount": "launch dossiers shown",
+      "viewDossier": "View dossier",
+      "status": {
+        "good": "Stable",
+        "vulnerable": "Vulnerable",
+        "endangered": "Endangered"
+      }
+    },
+    "navigator": {
+      "kicker": "Navigator",
+      "title": "195 countries, grouped for browsing",
+      "description": "The full ledger is structured from day one. Published profiles are live links, while pending countries remain visible as part of the publication queue."
+    },
+    "protocol": {
+      "kicker": "Publication Protocol",
+      "title": "Verified release cycle",
+      "description": "Every dossier follows a fixed editorial sequence before publication. The queue below shows countries currently staged for upcoming cycles.",
+      "queueTitle": "Upcoming queue preview",
+      "steps": {
+        "one": {
+          "title": "Source capture",
+          "description": "National designation sources, stamp records, and botanical notes are gathered into one working sheet."
+        },
+        "two": {
+          "title": "Scientific review",
+          "description": "Scientific naming and taxonomic consistency are verified before a profile can move to production."
+        },
+        "three": {
+          "title": "Rights check",
+          "description": "Image and stamp assets are released only when licensing and source rights are clear."
+        },
+        "four": {
+          "title": "Multilingual edit",
+          "description": "ES, EN, and DE copy is edited and aligned so each dossier ships as one coherent publication."
+        }
+      }
+    },
+    "footerNote": "The Flower Archive is maintained as a long-horizon publication of the International Association for the Defense of Flowers."
   }
 }
