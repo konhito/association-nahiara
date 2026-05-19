@@ -426,7 +426,7 @@ function ArchiveContent() {
     return value === key ? fallback : value;
   };
   const [query, setQuery] = useState("");
-  const [continentFilter, setContinentFilter] = useState("all");
+  const [continentFilter, setContinentFilter] = useState("Europe");
   const [conservationFilter, setConservationFilter] = useState("all");
 
   const publishedCount = LAUNCH_COUNTRIES.length;
@@ -472,15 +472,27 @@ function ArchiveContent() {
       };
     });
   }, []);
-  const pendingPreview = ALL_INDEX.filter((country) => !country.complete).slice(0, 12);
+  const pendingPreview = ALL_INDEX.filter((country) => !country.complete).slice(
+    0,
+    12,
+  );
   const seriesBlocks = SERIES_BLOCKS.map((block) => ({
     ...block,
     title: tr(`archivePage.series.blocks.${block.id}.title`, block.enTitle),
-    altTitle: tr(`archivePage.series.blocks.${block.id}.altTitle`, block.esTitle),
-    summary: tr(`archivePage.series.blocks.${block.id}.summary`, block.enSummary),
+    altTitle: tr(
+      `archivePage.series.blocks.${block.id}.altTitle`,
+      block.esTitle,
+    ),
+    summary: tr(
+      `archivePage.series.blocks.${block.id}.summary`,
+      block.enSummary,
+    ),
   }));
   const continentOptions = useMemo(() => {
-    return ["all", ...new Set(LAUNCH_COUNTRIES.map((country) => country.continent))];
+    return [
+      "all",
+      ...new Set(LAUNCH_COUNTRIES.map((country) => country.continent)),
+    ];
   }, []);
   const normalizedQuery = query.trim().toLowerCase();
   const visibleCountries = useMemo(() => {
@@ -566,21 +578,33 @@ function ArchiveContent() {
           </p>
           <div className="overview-stats" aria-label="Archive pulse">
             <article>
-              <span>{tr("archivePage.overview.stats.mapped", "Mapped ledger")}</span>
+              <span>
+                {tr("archivePage.overview.stats.mapped", "Mapped ledger")}
+              </span>
               <strong>{totalCount}</strong>
             </article>
             <article>
               <span>
-                {tr("archivePage.overview.stats.published", "Published dossiers")}
+                {tr(
+                  "archivePage.overview.stats.published",
+                  "Published dossiers",
+                )}
               </span>
               <strong>{publishedCount}</strong>
             </article>
             <article>
-              <span>{tr("archivePage.overview.stats.prep", "In preparation")}</span>
+              <span>
+                {tr("archivePage.overview.stats.prep", "In preparation")}
+              </span>
               <strong>{pendingCount}</strong>
             </article>
             <article>
-              <span>{tr("archivePage.overview.stats.completion", "Launch completion")}</span>
+              <span>
+                {tr(
+                  "archivePage.overview.stats.completion",
+                  "Launch completion",
+                )}
+              </span>
               <strong>{completionRate}%</strong>
             </article>
           </div>
@@ -605,10 +629,7 @@ function ArchiveContent() {
             ))}
           </div>
           <Link href="#archive-index" className="rail-link">
-            {tr(
-              "archivePage.overview.rail.link",
-              "Open publication navigator",
-            )}
+            {tr("archivePage.overview.rail.link", "Open publication navigator")}
             <ArrowUpRight size={13} strokeWidth={2.2} />
           </Link>
         </aside>
@@ -617,16 +638,10 @@ function ArchiveContent() {
       <section className="series-shell" id="series-edition">
         <div className="series-head fade-1">
           <p className={`${codeFace.className} series-kicker`}>
-            {tr(
-              "archivePage.series.kicker",
-              "Complete documentary series",
-            )}
+            {tr("archivePage.series.kicker", "Complete documentary series")}
           </p>
           <h2 className={`${displayFace.className}`}>
-            {tr(
-              "archivePage.series.title",
-              "Flowers That Changed the World",
-            )}
+            {tr("archivePage.series.title", "Flowers That Changed the World")}
           </h2>
           <p>
             {tr(
@@ -647,7 +662,10 @@ function ArchiveContent() {
 
         <div className="block-grid">
           {seriesBlocks.map((block, index) => (
-            <article key={block.id} className={`block-card fade-${(index % 4) + 1}`}>
+            <article
+              key={block.id}
+              className={`block-card fade-${(index % 4) + 1}`}
+            >
               <p className={`${codeFace.className} block-index`}>
                 {tr("archivePage.series.blockLabel", "Block")} {block.id}
               </p>
@@ -685,7 +703,12 @@ function ArchiveContent() {
           <p className={`${codeFace.className} feature-kicker`}>
             {tr("archivePage.features.one.kicker", "Search-ready index")}
           </p>
-          <h3>{tr("archivePage.features.one.title", "Find by country, flower, or SAN code")}</h3>
+          <h3>
+            {tr(
+              "archivePage.features.one.title",
+              "Find by country, flower, or SAN code",
+            )}
+          </h3>
           <p>
             {tr(
               "archivePage.features.one.description",
@@ -697,7 +720,12 @@ function ArchiveContent() {
           <p className={`${codeFace.className} feature-kicker`}>
             {tr("archivePage.features.two.kicker", "Visual dossier cards")}
           </p>
-          <h3>{tr("archivePage.features.two.title", "Every launch country has a visual profile")}</h3>
+          <h3>
+            {tr(
+              "archivePage.features.two.title",
+              "Every launch country has a visual profile",
+            )}
+          </h3>
           <p>
             {tr(
               "archivePage.features.two.description",
@@ -707,9 +735,17 @@ function ArchiveContent() {
         </article>
         <article className="feature-tile fade-3">
           <p className={`${codeFace.className} feature-kicker`}>
-            {tr("archivePage.features.three.kicker", "Cross-archive continuity")}
+            {tr(
+              "archivePage.features.three.kicker",
+              "Cross-archive continuity",
+            )}
           </p>
-          <h3>{tr("archivePage.features.three.title", "Built to scale to all 195 countries")}</h3>
+          <h3>
+            {tr(
+              "archivePage.features.three.title",
+              "Built to scale to all 195 countries",
+            )}
+          </h3>
           <p>
             {tr(
               "archivePage.features.three.description",
@@ -740,7 +776,12 @@ function ArchiveContent() {
 
         <div className="explorer-controls fade-2">
           <label className="control-block">
-            <span>{tr("archivePage.explorer.searchLabel", "Search country, flower, scientific name, or SAN")}</span>
+            <span>
+              {tr(
+                "archivePage.explorer.searchLabel",
+                "Search country, flower, scientific name, or SAN",
+              )}
+            </span>
             <input
               type="search"
               value={query}
@@ -752,7 +793,9 @@ function ArchiveContent() {
             />
           </label>
           <label className="control-block">
-            <span>{tr("archivePage.explorer.continentLabel", "Continent")}</span>
+            <span>
+              {tr("archivePage.explorer.continentLabel", "Continent")}
+            </span>
             <select
               value={continentFilter}
               onChange={(event) => setContinentFilter(event.target.value)}
@@ -767,7 +810,9 @@ function ArchiveContent() {
             </select>
           </label>
           <label className="control-block">
-            <span>{tr("archivePage.explorer.conservationLabel", "Conservation")}</span>
+            <span>
+              {tr("archivePage.explorer.conservationLabel", "Conservation")}
+            </span>
             <select
               value={conservationFilter}
               onChange={(event) => setConservationFilter(event.target.value)}
@@ -793,8 +838,14 @@ function ArchiveContent() {
 
         <div className="country-grid">
           {visibleCountries.map((country, index) => (
-            <article key={country.slug} className={`country-card fade-${(index % 4) + 1}`}>
-              <Link href={`/archive/${country.slug}`} className="country-image-wrap">
+            <article
+              key={country.slug}
+              className={`country-card fade-${(index % 4) + 1}`}
+            >
+              <Link
+                href={`/archive/${country.slug}`}
+                className="country-image-wrap"
+              >
                 <Image
                   src={`/complete-flowers/${country.assetKey}.png`}
                   alt={`${country.flower[lang] || country.flower.en} - ${country.name[lang] || country.name.en}`}
@@ -804,21 +855,30 @@ function ArchiveContent() {
                 />
               </Link>
               <div className="country-meta">
-                <p className={`${codeFace.className} country-san`}>{country.san}</p>
+                <p className={`${codeFace.className} country-san`}>
+                  {country.san}
+                </p>
                 <h3>{country.name[lang] || country.name.en}</h3>
                 <p className="country-flower">
                   {country.flower[lang] || country.flower.en}
                   <span>{country.scientific}</span>
                 </p>
-                <p className="country-tagline">{country.tagline[lang] || country.tagline.en}</p>
+                <p className="country-tagline">
+                  {country.tagline[lang] || country.tagline.en}
+                </p>
                 <div className="country-footer">
-                  <span className={`conservation-pill conservation-${country.conservation}`}>
+                  <span
+                    className={`conservation-pill conservation-${country.conservation}`}
+                  >
                     {tr(
                       `archivePage.explorer.status.${country.conservation}`,
                       country.conservation,
                     )}
                   </span>
-                  <Link href={`/archive/${country.slug}`} className="country-link">
+                  <Link
+                    href={`/archive/${country.slug}`}
+                    className="country-link"
+                  >
                     {tr("archivePage.explorer.viewDossier", "View dossier")}
                     <ArrowUpRight size={13} strokeWidth={2.2} />
                   </Link>
@@ -911,7 +971,9 @@ function ArchiveContent() {
         <div className="protocol-grid fade-2">
           <article>
             <span>1</span>
-            <h3>{tr("archivePage.protocol.steps.one.title", "Source capture")}</h3>
+            <h3>
+              {tr("archivePage.protocol.steps.one.title", "Source capture")}
+            </h3>
             <p>
               {tr(
                 "archivePage.protocol.steps.one.description",
@@ -921,7 +983,9 @@ function ArchiveContent() {
           </article>
           <article>
             <span>2</span>
-            <h3>{tr("archivePage.protocol.steps.two.title", "Scientific review")}</h3>
+            <h3>
+              {tr("archivePage.protocol.steps.two.title", "Scientific review")}
+            </h3>
             <p>
               {tr(
                 "archivePage.protocol.steps.two.description",
@@ -931,7 +995,9 @@ function ArchiveContent() {
           </article>
           <article>
             <span>3</span>
-            <h3>{tr("archivePage.protocol.steps.three.title", "Rights check")}</h3>
+            <h3>
+              {tr("archivePage.protocol.steps.three.title", "Rights check")}
+            </h3>
             <p>
               {tr(
                 "archivePage.protocol.steps.three.description",
@@ -941,7 +1007,9 @@ function ArchiveContent() {
           </article>
           <article>
             <span>4</span>
-            <h3>{tr("archivePage.protocol.steps.four.title", "Multilingual edit")}</h3>
+            <h3>
+              {tr("archivePage.protocol.steps.four.title", "Multilingual edit")}
+            </h3>
             <p>
               {tr(
                 "archivePage.protocol.steps.four.description",
@@ -952,7 +1020,9 @@ function ArchiveContent() {
         </div>
 
         <div className="pending-shelf fade-3">
-          <h3>{tr("archivePage.protocol.queueTitle", "Upcoming queue preview")}</h3>
+          <h3>
+            {tr("archivePage.protocol.queueTitle", "Upcoming queue preview")}
+          </h3>
           <div className="pending-tags">
             {pendingPreview.map((country) => (
               <span key={country.slug}>{country.name.en}</span>
@@ -1896,4 +1966,3 @@ export default function ArchivePage() {
     </Suspense>
   );
 }
-
