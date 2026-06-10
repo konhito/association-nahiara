@@ -426,40 +426,40 @@ function SectionHeader({ eyebrow, title, subtitle, align = "center" }) {
 }
 
 // ─── Navbar Component ───
-function Navbar({ scrolled, onContactClick, locale }) {
+function Navbar({ scrolled, onContactClick, locale, t }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navLinks = [
     {
       id: "story",
-      label: locale === "es" ? "Historia" : "Story",
+      label: t("landing.navStory"),
       type: "anchor",
     },
     {
       id: "journey",
-      label: locale === "es" ? "Experiencia" : "Experience",
+      label: t("landing.navExperience"),
       type: "anchor",
     },
     {
       id: "community",
-      label: locale === "es" ? "Comunidad" : "Community",
+      label: t("landing.navCommunity"),
       type: "anchor",
     },
     {
       id: "academic-alliances",
-      label: locale === "es" ? "Alianzas" : "Alliances",
+      label: t("landing.navAlliances"),
       type: "route",
       href: "/alianzas-academicas-e-institucionales",
     },
     {
       id: "archive",
-      label: locale === "es" ? "Archivo" : "Archive",
+      label: t("landing.navArchive"),
       type: "route",
       href: "/archive",
     },
     {
       id: "contact",
-      label: locale === "es" ? "Contacto" : "Contact",
+      label: t("landing.navContact"),
       type: "anchor",
     },
   ];
@@ -542,7 +542,7 @@ function Navbar({ scrolled, onContactClick, locale }) {
               onClick={onContactClick}
               className="hidden md:inline-flex btn-primary"
             >
-              {locale === "es" ? "Contactar" : "Get in Touch"}
+              {t("landing.contactUs")}
             </button>
           </div>
         </div>
@@ -570,7 +570,7 @@ function Navbar({ scrolled, onContactClick, locale }) {
                 }}
                 className="mt-2 btn-primary w-full"
               >
-                {locale === "es" ? "Contactar" : "Get in Touch"}
+                {t("landing.contactUs")}
               </button>
             </div>
           </div>
@@ -759,6 +759,7 @@ ${t("landing.visionText")}
           scrolled={scrolled}
           onContactClick={() => setShowContactModal(true)}
           locale={locale}
+          t={t}
         />
 
 
