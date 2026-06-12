@@ -6,13 +6,9 @@ import {
   ArrowLeft,
   CalendarDays,
   Copy,
-  Flower2,
   Globe2,
-  HeartHandshake,
-  Leaf,
   Mail,
   MapPin,
-  Sparkles,
   Users,
 } from "lucide-react";
 import enMessages from "../../../messages/en.json";
@@ -26,18 +22,24 @@ const displayFont = Baskervville({
 
 const PAGE_PATH = "/eventos/dia-de-los-polinizadores-2026";
 const PAGE_URL = `https://asociacionnahiara.org${PAGE_PATH}`;
-const OG_IMAGE_URL = `${PAGE_URL}/opengraph-image`;
+const EVENT_POSTER_IMAGE = "/events/eventosdia-de-los-polinizadores-2026.jpeg";
+const EVENT_POSTER_URL = `https://asociacionnahiara.org${EVENT_POSTER_IMAGE}`;
+const EVENT_MAP_URL = "https://maps.app.goo.gl/xypivKrRkYvCPAkH8?g_st=awb";
 
 const eventDetails = {
   date: "21 June 2026",
-  time: "[time TBC]",
+  time: "11:00 - 14:00 h",
   location: "La Blanca, Sardina del Sur - Santa Lucia de Tirajana, Gran Canaria",
-  exactVenue: "[exact venue TBC]",
-  audienceEs: "Abierto a todos los publicos - [gratuito / inscripcion TBC]",
-  audienceEn: "Open to all - [free / registration TBC]",
+  exactVenue:
+    "La Blanca - Sardina del Sur - Santa Lucia de Tirajana, Gran Canaria",
+  audienceEs: "Gratis - No requiere inscripcion",
+  audienceEn: "Free - No registration required",
   organizer:
     "Universo Nahiara - Asociacion Internacional en Defensa de las Flores (Proveneya & Nahiara)",
-  collaborator: "Asociacion de Vecinos de La Blanca",
+  collaborators: [
+    "Asociacion de Vecinos Yniguaden de La Blanca Cercados Bolanos",
+    "Concejalia de Participacion Ciudadana del Ayuntamiento de Santa Lucia de Tirajana",
+  ],
   contact: "contacto@asociacionnahiara.org",
 };
 
@@ -63,10 +65,10 @@ export const metadata = {
       "21 June 2026 in Gran Canaria. Bilingual public event page for 'Draw the flower and its pollinator' by Universo Nahiara.",
     images: [
       {
-        url: OG_IMAGE_URL,
-        width: 1200,
-        height: 630,
-        alt: "All Pollinators Day 2026 event preview",
+        url: EVENT_POSTER_URL,
+        width: 768,
+        height: 1344,
+        alt: "Dia de Todos los Polinizadores 2026 event poster",
       },
     ],
   },
@@ -75,7 +77,7 @@ export const metadata = {
     title: "Dia de Todos los Polinizadores 2026 | Universo Nahiara",
     description:
       "21 June 2026 in Gran Canaria. Bilingual public event page for 'Draw the flower and its pollinator'.",
-    images: [OG_IMAGE_URL],
+    images: [EVENT_POSTER_URL],
   },
 };
 
@@ -83,12 +85,12 @@ const eventJsonLd = {
   "@context": "https://schema.org",
   "@type": "Event",
   name: "Dia de Todos los Polinizadores - Dibuja la flor y su polinizador / All Pollinators Day - Draw the flower and its pollinator",
-  startDate: "2026-06-21",
-  endDate: "2026-06-21",
+  startDate: "2026-06-21T11:00:00+01:00",
+  endDate: "2026-06-21T14:00:00+01:00",
   eventStatus: "https://schema.org/EventScheduled",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   url: PAGE_URL,
-  image: [OG_IMAGE_URL],
+  image: [EVENT_POSTER_URL],
   description:
     "Bilingual public event page for Universo Nahiara's All Pollinators Day in Gran Canaria, featuring the activity 'Draw the flower and its pollinator'.",
   inLanguage: ["es", "en"],
@@ -100,7 +102,8 @@ const eventJsonLd = {
       addressLocality: "Santa Lucia de Tirajana",
       addressRegion: "Gran Canaria",
       addressCountry: "ES",
-      streetAddress: "[exact venue TBC]",
+      streetAddress:
+        "Marquee / Stand - La Blanca, Sardina del Sur - Santa Lucia de Tirajana, Gran Canaria",
     },
   },
   organizer: {
@@ -109,6 +112,11 @@ const eventJsonLd = {
     url: "https://asociacionnahiara.org",
     email: eventDetails.contact,
   },
+  isAccessibleForFree: true,
+  contributor: eventDetails.collaborators.map((name) => ({
+    "@type": "Organization",
+    name,
+  })),
 };
 
 function LanguageColumn({ lang, copy, sharedCopy }) {
@@ -154,7 +162,16 @@ function LanguageColumn({ lang, copy, sharedCopy }) {
           <dt className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[#6b7b74]">
             {sharedCopy.detailLocationLabel}
           </dt>
-          <dd className="mt-2 text-sm font-medium text-[#16352d]">{eventDetails.location}</dd>
+          <dd className="mt-2 text-sm font-medium text-[#16352d]">
+            <a
+              href={EVENT_MAP_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="underline decoration-[#d6b56d] underline-offset-4 transition hover:text-[#0f5b48]"
+            >
+              {eventDetails.location}
+            </a>
+          </dd>
           <dd className="text-sm text-[#50655d]">{eventDetails.exactVenue}</dd>
         </div>
         <div>
@@ -183,7 +200,11 @@ function LanguageColumn({ lang, copy, sharedCopy }) {
           <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[#9a7330]">
             {copy.collaboratorLabel}
           </p>
-          <p className="mt-2 text-sm leading-6 text-[#284239]">{eventDetails.collaborator}</p>
+          <ul className="mt-2 space-y-2 text-sm leading-6 text-[#284239]">
+            {eventDetails.collaborators.map((collaborator) => (
+              <li key={collaborator}>{collaborator}</li>
+            ))}
+          </ul>
         </div>
       </div>
 
@@ -216,13 +237,14 @@ export default async function PollinatorsEventPage() {
       primary: sharedCopy.factLocationPrimary,
       secondary: sharedCopy.factLocationSecondary,
       detail: eventDetails.exactVenue,
+      href: EVENT_MAP_URL,
     },
     {
       icon: Users,
       label: sharedCopy.factAudienceLabel,
       primary: sharedCopy.factAudiencePrimary,
       secondary: sharedCopy.factAudienceSecondary,
-      detail: "[gratuito / inscripcion TBC] / [free / registration TBC]",
+      detail: "Gratis - No requiere inscripcion / Free - No registration required",
     },
   ];
 
@@ -294,11 +316,8 @@ export default async function PollinatorsEventPage() {
               <div className="mt-10 grid gap-4 md:grid-cols-3">
                 {factItems.map((item) => {
                   const Icon = item.icon;
-                  return (
-                    <div
-                      key={item.label}
-                      className="rounded-[24px] border border-white/10 bg-white/[0.04] p-4 backdrop-blur-sm"
-                    >
+                  const content = (
+                    <>
                       <div className="flex items-center gap-2 text-[#efc85f]">
                         <Icon className="h-4 w-4" />
                         <span className="text-[0.68rem] font-semibold uppercase tracking-[0.16em]">
@@ -308,40 +327,52 @@ export default async function PollinatorsEventPage() {
                       <p className="mt-4 text-base font-medium text-white">{item.primary}</p>
                       <p className="mt-1 text-sm text-[#d8d3c7]">{item.secondary}</p>
                       <p className="mt-3 text-sm text-[#b7c1bb]">{item.detail}</p>
+                    </>
+                  );
+
+                  if (item.href) {
+                    return (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-[24px] border border-white/10 bg-white/[0.04] p-4 backdrop-blur-sm transition hover:border-[#efc85f]/45 hover:bg-white/[0.07]"
+                      >
+                        {content}
+                      </a>
+                    );
+                  }
+
+                  return (
+                    <div
+                      key={item.label}
+                      className="rounded-[24px] border border-white/10 bg-white/[0.04] p-4 backdrop-blur-sm"
+                    >
+                      {content}
                     </div>
                   );
                 })}
               </div>
             </div>
 
-            <div className="relative min-h-[28rem] lg:min-h-[40rem]">
-              <div className="absolute right-[10%] top-[2%] rounded-full bg-[#d6b56d]/10 px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[#efc85f]">
+            <div className="relative mx-auto min-h-[31rem] w-full max-w-[28rem] lg:min-h-[42rem]">
+              <div className="absolute right-[-1rem] top-[-1rem] z-20 rounded-full bg-[#d6b56d]/10 px-4 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[#efc85f]">
                 {sharedCopy.eventBadge}
               </div>
-              <div className="absolute left-[10%] top-[5%] h-16 w-16 rounded-full border border-[#d6b56d]/35" />
-              <div className="absolute bottom-0 right-0 h-full w-full">
-                <div className="absolute right-[8%] top-[10%] z-20">
-                  <div className="relative h-28 w-28 overflow-hidden rounded-full border border-[#e8d3a3]/30 bg-[#123f34] shadow-[0_20px_50px_-24px_rgba(0,0,0,0.7)] md:h-36 md:w-36">
-                    <Image
-                      src="/pollinators/honeybee.jpg"
-                      alt={sharedCopy.pollinatorAlt}
-                      fill
-                      sizes="(max-width: 768px) 112px, 144px"
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="absolute bottom-0 right-0 z-10 h-[24rem] w-[24rem] md:h-[34rem] md:w-[34rem]">
-                  <Image
-                    src="/complete-flowers/Espana.png"
-                    alt={sharedCopy.flowerAlt}
-                    fill
-                    sizes="(max-width: 768px) 384px, 544px"
-                    className="object-contain object-bottom"
-                    priority
-                  />
-                </div>
-                <div className="absolute bottom-[8%] left-[2%] z-0 h-32 w-32 rounded-full bg-[#d66152]/16 blur-2xl md:h-48 md:w-48" />
+              <div className="absolute left-[-1rem] top-[5%] h-16 w-16 rounded-full border border-[#d6b56d]/35" />
+              <div className="absolute bottom-[8%] left-[-8%] z-0 h-36 w-36 rounded-full bg-[#d66152]/18 blur-2xl md:h-52 md:w-52" />
+              <div className="absolute right-[-10%] top-[20%] z-0 h-44 w-44 rounded-full bg-[#8b5cf6]/14 blur-3xl md:h-64 md:w-64" />
+              <div className="relative z-10 overflow-hidden rounded-[28px] border border-[#e8d3a3]/25 bg-[#08251f] shadow-[0_28px_70px_-35px_rgba(0,0,0,0.85)]">
+                <Image
+                  src={EVENT_POSTER_IMAGE}
+                  alt="Dia de Todos los Polinizadores 2026 event poster"
+                  width={768}
+                  height={1344}
+                  sizes="(max-width: 1024px) 90vw, 448px"
+                  className="h-auto w-full"
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -363,20 +394,7 @@ export default async function PollinatorsEventPage() {
       </section>
 
       <section className="relative mx-auto max-w-7xl px-4 pb-10 pt-10 md:px-6 md:pb-12">
-        <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-          <div className="relative overflow-hidden rounded-[28px] bg-[#ede4d0] p-4 shadow-[0_18px_48px_-34px_rgba(9,35,27,0.28)]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(214,97,82,0.12),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(15,91,72,0.12),transparent_32%)]" />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[22px] bg-white">
-              <Image
-                src="/events/dibuja-flor-2026.png"
-                alt={sharedCopy.posterAlt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 34vw"
-                className="object-cover object-top"
-              />
-            </div>
-          </div>
-
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#9a7330]">
               {sharedCopy.activityLabel}
@@ -393,6 +411,29 @@ export default async function PollinatorsEventPage() {
               <p>{sharedCopy.activityBodyEs}</p>
               <p>{sharedCopy.activityBodyEn}</p>
             </div>
+          </div>
+
+          <div className="border-l border-[#d6c7a1] pl-0 lg:pl-10">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#0f5b48]">
+              {sharedCopy.globalParticipationLabel}
+            </p>
+            <h2
+              className={`${displayFont.className} mt-4 text-[clamp(2.1rem,3.8vw,3.5rem)] leading-[1] tracking-[-0.03em] text-[#13352d]`}
+              style={{ textWrap: "balance" }}
+            >
+              {sharedCopy.globalParticipationTitle}
+            </h2>
+            <div className="mt-5 space-y-4 text-[1rem] leading-8 text-[#355148]">
+              <p>{sharedCopy.globalParticipationBodyEs}</p>
+              <p>{sharedCopy.globalParticipationBodyEn}</p>
+            </div>
+            <a
+              href="/dia-de-todos-los-polinizadores"
+              className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#0f5b48] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#0b4638]"
+            >
+              <Globe2 className="h-4 w-4" />
+              {sharedCopy.globalParticipationCta}
+            </a>
           </div>
         </div>
       </section>
