@@ -111,7 +111,7 @@ const eventJsonLd = {
   },
 };
 
-function LanguageColumn({ lang, copy }) {
+function LanguageColumn({ lang, copy, sharedCopy }) {
   const audience = lang === "es" ? eventDetails.audienceEs : eventDetails.audienceEn;
 
   return (
@@ -399,7 +399,7 @@ export default async function PollinatorsEventPage() {
 
       <section className="mx-auto max-w-7xl px-4 pb-12 md:px-6 md:pb-16">
         <div className="grid gap-12">
-          <LanguageColumn id={locale} lang={locale} copy={pageCopy} />
+          <LanguageColumn lang={locale} copy={pageCopy} sharedCopy={sharedCopy} />
         </div>
       </section>
 
