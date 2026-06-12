@@ -294,5 +294,66 @@
       }
     },
     "footerNote": "The Flower Archive is maintained as a long-horizon publication of the International Association for the Defense of Flowers."
+  },
+  "pollinatorsEvent2026": {
+    "eyebrow": "Public event · 21 June 2026",
+    "title": "All Pollinators Day",
+    "subtitle": "\"Draw the flower and its pollinator\"",
+    "intro": "Universo Nahiara · Asociacion Internacional en Defensa de las Flores (Proveneya & Nahiara)",
+    "body": "A day to celebrate the world's pollinators. In the central activity, \"Draw the flower and its pollinator,\" children and families draw a flower and the pollinator that visits it, discovering the bond between them and why they matter. Art, science and biodiversity in one STE(A)M experience - inspiring care through wonder, not alarm.",
+    "audienceLabel": "Audience",
+    "infoLabel": "Info",
+    "organizerLabel": "Organised by",
+    "collaboratorLabel": "With",
+    "detailsTitle": "Event details",
+    "practicalTitle": "Information status",
+    "practicalBody": "This page is already structured as the permanent public URL to share with Scientix. Matias will send the time, exact venue in La Blanca, and confirmation on whether the activity is free/open or requires registration.",
+    "organizerBody": "Universo Nahiara - International Association for the Defence of Flowers (Proveneya & Nahiara), with the Asociacion de Vecinos de La Blanca.",
+    "hero": {
+      "kicker": "Scientix-ready event page",
+      "description": "Public bilingual event page for Scientix and international sharing. One canonical URL, permanent slug, and structured event data.",
+      "readEnglish": "Read in English",
+      "canonicalCta": "Copy canonical URL",
+      "visualTitle": "Representative visual",
+      "visualBody": "Flower and pollinator artwork for page presentation. Social sharing uses a dedicated OG image generated for this URL.",
+      "canonicalLabel": "Canonical URL",
+      "cards": {
+        "dateLabel": "Date",
+        "placeLabel": "Place",
+        "audienceLabel": "Audience",
+        "contactLabel": "Contact"
+      }
+    },
+    "shared": {
+      "homeLabel": "Inicio / Home",
+      "canonicalLabel": "Canonical URL",
+      "countdownLabel": "Reloj / Countdown",
+      "heroDescription": "Pagina publica bilingue para Scientix y difusion internacional. Una URL canonica y permanente para compartir. / Public bilingual event page for Scientix and international sharing. One canonical, permanent URL to share.",
+      "heroDate": "21 de junio de 2026",
+      "heroTitleLine1": "Dia de Todos los",
+      "heroTitleLine2": "Polinizadores 2026",
+      "heroEnglishTitle": "All Pollinators Day 2026",
+      "eventBadge": "Evento / Event",
+      "factDateLabel": "Fecha / Date",
+      "factLocationLabel": "Lugar / Location",
+      "factAudienceLabel": "Publico / Audience",
+      "factLocationPrimary": "La Blanca, Sardina del Sur",
+      "factLocationSecondary": "Santa Lucia de Tirajana, Gran Canaria",
+      "factAudiencePrimary": "Abierto a todos los publicos",
+      "factAudienceSecondary": "Open to all",
+      "detailDateLabel": "Fecha / Date",
+      "detailLocationLabel": "Lugar / Location",
+      "activityLabel": "Actividad central / Central activity",
+      "activityTitleLine1": "Dibuja la flor y su",
+      "activityTitleLine2": "polinizador",
+      "activityBodyEs": "Ninas, ninos y familias dibujan una flor y el polinizador que la visita, descubriendo el vinculo entre ambos y por que cuidarlos.",
+      "activityBodyEn": "Children and families draw a flower and the pollinator that visits it, discovering the bond between them and why they matter.",
+      "organizerHeading": "Organiza / Organised by",
+      "infoHeading": "Informacion / Info",
+      "websiteHeading": "Sitio web / Website",
+      "posterAlt": "Draw the flower and its pollinator poster",
+      "pollinatorAlt": "Pollinator honeybee",
+      "flowerAlt": "Representative flower artwork"
+    }
   }
 }

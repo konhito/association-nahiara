@@ -11,6 +11,7 @@ export default function sitemap() {
     { path: '/archive', freq: 'weekly', priority: 0.95 },
     { path: '/dia-de-todos-los-polinizadores', freq: 'weekly', priority: 0.92 },
     { path: '/reloj-dia-de-todos-los-polinizadores', freq: 'daily', priority: 0.9 },
+    { path: '/eventos/dia-de-los-polinizadores-2026', freq: 'weekly', priority: 0.9 },
     { path: '/galeria-dibujos', freq: 'monthly', priority: 0.8 },
     { path: '/evento-dibuja-flor', freq: 'monthly', priority: 0.8 },
     { path: '/dibuja-la-flor-de-tu-pais', freq: 'monthly', priority: 0.8 },

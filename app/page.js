@@ -838,6 +838,13 @@ ${t("landing.visionText")}
                 {t("landing.explore3DArchive")}
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
+              <Link
+                href="/reloj-dia-de-todos-los-polinizadores"
+                className="btn-secondary"
+              >
+                <Flower2 className="mr-2 w-4 h-4" />
+                Dia de Todos los Polinizadores
+              </Link>
               <button
                 onClick={() => setShowContactModal(true)}
                 className="btn-secondary"

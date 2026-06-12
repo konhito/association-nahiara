@@ -294,5 +294,66 @@
       }
     },
     "footerNote": "El Archivo Floral se mantiene como una publicacion de largo recorrido de la Asociacion Internacional en Defensa de las Flores."
+  },
+  "pollinatorsEvent2026": {
+    "eyebrow": "Evento publico · 21 de junio de 2026",
+    "title": "Dia de Todos los Polinizadores",
+    "subtitle": "\"Dibuja la flor y su polinizador\"",
+    "intro": "Universo Nahiara · Asociacion Internacional en Defensa de las Flores (Proveneya & Nahiara)",
+    "body": "Una jornada para celebrar a los polinizadores del mundo. En la actividad central, \"Dibuja la flor y su polinizador\", ninas, ninos y familias dibujan una flor y el polinizador que la visita, descubriendo el vinculo entre ambos y por que cuidarlos. Arte, ciencia y biodiversidad unidos en un enfoque STE(A)M, desde el asombro y no desde la alarma.",
+    "audienceLabel": "Publico",
+    "infoLabel": "Informacion",
+    "organizerLabel": "Organiza",
+    "collaboratorLabel": "En colaboracion con",
+    "detailsTitle": "Informacion del evento",
+    "practicalTitle": "Estado de la informacion",
+    "practicalBody": "Esta pagina ya esta preparada como URL publica permanente para Scientix. Matias enviara a continuacion la hora, el lugar exacto en La Blanca y la confirmacion sobre gratuidad o inscripcion.",
+    "organizerBody": "Universo Nahiara - Asociacion Internacional en Defensa de las Flores (Proveneya & Nahiara), en colaboracion con la Asociacion de Vecinos de La Blanca.",
+    "hero": {
+      "kicker": "Pagina del evento lista para Scientix",
+      "description": "Pagina publica bilingue para Scientix y difusion internacional. Una URL canonica, slug permanente y datos estructurados del evento.",
+      "readEnglish": "Leer en ingles",
+      "canonicalCta": "Copiar URL canonica",
+      "visualTitle": "Visual representativo",
+      "visualBody": "Imagen de flor y polinizador para la presentacion de la pagina. La previsualizacion social usa una imagen OG especifica generada para esta URL.",
+      "canonicalLabel": "URL canonica",
+      "cards": {
+        "dateLabel": "Fecha",
+        "placeLabel": "Lugar",
+        "audienceLabel": "Publico",
+        "contactLabel": "Contacto"
+      }
+    },
+    "shared": {
+      "homeLabel": "Inicio / Home",
+      "canonicalLabel": "URL canonica",
+      "countdownLabel": "Reloj / Cuenta atras",
+      "heroDescription": "Pagina publica bilingue para Scientix y difusion internacional. Una URL canonica y permanente para compartir. / Public bilingual event page for Scientix and international sharing. One canonical, permanent URL to share.",
+      "heroDate": "21 de junio de 2026",
+      "heroTitleLine1": "Dia de Todos los",
+      "heroTitleLine2": "Polinizadores 2026",
+      "heroEnglishTitle": "All Pollinators Day 2026",
+      "eventBadge": "Evento / Event",
+      "factDateLabel": "Fecha / Date",
+      "factLocationLabel": "Lugar / Location",
+      "factAudienceLabel": "Publico / Audience",
+      "factLocationPrimary": "La Blanca, Sardina del Sur",
+      "factLocationSecondary": "Santa Lucia de Tirajana, Gran Canaria",
+      "factAudiencePrimary": "Abierto a todos los publicos",
+      "factAudienceSecondary": "Open to all",
+      "detailDateLabel": "Fecha / Date",
+      "detailLocationLabel": "Lugar / Location",
+      "activityLabel": "Actividad central / Central activity",
+      "activityTitleLine1": "Dibuja la flor y su",
+      "activityTitleLine2": "polinizador",
+      "activityBodyEs": "Ninas, ninos y familias dibujan una flor y el polinizador que la visita, descubriendo el vinculo entre ambos y por que cuidarlos.",
+      "activityBodyEn": "Children and families draw a flower and the pollinator that visits it, discovering the bond between them and why they matter.",
+      "organizerHeading": "Organiza / Organised by",
+      "infoHeading": "Informacion / Info",
+      "websiteHeading": "Sitio web / Website",
+      "posterAlt": "Cartel del evento Dibuja la flor y su polinizador",
+      "pollinatorAlt": "Abeja polinizadora",
+      "flowerAlt": "Ilustracion floral representativa"
+    }
   }
 }
