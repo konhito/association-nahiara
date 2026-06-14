@@ -834,16 +834,21 @@ ${t("landing.visionText")}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center pointer-events-auto pt-4"
               style={entrance(4)}
             >
-              <Link href="/archive" className="btn-primary">
+              <Link href="http://aquamundi.org/" className="btn-primary">
                 {t("landing.explore3DArchive")}
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
               <Link
                 href="/reloj-dia-de-todos-los-polinizadores"
-                className="btn-secondary"
+                className="btn-secondary hero-event-cta"
+                aria-label="Open Dia de Todos los Polinizadores clock"
               >
-                <Flower2 className="mr-2 w-4 h-4" />
-                Dia de Todos los Polinizadores
+                <span className="hero-event-cta__icon" aria-hidden="true">
+                  <Flower2 className="w-4 h-4" />
+                </span>
+                <span className="hero-event-cta__text">
+                  Dia de Todos los Polinizadores
+                </span>
               </Link>
               <button
                 onClick={() => setShowContactModal(true)}
@@ -991,6 +996,17 @@ ${t("landing.visionText")}
                   description: t("landing.project5Description"),
                   cta: t("landing.project5Cta"),
                   href: "/press",
+                },
+                {
+                  label:
+                    locale === "es" ? "EVENTO CULTURAL" : "CULTURAL EVENT",
+                  title: "Sant Jordi 2026",
+                  description:
+                    locale === "es"
+                      ? "Encuentro de literatura, rosas y comunidad en Barcelona, con galeria del evento y espacio de prensa de la Asociacion Nahiara."
+                      : "A Barcelona gathering for literature, roses, and community, with event photography and a press area from Nahiara Association.",
+                  cta: locale === "es" ? "Ver Sant Jordi ->" : "View Sant Jordi ->",
+                  href: "/sant-jordi-2026",
                 },
               ].map((project) => (
                 <article
