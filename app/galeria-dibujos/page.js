@@ -17,6 +17,7 @@ import {
   Pause,
   Shuffle,
   BookOpen,
+  Upload,
 } from "lucide-react";
 
 // ====== ARTWORK DATA (from curatorial HTML) ======
@@ -430,6 +431,17 @@ export default function GaleriaDibujos() {
           <ChevronLeft className="w-5 h-5 mr-1" />
           {tBack}
         </Link>
+        <Link
+          href="/dibuja-la-flor-de-tu-pais"
+          className="inline-flex items-center gap-2 rounded-full bg-emerald-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800"
+        >
+          <Upload className="h-4 w-4" />
+          {locale === "es"
+            ? "Subir obra"
+            : locale === "de"
+              ? "Werk hochladen"
+              : "Upload artwork"}
+        </Link>
       </div>
 
       <main className="pt-20 pb-16">
@@ -473,6 +485,20 @@ export default function GaleriaDibujos() {
               >
                 {tDesc}
               </p>
+
+              <div className="mb-10 flex justify-center">
+                <Link
+                  href="/dibuja-la-flor-de-tu-pais"
+                  className="inline-flex min-h-12 items-center gap-2 rounded-full bg-[#0f5b48] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/10 transition hover:bg-[#0b4638]"
+                >
+                  <Upload className="h-4 w-4" />
+                  {locale === "es"
+                    ? "Subir tu obra"
+                    : locale === "de"
+                      ? "Dein Werk hochladen"
+                      : "Upload your artwork"}
+                </Link>
+              </div>
 
               {/* Stats row */}
               <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
