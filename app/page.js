@@ -859,6 +859,15 @@ ${t("landing.visionText")}
                 {t("landing.contactUs")}
               </button>
             </div>
+            <a
+              href="https://www.scientix.eu/news-events/events/event?id=110402"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pointer-events-auto mx-auto mt-4 inline-flex max-w-xl items-center justify-center text-center text-sm font-medium leading-6 text-[var(--muted-foreground)] underline decoration-[#d6b56d] underline-offset-4 transition hover:text-[var(--foreground)]"
+              style={entrance(5)}
+            >
+              {t("landing.scientixListingLink")}
+            </a>
           </div>
 
           {/* Scroll indicator */}

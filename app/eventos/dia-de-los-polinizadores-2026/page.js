@@ -16,6 +16,9 @@ import {
 import deMessages from "../../../messages/de.json";
 import enMessages from "../../../messages/en.json";
 import esMessages from "../../../messages/es.json";
+import frMessages from "../../../messages/fr.json";
+import itMessages from "../../../messages/it.json";
+import zhMessages from "../../../messages/zh.json";
 
 const displayFont = Baskervville({
   subsets: ["latin"],
@@ -30,6 +33,8 @@ const EVENT_POSTER_URL = `https://asociacionnahiara.org${EVENT_POSTER_IMAGE}`;
 const EVENT_MAP_URL = "https://maps.google.com/?cid=261711776052733802";
 const EVENT_FILM_EMBED_URL =
   "https://www.youtube-nocookie.com/embed/HdpjOvamzgY?rel=0&modestbranding=1";
+const SCIENTIX_EVENT_URL =
+  "https://www.scientix.eu/news-events/events/event?id=110402";
 
 const eventDetails = {
   date: "21 June 2026",
@@ -53,10 +58,16 @@ const eventDetails = {
 const esCopy = esMessages.pollinatorsEvent2026;
 const enCopy = enMessages.pollinatorsEvent2026;
 const deCopy = deMessages.pollinatorsEvent2026;
+const frCopy = frMessages.pollinatorsEvent2026;
+const itCopy = itMessages.pollinatorsEvent2026;
+const zhCopy = zhMessages.pollinatorsEvent2026;
 const eventMessages = {
   es: esCopy,
   en: enCopy,
   de: deCopy,
+  fr: frCopy,
+  it: itCopy,
+  zh: zhCopy,
 };
 
 export const metadata = {
@@ -362,6 +373,15 @@ export default async function PollinatorsEventPage() {
               <p className="mt-7 max-w-2xl text-[1.05rem] leading-8 text-[#d7ded8]">
                 {sharedCopy.heroDescription}
               </p>
+              <a
+                href={SCIENTIX_EVENT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex max-w-2xl items-center gap-2 text-sm font-medium leading-6 text-[#f1d993] underline decoration-[#d6b56d]/60 underline-offset-4 transition hover:text-[#fff3cf]"
+              >
+                {sharedCopy.scientixListingLink}
+                <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+              </a>
 
               <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3">
                 {factItems.map((item) => {
