@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { Baskervville } from "next/font/google";
 import {
   ArrowLeft,
+  ArrowUpRight,
   CalendarDays,
   Clock,
   Copy,
@@ -474,6 +475,13 @@ export default async function PollinatorsEventPage() {
             <div className="mt-5 space-y-4 text-[1rem] leading-8 text-[#355148]">
               <p>{sharedCopy.globalParticipationBody}</p>
             </div>
+            <Link
+              href="/dibuja-la-flor-de-tu-pais"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#0f5b48] px-5 py-3 text-sm font-semibold text-[#f7f4ec] shadow-[0_12px_30px_-22px_rgba(7,44,38,0.9)] transition hover:bg-[#0a4235] focus:outline-none focus:ring-2 focus:ring-[#d6b56d] focus:ring-offset-2 focus:ring-offset-[#f5f1e8]"
+            >
+              {sharedCopy.globalParticipationCta}
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>
