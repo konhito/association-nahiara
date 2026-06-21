@@ -30,6 +30,7 @@ const PAGE_PATH = "/eventos/dia-de-los-polinizadores-2026";
 const PAGE_URL = `https://asociacionnahiara.org${PAGE_PATH}`;
 const EVENT_POSTER_IMAGE = "/events/eventosdia-de-los-polinizadores-2026.jpeg";
 const EVENT_POSTER_URL = `https://asociacionnahiara.org${EVENT_POSTER_IMAGE}`;
+const MANIFESTO_PDF_URL = "/events/day-of-all-pollinators-manifesto.pdf";
 const EVENT_MAP_URL = "https://maps.google.com/?cid=261711776052733802";
 const EVENT_FILM_EMBED_URL =
   "https://www.youtube-nocookie.com/embed/HdpjOvamzgY?rel=0&modestbranding=1";
@@ -502,6 +503,37 @@ export default async function PollinatorsEventPage() {
               {sharedCopy.globalParticipationCta}
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-10 md:px-6 md:pb-12">
+        <div className="grid gap-7 border-t border-[#d6c7a1] py-8 lg:grid-cols-[0.95fr_1.25fr] lg:items-center lg:py-10">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9a7330]">
+              {sharedCopy.manifestoLabel}
+            </p>
+            <h2
+              className={`${displayFont.className} mt-4 text-[clamp(2rem,4vw,3.6rem)] leading-[1] tracking-[-0.03em] text-[#13352d]`}
+              style={{ textWrap: "balance" }}
+            >
+              {sharedCopy.manifestoTitle}
+            </h2>
+          </div>
+
+          <div className="flex flex-col gap-5 border-t border-[#d6c7a1] pt-6 sm:flex-row sm:items-center sm:justify-between lg:border-t-0 lg:pt-0">
+            <p className="max-w-2xl text-[1rem] leading-8 text-[#355148]">
+              {sharedCopy.manifestoBody}
+            </p>
+            <a
+              href={MANIFESTO_PDF_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#0f5b48] px-5 py-3 text-sm font-semibold text-[#f7f4ec] shadow-[0_12px_30px_-22px_rgba(7,44,38,0.9)] transition hover:bg-[#0a4235] focus:outline-none focus:ring-2 focus:ring-[#d6b56d] focus:ring-offset-2 focus:ring-offset-[#f5f1e8]"
+            >
+              {sharedCopy.manifestoCta}
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
           </div>
         </div>
       </section>
