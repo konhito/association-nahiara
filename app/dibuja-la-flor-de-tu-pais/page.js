@@ -14,6 +14,31 @@ import {
 import { useTranslation } from "../../lib/useTranslation";
 import { getUploadPresignedUrl } from "../actions/upload";
 
+const fallbackCopy = {
+  back: "Back",
+  eventLink: "Event page",
+  eyebrow: "Global artwork call",
+  title: "Upload your flower to the world",
+  description: "Send a drawing that connects a flower, a pollinator, and the place you call home.",
+  formIntro:
+    "Your artwork will be reviewed for the Global Gallery. Please include your name, country, and a clear image or PDF of the drawing.",
+  illustrationAlt: "Popsy flower illustration for the artwork submission page",
+  nameLabel: "Full name",
+  namePlaceholder: "Your name",
+  countryLabel: "Country of origin or adoption",
+  countryPlaceholder: "Spain",
+  messageLabel: "Message or dedication (optional)",
+  messagePlaceholder: "A short note about your drawing",
+  dragLabel: "Drag and drop your file here",
+  browseLabel: "or click to browse",
+  limit: "JPG, PNG or PDF. Max 10MB.",
+  submit: "Upload artwork",
+  uploading: "Uploading...",
+  success: "Artwork received successfully!",
+  galleryCta: "View Global Gallery",
+  error: "An error occurred while uploading.",
+};
+
 export default function SubmitArtworkPage() {
   const router = useRouter();
   const { isLoading, t } = useTranslation();
@@ -26,7 +51,11 @@ export default function SubmitArtworkPage() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef(null);
 
-  const copy = (key) => t(`submitArtwork.${key}`);
+  const copy = (key) => {
+    const translationKey = `submitArtwork.${key}`;
+    const translated = t(translationKey);
+    return translated === translationKey ? fallbackCopy[key] || translated : translated;
+  };
 
   const handleBack = () => {
     if (window.history.length > 1) {

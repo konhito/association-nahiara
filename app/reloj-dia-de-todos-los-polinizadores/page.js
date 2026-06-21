@@ -3,15 +3,64 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 
+const LONDON_TIMEZONE = "Europe/London";
+const londonFormatter = new Intl.DateTimeFormat("en-GB", {
+  timeZone: LONDON_TIMEZONE,
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hourCycle: "h23",
+});
+
+function getLondonParts(date) {
+  const parts = londonFormatter.formatToParts(date).reduce((result, part) => {
+    result[part.type] = part.value;
+    return result;
+  }, {});
+
+  return {
+    year: Number(parts.year),
+    month: Number(parts.month),
+    day: Number(parts.day),
+    hour: Number(parts.hour),
+    minute: Number(parts.minute),
+    second: Number(parts.second),
+  };
+}
+
+function getLondonMidnight(year, monthIndex, day) {
+  const targetLocalTime = Date.UTC(year, monthIndex, day, 0, 0, 0);
+  let utcGuess = targetLocalTime;
+
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    const parts = getLondonParts(new Date(utcGuess));
+    const renderedLocalTime = Date.UTC(
+      parts.year,
+      parts.month - 1,
+      parts.day,
+      parts.hour,
+      parts.minute,
+      parts.second
+    );
+    utcGuess -= renderedLocalTime - targetLocalTime;
+  }
+
+  return new Date(utcGuess);
+}
+
 function getCycleDates(now = new Date()) {
-  let year = now.getFullYear();
-  let dayStart = new Date(year, 5, 21, 0, 0, 0, 0);
-  let dayEnd = new Date(year, 5, 22, 0, 0, 0, 0);
+  const londonNow = getLondonParts(now);
+  let year = londonNow.year;
+  let dayStart = getLondonMidnight(year, 5, 21);
+  let dayEnd = getLondonMidnight(year, 5, 22);
 
   if (now >= dayEnd) {
     year += 1;
-    dayStart = new Date(year, 5, 21, 0, 0, 0, 0);
-    dayEnd = new Date(year, 5, 22, 0, 0, 0, 0);
+    dayStart = getLondonMidnight(year, 5, 21);
+    dayEnd = getLondonMidnight(year, 5, 22);
   }
 
   return { year, dayStart, dayEnd };
@@ -49,6 +98,17 @@ function getCountdownState(now = new Date()) {
 
 export default function RelojDiaPolinizadoresPage() {
   const [countdown, setCountdown] = useState(() => getCountdownState());
+  const fireworkBursts = useMemo(
+    () =>
+      Array.from({ length: 14 }, (_, index) => ({
+        id: index,
+        left: `${8 + ((index * 19) % 86)}%`,
+        top: `${8 + ((index * 31) % 54)}%`,
+        delay: `${(index % 7) * 0.42}s`,
+        duration: `${2.8 + (index % 4) * 0.38}s`,
+      })),
+    []
+  );
   const clockRef = useRef(null);
   const burstRef = useRef(null);
 
@@ -169,6 +229,22 @@ export default function RelojDiaPolinizadoresPage() {
     <main className={`clock-page ${countdown.arrived ? "arrived" : ""}`} ref={clockRef}>
       <div className="sun" />
       <div className="haze" />
+      {countdown.arrived && (
+        <div className="fireworks" aria-hidden="true">
+          {fireworkBursts.map((burst) => (
+            <span
+              className="firework"
+              key={burst.id}
+              style={{
+                "--fw-left": burst.left,
+                "--fw-top": burst.top,
+                "--fw-delay": burst.delay,
+                "--fw-duration": burst.duration,
+              }}
+            />
+          ))}
+        </div>
+      )}
       <div className="cursor-layer" aria-hidden="true">
         <div className="cursor-ring" />
         <div className="cursor-core" />
@@ -272,6 +348,36 @@ export default function RelojDiaPolinizadoresPage() {
             radial-gradient(45% 35% at 25% 30%, rgba(255, 248, 233, 0.12), transparent 70%),
             radial-gradient(40% 30% at 78% 58%, rgba(255, 215, 143, 0.14), transparent 70%);
           pointer-events: none;
+        }
+
+        .fireworks {
+          position: absolute;
+          inset: 0;
+          z-index: 3;
+          overflow: hidden;
+          pointer-events: none;
+        }
+
+        .firework {
+          position: absolute;
+          left: var(--fw-left);
+          top: var(--fw-top);
+          width: 7px;
+          height: 7px;
+          border-radius: 999px;
+          background: #fff6d6;
+          box-shadow:
+            0 -34px 0 -1px rgba(255, 246, 214, 0.92),
+            24px -24px 0 -1px rgba(247, 196, 102, 0.88),
+            34px 0 0 -1px rgba(255, 151, 112, 0.78),
+            24px 24px 0 -1px rgba(255, 233, 163, 0.82),
+            0 34px 0 -1px rgba(255, 246, 214, 0.86),
+            -24px 24px 0 -1px rgba(255, 151, 112, 0.72),
+            -34px 0 0 -1px rgba(247, 196, 102, 0.86),
+            -24px -24px 0 -1px rgba(255, 233, 163, 0.8);
+          opacity: 0;
+          transform: scale(0.2);
+          animation: firework-pop var(--fw-duration) ease-out var(--fw-delay) infinite;
         }
 
         .cursor-layer {
@@ -528,6 +634,26 @@ export default function RelojDiaPolinizadoresPage() {
           }
         }
 
+        @keyframes firework-pop {
+          0% {
+            opacity: 0;
+            transform: scale(0.2);
+            filter: blur(0);
+          }
+          12% {
+            opacity: 0.98;
+          }
+          46% {
+            opacity: 0.72;
+            transform: scale(1);
+          }
+          100% {
+            opacity: 0;
+            transform: scale(1.55);
+            filter: blur(0.5px);
+          }
+        }
+
         @media (max-width: 560px) {
           .clock {
             grid-template-columns: repeat(2, minmax(90px, 1fr));
@@ -540,11 +666,13 @@ export default function RelojDiaPolinizadoresPage() {
             display: none;
           }
 
+          .fireworks,
           .flyer,
           .sun {
             animation: none !important;
           }
 
+          .fireworks,
           .flyer {
             display: none;
           }
