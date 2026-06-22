@@ -9,11 +9,6 @@ export const metadata = {
   },
 };
 
-const MANIFESTO_TEXT = [
-  "[Inserta aqui, sin alterar una sola palabra, el texto integro del manifiesto oficial del Dia de Todos los Polinizadores recibido en el Google Doc.]",
-  "[Este marcador mantiene la estructura de publicacion hasta integrar el documento fundacional definitivo.]",
-];
-
 export default function DiaDeTodosLosPolinizadoresPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
@@ -53,18 +48,27 @@ export default function DiaDeTodosLosPolinizadoresPage() {
               Proclamacion permanente
             </p>
             <p className="mt-3 text-sm text-slate-600">
-              URL oficial: https://asociacionnahiara.org/dia-de-todos-los-polinizadores
+              URL oficial:
+              https://asociacionnahiara.org/dia-de-todos-los-polinizadores
             </p>
           </header>
 
           <div className="mt-8 space-y-6 text-[1.05rem] leading-8 text-slate-800">
-            {MANIFESTO_TEXT.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+            <p>
+              <a
+                href="https://www.asociacionnahiara.org/events/day-of-all-pollinators-manifesto.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-emerald-700 underline decoration-emerald-300 underline-offset-4 transition hover:text-emerald-800 hover:decoration-emerald-500"
+              >
+                Ver el manifiesto en PDF
+              </a>
+            </p>
           </div>
 
           <footer className="mt-10 border-t border-slate-100 pt-6 text-sm text-slate-600">
-            Publicacion institucional preparada para integrar el texto fundacional final sin recortes ni adaptaciones.
+            Publicacion institucional preparada para integrar el texto
+            fundacional final sin recortes ni adaptaciones.
           </footer>
         </article>
       </div>
