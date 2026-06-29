@@ -19,6 +19,7 @@ export default function sitemap() {
     { path: '/territories', freq: 'monthly', priority: 0.8 },
     { path: '/press', freq: 'monthly', priority: 0.75 },
     { path: '/sant-jordi-2026', freq: 'monthly', priority: 0.75 },
+    { path: '/guardianes-de-las-flores-2026', freq: 'monthly', priority: 0.8 },
   ];
 
   const archiveProfiles = LAUNCH_SLUGS.map(slug => ({
