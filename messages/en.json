@@ -70,6 +70,23 @@
     "plateII": "Plate II.",
     "featureEvent": "Feature Event",
     "scientixListingLink": "This event is listed in the Scientix events calendar (European Schoolnet)",
+    "recentEvents": {
+      "heading": "Recent events",
+      "intro": "A short path into the latest public gatherings, workshops, and community pages from Universo Nahiara.",
+      "cta": "View event",
+      "event1": {
+        "label": "21 June 2026",
+        "title": "Day of All Pollinators",
+        "location": "La Blanca, Sardina del Sur",
+        "description": "A community day of flowers, pollinators, workshops, and artworks created by participating families."
+      },
+      "event2": {
+        "label": "19 June 2026",
+        "title": "Guardians of the Flowers",
+        "location": "Parque El Canario",
+        "description": "The Guardians of the Flowers universe brought into a family, artistic, and educational gathering."
+      }
+    },
     "santJordiTitle": "Sant Jordi 2026",
     "santJordiDesc": "Discover the global initiative uniting literature, sustainably crafted artificial roses, and botanical conservation.",
     "exploreEvent": "Explore Event",
@@ -387,6 +404,46 @@
       "posterAlt": "Draw the flower and its pollinator poster",
       "pollinatorAlt": "Pollinator honeybee",
       "flowerAlt": "Representative flower artwork"
+      ,
+      "eventDayLabel": "Event day",
+      "eventDayTitle": "La Blanca, in full bloom",
+      "eventDayBody": "A visual record of the Day of All Pollinators in La Blanca: families, children, institutional visitors, and the collective mural of flowers and pollinators created on 21 June 2026.",
+      "eventDayPhotos": [
+        {
+          "caption": "La Blanca embraces the Day of All Pollinators - 21 June 2026 - Sardina del Sur, Santa Lucia de Tirajana",
+          "secondary": "La Blanca embraces the Day of All Pollinators - 21 June 2026 - Sardina del Sur, Santa Lucia de Tirajana"
+        },
+        {
+          "caption": "Draw Your Country's Flower and Your Favourite Pollinator - All ages, all origins, one shared world",
+          "secondary": "Draw Your Country's Flower and Your Favourite Pollinator - All ages, all origins, one shared world"
+        },
+        {
+          "caption": "Paper Flower Workshop - Guardians of the Flowers card game as reference - Day of All Pollinators",
+          "secondary": "Paper Flower Workshop - Guardians of the Flowers card game as reference - Day of All Pollinators"
+        },
+        {
+          "caption": "Institutional visit - The Mayor of Santa Lucia de Tirajana and the Councillor for Citizen Participation with the Association's Board of Directors - Also present: Alexandra, member of the Young Citizens Assembly on Pollinators of the European Commission; young people like her give real voice and visibility to initiatives like this one - 21 June 2026",
+          "secondary": "Institutional visit - The Mayor of Santa Lucia de Tirajana and the Councillor for Citizen Participation with the Association's Board of Directors - Also present: Alexandra, member of the Young Citizens Assembly on Pollinators of the European Commission; young people like her give real voice and visibility to initiatives like this one - 21 June 2026"
+        },
+        {
+          "caption": "Alexandra, member of the Young Citizens Assembly on Pollinators of the European Commission, with Matias Gonzalez, creator of Universo Nahiara - Alexandra painted the Canarian lizard, a documented pollinator of the endemic flora of the Canary Islands, and received her Diploma as Guardian of the Flowers - 21 June 2026",
+          "secondary": "Alexandra, member of the Young Citizens Assembly on Pollinators of the European Commission, with Matias Gonzalez, creator of Universo Nahiara - Alexandra painted the Canarian lizard, a documented pollinator of the endemic flora of the Canary Islands, and received her Diploma as Guardian of the Flowers - 21 June 2026"
+        },
+        {
+          "caption": "Closing of the Day of All Pollinators - The Board of Directors of the International Association for the Defence of Flowers beside the collective mural of flowers and pollinators from around the world - La Blanca, Sardina del Sur - 21 June 2026 - All artworks will be available soon at the dedicated link",
+          "secondary": "Closing of the Day of All Pollinators - The Board of Directors of the International Association for the Defence of Flowers beside the collective mural of flowers and pollinators from around the world - La Blanca, Sardina del Sur - 21 June 2026 - All artworks will be available soon at the dedicated link"
+        }
+      ],
+      "artworkGalleryLabel": "Children's artworks",
+      "artworkGalleryTitle": "Forty-one sheets, one moving garden",
+      "artworkGalleryBody": "The drawings now move like an exhibition table: three works in view, numbered from the first sheet, with the curatorial note kept beside each image. Hover to pause the reel.",
+      "artworkPlateLabel": "Plate",
+      "artworkDateLocation": "21 June 2026 - La Blanca",
+      "artworkUnknownAuthor": "Author to be confirmed",
+      "artworkFooterTitle": "Draw Your Country's Flower",
+      "archiveLabel": "Event archive",
+      "archiveTitle": "More moments from La Blanca",
+      "archiveBody": "Additional photographs from the shared event folder, kept as a compact visual archive beside the main story of the day."
     }
   },
   "submitArtwork": {
@@ -411,5 +468,172 @@
     "success": "Artwork received successfully!",
     "galleryCta": "View Global Gallery",
     "error": "An error occurred while uploading."
+  },
+  "guardianes2026": {
+    "artworks": {
+      "1": {
+        "curatorial": "Kimberly dresses her bumblebee in deep blue and saves a warm terracotta for its head, where two enormous, wide-awake green eyes peer out. The colour escapes the outline here and there, with the happy haste of someone who paints and then dashes off to keep playing, and that freedom is exactly what makes it hers."
+      },
+      "2": {
+        "curatorial": "At the centre, a large red flower opens its petals with a blazing intensity, surrounded by foliage tinged in lavender and mauve that wraps around it like a soft shadow. Below, a turquoise bloom breaks the warm harmony with a fresh, unexpected note."
+      },
+      "3": {
+        "curatorial": "Amberly didn't choose one colour: she chose them all. Her petals light up in blue, violet, orange and pink around a yellow heart, and a deep red rose peeks out among the green leaves. The whole piece pulses like a rainbow that had decided to bloom."
+      },
+      "4": {
+        "curatorial": "The moth unfolds in perfect symmetry, each wing answering the other in a mosaic of pinks, greens, blues and purples set like stained glass. The golden head and the garnet thorax gather the warmth of the whole composition."
+      },
+      "5": {
+        "curatorial": "From a whole field of dahlias, Ranime chooses just one to bring into bloom in yellow, letting the rest rest in pencil grey like a silent echo. To one side, a red stroke appears like a whisper of colour daring to show itself."
+      },
+      "6": {
+        "curatorial": "Ines fills the whole page with life: one yellow flower and one pink open among green leaves, surrounded by spirals and scribbles that dance across the paper. A yellow sun keeps watch from one corner and a band of green grass closes the drawing, as if the joy couldn't fit within the margins."
+      },
+      "7": {
+        "curatorial": "Davinia spreads out three hibiscus flowers in coral red, shaping each petal with fine veins that give them volume and a gentle tremor. The leaves, in a calm green, hold the flowers with the ease of someone who knows her garden."
+      },
+      "8": {
+        "curatorial": "Theylor sets his hibiscus alight in an intense pink crossed by red strokes that look like movement, while the golden columns of the stamens rise at the centre of each flower. Around them, a few loose red marks leave the feeling of a flower caught mid-gesture."
+      },
+      "9": {
+        "curatorial": "Raquel draws a rose in a pale, luminous pink, its yellow heart open to the air, and beside it gathers a cluster of buds in orange, red, purple and gold. The leaves, in natural, nuanced greens, frame the scene with botanical delicacy."
+      },
+      "10": {
+        "curatorial": "Catalina sets two sunflowers blazing, their yellow petals around hearts of a deep, almost nocturnal garnet. The green buds and the reddish stem add an earthy strength to a flower that always seems to turn towards the light."
+      },
+      "11": {
+        "curatorial": "Paula sets a great flower spinning, its petals moving from yellow to lime green, to red and to orange around a dark, dense heart. She surrounds it with leaves in brown, deep blue and violet, and scatters the air with little curls of colour, as if the flower were giving off sparks."
+      },
+      "12": {
+        "curatorial": "Martina dresses her sunflower in petals that alternate between pink, cream and blue, framing the centre with a golden ring that guards a violet heart. She leaves the stem and leaves in pencil grey, so that all the light stays above, in the flower."
+      },
+      "13": {
+        "curatorial": "A lotus opens in white with its edges barely tinged in pink, holding at its centre a crown of red petals around a bright yellow point. Beneath it, a floating green leaf holds the scene upon the water."
+      },
+      "14": {
+        "curatorial": "Theylor paints his ladybird in a reddish pink dotted with big black spots, leaving a little smiling face on its head. Two antennae tipped in yellow and a few grey legs complete this small guardian of the garden."
+      },
+      "15": {
+        "curatorial": "Yarely opens a water lily of white and pink petals around a yellow heart, resting on green leaves. All around it, a few loose blue strokes sketch the water, like a pond imagined in a hurry."
+      },
+      "16": {
+        "curatorial": "Melanie spreads out a great rose in rosy red, shaping each petal with soft veins that give it body, and crowns the scene with a coral bud about to open. The leaves, in a tender green, embrace the flower calmly."
+      },
+      "17": {
+        "curatorial": "Violeta builds a face from scraps of every colour - blue, green, red and violet - that fit together like a living mosaic. She frames it with flowers in coral, pink and blue, until the face and the garden seem to be one and the same."
+      },
+      "18": {
+        "curatorial": "Neyzan repeats not a single colour: every petal of her flower is different - red beside blue, green beside yellow, orange beside pink - in a wheel that never stops turning. The green stem holds it from below with a pair of serene leaves."
+      },
+      "19": {
+        "curatorial": "Laia lights up one wing of her butterfly in green, red, blue and yellow, and leaves the other almost blank, like an invitation to carry on. The little orange head smiles at the centre, and the drawing stays open, halfway between the colour and the paper."
+      },
+      "20": {
+        "curatorial": "Elba chooses yellow for a single flower and leaves the rest of the water lily in pencil greys, like a sleeping garden from which only one flower wakes. Below, a blue pool gathers the reflection, and a few touches of green and red appear among the leaves."
+      },
+      "21": {
+        "curatorial": "A sunflower sets its upper petals alight in orange and red and lets them descend towards a soft yellow, while the rest of the flower and the neighbouring buds remain in pencil grey. The centre, worked in graphite, holds that gradient of fire like a sun half-risen."
+      },
+      "22": {
+        "curatorial": "A rose splits into two worlds: the lower half burns in a full, resounding red, while the upper stays in the white of the outline, untouched. The contrast turns the flower into a gesture frozen at the very instant of opening."
+      },
+      "23": {
+        "curatorial": "The hummingbird gathers every colour in one small body: head and back in warm brown, one wing blue and the other pink, the throat green and the tail yellow, with its beak ablaze in red. A tiny pollinator dressed for a celebration."
+      },
+      "24": {
+        "curatorial": "Yurena spreads out a bouquet of hibiscus in reds and corals, shaping each petal with veins that move from pale pink to glowing red. The leaves, in a fresh, serrated green, frame the flowers with the energy of a whole garden."
+      },
+      "25": {
+        "curatorial": "Valeria opens a large gerbera of yellow petals around a fresh, luminous green heart. At its foot, a bud in red and pink rises on the stem, like a promise that doesn't yet dare to open."
+      },
+      "27": {
+        "curatorial": "Catalina tints the upper half of her dahlia in a vibrant blue and leaves the lower half in the white of the paper, drawn in lines alone. A pair of green leaves appear above, and the flower hangs suspended between the colour and the outline."
+      },
+      "28": {
+        "curatorial": "Martina surrounds her great red gerbera with hearts, stars and little dots that dance across the whole page, as if the flower couldn't keep still. The lilac centre and the turquoise stem complete a page that breathes pure joy."
+      },
+      "29": {
+        "curatorial": "Candela saves the colour for the heart of her flower: a burst of blue, turquoise, violet and pink at the centre, while the outer petals stay in white and grey. The flower keeps its liveliest fire right in the middle."
+      },
+      "30": {
+        "curatorial": "Janat paints her largest hibiscus in an intense violet edged with red, accompanying it with flowers in pink and yellow among green leaves. The colours stray beyond the outline here and there, with the spontaneity of someone who paints her own way."
+      },
+      "31": {
+        "curatorial": "Laia spreads out a great red rose with dense, vibrant petals, crowned by a bud that echoes the same glowing red. The leaves, in a deep, nuanced green, hold the flower with elegance."
+      },
+      "32": {
+        "curatorial": "Two sunflowers light up in intense yellow around hearts of a warm garnet, while the rest of the cluster remains in graphite grey. The contrast makes the two coloured flowers shine as if they held all the light of the whole."
+      },
+      "33": {
+        "curatorial": "India leaves her rose almost entirely in the white of the outline and saves the colour for two leaves, lit up in a vivid green. The flower waits, drawn in detail, ready to receive its colour when the moment comes."
+      },
+      "34": {
+        "curatorial": "Riham sets her central flower alight in an intense red with a yellow heart, and colours a single leaf in green with reddish veins. The rest of the bouquet stays in grey lines, like a garden still waking to colour."
+      },
+      "35": {
+        "curatorial": "Naymar dresses a whole sheet of pollinators - bee, butterfly, bumblebee, hummingbird, ladybird, moth, beetle and bat - giving each its own palette: yellows and blues, corals, golds and purples. A small collection in which every creature of the garden receives its colour."
+      }
+    },
+    "navHome": "Home",
+    "navPollinators": "Pollinators Day",
+    "facts": {
+      "date": {
+        "label": "Date",
+        "primary": "19 June 2026",
+        "secondary": "Tuesday, from 18:30"
+      },
+      "location": {
+        "label": "Location",
+        "primary": "Parque El Canario",
+        "secondary": "AA.VV. Vereda El Canario, Santa Lucia de Tirajana"
+      },
+      "gathering": {
+        "label": "Gathering",
+        "primary": "For all ages",
+        "secondary": "Art, play, and biodiversity"
+      }
+    },
+    "hero": {
+      "title": "Guardians of the Flowers",
+      "subtitle": "Nahiara and the Guardians of the Flowers",
+      "description": "An afternoon of creativity, play, and community celebrating flowers and pollinators together.",
+      "badge": "Event",
+      "posterLabel": "Event poster",
+      "posterTime": "From 18:30",
+      "posterAlt": "Nahiara and the Guardians of the Flowers event poster",
+      "posterCaption": "The official poster anchors the event's visual memory."
+    },
+    "story": {
+      "label": "Event memory",
+      "title": "A public square transformed into a shared garden",
+      "body1": "Nahiara and AA.VV. Vereda El Canario brought children and families together to learn by doing: drawing, playing, identifying flowers, and celebrating those who protect biodiversity.",
+      "body2": "The drawing exhibition and collective mural left a visible record of an afternoon devoted to tradition, culture, and community."
+    },
+    "artwork": {
+      "label": "Artworks from 19 June",
+      "title": "A table of color preserving the afternoon",
+      "intro": "The complete series keeps the received order and respects the workshop's variety: pollinator sheets, floral studies, and imaginative compositions.",
+      "plate": "Plate",
+      "work": "Work",
+      "imageAlt": "Artwork from Nahiara and the Guardians of the Flowers",
+      "unknownAuthor": "Author not indicated",
+      "dateLocation": "19 June 2026 - Parque El Canario",
+      "digitizedWorks": "digitized works"
+    },
+    "photos": {
+      "label": "Event day",
+      "title": "Parque El Canario in bloom",
+      "intro": "A visual record of the gathering: families, the play table, drawings, diplomas, and the collective mural of flowers and pollinators created on 19 June 2026.",
+      "imageAlt": "Nahiara and the Guardians of the Flowers event photograph",
+      "captionTitle": "Nahiara and the Guardians of the Flowers",
+      "captionDate": "Parque El Canario - 19 June 2026"
+    },
+    "close": {
+      "label": "Organised by",
+      "title": "Universo Nahiara",
+      "body": "Nahiara and the Guardians of the Flowers, in collaboration with AA.VV. Vereda El Canario and Santa Lucia de Tirajana Town Council.",
+      "info": "Info",
+      "website": "Website"
+    }
   }
 }

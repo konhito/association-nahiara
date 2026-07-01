@@ -70,6 +70,23 @@
     "plateII": "Planche II.",
     "featureEvent": "Événement Phare",
     "scientixListingLink": "Cet evenement est repertorie dans le calendrier des evenements Scientix (European Schoolnet)",
+    "recentEvents": {
+      "heading": "Evenements recents",
+      "intro": "Un acces bref aux derniers rassemblements publics, ateliers et pages communautaires d'Universo Nahiara.",
+      "cta": "Voir l'evenement",
+      "event1": {
+        "label": "21 juin 2026",
+        "title": "Jour de tous les pollinisateurs",
+        "location": "La Blanca, Sardina del Sur",
+        "description": "Une journee communautaire autour des fleurs, des pollinisateurs, des ateliers et des oeuvres creees par les familles participantes."
+      },
+      "event2": {
+        "label": "19 juin 2026",
+        "title": "Gardiens des fleurs",
+        "location": "Parque El Canario",
+        "description": "L'univers des Gardiens des fleurs transforme en rencontre familiale, artistique et educative."
+      }
+    },
     "santJordiTitle": "Sant Jordi 2026",
     "santJordiDesc": "Découvrez l'initiative mondiale qui unit la littérature, les roses artificielles fabriquées de manière durable et la conservation botanique.",
     "exploreEvent": "Explorer l'Événement",

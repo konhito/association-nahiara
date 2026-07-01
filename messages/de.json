@@ -70,6 +70,23 @@
     "plateII": "Tafel II.",
     "featureEvent": "Hervorgehobenes Ereignis",
     "scientixListingLink": "Diese Veranstaltung ist im Scientix-Veranstaltungskalender (European Schoolnet) aufgefuehrt",
+    "recentEvents": {
+      "heading": "Aktuelle Veranstaltungen",
+      "intro": "Ein kurzer Weg zu den neuesten oeffentlichen Treffen, Workshops und Gemeinschaftsseiten von Universo Nahiara.",
+      "cta": "Veranstaltung ansehen",
+      "event1": {
+        "label": "21. Juni 2026",
+        "title": "Tag aller Bestaeuber",
+        "location": "La Blanca, Sardina del Sur",
+        "description": "Ein Gemeinschaftstag mit Blumen, Bestaeubern, Workshops und Kunstwerken der teilnehmenden Familien."
+      },
+      "event2": {
+        "label": "19. Juni 2026",
+        "title": "Waechter der Blumen",
+        "location": "Parque El Canario",
+        "description": "Das Universum der Waechter der Blumen als familiaeres, kuenstlerisches und paedagogisches Treffen."
+      }
+    },
     "santJordiTitle": "Sant Jordi 2026",
     "santJordiDesc": "Entdecken Sie die globale Initiative, die Literatur, nachhaltig gefertigte künstliche Rosen und den Schutz der Botanik vereint.",
     "exploreEvent": "Ereignis Erkunden",

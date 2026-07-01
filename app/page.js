@@ -739,6 +739,23 @@ ${t("landing.visionText")}
     URL.revokeObjectURL(url);
   };
 
+  const recentEvents = [
+    {
+      href: "/eventos/dia-de-los-polinizadores-2026",
+      label: t("landing.recentEvents.event1.label"),
+      title: t("landing.recentEvents.event1.title"),
+      location: t("landing.recentEvents.event1.location"),
+      description: t("landing.recentEvents.event1.description"),
+    },
+    {
+      href: "/eventos/guardianes-de-las-flores-2026",
+      label: t("landing.recentEvents.event2.label"),
+      title: t("landing.recentEvents.event2.title"),
+      location: t("landing.recentEvents.event2.location"),
+      description: t("landing.recentEvents.event2.description"),
+    },
+  ];
+
   // Entrance animation helper
   const entrance = (index = 0) => ({
     opacity: mounted ? 1 : 0,
@@ -970,6 +987,61 @@ ${t("landing.visionText")}
                 {t("landing.projectsTitle")}
               </h2>
             </header>
+
+            <div
+              id="recent-events"
+              className="mb-14 grid gap-6 border-y border-[#1a3a2f]/15 py-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start"
+            >
+              <div className="max-w-xl">
+                <h3
+                  className="text-2xl leading-tight text-[#1a3a2f] md:text-3xl"
+                  style={{
+                    fontFamily:
+                      'Georgia, Cambria, "Times New Roman", Times, serif',
+                  }}
+                >
+                  {t("landing.recentEvents.heading")}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-[#3b5e4d] md:text-base">
+                  {t("landing.recentEvents.intro")}
+                </p>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {recentEvents.map((event) => (
+                  <Link
+                    key={event.href}
+                    href={event.href}
+                    className="group flex min-h-[13rem] flex-col justify-between border border-[#1a3a2f]/15 bg-[#f8f5f0] p-5 text-[#123a31] transition-colors hover:border-[#9b7b3d]/70 hover:bg-[#fffaf0] md:p-6"
+                  >
+                    <article>
+                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9b7b3d]">
+                        {event.label}
+                      </p>
+                      <h4
+                        className="mt-3 text-xl leading-tight text-[#1a3a2f] md:text-2xl"
+                        style={{
+                          fontFamily:
+                            'Georgia, Cambria, "Times New Roman", Times, serif',
+                        }}
+                      >
+                        {event.title}
+                      </h4>
+                      <p className="mt-3 text-xs font-semibold uppercase tracking-[0.12em] text-[#b24f45]">
+                        {event.location}
+                      </p>
+                      <p className="mt-4 text-sm leading-6 text-[#3b5e4d]">
+                        {event.description}
+                      </p>
+                    </article>
+                    <span className="mt-6 inline-flex items-center text-xs font-bold uppercase tracking-[0.14em] text-[#1a3a2f]">
+                      {t("landing.recentEvents.cta")}
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
               {[

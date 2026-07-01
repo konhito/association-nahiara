@@ -70,6 +70,23 @@
     "plateII": "Tavola II.",
     "featureEvent": "Evento in Evidenza",
     "scientixListingLink": "Questo evento e presente nel calendario degli eventi Scientix (European Schoolnet)",
+    "recentEvents": {
+      "heading": "Eventi recenti",
+      "intro": "Un accesso breve agli ultimi incontri pubblici, laboratori e pagine comunitarie di Universo Nahiara.",
+      "cta": "Vedi evento",
+      "event1": {
+        "label": "21 giugno 2026",
+        "title": "Giornata di tutti gli impollinatori",
+        "location": "La Blanca, Sardina del Sur",
+        "description": "Una giornata comunitaria con fiori, impollinatori, laboratori e opere create dalle famiglie partecipanti."
+      },
+      "event2": {
+        "label": "19 giugno 2026",
+        "title": "Guardiani dei fiori",
+        "location": "Parque El Canario",
+        "description": "L'universo dei Guardiani dei fiori trasformato in un incontro familiare, artistico ed educativo."
+      }
+    },
     "santJordiTitle": "Sant Jordi 2026",
     "santJordiDesc": "Scopri l'iniziativa globale che unisce la letteratura, le rose artificiali realizzate in modo sostenibile e la conservazione botanica.",
     "exploreEvent": "Esplora Evento",

@@ -70,6 +70,23 @@
     "plateII": "Lámina II.",
     "featureEvent": "Evento Destacado",
     "scientixListingLink": "Este evento aparece en el calendario de eventos de Scientix (European Schoolnet)",
+    "recentEvents": {
+      "heading": "Eventos recientes",
+      "intro": "Un acceso breve a los ultimos encuentros publicos, talleres y paginas comunitarias de Universo Nahiara.",
+      "cta": "Ver evento",
+      "event1": {
+        "label": "21 de junio de 2026",
+        "title": "Dia de Todos los Polinizadores",
+        "location": "La Blanca, Sardina del Sur",
+        "description": "Una jornada comunitaria de flores, polinizadores, talleres y obras creadas por las familias participantes."
+      },
+      "event2": {
+        "label": "19 de junio de 2026",
+        "title": "Guardianes de las Flores",
+        "location": "Parque El Canario",
+        "description": "El universo Guardianes de las Flores llevado al encuentro familiar, artistico y educativo."
+      }
+    },
     "santJordiTitle": "Sant Jordi 2026",
     "santJordiDesc": "Descubre la iniciativa global que une literatura, rosas artificiales elaboradas de manera sostenible y conservación botánica.",
     "exploreEvent": "Explorar Evento",
@@ -387,6 +404,46 @@
       "posterAlt": "Cartel del evento Dibuja la flor y su polinizador",
       "pollinatorAlt": "Abeja polinizadora",
       "flowerAlt": "Ilustracion floral representativa"
+      ,
+      "eventDayLabel": "Dia del evento",
+      "eventDayTitle": "La Blanca en plena floracion",
+      "eventDayBody": "Una memoria visual del Dia de Todos los Polinizadores en La Blanca: familias, ninas, ninos, visitas institucionales y el mural colectivo de flores y polinizadores creado el 21 de junio de 2026.",
+      "eventDayPhotos": [
+        {
+          "caption": "La Blanca se vuelca con el Dia de Todos los Polinizadores - 21 de junio de 2026 - Sardina del Sur, Santa Lucia de Tirajana",
+          "secondary": "La Blanca se vuelca con el Dia de Todos los Polinizadores - 21 de junio de 2026 - Sardina del Sur, Santa Lucia de Tirajana"
+        },
+        {
+          "caption": "Dibuja la Flor de Tu Pais y tu Polinizador Favorito - Todas las edades, todos los origenes, un mismo mundo",
+          "secondary": "Dibuja la Flor de Tu Pais y tu Polinizador Favorito - Todas las edades, todos los origenes, un mismo mundo"
+        },
+        {
+          "caption": "Taller de Flores de Papel - Las cartas del juego Guardianes de las Flores como referencia - Dia de Todos los Polinizadores",
+          "secondary": "Taller de Flores de Papel - Las cartas del juego Guardianes de las Flores como referencia - Dia de Todos los Polinizadores"
+        },
+        {
+          "caption": "Visita institucional - El Alcalde de Santa Lucia de Tirajana y la Concejalia de Participacion Ciudadana con la Junta Directiva de la Asociacion - Tambien presente Alexandra, miembro de la Asamblea Ciudadana Juvenil sobre Polinizadores de la Comision Europea; jovenes como ella son quienes dan voz y visibilidad real a iniciativas como esta - 21 de junio de 2026",
+          "secondary": "Visita institucional - El Alcalde de Santa Lucia de Tirajana y la Concejalia de Participacion Ciudadana con la Junta Directiva de la Asociacion - Tambien presente Alexandra, miembro de la Asamblea Ciudadana Juvenil sobre Polinizadores de la Comision Europea; jovenes como ella son quienes dan voz y visibilidad real a iniciativas como esta - 21 de junio de 2026"
+        },
+        {
+          "caption": "Alexandra, miembro de la Asamblea Ciudadana Juvenil sobre Polinizadores de la Comision Europea, junto a Matias Gonzalez, creador del proyecto Universo Nahiara - Alexandra pinto el lagarto canario, polinizador documentado de la flora endemica de las Islas Canarias, y recibio su Diploma de Guardiana de las Flores - 21 de junio de 2026",
+          "secondary": "Alexandra, miembro de la Asamblea Ciudadana Juvenil sobre Polinizadores de la Comision Europea, junto a Matias Gonzalez, creador del proyecto Universo Nahiara - Alexandra pinto el lagarto canario, polinizador documentado de la flora endemica de las Islas Canarias, y recibio su Diploma de Guardiana de las Flores - 21 de junio de 2026"
+        },
+        {
+          "caption": "Cierre del Dia de Todos los Polinizadores - La Junta Directiva de la Asociacion Internacional en Defensa de las Flores junto al mural colectivo de flores y polinizadores del mundo - La Blanca, Sardina del Sur - 21 de junio de 2026 - Todas las obras estaran disponibles proximamente en el enlace habilitado para ello",
+          "secondary": "Cierre del Dia de Todos los Polinizadores - La Junta Directiva de la Asociacion Internacional en Defensa de las Flores junto al mural colectivo de flores y polinizadores del mundo - La Blanca, Sardina del Sur - 21 de junio de 2026 - Todas las obras estaran disponibles proximamente en el enlace habilitado para ello"
+        }
+      ],
+      "artworkGalleryLabel": "Obras infantiles",
+      "artworkGalleryTitle": "Cuarenta y una laminas, un jardin en movimiento",
+      "artworkGalleryBody": "Los dibujos se mueven como una mesa de exposicion: tres obras a la vista, numeradas desde la primera lamina, con la nota curatorial junto a cada imagen. Pasa el cursor para pausar el recorrido.",
+      "artworkPlateLabel": "Lamina",
+      "artworkDateLocation": "21 de junio de 2026 - La Blanca",
+      "artworkUnknownAuthor": "Autoria por confirmar",
+      "artworkFooterTitle": "Dibuja la Flor de Tu Pais",
+      "archiveLabel": "Archivo del evento",
+      "archiveTitle": "Mas momentos desde La Blanca",
+      "archiveBody": "Fotografias adicionales de la carpeta compartida del evento, conservadas como un archivo visual compacto junto a la historia principal del dia."
     }
   },
   "submitArtwork": {
@@ -411,5 +468,172 @@
     "success": "Obra recibida con exito!",
     "galleryCta": "Ver Galeria Global",
     "error": "Ocurrio un error al subir el archivo."
+  },
+  "guardianes2026": {
+    "artworks": {
+      "1": {
+        "curatorial": "Kimberly viste a su abejorro de un azul profundo y le reserva para la cabeza un terracota calido del que asoman dos ojos verdes, enormes y despiertos. El color se escapa a ratos de la linea, con la prisa feliz de quien pinta y sale corriendo a seguir jugando, y esa libertad es justo lo que lo hace suyo."
+      },
+      "2": {
+        "curatorial": "En el centro, una gran flor roja abre sus petalos con una intensidad encendida, rodeada por un follaje tenido de lavanda y malva que la envuelve como una sombra suave. Abajo, una corola en turquesa rompe la armonia calida con una nota fresca e inesperada."
+      },
+      "3": {
+        "curatorial": "Amberly no eligio un color: los eligio todos. Sus petalos se encienden en azul, violeta, naranja y rosa alrededor de un corazon amarillo, y entre las hojas verdes asoma una rosa roja intensa. El conjunto entero late como un arcoiris que hubiera decidido florecer."
+      },
+      "4": {
+        "curatorial": "La mariposa nocturna se despliega en perfecta simetria, con cada ala respondiendo a la otra en un mosaico de rosas, verdes, azules y purpuras encajados como un vitral. La cabeza dorada y el pecho granate concentran el calor de toda la composicion."
+      },
+      "5": {
+        "curatorial": "De todo un campo de dalias, Ranime elige una sola para hacerla florecer en amarillo, dejando que las demas descansen en el gris del lapiz como un eco silencioso. A un lado, un trazo rojo asoma como un susurro de color que se atreve a aparecer."
+      },
+      "6": {
+        "curatorial": "Ines llena la pagina entera de vida: una flor amarilla y otra rosada se abren entre hojas verdes, rodeadas de espirales y garabatos que bailan por todo el papel. Un sol amarillo vigila desde una esquina y una franja de hierba verde cierra el dibujo, como si la alegria no cupiera dentro de los margenes."
+      },
+      "7": {
+        "curatorial": "Davinia despliega tres hibiscos en rojo coral, modelando cada petalo con vetas finas que les dan volumen y temblor. Las hojas, en un verde sereno, sostienen las flores con la calma de quien conoce su jardin."
+      },
+      "8": {
+        "curatorial": "Theylor enciende sus hibiscos en un rosa intenso atravesado por trazos rojos que parecen movimiento, mientras las columnas doradas de los estambres se alzan en el centro de cada flor. Alrededor, unas pinceladas sueltas de rojo dejan la sensacion de una flor sorprendida en pleno gesto."
+      },
+      "9": {
+        "curatorial": "Raquel dibuja una rosa de un rosa palido y luminoso, con el corazon amarillo abierto al aire, y a su lado reune un ramillete de capullos en naranja, rojo, purpura y oro. Las hojas, en verdes naturales y matizados, enmarcan la escena con delicadeza botanica."
+      },
+      "10": {
+        "curatorial": "Catalina hace arder dos girasoles de petalos amarillos alrededor de unos corazones de granate profundo, casi nocturno. Los capullos verdes y el tallo rojizo anaden una fuerza terrosa a una flor que parece mirar siempre hacia la luz."
+      },
+      "11": {
+        "curatorial": "Paula hace girar una gran flor cuyos petalos pasan del amarillo al verde lima, al rojo y al naranja alrededor de un corazon oscuro y tupido. La rodea de hojas en marron, azul profundo y violeta, y siembra el aire de pequenos rizos de color, como si la flor soltara chispas."
+      },
+      "12": {
+        "curatorial": "Martina viste su girasol con petalos que alternan el rosa, el crema y el azul, y enmarca el centro con un anillo dorado que custodia un corazon violeta. Deja el tallo y las hojas en el gris del lapiz, para que toda la luz se quede arriba, en la flor."
+      },
+      "13": {
+        "curatorial": "Una flor de loto se abre en blanco con los bordes apenas tenidos de rosa, y guarda en el centro una corona de petalos rojos en torno a un punto amarillo encendido. Debajo, una hoja flotante en verde sostiene la escena sobre el agua."
+      },
+      "14": {
+        "curatorial": "Theylor pinta su mariquita de un rosa rojizo salpicado de grandes lunares negros, y le deja una carita sonriente en la cabeza. Dos antenas rematadas en amarillo y unas patitas grises completan a este pequeno guardian del jardin."
+      },
+      "15": {
+        "curatorial": "Yarely abre un nenufar de petalos blancos y rosados en torno a un corazon amarillo, posado sobre hojas verdes. A su alrededor, unos trazos azules sueltos dibujan el agua, como un estanque imaginado a toda prisa."
+      },
+      "16": {
+        "curatorial": "Melanie despliega una gran rosa en rojo rosado, modelando cada petalo con vetas suaves que le dan cuerpo, y corona la escena con un capullo coral a punto de abrirse. Las hojas, en un verde tierno, abrazan la flor con calma."
+      },
+      "17": {
+        "curatorial": "Violeta construye un rostro con retazos de todos los colores - azul, verde, rojo y violeta - que encajan como un mosaico vivo. Lo enmarca con flores en coral, rosa y azul, hasta que la cara y el jardin parecen una misma cosa."
+      },
+      "18": {
+        "curatorial": "Neyzan no repite ni un color: cada petalo de su flor es distinto, rojo junto a azul, verde junto a amarillo, naranja junto a rosa, en una rueda que no deja de girar. El tallo verde la sostiene desde abajo con un par de hojas serenas."
+      },
+      "19": {
+        "curatorial": "Laia enciende un ala de su mariposa con verde, rojo, azul y amarillo, y deja la otra casi en blanco, como una invitacion a seguir. La cabecita naranja sonrie en el centro, y el dibujo se queda abierto, a medio camino entre el color y el papel."
+      },
+      "20": {
+        "curatorial": "Elba elige el amarillo para una sola flor y deja el resto del nenufar en grises de lapiz, como un jardin dormido del que solo una flor despierta. Abajo, un charco azul recoge el reflejo, y unos toques de verde y rojo asoman entre las hojas."
+      },
+      "21": {
+        "curatorial": "Un girasol enciende sus petalos de arriba en naranja y rojo y los deja descender hacia un amarillo suave, mientras el resto de la flor y los capullos vecinos permanecen en el gris del lapiz. El centro, trabajado en grafito, sostiene ese degradado de fuego como un sol a medio amanecer."
+      },
+      "22": {
+        "curatorial": "Una rosa se parte en dos mundos: la mitad de abajo arde en un rojo pleno y rotundo, y la de arriba se queda en el blanco del trazo, intacta. El contraste convierte la flor en un gesto detenido justo en el instante de abrirse."
+      },
+      "23": {
+        "curatorial": "El colibri reune todos los colores en un cuerpo pequeno: la cabeza y el lomo en marron calido, un ala azul y otra rosada, la garganta verde y la cola amarilla, con el pico encendido en rojo. Un polinizador diminuto vestido de fiesta."
+      },
+      "24": {
+        "curatorial": "Yurena despliega un ramo de hibiscos en rojos y corales, modelando cada petalo con vetas que van del rosa palido al rojo encendido. Las hojas, en un verde fresco y dentado, enmarcan la flor con la energia de un jardin entero."
+      },
+      "25": {
+        "curatorial": "Valeria abre una gran gerbera de petalos amarillos en torno a un corazon verde, fresco y luminoso. A los pies, un capullo en rojo y rosa asoma sobre el tallo, como una promesa que aun no se atreve a abrirse."
+      },
+      "27": {
+        "curatorial": "Catalina tine la mitad superior de su dalia de un azul vibrante y deja la inferior en el blanco del papel, dibujada solo con lineas. Un par de hojas verdes asoman arriba, y la flor queda suspendida entre el color y el trazo."
+      },
+      "28": {
+        "curatorial": "Martina rodea su gran gerbera roja de corazones, estrellas y puntitos que bailan por toda la hoja, como si la flor no pudiera estarse quieta. El centro en lila y el tallo en turquesa rematan una pagina que respira pura alegria."
+      },
+      "29": {
+        "curatorial": "Candela reserva el color para el corazon de su flor: un estallido de azul, turquesa, violeta y rosa en el centro, mientras los petalos exteriores se quedan en blanco y gris. La flor guarda su fuego mas vivo justo en el medio."
+      },
+      "30": {
+        "curatorial": "Janat pinta su hibisco mayor en un violeta intenso bordeado de rojo, y lo acompana de flores en rosa y amarillo entre hojas verdes. Los colores se salen a ratos de la linea, con la espontaneidad de quien pinta a su manera."
+      },
+      "31": {
+        "curatorial": "Laia despliega una gran rosa roja de petalos densos y vibrantes, coronada por un capullo que repite el mismo rojo encendido. Las hojas, en un verde profundo y matizado, sostienen la flor con elegancia."
+      },
+      "32": {
+        "curatorial": "Dos girasoles se encienden en amarillo intenso alrededor de unos corazones de un granate calido, mientras el resto del ramillete permanece en el gris del grafito. El contraste hace que las dos flores coloreadas brillen como si guardaran toda la luz del conjunto."
+      },
+      "33": {
+        "curatorial": "India deja su rosa casi entera en el blanco del trazo y reserva el color para dos hojas, encendidas en un verde vivo. La flor espera, dibujada con detalle, lista para recibir el color cuando llegue su momento."
+      },
+      "34": {
+        "curatorial": "Riham enciende su flor central en un rojo intenso con el corazon amarillo, y colorea una sola hoja en verde con nervios rojizos. El resto del ramo permanece en lineas grises, como un jardin que aun despierta al color."
+      },
+      "35": {
+        "curatorial": "Naymar viste toda una lamina de polinizadores - abeja, mariposa, abejorro, colibri, mariquita, polilla, escarabajo y murcielago - dandole a cada uno su propia paleta: amarillos y azules, corales, dorados y morados. Una pequena coleccion donde cada criatura del jardin recibe su color."
+      }
+    },
+    "navHome": "Inicio",
+    "navPollinators": "Dia de los Polinizadores",
+    "facts": {
+      "date": {
+        "label": "Fecha",
+        "primary": "19 de junio de 2026",
+        "secondary": "Martes, desde las 18:30"
+      },
+      "location": {
+        "label": "Lugar",
+        "primary": "Parque El Canario",
+        "secondary": "AA.VV. Vereda El Canario, Santa Lucia de Tirajana"
+      },
+      "gathering": {
+        "label": "Encuentro",
+        "primary": "Para todas las edades",
+        "secondary": "Arte, juego y biodiversidad"
+      }
+    },
+    "hero": {
+      "title": "Guardianes de las Flores",
+      "subtitle": "Nahiara y los Guardianes de las Flores",
+      "description": "Una tarde de creatividad, juego y convivencia para descubrir las flores y los polinizadores en comunidad.",
+      "badge": "Encuentro",
+      "posterLabel": "Cartel del encuentro",
+      "posterTime": "Desde las 18:30",
+      "posterAlt": "Cartel de Nahiara y los Guardianes de las Flores",
+      "posterCaption": "El afiche oficial acompana la memoria visual del encuentro."
+    },
+    "story": {
+      "label": "Memoria del encuentro",
+      "title": "Una plaza convertida en jardin compartido",
+      "body1": "Nahiara y la AA.VV. Vereda El Canario reunieron a ninas, ninos y familias para aprender haciendo: dibujar, jugar, reconocer flores y celebrar a quienes cuidan la biodiversidad.",
+      "body2": "La exposicion de dibujos y el mural colectivo dejaron una memoria visible de una tarde dedicada a la tradicion, la cultura y la convivencia."
+    },
+    "artwork": {
+      "label": "Dibujos del 19 de junio",
+      "title": "Una mesa de color para guardar la tarde",
+      "intro": "La serie completa conserva el orden recibido y respeta la variedad del taller: paginas de polinizadores, estudios florales y composiciones de imaginacion.",
+      "plate": "Lamina",
+      "work": "Obra",
+      "imageAlt": "Obra de Nahiara y los Guardianes de las Flores",
+      "unknownAuthor": "Autor no indicado",
+      "dateLocation": "19 de junio de 2026 - Parque El Canario",
+      "digitizedWorks": "obras digitalizadas"
+    },
+    "photos": {
+      "label": "Dia del evento",
+      "title": "Parque El Canario en flor",
+      "intro": "Una memoria visual del encuentro: familias, mesa de juego, dibujos, diplomas y el mural colectivo de flores y polinizadores creado el 19 de junio de 2026.",
+      "imageAlt": "Fotografia del encuentro Nahiara y los Guardianes de las Flores",
+      "captionTitle": "Nahiara y los Guardianes de las Flores",
+      "captionDate": "Parque El Canario - 19 de junio de 2026"
+    },
+    "close": {
+      "label": "Organiza",
+      "title": "Universo Nahiara",
+      "body": "Nahiara y los Guardianes de las Flores, en colaboracion con AA.VV. Vereda El Canario y el Ayuntamiento de Santa Lucia de Tirajana.",
+      "info": "Informacion",
+      "website": "Sitio web"
+    }
   }
 }

@@ -8,7 +8,7 @@ export const metadata = {
   openGraph: {
     title: `${title} | IADF`,
     description,
-    url: "https://asociacionnahiara.org/guardianes-de-las-flores-2026",
+    url: "https://asociacionnahiara.org/eventos/guardianes-de-las-flores-2026",
     images: [
       {
         url: "/guardianes-flores-2026/poster.jpeg",
@@ -17,7 +17,7 @@ export const metadata = {
     ],
   },
   alternates: {
-    canonical: "/guardianes-de-las-flores-2026",
+    canonical: "/eventos/guardianes-de-las-flores-2026",
   },
 };
 

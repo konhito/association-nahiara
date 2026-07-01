@@ -70,6 +70,23 @@
     "plateII": "图版 II.",
     "featureEvent": "特色活动",
     "scientixListingLink": "本活动已列入 Scientix 活动日历（European Schoolnet）",
+    "recentEvents": {
+      "heading": "近期活动",
+      "intro": "快速进入 Universo Nahiara 最新的公共聚会、工作坊和社区活动页面。",
+      "cta": "查看活动",
+      "event1": {
+        "label": "2026年6月21日",
+        "title": "所有传粉者日",
+        "location": "La Blanca, Sardina del Sur",
+        "description": "一个围绕花朵、传粉者、工作坊和参与家庭作品展开的社区日。"
+      },
+      "event2": {
+        "label": "2026年6月19日",
+        "title": "花之守护者",
+        "location": "Parque El Canario",
+        "description": "将花之守护者宇宙带入家庭、艺术和教育相结合的聚会。"
+      }
+    },
     "santJordiTitle": "Sant Jordi 2026",
     "santJordiDesc": "探索将文学、可持续制作的人造玫瑰和植物保护结合在一起的全球倡议。",
     "exploreEvent": "探索活动",
