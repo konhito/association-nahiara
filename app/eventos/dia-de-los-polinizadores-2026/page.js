@@ -92,6 +92,18 @@ const eventDayPhotos = [
   },
 ];
 
+function getEventDayPhotoCopy(copy, index) {
+  const photoCopy = copy.eventDayPhotos[index] || {};
+  const caption = photoCopy.caption || "";
+  const secondary = photoCopy.secondary && photoCopy.secondary !== caption ? photoCopy.secondary : "";
+
+  return { caption, secondary };
+}
+
+function getArtworkText(drawing, locale) {
+  return locale === "es" ? drawing.textEs : drawing.textEn;
+}
+
 const extraEventPhotos = Array.from({ length: 22 }, (_, index) => ({
   src: `/events/dia-de-los-polinizadores-2026/extra/extra-photo-${String(index + 1).padStart(2, "0")}.jpeg`,
   alt: `Additional event photo ${index + 1} from the Day of All Pollinators 2026 in La Blanca`,
@@ -1013,36 +1025,42 @@ export default async function PollinatorsEventPage() {
           </div>
 
           <div className="mt-8 grid auto-rows-[minmax(20rem,auto)] gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {eventDayPhotos.map((photo, index) => (
-              <figure
-                key={photo.src}
-                className={`group relative overflow-hidden rounded-2xl bg-[#072c26] ${
-                  photo.className || ""
-                }`}
-              >
-                <Image
-                  src={photo.src}
-                  alt={sharedCopy.eventDayPhotos[index].caption}
-                  width={photo.width}
-                  height={photo.height}
-                  sizes={
-                    photo.className?.includes("col-span")
-                      ? "(max-width: 1024px) 100vw, 820px"
-                      : "(max-width: 768px) 100vw, 420px"
-                  }
-                  className="h-full min-h-[20rem] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.025]"
-                  loading={index === 0 ? "eager" : "lazy"}
-                />
-                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#061b17]/95 via-[#061b17]/74 to-transparent px-4 pb-4 pt-14 text-[#f8f2df] md:px-5 md:pb-5">
-                  <p className="text-sm font-medium leading-6">
-                    {sharedCopy.eventDayPhotos[index].caption}
-                  </p>
-                  <p className="mt-2 border-t border-white/14 pt-2 text-xs leading-5 text-[#d8ded8]">
-                    {sharedCopy.eventDayPhotos[index].secondary}
-                  </p>
-                </figcaption>
-              </figure>
-            ))}
+            {eventDayPhotos.map((photo, index) => {
+              const photoCopy = getEventDayPhotoCopy(sharedCopy, index);
+
+              return (
+                <figure
+                  key={photo.src}
+                  className={`group relative overflow-hidden rounded-2xl bg-[#072c26] ${
+                    photo.className || ""
+                  }`}
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photoCopy.caption}
+                    width={photo.width}
+                    height={photo.height}
+                    sizes={
+                      photo.className?.includes("col-span")
+                        ? "(max-width: 1024px) 100vw, 820px"
+                        : "(max-width: 768px) 100vw, 420px"
+                    }
+                    className="h-full min-h-[20rem] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.025]"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                  <figcaption className="absolute inset-x-0 bottom-0 h-[30%] overflow-y-auto bg-gradient-to-t from-[#061b17]/96 via-[#061b17]/86 to-[#061b17]/18 px-4 pb-4 pt-6 text-[#f8f2df] [scrollbar-color:#d6b56d_transparent] md:max-h-[30%] md:px-5 md:pb-5 md:pt-8">
+                    <p className="text-xs font-medium leading-5 md:text-sm md:leading-6">
+                      {photoCopy.caption}
+                    </p>
+                    {photoCopy.secondary ? (
+                      <p className="mt-2 border-t border-white/14 pt-2 text-xs leading-5 text-[#d8ded8]">
+                        {photoCopy.secondary}
+                      </p>
+                    ) : null}
+                  </figcaption>
+                </figure>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1164,10 +1182,7 @@ export default async function PollinatorsEventPage() {
                           {drawing.subject}
                         </p>
                         <p className="mt-2 text-[0.78rem] leading-5 text-[#244038] sm:text-[0.82rem]">
-                          {drawing.textEs}
-                        </p>
-                        <p className="mt-2 border-t border-[#dec58b] pt-2 text-[0.72rem] leading-5 text-[#5a4b33]">
-                          {drawing.textEn}
+                          {getArtworkText(drawing, locale)}
                         </p>
                       </figcaption>
                     </div>
