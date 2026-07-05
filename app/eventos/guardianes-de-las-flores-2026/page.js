@@ -13,6 +13,7 @@ import {
   Users,
 } from "lucide-react";
 import { Suspense } from "react";
+import MobileInteractiveCarousel from "../components/MobileInteractiveCarousel";
 import { useTranslation } from "../../../lib/useTranslation";
 
 const displayFont = Baskervville({
@@ -271,44 +272,6 @@ function EventStory({ t }) {
 function ArtworkSection({ t }) {
   return (
     <section className="mx-auto max-w-7xl overflow-hidden px-4 pb-12 md:px-6 md:pb-16">
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-            @keyframes guardianes-art-scroll {
-              from { transform: translateX(0); }
-              to { transform: translateX(calc(-100% + var(--guardianes-art-card-width))); }
-            }
-
-            .guardianes-art-track {
-              --guardianes-art-card-width: 82vw;
-              animation: guardianes-art-scroll 105s linear infinite;
-            }
-
-            @media (min-width: 640px) {
-              .guardianes-art-track { --guardianes-art-card-width: 70vw; }
-            }
-
-            @media (min-width: 768px) {
-              .guardianes-art-track { --guardianes-art-card-width: 42vw; }
-            }
-
-            @media (min-width: 1024px) {
-              .guardianes-art-track { --guardianes-art-card-width: calc((74rem - 2rem) / 3); }
-            }
-
-            .guardianes-art-showcase:hover .guardianes-art-track {
-              animation-play-state: paused;
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-              .guardianes-art-track {
-                animation: none;
-                transform: none;
-              }
-            }
-          `,
-        }}
-      />
       <div className="border-y border-[#d6c7a1] py-7 sm:py-8 lg:py-10">
         <div className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
           <div>
@@ -327,71 +290,65 @@ function ArtworkSection({ t }) {
           </p>
         </div>
 
-        <div className="guardianes-art-showcase relative mt-6 rounded-xl bg-[#0f3028] px-0 py-4 shadow-[0_0_0_1px_rgba(184,138,50,0.24),0_18px_42px_-34px_rgba(7,44,38,0.9)] sm:mt-8 sm:rounded-2xl sm:py-5">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-7 rounded-l-xl bg-gradient-to-r from-[#0f3028] via-[#0f3028]/82 to-transparent sm:w-12 sm:rounded-l-2xl md:w-20" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-7 rounded-r-xl bg-gradient-to-l from-[#0f3028] via-[#0f3028]/82 to-transparent sm:w-12 sm:rounded-r-2xl md:w-20" />
-          <div className="pointer-events-none absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-[#d6b56d]/70 to-transparent sm:inset-x-8" />
-          <div className="pointer-events-none absolute inset-x-4 bottom-0 h-px bg-gradient-to-r from-transparent via-[#d6b56d]/45 to-transparent sm:inset-x-8" />
-          <div className="overflow-hidden py-1">
-            <div className="guardianes-art-track flex w-max gap-4 pr-4">
-              {ARTWORKS.map((artwork, index) => (
-                <figure
-                  key={artwork.src}
-                  className="flex h-[38rem] w-[82vw] shrink-0 flex-col overflow-hidden rounded-lg border border-[#b88a32] bg-[#12392f] sm:h-[40rem] sm:w-[70vw] md:h-[42rem] md:w-[42vw] lg:h-[44rem] lg:w-[calc((74rem-2rem)/3)]"
-                >
-                  <div className="flex items-start justify-between gap-3 border-b border-[#c99f4f]/45 bg-[#102f28] px-3 py-3 text-[#f8f2df] sm:gap-4 sm:px-4 md:px-5">
-                    <div>
-                      <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#d6b56d] sm:text-xs sm:tracking-[0.16em]">
-                        {t("guardianes2026.artwork.plate")} {String(artwork.number).padStart(2, "0")}
-                      </p>
-                      <p className="mt-1 text-xs leading-5 text-[#d8ded8]">
-                        {t("guardianes2026.artwork.dateLocation")}
-                      </p>
-                    </div>
-                    <div className="max-w-[9rem] text-right sm:max-w-[11rem]">
-                      <p className={`${displayFont.className} text-2xl leading-none tracking-[-0.03em] sm:text-3xl`}>
-                        {String(index + 1).padStart(2, "0")}
-                      </p>
-                      <p className="mt-1 text-xs leading-5 text-[#d8ded8]">
-                        {artwork.details?.nombre ??
-                          t("guardianes2026.artwork.unknownAuthor")}
-                        {artwork.details?.edad ? `, ${artwork.details.edad}` : ""}
-                      </p>
+        <MobileInteractiveCarousel
+          showcaseClassName="guardianes-art-showcase relative mt-6 rounded-xl bg-[#0f3028] px-0 py-4 shadow-[0_0_0_1px_rgba(184,138,50,0.24),0_18px_42px_-34px_rgba(7,44,38,0.9)] sm:mt-8 sm:rounded-2xl sm:py-5"
+          trackClassName="guardianes-art-track flex w-max gap-4 pr-4"
+          items={ARTWORKS}
+          renderCard={(artwork, index) => (
+            <figure
+              className="flex h-[38rem] w-[82vw] shrink-0 flex-col overflow-hidden rounded-lg border border-[#b88a32] bg-[#12392f] sm:h-[40rem] sm:w-[70vw] md:h-[42rem] md:w-[42vw] lg:h-[44rem] lg:w-[calc((74rem-2rem)/3)]"
+            >
+              <div className="flex items-start justify-between gap-3 border-b border-[#c99f4f]/45 bg-[#102f28] px-3 py-3 text-[#f8f2df] sm:gap-4 sm:px-4 md:px-5">
+                <div>
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#d6b56d] sm:text-xs sm:tracking-[0.16em]">
+                    {t("guardianes2026.artwork.plate")} {String(artwork.number).padStart(2, "0")}
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-[#d8ded8]">
+                    {t("guardianes2026.artwork.dateLocation")}
+                  </p>
+                </div>
+                <div className="max-w-[9rem] text-right sm:max-w-[11rem]">
+                  <p className={`${displayFont.className} text-2xl leading-none tracking-[-0.03em] sm:text-3xl`}>
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-[#d8ded8]">
+                    {artwork.details?.nombre ??
+                      t("guardianes2026.artwork.unknownAuthor")}
+                    {artwork.details?.edad ? `, ${artwork.details.edad}` : ""}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex min-h-0 flex-1 flex-col">
+                <div className="bg-[#173d33] p-2.5 sm:p-3">
+                  <div className="relative rounded-md border border-[#f0d686] bg-[#8d6927] p-1.5 shadow-[inset_0_1px_0_rgba(255,247,196,0.75),inset_0_-1px_0_rgba(70,43,10,0.45)] sm:p-2">
+                    <div className="rounded-[4px] border border-[#6d4b16] bg-[#f3e6c1] p-1.5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.45)]">
+                      <Image
+                        src={artwork.src}
+                        alt={`${t("guardianes2026.artwork.imageAlt")} ${artwork.number}`}
+                        width={900}
+                        height={1200}
+                        unoptimized
+                        sizes="(max-width: 640px) 82vw, (max-width: 768px) 70vw, (max-width: 1024px) 42vw, 410px"
+                        className="h-[14.5rem] w-full rounded-[2px] object-cover sm:h-[16rem] md:h-[18rem]"
+                        loading={index < 6 ? "eager" : "lazy"}
+                      />
                     </div>
                   </div>
+                </div>
 
-                  <div className="flex min-h-0 flex-1 flex-col">
-                    <div className="bg-[#173d33] p-2.5 sm:p-3">
-                      <div className="relative rounded-md border border-[#f0d686] bg-[#8d6927] p-1.5 shadow-[inset_0_1px_0_rgba(255,247,196,0.75),inset_0_-1px_0_rgba(70,43,10,0.45)] sm:p-2">
-                        <div className="rounded-[4px] border border-[#6d4b16] bg-[#f3e6c1] p-1.5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.45)]">
-                          <Image
-                            src={artwork.src}
-                            alt={`${t("guardianes2026.artwork.imageAlt")} ${artwork.number}`}
-                            width={900}
-                            height={1200}
-                            unoptimized
-                            sizes="(max-width: 640px) 82vw, (max-width: 768px) 70vw, (max-width: 1024px) 42vw, 410px"
-                            className="h-[14.5rem] w-full rounded-[2px] object-cover sm:h-[16rem] md:h-[18rem]"
-                            loading={index < 6 ? "eager" : "lazy"}
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <figcaption className="min-h-0 flex-1 overflow-y-auto bg-white px-3 pb-4 pt-3 sm:px-4 md:px-5">
-                      <p className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[#8a6420]">
-                        {t("guardianes2026.artwork.work")} {artwork.number}
-                      </p>
-                      <p className="mt-2 text-[0.78rem] leading-5 text-[#244038] sm:text-[0.82rem]">
-                        {t(`guardianes2026.artworks.${artwork.number}.curatorial`)}
-                      </p>
-                    </figcaption>
-                  </div>
-                </figure>
-              ))}
-            </div>
-          </div>
-        </div>
+                <figcaption className="min-h-0 flex-1 overflow-y-auto bg-white px-3 pb-4 pt-3 sm:px-4 md:px-5">
+                  <p className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[#8a6420]">
+                    {t("guardianes2026.artwork.work")} {artwork.number}
+                  </p>
+                  <p className="mt-2 text-[0.78rem] leading-5 text-[#244038] sm:text-[0.82rem]">
+                    {t(`guardianes2026.artworks.${artwork.number}.curatorial`)}
+                  </p>
+                </figcaption>
+              </div>
+            </figure>
+          )}
+        />
 
         <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs leading-5 text-[#5c6f66]">
           <span>{t("guardianes2026.hero.subtitle")}</span>
