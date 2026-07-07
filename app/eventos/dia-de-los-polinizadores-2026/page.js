@@ -1088,11 +1088,10 @@ export default async function PollinatorsEventPage() {
           <MobileInteractiveCarousel
             showcaseClassName="relative mt-6 rounded-xl bg-[#0f3028] px-0 py-4 shadow-[0_0_0_1px_rgba(184,138,50,0.24),0_18px_42px_-34px_rgba(7,44,38,0.9)] sm:mt-8 sm:rounded-2xl sm:py-5"
             trackClassName="pollinator-art-track flex w-max gap-4 pr-4"
-            items={artworkCarouselItems}
-            renderCard={(drawing, index) => (
-              <figure
-                className="flex h-[38rem] w-[82vw] shrink-0 flex-col overflow-hidden rounded-lg border border-[#b88a32] bg-[#12392f] sm:h-[40rem] sm:w-[70vw] md:h-[42rem] md:w-[42vw] lg:h-[44rem] lg:w-[calc((74rem-2rem)/3)]"
-              >
+          >
+            {artworkCarouselItems.map((drawing, index) => (
+              <div key={`${drawing.src}-${index}`} className="shrink-0">
+                <figure className="flex h-[38rem] w-[82vw] flex-col overflow-hidden rounded-lg border border-[#b88a32] bg-[#12392f] sm:h-[40rem] sm:w-[70vw] md:h-[42rem] md:w-[42vw] lg:h-[44rem] lg:w-[calc((74rem-2rem)/3)]">
                 <div className="flex items-start justify-between gap-3 border-b border-[#c99f4f]/45 bg-[#102f28] px-3 py-3 text-[#f8f2df] sm:gap-4 sm:px-4 md:px-5">
                   <div>
                     <p className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#d6b56d] sm:text-xs sm:tracking-[0.16em]">
@@ -1139,9 +1138,10 @@ export default async function PollinatorsEventPage() {
                     </p>
                   </figcaption>
                 </div>
-              </figure>
-            )}
-          />
+                </figure>
+              </div>
+            ))}
+          </MobileInteractiveCarousel>
 
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs leading-5 text-[#5c6f66]">
             <span>{sharedCopy.artworkFooterTitle}</span>

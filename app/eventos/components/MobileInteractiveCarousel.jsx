@@ -55,6 +55,7 @@ const ANIMATION_CSS = `
 export default function MobileInteractiveCarousel({
   showcaseClassName = "",
   trackClassName = "",
+  children,
   items,
   renderCard,
   pauseDelayMs = 1200,
@@ -150,11 +151,12 @@ export default function MobileInteractiveCarousel({
         onPointerCancel={scheduleResume}
       >
         <div className={`mobile-interactive-carousel-track ${trackClassName}`.trim()}>
-          {items.map((item, index) => (
-            <div key={item.key ?? index} className="shrink-0">
-              {renderCard(item, index, { isActive: false, isMobile })}
-            </div>
-          ))}
+          {children ||
+            items.map((item, index) => (
+              <div key={item.key ?? index} className="shrink-0">
+                {renderCard(item, index, { isActive: false, isMobile })}
+              </div>
+            ))}
         </div>
       </div>
     </div>
