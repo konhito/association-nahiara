@@ -1,4 +1,5 @@
 import "./globals.css";
+import CookieConsent from "../components/CookieConsent";
 
 // Site configuration for SEO
 const siteConfig = {
@@ -260,6 +261,7 @@ export default function RootLayout({ children }) {
           <span className="pollinator-report-banner__cta">Read the European Commission report in your language <span aria-hidden="true">→</span></span>
         </a>
         {children}
+        <CookieConsent />
       </body>
     </html>
   );

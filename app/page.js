@@ -591,6 +591,7 @@ function LandingContent() {
     email: "",
     message: "",
     subject: "",
+    privacyAccepted: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -698,7 +699,7 @@ function LandingContent() {
         setShowContactModal(false);
       }, 2000);
 
-      setContactForm({ name: "", email: "", message: "", subject: "" });
+      setContactForm({ name: "", email: "", message: "", subject: "", privacyAccepted: false });
     } catch (error) {
       console.error("Error submitting contact form:", error);
     } finally {
@@ -1471,6 +1472,9 @@ ${t("landing.visionText")}
                 </div>
 
                 <div className="flex gap-6 text-sm text-white/40 mt-1">
+                  <Link href="/legal-notice" className="hover:text-white/80 transition-colors">{locale === "es" ? "Aviso legal" : "Legal Notice"}</Link>
+                  <Link href="/privacy" className="hover:text-white/80 transition-colors">{locale === "es" ? "Privacidad" : "Privacy Policy"}</Link>
+                  <button type="button" onClick={() => window.dispatchEvent(new Event("cookie-settings"))} className="hover:text-white/80 transition-colors">{locale === "es" ? "Cookies" : "Cookie settings"}</button>
                   <Link
                     href="/press"
                     className="hover:text-white/80 transition-colors"
@@ -1626,6 +1630,11 @@ ${t("landing.visionText")}
                       placeholder={t("landing.tellUsAbout")}
                     />
                   </div>
+
+                  <label className="flex items-start gap-2 text-sm text-[var(--muted-foreground)]">
+                    <input type="checkbox" required checked={contactForm.privacyAccepted} onChange={(e) => setContactForm({ ...contactForm, privacyAccepted: e.target.checked })} className="mt-1 h-4 w-4" />
+                    <span>I have read and accept the <Link href="/privacy" className="underline">Privacy Policy</Link>. *</span>
+                  </label>
 
                   <button
                     type="submit"

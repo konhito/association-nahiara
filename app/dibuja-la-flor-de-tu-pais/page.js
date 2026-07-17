@@ -47,6 +47,7 @@ export default function SubmitArtworkPage() {
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [message, setMessage] = useState("");
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [status, setStatus] = useState("idle");
   const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef(null);
@@ -93,7 +94,7 @@ export default function SubmitArtworkPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!file || !name || !country) return;
+    if (!file || !name || !country || !privacyAccepted) return;
 
     setStatus("uploading");
     setUploadProgress(0);
@@ -290,6 +291,11 @@ export default function SubmitArtworkPage() {
                 </div>
               </div>
 
+              <label className="flex items-start gap-2 text-sm text-slate-700">
+                <input type="checkbox" required checked={privacyAccepted} onChange={(event) => setPrivacyAccepted(event.target.checked)} className="mt-1 h-4 w-4" />
+                <span>I have read and accept the <Link href="/privacy" className="underline">Privacy Policy</Link>. *</span>
+              </label>
+
               {status === "error" ? (
                 <div className="mt-4 flex items-center gap-2 rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800">
                   <AlertCircle className="h-5 w-5 flex-shrink-0" />
@@ -300,7 +306,7 @@ export default function SubmitArtworkPage() {
               <div className="pt-4">
                 <button
                   type="submit"
-                  disabled={!file || !name || !country || status === "uploading"}
+                  disabled={!file || !name || !country || !privacyAccepted || status === "uploading"}
                   className="flex w-full items-center justify-center rounded-xl bg-emerald-600 px-6 py-4 font-bold text-white shadow-lg shadow-emerald-200 transition-all hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {status === "uploading" ? (
