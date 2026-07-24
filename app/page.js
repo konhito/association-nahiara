@@ -468,7 +468,7 @@ function Navbar({ scrolled, onContactClick, locale, t }) {
 
   return (
     <nav
-      className={`fixed top-[var(--site-banner-height)] left-0 right-0 z-40 transition-all duration-500 ${
+      className={`fixed top-[var(--header-banner-offset)] left-0 right-0 z-40 transition-all duration-500 ${
         scrolled
           ? "navbar-glass shadow-[0_1px_0_rgba(15,29,21,0.05)]"
           : "bg-transparent"

@@ -7,6 +7,8 @@
 /* ─── Design Tokens ─── */
 :root {
   --site-banner-height: 7rem;
+  --pollinator-report-banner-height: 4rem;
+  --header-banner-offset: calc(var(--site-banner-height) + var(--pollinator-report-banner-height));
   /* Emerald-tinted neutrals — nature-forward, premium */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -568,7 +570,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 640px) {
-  :root { --site-banner-height: 10rem; }
+  :root { --site-banner-height: 10rem; --pollinator-report-banner-height: 4.5rem; }
   .wildfire-banner { font-size: 0.75rem; justify-content: flex-start; line-height: 1.3; padding: 0.65rem 1rem; text-align: left; }
   .wildfire-banner__art { display: none; }
   .wildfire-banner__data { grid-template-columns: 1fr; }
@@ -583,6 +585,41 @@ h1, h2, h3, h4, h5, h6 {
   .wildfire-glow,
   .wildfire-spark,
   .wildfire-pollinator { animation: none; }
+}
+
+.pollinator-report-banner {
+  align-items: center;
+  background: #f8fbf6 url('/pollinator-report-banner.png') right center / auto 100% no-repeat;
+  color: #164d31;
+  display: flex;
+  font-size: clamp(0.78rem, 1.25vw, 0.95rem);
+  font-weight: 600;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  justify-content: center;
+  line-height: 1.25;
+  min-height: var(--pollinator-report-banner-height);
+  padding: 0.65rem clamp(1rem, 4vw, 3rem);
+  position: sticky;
+  text-align: center;
+  text-decoration: none;
+  top: var(--site-banner-height);
+  z-index: 49;
+}
+
+.pollinator-report-banner::before {
+  background: linear-gradient(90deg, rgba(248, 251, 246, 1) 0%, rgba(248, 251, 246, 0.94) 72%, rgba(248, 251, 246, 0.42) 100%);
+  content: '';
+  inset: 0;
+  position: absolute;
+}
+
+.pollinator-report-banner > span { position: relative; }
+.pollinator-report-banner__cta { color: #17623c; text-decoration: underline; text-underline-offset: 0.2em; }
+.pollinator-report-banner:hover .pollinator-report-banner__cta { color: #0d3e24; }
+.pollinator-report-banner:focus-visible { outline: 3px solid #1f6f43; outline-offset: -3px; }
+
+@media (max-width: 640px) {
+  .pollinator-report-banner { flex-direction: column; gap: 0.2rem; min-height: var(--pollinator-report-banner-height); padding-block: 0.55rem; }
 }
 
 .hero-event-cta {
