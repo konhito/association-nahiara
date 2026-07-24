@@ -1,5 +1,6 @@
 import "./globals.css";
 import CookieConsent from "../components/CookieConsent";
+import WildfirePollinatorBanner from "../components/WildfirePollinatorBanner";
 
 // Site configuration for SEO
 const siteConfig = {
@@ -251,12 +252,7 @@ export default function RootLayout({ children }) {
       <body
         className="antialiased"
       >
-        <section
-          className="world-cup-banner"
-        >
-          <strong>El clavel español brilla hoy más que nunca</strong>
-          <span>Desde la Asociación Internacional en Defensa de las Flores “Proveneya &amp; Nahiara”, felicitamos a la Selección Española y a todos los ciudadanos españoles: ¡somos campeones del Mundial 2026 de fútbol! Y muchísimas felicidades a todas las selecciones que han participado en el torneo.</span>
-        </section>
+        <WildfirePollinatorBanner />
         {children}
         <CookieConsent />
       </body>
