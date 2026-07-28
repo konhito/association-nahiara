@@ -1,8 +1,6 @@
 {
   "en": {
     "date": "Updated Tuesday, July 28, 2026",
-    "text": "Wildfires 2026 — daily update.",
-    "emphasis": "Bilingual Spanish/English information from Proveneya & Nahiara.",
     "details": "View the daily update",
     "close": "Close daily update",
     "groups": [
@@ -14,14 +12,13 @@
       {"title": "Algeria", "items": ["154 fires declared in 24 hours (peak on July 18); 6 deaths and about 150 homes affected in Annaba, the epicenter of the wave.", "Residents fighting the fire with their bare hands due to lack of resources."]},
       {"title": "Turkey", "items": ["About 95,000 hectares burned — seven times the historical average (2008–2020) for this time of year.", "Evacuations in Bodrum and Antalya."]},
       {"title": "Canada", "items": ["3,656 fires and 2.78 million hectares burned — already above the 25-year average.", "Ontario is the hardest-hit province: a single fire (Thunder Bay 36) has already burned 314,000 ha, uncontained."]},
+      {"title": "Human origin", "items": [{"text": "According to Greenpeace, 95% of wildfires have a human origin: intentional, negligent or accidental — not a purely natural phenomenon.", "href": "https://es.greenpeace.org/es/sala-de-prensa/comunicados/greenpeace-exige-que-no-se-olviden-de-las-zonas-quemadas-en-2025-y-que-se-actue-en-2026-con-prevencion-y-gestion-posincendios-2/"}]},
       {"title": "Ocean context", "items": ["Record-high average sea-surface temperature: 20.86°C (June 21).", "37% of oceans under a marine heatwave — the engine behind all these simultaneous fire fronts."]}
     ],
     "sources": "Sources: MITECO, EFFIS/Copernicus, French Interior Ministry, Portuguese Civil Protection (ICNF), Italian Civil Protection and various outlets (see note on Italy), Algerian Civil Protection, Turkish Meteorological Service, Government of Canada, CBC News, NOAA, Copernicus Marine Service."
   },
   "es": {
     "date": "Actualizado martes 28 de julio de 2026",
-    "text": "Incendios forestales 2026 — actualización diaria.",
-    "emphasis": "Contenido bilingüe ES/EN de Proveneya & Nahiara.",
     "details": "Ver la actualización diaria",
     "close": "Cerrar actualización diaria",
     "groups": [
@@ -33,6 +30,7 @@
       {"title": "Argelia", "items": ["154 incendios declarados en 24 h (pico del 18 de julio); 6 muertos y unas 150 viviendas afectadas en Annaba, epicentro de la ola.", "Vecinos combatiendo el fuego con sus propias manos ante la falta de medios."]},
       {"title": "Turquía", "items": ["Unas 95.000 hectáreas quemadas — siete veces la media histórica (2008–2020) para estas fechas.", "Evacuaciones en Bodrum y Antalya."]},
       {"title": "Canadá", "items": ["3.656 incendios y 2,78 millones de hectáreas quemadas — ya por encima de la media de los últimos 25 años.", "Ontario es la provincia más golpeada: un solo incendio (Thunder Bay 36) ha quemado ya 314.000 ha sin control."]},
+      {"title": "Origen humano", "items": [{"text": "Según Greenpeace, el 95% de los incendios forestales tiene un origen humano: intencionado, negligente o accidental; no es un fenómeno puramente natural.", "href": "https://es.greenpeace.org/es/sala-de-prensa/comunicados/greenpeace-exige-que-no-se-olviden-de-las-zonas-quemadas-en-2025-y-que-se-actue-en-2026-con-prevencion-y-gestion-posincendios-2/"}]},
       {"title": "Contexto oceánico", "items": ["Temperatura media de la superficie oceánica en récord histórico: 20,86 °C (21 de junio).", "37% de los océanos bajo ola de calor marina — el motor detrás de todos estos focos simultáneos."]}
     ],
     "sources": "Fuentes: MITECO, EFFIS/Copernicus, Ministerio del Interior francés, Protección Civil portuguesa (ICNF), Protección Civil italiana y diversos medios (ver nota sobre Italia), Protección Civil argelina, Servicio Meteorológico de Turquía, Gobierno de Canadá, CBC News, NOAA, Copernicus Marine Service."
