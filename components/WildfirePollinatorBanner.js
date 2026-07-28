@@ -6,12 +6,13 @@ import WildfireArt from "./WildfireArt";
 
 export default function WildfirePollinatorBanner() {
   const { locale } = useTranslation();
-  const content = copy[locale] || copy.en;
+  // This daily update was supplied in Spanish and English.
+  const content = locale === "es" ? copy.es : copy.en;
 
   return (
     <section className="wildfire-banner" aria-label={content.emphasis}>
       <div className="wildfire-banner__copy">
-        {/* Monthly refresh: update this date and every figure below while fire season continues. */}
+        {/* Daily refresh: update this date and every figure below while fire season continues. */}
         <p className="wildfire-banner__meta">Proveneya &amp; Nahiara · {content.date}</p>
         <p>{content.text} <strong>{content.emphasis}</strong></p>
         <details className="wildfire-banner__details">

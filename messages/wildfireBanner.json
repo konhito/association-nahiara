@@ -1,80 +1,36 @@
 {
   "en": {
-    "date": "Data as of July 24, 2026",
-    "text": "Behind every wildfire is a story the news never tells: the story of those who, silently and over millions of years, built with their flight the flowers, the fruit, and the green we now watch burn.",
-    "emphasis": "Pollinators are victims too — and they deserve to be counted.",
-    "details": "View supporting data",
-    "close": "Close supporting data",
+    "date": "Updated Tuesday, July 28, 2026",
+    "text": "Wildfires 2026 — daily update.",
+    "emphasis": "Bilingual Spanish/English information from Proveneya & Nahiara.",
+    "details": "View the daily update",
+    "close": "Close daily update",
     "groups": [
-      {"title": "Spain", "items": ["~120,000 hectares burned in 2026 (EFFIS/Copernicus, July 22) vs. 35,270 ha on the same date in 2025 — 3.4x.", "343 fires in 2026 through July 22, vs. 129 in 2025.", "18 major fires (>500 ha) through July 12, vs. 7 in 2025.", "Spain leads the EU in both burned area and number of fires this year.", "Last 24h: three active, uncontained fires southwest of Madrid, over 10,000 people evacuated, national-interest emergency declared."]},
-      {"title": "Canada", "items": ["Over 950 active wildfires (July 17, 2026).", "3,137 fires and 1.4 million hectares burned this season.", "Smoke has reached Toronto, Boston, and New York City."]},
-      {"title": "Oceans and global heat", "items": ["Record global sea-surface temperature: 20.86°C on June 21, 2026.", "Over 37% of oceans affected by a marine heatwave; NOAA forecasts up to 40%.", "This ocean heat feeds back into heatwaves on land and worsens wildfires."]}
+      {"title": "Spain", "items": ["Over 170,000 ha burned in 2026 according to the Ministry for Ecological Transition; provisional EFFIS satellite estimates already exceed 200,000 ha.", "The Madrid-Ávila-Toledo megafire alone stands at roughly 77,000–85,000 ha — described by the Interior Minister as the most significant and aggressive fire in Spain's history.", "90,949 people evacuated or confined because of that fire alone; a new fire front in Castellón adds another 10,000 ha.", "International aid deployed: Greece, Italy, Turkey and Portugal have sent Canadair aircraft, Air Tractor Fireboss planes and ground crews."]},
+      {"title": "France", "items": ["116,085 hectares burned in total in 2026, according to the French Interior Ministry (July 27) — a completely unprecedented season, far from over.", "13,566 fires or fire outbreaks recorded since the start of the season.", "The Gironde megafire alone: 42,000 ha and 220,000 evacuees, who will not be able to return home in the short term.", "Two firefighters died battling the blaze near Bordeaux airport."]},
+      {"title": "Italy", "items": ["Official figures vary between sources: between 40,000 ha (+81% over the recent average) and over 100,000 ha nationwide, depending on the outlet. Sicily and Calabria are the worst-hit areas, with one firefighter killed.", "Note: there is no single consolidated official figure yet for Italy — treat with caution until an official Protezione Civile or EFFIS figure is available."]},
+      {"title": "Algeria", "items": ["154 fires declared in 24 hours (peak on July 18); 6 deaths and about 150 homes affected in Annaba, the epicenter of the wave.", "Residents fighting the fire with their bare hands due to lack of resources."]},
+      {"title": "Turkey", "items": ["About 95,000 hectares burned — seven times the historical average (2008–2020) for this time of year.", "Evacuations in Bodrum and Antalya."]},
+      {"title": "Canada", "items": ["3,656 fires and 2.78 million hectares burned — already above the 25-year average.", "Ontario is the hardest-hit province: a single fire (Thunder Bay 36) has already burned 314,000 ha, uncontained."]},
+      {"title": "Ocean context", "items": ["Record-high average sea-surface temperature: 20.86°C (June 21).", "37% of oceans under a marine heatwave — the engine behind all these simultaneous fire fronts."]}
     ],
-    "sources": "Sources: MITECO, EFFIS/Copernicus, Government of Canada, NOAA, Copernicus Marine Service."
+    "sources": "Sources: MITECO, EFFIS/Copernicus, French Interior Ministry, Italian Civil Protection and various outlets (see note on Italy), Algerian Civil Protection, Turkish Meteorological Service, Government of Canada, CBC News, NOAA, Copernicus Marine Service."
   },
   "es": {
-    "date": "Datos a 24 de julio de 2026",
-    "text": "Detrás de cada incendio hay una historia que no sale en las noticias: la de quienes, durante millones de años y en silencio, construyeron con su vuelo las flores, los frutos y el verde que hoy vemos arder.",
-    "emphasis": "Los polinizadores también son víctimas — y también merecen ser contados.",
-    "details": "Ver datos de apoyo",
-    "close": "Cerrar datos de apoyo",
+    "date": "Actualizado martes 28 de julio de 2026",
+    "text": "Incendios forestales 2026 — actualización diaria.",
+    "emphasis": "Contenido bilingüe ES/EN de Proveneya & Nahiara.",
+    "details": "Ver la actualización diaria",
+    "close": "Cerrar actualización diaria",
     "groups": [
-      {"title": "España", "items": ["~120.000 hectáreas quemadas en 2026 (EFFIS/Copernicus, 22 de julio) frente a 35.270 ha en la misma fecha de 2025 — ×3,4.", "343 incendios en 2026 hasta el 22 de julio, frente a 129 en 2025.", "18 grandes incendios (>500 ha) hasta el 12 de julio, frente a 7 en 2025.", "España encabeza el ranking de la UE en superficie quemada y número de incendios.", "Últimas 24h: tres incendios activos sin controlar en el suroeste de Madrid, más de 10.000 evacuados, emergencia de interés nacional."]},
-      {"title": "Canadá", "items": ["Más de 950 incendios activos (17 de julio de 2026).", "3.137 incendios y 1,4 millones de hectáreas quemadas en la temporada.", "El humo ha llegado a Toronto, Boston y Nueva York."]},
-      {"title": "Océanos y calor global", "items": ["Récord histórico de temperatura marina global: 20,86 °C el 21 de junio de 2026.", "Más del 37% de los océanos afectados por una ola de calor marina; la NOAA prevé hasta el 40%.", "Este calor oceánico retroalimenta las olas de calor en tierra y agrava los incendios."]}
+      {"title": "España", "items": ["Más de 170.000 ha quemadas en 2026 según el Ministerio para la Transición Ecológica; estimaciones satelitales provisionales de EFFIS ya superan las 200.000 ha.", "El megaincendio de Madrid-Ávila-Toledo ronda por sí solo las 77.000–85.000 ha — calificado por el ministro del Interior como el más importante y agresivo de la historia de España.", "90.949 personas evacuadas o confinadas solo por ese incendio; nuevo foco en Castellón suma otras 10.000 ha.", "Ayuda internacional desplegada: Grecia, Italia, Turquía y Portugal han enviado aviones Canadair, Air Tractor Fireboss y efectivos terrestres."]},
+      {"title": "Francia", "items": ["116.085 hectáreas quemadas en total en 2026, según el Ministerio del Interior francés (27 de julio) — temporada completamente sin precedentes, lejos de terminar.", "13.566 incendios o brotes de fuego registrados desde el inicio de la temporada.", "El megaincendio de Gironda, por sí solo: 42.000 ha y 220.000 evacuados, que no podrán volver a sus casas a corto plazo.", "Dos bomberos muertos combatiendo el fuego cerca del aeropuerto de Burdeos."]},
+      {"title": "Italia", "items": ["Cifras oficiales dispares entre fuentes: entre 40.000 ha (+81% sobre la media reciente) y más de 100.000 ha a nivel nacional, según distintos medios. Sicilia y Calabria son los focos más graves, con un bombero fallecido.", "Nota: no hay aún una cifra oficial consolidada única para Italia — tratar con cautela hasta disponer de un dato de Protezione Civile o EFFIS."]},
+      {"title": "Argelia", "items": ["154 incendios declarados en 24 h (pico del 18 de julio); 6 muertos y unas 150 viviendas afectadas en Annaba, epicentro de la ola.", "Vecinos combatiendo el fuego con sus propias manos ante la falta de medios."]},
+      {"title": "Turquía", "items": ["Unas 95.000 hectáreas quemadas — siete veces la media histórica (2008–2020) para estas fechas.", "Evacuaciones en Bodrum y Antalya."]},
+      {"title": "Canadá", "items": ["3.656 incendios y 2,78 millones de hectáreas quemadas — ya por encima de la media de los últimos 25 años.", "Ontario es la provincia más golpeada: un solo incendio (Thunder Bay 36) ha quemado ya 314.000 ha sin control."]},
+      {"title": "Contexto oceánico", "items": ["Temperatura media de la superficie oceánica en récord histórico: 20,86 °C (21 de junio).", "37% de los océanos bajo ola de calor marina — el motor detrás de todos estos focos simultáneos."]}
     ],
-    "sources": "Fuentes: MITECO, EFFIS/Copernicus, Gobierno de Canadá, NOAA, Copernicus Marine Service."
-  },
-  "de": {
-    "date": "Datenstand: 24. Juli 2026",
-    "text": "Hinter jedem Waldbrand steht eine Geschichte, über die in den Nachrichten nicht berichtet wird: die Geschichte jener, die still und über Millionen von Jahren mit ihrem Flug die Blumen, Früchte und grünen Landschaften geschaffen haben, die wir heute brennen sehen.",
-    "emphasis": "Auch Bestäuber sind Opfer — und auch sie verdienen es, gezählt zu werden.",
-    "details": "Hintergrunddaten anzeigen",
-    "close": "Hintergrunddaten schließen",
-    "groups": [
-      {"title": "Spanien", "items": ["Im Jahr 2026 verbrannten rund 120.000 Hektar (EFFIS/Copernicus, 22. Juli), gegenüber 35.270 ha zum gleichen Zeitpunkt 2025 — das 3,4-Fache.", "343 Brände im Jahr 2026 bis zum 22. Juli, gegenüber 129 im Jahr 2025.", "18 Großbrände (>500 ha) bis zum 12. Juli, gegenüber 7 im Jahr 2025.", "Spanien führt dieses Jahr die EU sowohl bei der verbrannten Fläche als auch bei der Zahl der Brände an.", "Letzte 24 Stunden: drei aktive, unkontrollierte Brände südwestlich von Madrid, mehr als 10.000 Evakuierte und Ausrufung eines Notstands von nationalem Interesse."]},
-      {"title": "Kanada", "items": ["Mehr als 950 aktive Waldbrände (17. Juli 2026).", "3.137 Brände und 1,4 Millionen Hektar verbrannte Fläche in dieser Saison.", "Der Rauch hat Toronto, Boston und New York City erreicht."]},
-      {"title": "Ozeane und globale Hitze", "items": ["Globaler Rekord der Meeresoberflächentemperatur: 20,86 °C am 21. Juni 2026.", "Mehr als 37 % der Ozeane sind von einer marinen Hitzewelle betroffen; die NOAA prognostiziert bis zu 40 %.", "Diese Ozeanhitze verstärkt Hitzewellen an Land und verschärft Waldbrände."]}
-    ],
-    "sources": "Quellen: MITECO, EFFIS/Copernicus, Regierung von Kanada, NOAA, Copernicus Marine Service."
-  },
-  "fr": {
-    "date": "Données au 24 juillet 2026",
-    "text": "Derrière chaque incendie de forêt se cache une histoire dont les médias ne parlent jamais : celle de ceux qui, silencieusement et pendant des millions d’années, ont façonné par leur vol les fleurs, les fruits et les paysages verdoyants que nous regardons aujourd’hui brûler.",
-    "emphasis": "Les pollinisateurs sont eux aussi des victimes — et ils méritent eux aussi d’être comptés.",
-    "details": "Voir les données complémentaires",
-    "close": "Fermer les données complémentaires",
-    "groups": [
-      {"title": "Espagne", "items": ["Environ 120 000 hectares brûlés en 2026 (EFFIS/Copernicus, 22 juillet), contre 35 270 ha à la même date en 2025 — soit 3,4 fois plus.", "343 incendies en 2026 jusqu’au 22 juillet, contre 129 en 2025.", "18 grands incendies (>500 ha) jusqu’au 12 juillet, contre 7 en 2025.", "L’Espagne arrive en tête de l’UE cette année pour la superficie brûlée comme pour le nombre d’incendies.", "Dernières 24 h : trois incendies actifs et non maîtrisés au sud-ouest de Madrid, plus de 10 000 personnes évacuées et déclaration d’une urgence d’intérêt national."]},
-      {"title": "Canada", "items": ["Plus de 950 incendies de forêt actifs (17 juillet 2026).", "3 137 incendies et 1,4 million d’hectares brûlés cette saison.", "La fumée a atteint Toronto, Boston et New York."]},
-      {"title": "Océans et chaleur mondiale", "items": ["Record mondial de température de surface de la mer : 20,86 °C le 21 juin 2026.", "Plus de 37 % des océans sont touchés par une vague de chaleur marine ; la NOAA prévoit jusqu’à 40 %.", "Cette chaleur océanique renforce les vagues de chaleur terrestres et aggrave les incendies."]}
-    ],
-    "sources": "Sources : MITECO, EFFIS/Copernicus, gouvernement du Canada, NOAA, Copernicus Marine Service."
-  },
-  "it": {
-    "date": "Dati aggiornati al 24 luglio 2026",
-    "text": "Dietro ogni incendio boschivo c’è una storia che le notizie non raccontano mai: la storia di chi, in silenzio e per milioni di anni, ha costruito con il proprio volo i fiori, i frutti e il verde che oggi vediamo bruciare.",
-    "emphasis": "Anche gli impollinatori sono vittime — e meritano di essere contati.",
-    "details": "Visualizza i dati di supporto",
-    "close": "Chiudi i dati di supporto",
-    "groups": [
-      {"title": "Spagna", "items": ["Circa 120.000 ettari bruciati nel 2026 (EFFIS/Copernicus, 22 luglio), contro 35.270 ha alla stessa data del 2025 — 3,4 volte tanto.", "343 incendi nel 2026 fino al 22 luglio, contro 129 nel 2025.", "18 grandi incendi (>500 ha) fino al 12 luglio, contro 7 nel 2025.", "Quest’anno la Spagna è al primo posto nell’UE sia per superficie bruciata sia per numero di incendi.", "Ultime 24 ore: tre incendi attivi e fuori controllo a sud-ovest di Madrid, oltre 10.000 persone evacuate e dichiarazione di emergenza di interesse nazionale."]},
-      {"title": "Canada", "items": ["Oltre 950 incendi boschivi attivi (17 luglio 2026).", "3.137 incendi e 1,4 milioni di ettari bruciati in questa stagione.", "Il fumo ha raggiunto Toronto, Boston e New York."]},
-      {"title": "Oceani e calore globale", "items": ["Record globale della temperatura superficiale del mare: 20,86 °C il 21 giugno 2026.", "Oltre il 37% degli oceani è interessato da un’ondata di calore marina; la NOAA prevede fino al 40%.", "Questo calore oceanico alimenta le ondate di calore sulla terraferma e aggrava gli incendi."]}
-    ],
-    "sources": "Fonti: MITECO, EFFIS/Copernicus, Governo del Canada, NOAA, Copernicus Marine Service."
-  },
-  "zh": {
-    "date": "数据截至2026年7月24日",
-    "text": "每一场山火背后，都有一个新闻从未讲述的故事：数百万年来，它们默默地用飞翔塑造了花朵、果实和绿色大地，而如今这一切正在我们眼前燃烧。",
-    "emphasis": "传粉者也是受害者——它们同样值得被看见、被统计。",
-    "details": "查看支持数据",
-    "close": "关闭支持数据",
-    "groups": [
-      {"title": "西班牙", "items": ["2026年约有12万公顷土地被烧毁（EFFIS/Copernicus，7月22日），而2025年同期为35,270公顷——是去年的3.4倍。", "截至7月22日，2026年已发生343起火灾，2025年同期为129起。", "截至7月12日，已发生18起大型火灾（>500公顷），2025年同期为7起。", "今年西班牙的过火面积和火灾数量均居欧盟首位。", "过去24小时：马德里西南部有三场仍未受控的活跃火灾，超过1万人被疏散，并已宣布国家级紧急状态。"]},
-      {"title": "加拿大", "items": ["超过950场活跃山火（2026年7月17日）。", "本季已发生3,137起火灾，过火面积达140万公顷。", "烟霾已影响多伦多、波士顿和纽约市。"]},
-      {"title": "海洋与全球高温", "items": ["全球海表温度创历史纪录：2026年6月21日达到20.86°C。", "超过37%的海洋受到海洋热浪影响；NOAA预计这一比例最高可达40%。", "海洋高温会进一步加剧陆地热浪和山火。"]}
-    ],
-    "sources": "来源：MITECO、EFFIS/Copernicus、加拿大政府、NOAA、Copernicus Marine Service。"
+    "sources": "Fuentes: MITECO, EFFIS/Copernicus, Ministerio del Interior francés, Protección Civil italiana y diversos medios (ver nota sobre Italia), Protección Civil argelina, Servicio Meteorológico de Turquía, Gobierno de Canadá, CBC News, NOAA, Copernicus Marine Service."
   }
 }

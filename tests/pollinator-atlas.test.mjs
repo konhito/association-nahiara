@@ -1,0 +1,26 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+
+const atlas = await readFile(new URL("../lib/pollinatorAtlas.js", import.meta.url), "utf8");
+const map = await readFile(new URL("../components/PollinatorAtlas.js", import.meta.url), "utf8");
+const mock = await readFile(new URL("../components/mockFireSnapshot.js", import.meta.url), "utf8");
+const cron = await readFile(new URL("../app/api/cron/refresh-fire-data/route.js", import.meta.url), "utf8");
+const database = await readFile(new URL("../scripts/setup-atlas-db.sql", import.meta.url), "utf8");
+
+assert.equal((atlas.match(/id: "/g) || []).length, 25, "atlas must keep ten routes and fifteen source records");
+assert.match(map, /Projected scenario — not observed data/);
+assert.match(map, /setLayoutProperty\("scenario-fire"/);
+assert.match(cron, /CRON_SECRET/);
+assert.match(cron, /FIRMS_MAP_KEY/);
+assert.match(cron, /ATLAS_FIRE_WEATHER_RISK_URL/);
+assert.match(cron, /ATLAS_PROJECTED_BURNED_AREA_URL/);
+assert.match(map, /projected-fire-hatch/);
+assert.match(map, /MOCK_FIRE_SNAPSHOT/);
+assert.match(map, /Demo fire data/);
+assert.match(mock, /isDemo: true/);
+assert.match(mock, /Illustrative only/);
+assert.match(database, /CREATE TABLE IF NOT EXISTS atlas_sources/);
+assert.match(database, /CREATE TABLE IF NOT EXISTS pollinator_routes/);
+assert.match(database, /CREATE TABLE IF NOT EXISTS atlas_fire_snapshots/);
+assert.match(database, /ON CONFLICT \(id\) DO UPDATE/);
+console.log("pollinator atlas source checks passed");

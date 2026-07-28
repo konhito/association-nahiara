@@ -460,6 +460,12 @@ function Navbar({ scrolled, onContactClick, locale, t }) {
       href: "/archive",
     },
     {
+      id: "pollinator-atlas",
+      label: "Atlas",
+      type: "route",
+      href: "/corredor-de-los-polinizadores",
+    },
+    {
       id: "contact",
       label: t("landing.navContact"),
       type: "anchor",

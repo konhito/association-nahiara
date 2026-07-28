@@ -1,0 +1,31 @@
+.page { background: #06110d; color: #f5f1e8; min-height: 100svh; padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 4vw, 4rem); }
+.header { margin: 0 auto clamp(1.5rem, 3vw, 2.5rem); max-width: 72rem; }
+.kicker { color: #d6b56d; font-size: .78rem; font-weight: 700; letter-spacing: .1em; margin: 0 0 .75rem; text-transform: uppercase; }
+.header h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.3rem, 6vw, 5.2rem); letter-spacing: -.035em; line-height: .95; margin: 0; text-wrap: balance; }
+.header p:last-child { color: #d2ded2; font-size: 1.05rem; line-height: 1.6; margin: 1rem 0 0; max-width: 60ch; }
+.atlas { border: 1px solid rgba(214,181,109,.55); height: min(76svh, 48rem); margin: auto; max-width: 96rem; min-height: 39rem; position: relative; }
+.map { height: 100%; width: 100%; }
+.controls, .detail, .status { background: rgba(6,17,13,.94); color: #f5f1e8; position: absolute; z-index: 2; }
+.controls { border-bottom: 1px solid rgba(245,241,232,.24); border-right: 1px solid rgba(245,241,232,.24); left: 0; max-height: 100%; overflow-y: auto; padding: 1rem; top: 0; width: min(20rem, 42%); }
+.controls fieldset { border: 0; margin: 0; padding: 0; }
+.controls legend, .detailLabel { color: #d6b56d; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.routeList { display: grid; gap: .1rem; margin-top: .65rem; }
+.routeList label { align-items: center; display: flex; gap: .35rem; padding: .25rem 0; }
+.routeList button { background: transparent; border: 0; color: inherit; cursor: pointer; font: inherit; padding: .35rem; text-align: left; }
+.routeList button span { border-radius: 50%; display: inline-block; height: .65rem; margin-right: .45rem; vertical-align: middle; width: .65rem; }
+.activeRoute button { color: #f6d889; text-decoration: underline; text-underline-offset: .22em; }
+.fireControls { border-top: 1px solid rgba(245,241,232,.2) !important; display: grid; gap: .4rem; margin-top: .8rem !important; padding-top: .85rem !important; }
+.fireControls label { align-items: flex-start; display: flex; font-size: .86rem; gap: .45rem; line-height: 1.3; }
+.fireControls .dateControl { color: #d6b56d; display: grid; font-size: .72rem; font-weight: 700; gap: .35rem; letter-spacing: .06em; margin-top: .3rem; text-transform: uppercase; }
+.dateControl input { background: #f5f1e8; border: 0; color: #13352d; font: inherit; padding: .45rem; text-transform: none; }
+.detail { bottom: 0; max-width: 30rem; padding: 1.15rem; right: 0; width: min(30rem, 48%); }
+.detail h2 { font-family: Georgia, "Times New Roman", serif; font-size: 1.55rem; line-height: 1.05; margin: .35rem 0 0; }
+.detail p { color: #d8e0d7; line-height: 1.45; margin: .55rem 0 0; }
+.detail .scientific { color: #d6b56d; font-style: italic; }
+.detail .warning { color: #f6d889; font-size: .85rem; }
+.detail a { color: #f5f1e8; display: inline-block; margin-top: .8rem; text-decoration: underline; text-underline-offset: .2em; }
+.status { bottom: .75rem; left: 50%; max-width: 42rem; padding: .55rem .8rem; text-align: center; transform: translateX(-50%); width: max-content; }
+.status strong { color: #e9d5ff; display: block; font-size: .76rem; letter-spacing: .05em; text-transform: uppercase; }
+.status span { color: #d8e0d7; font-size: .74rem; }
+@media (max-width: 720px) { .page { padding-inline: 0; } .header { padding-inline: 1rem; } .atlas { border-inline: 0; height: 82svh; min-height: 42rem; } .controls { max-height: 47%; width: min(21rem, 82%); } .detail { bottom: 0; max-width: none; width: 100%; } .status { bottom: calc(13rem + env(safe-area-inset-bottom)); max-width: 94%; } }
+@media (prefers-reduced-motion: reduce) { .map :global(.maplibregl-canvas) { transition: none !important; } }
