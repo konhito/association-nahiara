@@ -6,8 +6,7 @@ import WildfireArt from "./WildfireArt";
 
 export default function WildfirePollinatorBanner() {
   const { locale } = useTranslation();
-  // This daily update was supplied in Spanish and English.
-  const content = locale === "es" ? copy.es : copy.en;
+  const content = copy[locale] ?? copy.en;
   const message = locale === "es"
     ? "Incendios forestales 2026 — actualización diaria. Los polinizadores también son víctimas — y merecen ser contados. Son la gran incógnita de estos incendios, ausentes de la cobertura informativa."
     : "Wildfires 2026 — daily update. Pollinators are victims too — and they deserve to be counted. They are the great unknown of these fires, absent from the reporting.";
