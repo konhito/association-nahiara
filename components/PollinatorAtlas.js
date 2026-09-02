@@ -3,22 +3,23 @@
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useRef, useState } from "react";
 import { Map, NavigationControl, Popup } from "maplibre-gl";
-import { Cloud, CloudRain, Flame, Radio, Route, SlidersHorizontal, Wind, X } from "lucide-react";
+import { Cloud, CloudRain, Flame, Layers3, Radio, Route, Wind, X } from "lucide-react";
 import { POLLINATOR_ROUTES, getAtlasSource } from "../lib/pollinatorAtlas";
 import { MOCK_FIRE_SNAPSHOT } from "./mockFireSnapshot";
 import styles from "./PollinatorAtlas.module.css";
 
 const copy = {
-  en: { title: "Pollinator Corridor Atlas", routes: "Routes", observed: "Burned area", current: "Active wildfire events", projected: "Projected scenario — not observed data", source: "Open source record", method: "Route evidence", updated: "Updated", noData: "No approved live snapshot is available yet.", date: "Historical record through", risk: "Fire-weather risk", burned: "Projected burned area", scenarioUnavailable: "No approved scenario dataset is available.", preliminary: "This route is a preliminary footprint until a study-specific geometry is approved.", layers: "Map layers", routeList: "Choose a route", close: "Close details", demo: "Demo fire data — not observed", time: "Time layer" },
-  es: { title: "Atlas de corredores de polinizadores", routes: "Rutas", observed: "Área quemada", current: "Incendios forestales activos", source: "Abrir ficha de fuente", method: "Evidencia de la ruta", updated: "Actualizado", noData: "Aún no hay una instantánea en directo aprobada.", date: "Registro histórico hasta", risk: "Riesgo meteorológico de incendios", burned: "Superficie quemada proyectada", scenarioUnavailable: "No hay ningún conjunto de datos de escenario aprobado.", preliminary: "Esta ruta es preliminar hasta que se apruebe una geometría específica del estudio.", layers: "Capas del mapa", routeList: "Elige una ruta", close: "Cerrar detalles", demo: "Datos de incendios de demostración — no observados", time: "Capa temporal" },
+  en: { title: "Pollinator Corridor Atlas", intro: "Follow the living routes across a changing planet.", layers: "Live layers", routes: "Explore routes", routeList: "Choose a pollinator route", close: "Close", source: "Read the route source", details: "Pollinator corridor", fire: "Wildfire events", clouds: "Clouds", rain: "Rainfall", smoke: "Aerosols", updated: "Updated", demo: "Demo fire data - not observed", noData: "Live fire data is unavailable.", atmosphere: "NASA Earthdata live atmosphere" },
+  es: { title: "Atlas de corredores de polinizadores", intro: "Sigue las rutas vivas a traves de un planeta cambiante.", layers: "Capas en directo", routes: "Explorar rutas", routeList: "Elige una ruta de polinizadores", close: "Cerrar", source: "Leer la fuente de la ruta", details: "Corredor de polinizadores", fire: "Incendios forestales", clouds: "Nubes", rain: "Lluvia", smoke: "Aerosoles", updated: "Actualizado", demo: "Datos de incendios de demostracion", noData: "Los datos de incendios no estan disponibles.", atmosphere: "Atmosfera NASA Earthdata en directo" },
 };
 
-const emptySnapshot = { currentDetections: [], historicalBurnedArea: { type: "FeatureCollection", features: [] }, scenarios: {} };
+const emptySnapshot = { currentDetections: [] };
 const atmosphereDate = new Date().toISOString().slice(0, 10);
-const atmosphereLayers = [
-  { id: "clouds", Icon: Cloud, label: { en: "Clouds", es: "Nubes" }, dataset: "NASA MODIS satellite imagery", layer: "MODIS_Terra_CorrectedReflectance_TrueColor", tileMatrixSet: "GoogleMapsCompatible_Level9", opacity: 0.46, format: "jpg" },
-  { id: "rain", Icon: CloudRain, label: { en: "Rainfall", es: "Lluvia" }, dataset: "NASA GPM IMERG precipitation", layer: "IMERG_Precipitation_Rate_30min", tileMatrixSet: "GoogleMapsCompatible_Level6", opacity: 0.7, format: "png" },
-  { id: "smoke", Icon: Wind, label: { en: "Aerosols", es: "Aerosoles" }, dataset: "NASA MODIS aerosol - smoke indicator", layer: "MODIS_Terra_Aerosol", tileMatrixSet: "GoogleMapsCompatible_Level6", opacity: 0.58, format: "png" },
+const layers = [
+  { id: "fire", Icon: Flame, label: (t) => t.fire },
+  { id: "clouds", Icon: Cloud, label: (t) => t.clouds, source: "MODIS_Terra_CorrectedReflectance_TrueColor", matrix: "GoogleMapsCompatible_Level9", opacity: 0.24, format: "jpg" },
+  { id: "rain", Icon: CloudRain, label: (t) => t.rain, source: "IMERG_Precipitation_Rate_30min", matrix: "GoogleMapsCompatible_Level6", opacity: 0.7, format: "png" },
+  { id: "smoke", Icon: Wind, label: (t) => t.smoke, source: "MODIS_Terra_Aerosol", matrix: "GoogleMapsCompatible_Level6", opacity: 0.58, format: "png" },
 ];
 
 export default function PollinatorAtlas({ locale = "en" }) {
@@ -27,14 +28,14 @@ export default function PollinatorAtlas({ locale = "en" }) {
   const mapNode = useRef(null);
   const map = useRef(null);
   const [ready, setReady] = useState(false);
-  const [selectedRoute, setSelectedRoute] = useState(POLLINATOR_ROUTES[0].id);
+  const [selectedRoute, setSelectedRoute] = useState(null);
   const [enabledRoutes, setEnabledRoutes] = useState(() => new Set(POLLINATOR_ROUTES.map((route) => route.id)));
-  const [fireMode, setFireMode] = useState("current");
   const [snapshot, setSnapshot] = useState(emptySnapshot);
-  const [fireDate, setFireDate] = useState("");
   const [showRoutes, setShowRoutes] = useState(false);
-  const [showDetails, setShowDetails] = useState(true);
-  const [atmosphere, setAtmosphere] = useState({ clouds: true, rain: false, smoke: false });
+  const [showLayers, setShowLayers] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [activeLayers, setActiveLayers] = useState({ fire: true, clouds: false, rain: false, smoke: false });
 
   useEffect(() => {
     let cancelled = false;
@@ -43,20 +44,23 @@ export default function PollinatorAtlas({ locale = "en" }) {
   }, []);
 
   useEffect(() => {
+    const timeout = window.setTimeout(() => setLoading(false), 3200);
+    return () => window.clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
     if (map.current || !mapNode.current) return;
-    const instance = new Map({ container: mapNode.current, style: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json", center: [8, 20], zoom: 1.35, attributionControl: false });
+    const instance = new Map({ container: mapNode.current, style: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json", center: [8, 20], zoom: 0.65, attributionControl: false });
     instance.addControl(new NavigationControl({ showCompass: false }), "bottom-right");
     instance.on("load", () => {
-      atmosphereLayers.forEach(({ id, layer, tileMatrixSet, opacity, format }) => {
-        instance.addSource(`atmosphere-${id}`, { type: "raster", tiles: [`https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/${layer}/default/${atmosphereDate}/${tileMatrixSet}/{z}/{y}/{x}.${format}`], tileSize: 256, maxzoom: Number(tileMatrixSet.match(/\d+$/)?.[0]) });
+      layers.filter(({ source }) => source).forEach(({ id, source, matrix, opacity, format }) => {
+        instance.addSource(`atmosphere-${id}`, { type: "raster", tiles: [`https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/${source}/default/${atmosphereDate}/${matrix}/{z}/{y}/{x}.${format}`], tileSize: 256, maxzoom: Number(matrix.match(/\d+$/)?.[0]) });
         instance.addLayer({ id: `atmosphere-${id}`, type: "raster", source: `atmosphere-${id}`, paint: { "raster-opacity": opacity } });
       });
       POLLINATOR_ROUTES.forEach((route) => {
         instance.addSource(route.id, { type: "geojson", data: route.geometry });
-        instance.addLayer({ id: route.id, type: "line", source: route.id, paint: { "line-color": route.color, "line-width": 2.5, "line-opacity": 0.65, "line-blur": route.dashed ? 0.35 : 0.1, "line-dasharray": route.dashed ? [2, 2] : [1, 0] } });
+        instance.addLayer({ id: route.id, type: "line", source: route.id, paint: { "line-color": route.color, "line-width": 2.4, "line-opacity": 0.58, "line-blur": route.dashed ? 0.35 : 0.1, "line-dasharray": route.dashed ? [2, 2] : [1, 0] } });
       });
-      instance.addSource("historical-fire", { type: "geojson", data: emptySnapshot.historicalBurnedArea });
-      instance.addLayer({ id: "historical-fire", type: "fill", source: "historical-fire", paint: { "fill-color": "#fb4f14", "fill-opacity": 0.34 } });
       instance.addSource("current-fire", { type: "geojson", data: { type: "FeatureCollection", features: [] }, cluster: true, clusterRadius: 44 });
       instance.addLayer({ id: "current-fire-halo", type: "circle", source: "current-fire", filter: ["!", ["has", "point_count"]], paint: { "circle-color": "#fb4f14", "circle-radius": 10, "circle-opacity": 0.13, "circle-blur": 0.7 } });
       instance.addLayer({ id: "current-fire-clusters", type: "circle", source: "current-fire", filter: ["has", "point_count"], paint: { "circle-color": "#fb4f14", "circle-radius": ["step", ["get", "point_count"], 15, 100, 21, 1000, 28], "circle-opacity": 0.84 } });
@@ -81,17 +85,10 @@ export default function PollinatorAtlas({ locale = "en" }) {
       });
       instance.on("mouseenter", "current-fire", () => { instance.getCanvas().style.cursor = "pointer"; });
       instance.on("mouseleave", "current-fire", () => { instance.getCanvas().style.cursor = ""; });
-      instance.addSource("scenario-fire", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
-      const pattern = document.createElement("canvas");
-      pattern.width = pattern.height = 8;
-      const context = pattern.getContext("2d");
-      context.strokeStyle = "#e9d5ff";
-      context.lineWidth = 2;
-      context.beginPath(); context.moveTo(-2, 8); context.lineTo(8, -2); context.moveTo(2, 10); context.lineTo(10, 2); context.stroke();
-      instance.addImage("projected-fire-hatch", context.getImageData(0, 0, 8, 8));
-      instance.addLayer({ id: "scenario-fire", type: "fill", source: "scenario-fire", paint: { "fill-color": "#7e22ce", "fill-opacity": 0.28, "fill-outline-color": "#e9d5ff", "fill-pattern": "projected-fire-hatch" } });
       map.current = instance;
       setReady(true);
+      instance.flyTo({ center: [8, 20], zoom: 1.35, duration: 2600, essential: false });
+      window.setTimeout(() => setLoading(false), 1150);
     });
     return () => instance.remove();
   }, []);
@@ -100,50 +97,40 @@ export default function PollinatorAtlas({ locale = "en" }) {
     if (!ready || !map.current) return;
     POLLINATOR_ROUTES.forEach((route) => {
       map.current.setLayoutProperty(route.id, "visibility", enabledRoutes.has(route.id) ? "visible" : "none");
-      map.current.setPaintProperty(route.id, "line-width", route.id === selectedRoute ? 4 : 2.25);
-      map.current.setPaintProperty(route.id, "line-opacity", route.id === selectedRoute ? 1 : 0.38);
+      map.current.setPaintProperty(route.id, "line-width", route.id === selectedRoute ? 4.25 : 2.2);
+      map.current.setPaintProperty(route.id, "line-opacity", route.id === selectedRoute ? 1 : 0.42);
     });
   }, [enabledRoutes, ready, selectedRoute]);
 
   useEffect(() => {
     if (!ready || !map.current) return;
-    atmosphereLayers.forEach(({ id }) => map.current.setLayoutProperty(`atmosphere-${id}`, "visibility", atmosphere[id] ? "visible" : "none"));
-  }, [atmosphere, ready]);
+    layers.forEach(({ id, source }) => {
+      const ids = source ? [`atmosphere-${id}`] : ["current-fire", "current-fire-halo", "current-fire-clusters", "current-fire-cluster-count"];
+      ids.forEach((layerId) => map.current.setLayoutProperty(layerId, "visibility", activeLayers[id] ? "visible" : "none"));
+    });
+  }, [activeLayers, ready]);
 
   useEffect(() => {
     if (!ready || !map.current) return;
-    const current = { type: "FeatureCollection", features: (snapshot.currentDetections || []).map((point) => ({ type: "Feature", properties: point, geometry: { type: "Point", coordinates: [point.longitude, point.latitude] } })) };
-    const historical = snapshot.historicalBurnedArea || emptySnapshot.historicalBurnedArea;
-    map.current.getSource("historical-fire").setData({ ...historical, features: historical.features.filter((feature) => !fireDate || !feature.properties?.date || feature.properties.date <= fireDate) });
-    map.current.getSource("current-fire").setData(current);
-    const scenario = fireMode === "risk" ? snapshot.scenarios?.fireWeatherRisk : snapshot.scenarios?.burnedArea;
-    map.current.getSource("scenario-fire").setData(scenario?.data || { type: "FeatureCollection", features: [] });
-    map.current.setLayoutProperty("historical-fire", "visibility", fireMode === "observed" ? "visible" : "none");
-    ["current-fire", "current-fire-halo", "current-fire-clusters", "current-fire-cluster-count"].forEach((id) => map.current.setLayoutProperty(id, "visibility", fireMode === "current" ? "visible" : "none"));
-    map.current.setLayoutProperty("scenario-fire", "visibility", fireMode === "risk" || fireMode === "burned" ? "visible" : "none");
-  }, [fireDate, fireMode, ready, snapshot]);
+    map.current.getSource("current-fire").setData({ type: "FeatureCollection", features: (snapshot.currentDetections || []).map((point) => ({ type: "Feature", properties: point, geometry: { type: "Point", coordinates: [point.longitude, point.latitude] } })) });
+  }, [ready, snapshot]);
 
-  const route = POLLINATOR_ROUTES.find((item) => item.id === selectedRoute);
-  const source = getAtlasSource(route.sourceId);
-  const scenario = fireMode === "risk" ? snapshot.scenarios?.fireWeatherRisk : snapshot.scenarios?.burnedArea;
+  const route = selectedRoute ? POLLINATOR_ROUTES.find((item) => item.id === selectedRoute) : null;
+  const source = route ? getAtlasSource(route.sourceId) : null;
   const toggleRoute = (id) => setEnabledRoutes((current) => { const next = new Set(current); if (next.has(id)) next.delete(id); else next.add(id); return next; });
   const chooseRoute = (id) => { setSelectedRoute(id); setShowDetails(true); setShowRoutes(false); };
-  const cycleFire = () => setFireMode((current) => current === "current" ? "observed" : current === "observed" ? "risk" : current === "risk" ? "burned" : "current");
-  const toggleAtmosphere = (id) => setAtmosphere((current) => ({ ...current, [id]: !current[id] }));
+  const toggleLayer = (id) => setActiveLayers((current) => ({ ...current, [id]: !current[id] }));
+  const status = snapshot.isDemo ? t.demo : snapshot.updatedAt ? `${snapshot.status || "Live data"} - ${t.updated} ${new Date(snapshot.updatedAt).toLocaleString(language)}` : t.noData;
 
   return <main className={styles.page} data-atlas>
-    <header className={styles.topbar}><div><p className={styles.brand}>Universo Nahiara</p><h1>{t.title}</h1></div><div className={styles.liveStatus}><Radio aria-hidden="true" /><span>{snapshot.isDemo ? t.demo : snapshot.updatedAt ? `${snapshot.status || "Live data"} · ${t.updated} ${new Date(snapshot.updatedAt).toLocaleString(language)}` : t.noData}</span></div></header>
     <section className={styles.atlas} aria-label={t.title}>
       <div className={styles.map} ref={mapNode} />
-      <p className={styles.atmosphereSource}>{language === "es" ? "Atmósfera en directo: NASA Earthdata" : "Live atmosphere: NASA Earthdata"} · {atmosphereDate}</p>
-      <aside className={styles.rail} aria-label={t.layers}>
-        <button type="button" className={fireMode === "current" ? styles.activeLayer : ""} onClick={cycleFire} aria-label={t.current}><Flame /><span>{t.current}</span></button>
-        {atmosphereLayers.map(({ id, Icon, label, dataset }) => <button type="button" key={id} className={atmosphere[id] ? styles.activeLayer : ""} onClick={() => toggleAtmosphere(id)} aria-pressed={atmosphere[id]} title={dataset}><Icon /><span>{label[language]}</span></button>)}
-        <button type="button" className={showRoutes ? styles.activeLayer : ""} onClick={() => setShowRoutes((value) => !value)} aria-expanded={showRoutes}><Route /><span>{t.routes}</span></button>
-      </aside>
+      <div className={`${styles.loading} ${loading ? "" : styles.loadingDone}`} aria-hidden="true"><b>Pollinator Corridor Atlas</b></div>
+      <header className={styles.topbar}><div><h1>{t.title}</h1><p className={styles.intro}>{t.intro}</p><p className={styles.liveStatus}><Radio aria-hidden="true" />{status}</p></div><div className={styles.actions}><button type="button" className={showLayers ? styles.activeAction : ""} onClick={() => { setShowLayers((value) => !value); setShowRoutes(false); }} aria-expanded={showLayers}><Layers3 />{t.layers}</button><button type="button" className={showRoutes ? styles.activeAction : ""} onClick={() => { setShowRoutes((value) => !value); setShowLayers(false); }} aria-expanded={showRoutes}><Route />{t.routes}</button></div></header>
+      {showLayers ? <aside className={styles.layersPanel} aria-label={t.layers}><div className={styles.panelHeading}><span>{t.layers}</span><button type="button" onClick={() => setShowLayers(false)} aria-label={t.close}><X /></button></div>{layers.map(({ id, Icon, label }) => <button type="button" key={id} className={activeLayers[id] ? styles.layerOn : ""} onClick={() => toggleLayer(id)} aria-pressed={activeLayers[id]}><Icon /><span>{label(t)}</span><i aria-hidden="true" /></button>)}</aside> : null}
       {showRoutes ? <aside className={styles.routePicker} aria-label={t.routeList}><div className={styles.panelHeading}><span>{t.routeList}</span><button type="button" onClick={() => setShowRoutes(false)} aria-label={t.close}><X /></button></div><div className={styles.routeList}>{POLLINATOR_ROUTES.map((item) => <div key={item.id} className={selectedRoute === item.id ? styles.activeRoute : ""}><label><input type="checkbox" checked={enabledRoutes.has(item.id)} onChange={() => toggleRoute(item.id)} /><span style={{ background: item.color }} /></label><button type="button" onClick={() => chooseRoute(item.id)}>{item.name[language]}</button></div>)}</div></aside> : null}
-      {showDetails ? <article className={styles.detail} aria-live="polite"><button type="button" className={styles.closeDetail} onClick={() => setShowDetails(false)} aria-label={t.close}><X /></button><p className={styles.detailLabel}>{t.method}</p><h2>{route.name[language]}</h2><p className={styles.scientific}>{route.scientificName}</p><div className={styles.routeKey}><span style={{ background: route.color }} />{route.name[language]}</div><p>{route.method[language]}</p><p className={styles.warning}>{t.preliminary}</p><a href={`/sources/${source.id}`}>{t.source} <span aria-hidden="true">→</span></a></article> : <button type="button" className={styles.openDetail} onClick={() => setShowDetails(true)}><SlidersHorizontal /> {route.name[language]}</button>}
-      <footer className={styles.timeline}><div><span className={styles.timeLabel}>{t.time}</span><button type="button" className={fireMode === "current" ? styles.selectedTime : ""} onClick={() => setFireMode("current")}>{t.current}</button><button type="button" className={fireMode === "observed" ? styles.selectedTime : ""} onClick={() => setFireMode("observed")}>{t.observed}</button><button type="button" className={fireMode === "risk" ? styles.selectedTime : ""} onClick={() => setFireMode("risk")}>{t.risk}</button><button type="button" className={fireMode === "burned" ? styles.selectedTime : ""} onClick={() => setFireMode("burned")}>{t.burned}</button></div>{fireMode === "observed" && snapshot.timeline?.max ? <label>{t.date}<input type="date" min={snapshot.timeline.min || undefined} max={snapshot.timeline.max} value={fireDate || snapshot.timeline.max} onChange={(event) => setFireDate(event.target.value)} /></label> : null}{(fireMode === "risk" || fireMode === "burned") && <span className={styles.scenario}>{scenario ? `${scenario.model} · ${scenario.pathway} · ${scenario.period}` : t.scenarioUnavailable}</span>}</footer>
+      {route && showDetails ? <article className={styles.detail} aria-live="polite"><button type="button" className={styles.closeDetail} onClick={() => setShowDetails(false)} aria-label={t.close}><X /></button><p>{t.details}</p><h2>{route.name[language]}</h2><em>{route.scientificName}</em><span className={styles.routeKey}><i style={{ background: route.color }} />{route.method[language]}</span><a href={`/sources/${source.id}`}>{t.source} <span aria-hidden="true">-&gt;</span></a></article> : <p className={styles.mapPrompt}>{t.routes}</p>}
+      <p className={styles.atmosphereSource}>{t.atmosphere} - {atmosphereDate}</p>
     </section>
   </main>;
 }
