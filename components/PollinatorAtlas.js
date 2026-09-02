@@ -1,6 +1,7 @@
 "use client";
 
 import "maplibre-gl/dist/maplibre-gl.css";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Map, NavigationControl, Popup } from "maplibre-gl";
 import { Cloud, CloudRain, Flame, Layers3, Radio, Route, Wind, X } from "lucide-react";
@@ -21,6 +22,8 @@ const layers = [
   { id: "rain", Icon: CloudRain, label: (t) => t.rain, source: "IMERG_Precipitation_Rate_30min", matrix: "GoogleMapsCompatible_Level6", opacity: 0.7, format: "png" },
   { id: "smoke", Icon: Wind, label: (t) => t.smoke, source: "MODIS_Terra_Aerosol", matrix: "GoogleMapsCompatible_Level6", opacity: 0.58, format: "png" },
 ];
+const storyStages = { en: ["Pollination", "Refuel", "Crossing", "Arrival"], es: ["Polinización", "Recarga", "Travesía", "Llegada"] };
+const storyImage = (route) => `/pollinators/stories/${route.id}.png`;
 
 export default function PollinatorAtlas({ locale = "en" }) {
   const language = locale === "es" ? "es" : "en";
@@ -34,6 +37,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
   const [showRoutes, setShowRoutes] = useState(false);
   const [showLayers, setShowLayers] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [hoveredRoute, setHoveredRoute] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeLayers, setActiveLayers] = useState({ fire: true, clouds: false, rain: false, smoke: false });
 
@@ -60,6 +64,9 @@ export default function PollinatorAtlas({ locale = "en" }) {
       POLLINATOR_ROUTES.forEach((route) => {
         instance.addSource(route.id, { type: "geojson", data: route.geometry });
         instance.addLayer({ id: route.id, type: "line", source: route.id, paint: { "line-color": route.color, "line-width": 2.4, "line-opacity": 0.58, "line-blur": route.dashed ? 0.35 : 0.1, "line-dasharray": route.dashed ? [2, 2] : [1, 0] } });
+        instance.on("mouseenter", route.id, () => { instance.getCanvas().style.cursor = "pointer"; setHoveredRoute(route.id); });
+        instance.on("mouseleave", route.id, () => { instance.getCanvas().style.cursor = ""; setHoveredRoute(null); });
+        instance.on("click", route.id, () => { setSelectedRoute(route.id); setShowDetails(true); setShowRoutes(false); });
       });
       instance.addSource("current-fire", { type: "geojson", data: { type: "FeatureCollection", features: [] }, cluster: true, clusterRadius: 44 });
       instance.addLayer({ id: "current-fire-halo", type: "circle", source: "current-fire", filter: ["!", ["has", "point_count"]], paint: { "circle-color": "#fb4f14", "circle-radius": 10, "circle-opacity": 0.13, "circle-blur": 0.7 } });
@@ -116,6 +123,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
   }, [ready, snapshot]);
 
   const route = selectedRoute ? POLLINATOR_ROUTES.find((item) => item.id === selectedRoute) : null;
+  const hovered = hoveredRoute ? POLLINATOR_ROUTES.find((item) => item.id === hoveredRoute) : null;
   const source = route ? getAtlasSource(route.sourceId) : null;
   const toggleRoute = (id) => setEnabledRoutes((current) => { const next = new Set(current); if (next.has(id)) next.delete(id); else next.add(id); return next; });
   const chooseRoute = (id) => { setSelectedRoute(id); setShowDetails(true); setShowRoutes(false); };
@@ -129,7 +137,8 @@ export default function PollinatorAtlas({ locale = "en" }) {
       <header className={styles.topbar}><div><h1>{t.title}</h1><p className={styles.intro}>{t.intro}</p><p className={styles.liveStatus}><Radio aria-hidden="true" />{status}</p></div><div className={styles.actions}><button type="button" className={showLayers ? styles.activeAction : ""} onClick={() => { setShowLayers((value) => !value); setShowRoutes(false); }} aria-expanded={showLayers}><Layers3 />{t.layers}</button><button type="button" className={showRoutes ? styles.activeAction : ""} onClick={() => { setShowRoutes((value) => !value); setShowLayers(false); }} aria-expanded={showRoutes}><Route />{t.routes}</button></div></header>
       {showLayers ? <aside className={styles.layersPanel} aria-label={t.layers}><div className={styles.panelHeading}><span>{t.layers}</span><button type="button" onClick={() => setShowLayers(false)} aria-label={t.close}><X /></button></div>{layers.map(({ id, Icon, label }) => <button type="button" key={id} className={activeLayers[id] ? styles.layerOn : ""} onClick={() => toggleLayer(id)} aria-pressed={activeLayers[id]}><Icon /><span>{label(t)}</span><i aria-hidden="true" /></button>)}</aside> : null}
       {showRoutes ? <aside className={styles.routePicker} aria-label={t.routeList}><div className={styles.panelHeading}><span>{t.routeList}</span><button type="button" onClick={() => setShowRoutes(false)} aria-label={t.close}><X /></button></div><div className={styles.routeList}>{POLLINATOR_ROUTES.map((item) => <div key={item.id} className={selectedRoute === item.id ? styles.activeRoute : ""}><label><input type="checkbox" checked={enabledRoutes.has(item.id)} onChange={() => toggleRoute(item.id)} /><span style={{ background: item.color }} /></label><button type="button" onClick={() => chooseRoute(item.id)}>{item.name[language]}</button></div>)}</div></aside> : null}
-      {route && showDetails ? <article className={styles.detail} aria-live="polite"><button type="button" className={styles.closeDetail} onClick={() => setShowDetails(false)} aria-label={t.close}><X /></button><p>{t.details}</p><h2>{route.name[language]}</h2><em>{route.scientificName}</em><span className={styles.routeKey}><i style={{ background: route.color }} />{route.method[language]}</span><strong className={styles.routeSeason}>{route.season?.[language]}</strong><span className={styles.routeSummary}>{route.summary?.[language]}</span><span className={styles.routeCaveat}>{source.status}</span><a href={`/sources/${source.id}`}>{t.source} <span aria-hidden="true">-&gt;</span></a></article> : <p className={styles.mapPrompt}>{t.routes}</p>}
+      {hovered && !showDetails ? <aside className={styles.glimpse} aria-live="polite"><Image src={storyImage(hovered)} alt="" width={640} height={640} sizes="(max-width:760px) 32vw, 124px" /><div><span>{hovered.scientificName}</span><strong>{hovered.name[language]}</strong><p>{hovered.summary?.[language]}</p></div></aside> : null}
+      {route && showDetails ? <article className={styles.detail} aria-live="polite"><button type="button" className={styles.closeDetail} onClick={() => setShowDetails(false)} aria-label={t.close}><X /></button><p>{t.details}</p><h2>{route.name[language]}</h2><em>{route.scientificName}</em><span className={styles.routeKey}><i style={{ background: route.color }} />{route.method[language]}</span><strong className={styles.routeSeason}>{route.season?.[language]}</strong><span className={styles.routeSummary}>{route.summary?.[language]}</span><section className={styles.storyScenes} aria-label={`${route.name[language]} journey`}><div role="img" aria-label={`${storyStages[language][0]}: ${route.name[language]}`} style={{ backgroundImage: `url(${storyImage(route)})`, backgroundPosition: "0 0" }}><span>{storyStages[language][0]}</span></div><div role="img" aria-label={`${storyStages[language][1]}: ${route.name[language]}`} style={{ backgroundImage: `url(${storyImage(route)})`, backgroundPosition: "100% 0" }}><span>{storyStages[language][1]}</span></div><div role="img" aria-label={`${storyStages[language][2]}: ${route.name[language]}`} style={{ backgroundImage: `url(${storyImage(route)})`, backgroundPosition: "0 100%" }}><span>{storyStages[language][2]}</span></div><div role="img" aria-label={`${storyStages[language][3]}: ${route.name[language]}`} style={{ backgroundImage: `url(${storyImage(route)})`, backgroundPosition: "100% 100%" }}><span>{storyStages[language][3]}</span></div></section><span className={styles.routeCaveat}>{source.status}</span><a href={`/sources/${source.id}`}>{t.source} <span aria-hidden="true">-&gt;</span></a></article> : <p className={styles.mapPrompt}>{t.routes}</p>}
       <p className={styles.atmosphereSource}>{t.atmosphere} - {atmosphereDate}</p>
     </section>
   </main>;
