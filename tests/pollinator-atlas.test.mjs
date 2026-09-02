@@ -5,6 +5,7 @@ const atlas = await readFile(new URL("../lib/pollinatorAtlas.js", import.meta.ur
 const map = await readFile(new URL("../components/PollinatorAtlas.js", import.meta.url), "utf8");
 const mock = await readFile(new URL("../components/mockFireSnapshot.js", import.meta.url), "utf8");
 const cron = await readFile(new URL("../app/api/cron/refresh-fire-data/route.js", import.meta.url), "utf8");
+const snapshotApi = await readFile(new URL("../app/api/fire-snapshot/route.js", import.meta.url), "utf8");
 const database = await readFile(new URL("../scripts/setup-atlas-db.sql", import.meta.url), "utf8");
 
 assert.equal((atlas.match(/id: "/g) || []).length, 25, "atlas must keep ten routes and fifteen source records");
@@ -14,6 +15,8 @@ assert.match(cron, /CRON_SECRET/);
 assert.match(cron, /FIRMS_MAP_KEY/);
 assert.match(cron, /ATLAS_FIRE_WEATHER_RISK_URL/);
 assert.match(cron, /ATLAS_PROJECTED_BURNED_AREA_URL/);
+assert.match(snapshotApi, /eonet\.gsfc\.nasa\.gov\/api\/v3\/events/);
+assert.match(snapshotApi, /Live NASA EONET open wildfire events/);
 assert.match(map, /projected-fire-hatch/);
 assert.match(map, /MOCK_FIRE_SNAPSHOT/);
 assert.match(map, /Demo fire data/);

@@ -42,7 +42,9 @@ ATLAS_FIRE_WEATHER_RISK_URL=https://your-reviewed-data-host/fire-weather-risk.js
 ATLAS_PROJECTED_BURNED_AREA_URL=https://your-reviewed-data-host/projected-burned-area.json
 ```
 
-`ATLAS_HISTORICAL_BURNED_AREA_URL` is an approved GeoJSON `FeatureCollection`; each feature must have a `properties.date` value in `YYYY-MM-DD` form. Without these variables, the map stays available and explicitly reports that no approved live snapshot exists.
+`ATLAS_HISTORICAL_BURNED_AREA_URL` is an approved GeoJSON `FeatureCollection`; each feature must have a `properties.date` value in `YYYY-MM-DD` form. Without the production variables, the map uses NASA EONET's public open-wildfire events as a clearly labelled real-event fallback; FIRMS remains the higher-detail active-fire feed.
+
+Cloud, rainfall, and aerosol overlays use public NASA Earthdata GIBS tiles directly in the map. Aerosols are shown as a smoke indicator, not a verified smoke-plume boundary.
 
 Each future-dataset URL must return `{ "model", "pathway", "period", "data" }`, where `data` is a GeoJSON `FeatureCollection`. The map rejects incomplete scenarios rather than presenting them as observed fire data.
 
