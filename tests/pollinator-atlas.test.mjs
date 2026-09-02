@@ -8,7 +8,11 @@ const cron = await readFile(new URL("../app/api/cron/refresh-fire-data/route.js"
 const snapshotApi = await readFile(new URL("../app/api/fire-snapshot/route.js", import.meta.url), "utf8");
 const database = await readFile(new URL("../scripts/setup-atlas-db.sql", import.meta.url), "utf8");
 
-assert.equal((atlas.match(/id: "/g) || []).length, 25, "atlas must keep ten routes and fifteen source records");
+assert.equal((atlas.match(/id: "/g) || []).length, 37, "atlas must keep sixteen routes and twenty-one source records");
+assert.match(atlas, /migrant-hoverflies/);
+assert.match(atlas, /mexican-long-nosed-bat/);
+assert.match(map, /routeSummary/);
+assert.match(map, /routeCaveat/);
 assert.match(map, /Live layers/);
 assert.match(map, /Pollinator Corridor Atlas/);
 assert.match(map, /instance\.flyTo/);
