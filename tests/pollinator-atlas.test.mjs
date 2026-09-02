@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 
 const atlas = await readFile(new URL("../lib/pollinatorAtlas.js", import.meta.url), "utf8");
 const map = await readFile(new URL("../components/PollinatorAtlas.js", import.meta.url), "utf8");
+const styles = await readFile(new URL("../components/PollinatorAtlas.module.css", import.meta.url), "utf8");
 const mock = await readFile(new URL("../components/mockFireSnapshot.js", import.meta.url), "utf8");
 const cron = await readFile(new URL("../app/api/cron/refresh-fire-data/route.js", import.meta.url), "utf8");
 const snapshotApi = await readFile(new URL("../app/api/fire-snapshot/route.js", import.meta.url), "utf8");
@@ -18,6 +19,9 @@ assert.match(map, /setHoveredRoute/);
 assert.match(map, /pollinators\/stories/);
 assert.match(map, /requestAnimationFrame\(pulse\)/);
 assert.match(map, /prefers-reduced-motion: reduce/);
+assert.match(map, /new Marker/);
+assert.match(map, /fireMarker/);
+assert.match(styles, /fire-flame-sprite\.png/);
 assert.match(map, /Live layers/);
 assert.match(map, /Pollinator Corridor Atlas/);
 assert.match(map, /instance\.flyTo/);

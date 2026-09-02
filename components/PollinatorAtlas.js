@@ -3,7 +3,7 @@
 import "maplibre-gl/dist/maplibre-gl.css";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { Map, NavigationControl, Popup } from "maplibre-gl";
+import { Map as MapLibre, Marker, NavigationControl, Popup } from "maplibre-gl";
 import { Cloud, CloudRain, Flame, Layers3, Radio, Route, Wind, X } from "lucide-react";
 import { POLLINATOR_ROUTES, getAtlasSource } from "../lib/pollinatorAtlas";
 import { MOCK_FIRE_SNAPSHOT } from "./mockFireSnapshot";
@@ -30,6 +30,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
   const t = copy[language];
   const mapNode = useRef(null);
   const map = useRef(null);
+  const fireMarkers = useRef(new Map());
   const [ready, setReady] = useState(false);
   const [selectedRoute, setSelectedRoute] = useState(null);
   const [enabledRoutes, setEnabledRoutes] = useState(() => new Set(POLLINATOR_ROUTES.map((route) => route.id)));
@@ -54,7 +55,8 @@ export default function PollinatorAtlas({ locale = "en" }) {
 
   useEffect(() => {
     if (map.current || !mapNode.current) return;
-    const instance = new Map({ container: mapNode.current, style: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json", center: [8, 20], zoom: 0.65, attributionControl: false });
+    const instance = new MapLibre({ container: mapNode.current, style: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json", center: [8, 20], zoom: 0.65, attributionControl: false });
+    const markers = fireMarkers.current;
     instance.addControl(new NavigationControl({ showCompass: false }), "bottom-right");
     instance.on("load", () => {
       layers.filter(({ source }) => source).forEach(({ id, source, matrix, opacity, format }) => {
@@ -72,7 +74,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
       instance.addLayer({ id: "current-fire-halo", type: "circle", source: "current-fire", filter: ["!", ["has", "point_count"]], paint: { "circle-color": "#fb4f14", "circle-radius": 10, "circle-opacity": 0.13, "circle-blur": 0.7 } });
       instance.addLayer({ id: "current-fire-clusters", type: "circle", source: "current-fire", filter: ["has", "point_count"], paint: { "circle-color": "#fb4f14", "circle-radius": ["step", ["get", "point_count"], 15, 100, 21, 1000, 28], "circle-opacity": 0.84 } });
       instance.addLayer({ id: "current-fire-cluster-count", type: "symbol", source: "current-fire", filter: ["has", "point_count"], layout: { "text-field": ["get", "point_count_abbreviated"], "text-size": 11 }, paint: { "text-color": "#fff4d6" } });
-      instance.addLayer({ id: "current-fire", type: "circle", source: "current-fire", filter: ["!", ["has", "point_count"]], paint: { "circle-color": "#fb4f14", "circle-radius": 4.5, "circle-stroke-color": "#fff4d6", "circle-stroke-width": 1.2 } });
+      instance.addLayer({ id: "current-fire", type: "circle", source: "current-fire", filter: ["!", ["has", "point_count"]], paint: { "circle-opacity": 0, "circle-radius": 13 } });
       instance.on("click", "current-fire", (event) => {
         const point = event.features?.[0];
         if (!point) return;
@@ -97,7 +99,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
       instance.flyTo({ center: [8, 20], zoom: 1.35, duration: 2600, essential: false });
       window.setTimeout(() => setLoading(false), 1150);
     });
-    return () => instance.remove();
+    return () => { markers.forEach((marker) => marker.remove()); instance.remove(); };
   }, []);
 
   useEffect(() => {
@@ -123,19 +125,20 @@ export default function PollinatorAtlas({ locale = "en" }) {
   }, [ready, snapshot]);
 
   useEffect(() => {
-    if (!ready || !activeLayers.fire || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let frame;
-    const pulse = (time) => {
-      const glow = (Math.sin(time / 700) + 1) / 2;
-      if (map.current?.getLayer("current-fire-halo")) {
-        map.current.setPaintProperty("current-fire-halo", "circle-radius", 8 + glow * 8);
-        map.current.setPaintProperty("current-fire-halo", "circle-opacity", 0.08 + glow * 0.14);
-      }
-      frame = window.requestAnimationFrame(pulse);
-    };
-    frame = window.requestAnimationFrame(pulse);
-    return () => window.cancelAnimationFrame(frame);
-  }, [activeLayers.fire, ready]);
+    if (!ready || !map.current) return;
+    if (!activeLayers.fire) { fireMarkers.current.forEach((marker) => marker.remove()); fireMarkers.current.clear(); return; }
+    const detections = snapshot.currentDetections || [];
+    const ids = new Set(detections.map((point) => point.eventId || `${point.longitude}:${point.latitude}`));
+    fireMarkers.current.forEach((marker, id) => { if (!ids.has(id)) { marker.remove(); fireMarkers.current.delete(id); } });
+    detections.forEach((point) => {
+      const id = point.eventId || `${point.longitude}:${point.latitude}`;
+      if (fireMarkers.current.has(id)) return;
+      const element = document.createElement("span");
+      element.className = styles.fireMarker;
+      element.setAttribute("aria-hidden", "true");
+      fireMarkers.current.set(id, new Marker({ element, anchor: "bottom" }).setLngLat([point.longitude, point.latitude]).addTo(map.current));
+    });
+  }, [activeLayers.fire, ready, snapshot]);
 
   useEffect(() => {
     if (!ready || !activeLayers.fire || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
