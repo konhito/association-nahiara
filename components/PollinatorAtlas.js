@@ -122,6 +122,36 @@ export default function PollinatorAtlas({ locale = "en" }) {
     map.current.getSource("current-fire").setData({ type: "FeatureCollection", features: (snapshot.currentDetections || []).map((point) => ({ type: "Feature", properties: point, geometry: { type: "Point", coordinates: [point.longitude, point.latitude] } })) });
   }, [ready, snapshot]);
 
+  useEffect(() => {
+    if (!ready || !activeLayers.fire || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let frame;
+    const pulse = (time) => {
+      const glow = (Math.sin(time / 700) + 1) / 2;
+      if (map.current?.getLayer("current-fire-halo")) {
+        map.current.setPaintProperty("current-fire-halo", "circle-radius", 8 + glow * 8);
+        map.current.setPaintProperty("current-fire-halo", "circle-opacity", 0.08 + glow * 0.14);
+      }
+      frame = window.requestAnimationFrame(pulse);
+    };
+    frame = window.requestAnimationFrame(pulse);
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeLayers.fire, ready]);
+
+  useEffect(() => {
+    if (!ready || !activeLayers.fire || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let frame;
+    const pulse = (time) => {
+      const glow = (Math.sin(time / 700) + 1) / 2;
+      if (map.current?.getLayer("current-fire-halo")) {
+        map.current.setPaintProperty("current-fire-halo", "circle-radius", 8 + glow * 8);
+        map.current.setPaintProperty("current-fire-halo", "circle-opacity", 0.08 + glow * 0.14);
+      }
+      frame = window.requestAnimationFrame(pulse);
+    };
+    frame = window.requestAnimationFrame(pulse);
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeLayers.fire, ready]);
+
   const route = selectedRoute ? POLLINATOR_ROUTES.find((item) => item.id === selectedRoute) : null;
   const hovered = hoveredRoute ? POLLINATOR_ROUTES.find((item) => item.id === hoveredRoute) : null;
   const source = route ? getAtlasSource(route.sourceId) : null;

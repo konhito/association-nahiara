@@ -16,6 +16,8 @@ assert.match(map, /routeCaveat/);
 assert.match(map, /storyScenes/);
 assert.match(map, /setHoveredRoute/);
 assert.match(map, /pollinators\/stories/);
+assert.match(map, /requestAnimationFrame\(pulse\)/);
+assert.match(map, /prefers-reduced-motion: reduce/);
 assert.match(map, /Live layers/);
 assert.match(map, /Pollinator Corridor Atlas/);
 assert.match(map, /instance\.flyTo/);
