@@ -21,6 +21,7 @@ assert.match(styles, /prefers-reduced-motion/);
 assert.match(map, /new Marker/);
 assert.match(map, /fireMarker/);
 assert.match(styles, /fire-flame-sprite\.png/);
+assert.match(styles, /\.fireMarker \{[^}]*display:block/);
 assert.match(map, /Live layers/);
 assert.match(map, /Pollinator Corridor Atlas/);
 assert.match(map, /instance\.flyTo/);
