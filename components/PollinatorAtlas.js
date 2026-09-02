@@ -71,7 +71,6 @@ export default function PollinatorAtlas({ locale = "en" }) {
         instance.on("click", route.id, () => { setSelectedRoute(route.id); setShowDetails(true); setShowRoutes(false); });
       });
       instance.addSource("current-fire", { type: "geojson", data: { type: "FeatureCollection", features: [] }, cluster: true, clusterRadius: 44 });
-      instance.addLayer({ id: "current-fire-halo", type: "circle", source: "current-fire", filter: ["!", ["has", "point_count"]], paint: { "circle-color": "#fb4f14", "circle-radius": 10, "circle-opacity": 0.13, "circle-blur": 0.7 } });
       instance.addLayer({ id: "current-fire-clusters", type: "circle", source: "current-fire", filter: ["has", "point_count"], paint: { "circle-color": "#fb4f14", "circle-radius": ["step", ["get", "point_count"], 15, 100, 21, 1000, 28], "circle-opacity": 0.84 } });
       instance.addLayer({ id: "current-fire-cluster-count", type: "symbol", source: "current-fire", filter: ["has", "point_count"], layout: { "text-field": ["get", "point_count_abbreviated"], "text-size": 11 }, paint: { "text-color": "#fff4d6" } });
       instance.addLayer({ id: "current-fire", type: "circle", source: "current-fire", filter: ["!", ["has", "point_count"]], paint: { "circle-opacity": 0, "circle-radius": 13 } });
@@ -114,7 +113,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
   useEffect(() => {
     if (!ready || !map.current) return;
     layers.forEach(({ id, source }) => {
-      const ids = source ? [`atmosphere-${id}`] : ["current-fire", "current-fire-halo", "current-fire-clusters", "current-fire-cluster-count"];
+      const ids = source ? [`atmosphere-${id}`] : ["current-fire", "current-fire-clusters", "current-fire-cluster-count"];
       ids.forEach((layerId) => map.current.setLayoutProperty(layerId, "visibility", activeLayers[id] ? "visible" : "none"));
     });
   }, [activeLayers, ready]);
@@ -139,21 +138,6 @@ export default function PollinatorAtlas({ locale = "en" }) {
       fireMarkers.current.set(id, new Marker({ element, anchor: "bottom" }).setLngLat([point.longitude, point.latitude]).addTo(map.current));
     });
   }, [activeLayers.fire, ready, snapshot]);
-
-  useEffect(() => {
-    if (!ready || !activeLayers.fire || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let frame;
-    const pulse = (time) => {
-      const glow = (Math.sin(time / 700) + 1) / 2;
-      if (map.current?.getLayer("current-fire-halo")) {
-        map.current.setPaintProperty("current-fire-halo", "circle-radius", 8 + glow * 8);
-        map.current.setPaintProperty("current-fire-halo", "circle-opacity", 0.08 + glow * 0.14);
-      }
-      frame = window.requestAnimationFrame(pulse);
-    };
-    frame = window.requestAnimationFrame(pulse);
-    return () => window.cancelAnimationFrame(frame);
-  }, [activeLayers.fire, ready]);
 
   const route = selectedRoute ? POLLINATOR_ROUTES.find((item) => item.id === selectedRoute) : null;
   const hovered = hoveredRoute ? POLLINATOR_ROUTES.find((item) => item.id === hoveredRoute) : null;
