@@ -3,6 +3,39 @@ import { FALLBACK_FIRE_SNAPSHOT } from "../../../lib/fireSnapshot";
 import { hasAtlasStorage, readAtlasSnapshot } from "../../../lib/atlasStorage";
 
 export const revalidate = 300;
+const FIRMS_24H_URL = "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_Global_24h.csv";
+const MAX_DETECTIONS = 2000;
+
+function sampleDetections(detections) {
+  const step = Math.ceil(detections.length / MAX_DETECTIONS);
+  return step > 1 ? detections.filter((_, index) => index % step === 0).slice(0, MAX_DETECTIONS) : detections;
+}
+
+function compactSnapshot(snapshot) {
+  const detections = snapshot.currentDetections || [];
+  return { ...snapshot, currentDetections: sampleDetections(detections), totalDetections: snapshot.totalDetections || detections.length };
+}
+
+async function readFirmsWildfires() {
+  const response = await fetch(FIRMS_24H_URL, { next: { revalidate } });
+  if (!response.ok) throw new Error(`NASA FIRMS returned ${response.status}`);
+  const [header, ...rows] = (await response.text()).trim().split(/\r?\n/).map((line) => line.split(","));
+  const column = (name) => header.indexOf(name);
+  const latitude = column("latitude");
+  const longitude = column("longitude");
+  const date = column("acq_date");
+  const time = column("acq_time");
+  const confidence = column("confidence");
+  const frp = column("frp");
+  const detections = rows.flatMap((row) => {
+    const lat = Number(row[latitude]);
+    const lng = Number(row[longitude]);
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return [];
+    const observedAt = date >= 0 && time >= 0 ? `${row[date]} ${row[time]?.padStart(4, "0")} UTC` : null;
+    return [{ longitude: lng, latitude: lat, detectedAt: observedAt, confidence: row[confidence] || null, frp: Number(row[frp]) || null, title: "NASA FIRMS active fire", eventId: `firms-${row[date]}-${row[time]}-${lat}-${lng}`, sourceUrl: "https://firms.modaps.eosdis.nasa.gov/", dataSource: "NASA FIRMS VIIRS" }];
+  });
+  return { ...FALLBACK_FIRE_SNAPSHOT, updatedAt: new Date().toISOString(), status: "Live NASA FIRMS 24-hour active-fire sample", currentDetections: sampleDetections(detections), totalDetections: detections.length };
+}
 
 async function readEonetWildfires() {
   const response = await fetch("https://eonet.gsfc.nasa.gov/api/v3/events?category=wildfires&status=open&limit=100", { next: { revalidate } });
@@ -19,15 +52,20 @@ async function readEonetWildfires() {
 export async function GET() {
   if (!hasAtlasStorage()) {
     try {
-      return NextResponse.json(await readEonetWildfires(), { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400" } });
+      return NextResponse.json(await readFirmsWildfires(), { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400" } });
     } catch (error) {
-      console.error("Atlas EONET fallback failed", error);
-      return NextResponse.json(FALLBACK_FIRE_SNAPSHOT);
+      console.error("Atlas FIRMS fallback failed", error);
+      try {
+        return NextResponse.json(await readEonetWildfires(), { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400" } });
+      } catch (fallbackError) {
+        console.error("Atlas EONET fallback failed", fallbackError);
+        return NextResponse.json(FALLBACK_FIRE_SNAPSHOT);
+      }
     }
   }
 
   try {
-    return NextResponse.json(await readAtlasSnapshot(), { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400" } });
+    return NextResponse.json(compactSnapshot(await readAtlasSnapshot()), { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400" } });
   } catch (error) {
     console.error("Atlas snapshot read failed", error);
     try {
