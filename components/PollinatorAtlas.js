@@ -60,10 +60,12 @@ export default function PollinatorAtlas({ locale = "en" }) {
     instance.on("load", () => {
       POLLINATOR_ROUTES.forEach((route) => {
         instance.addSource(route.id, { type: "geojson", data: route.geometry });
+        instance.addLayer({ id: `${route.id}-hit`, type: "line", source: route.id, paint: { "line-color": "#ffffff", "line-width": 18, "line-opacity": 0.01 } });
         instance.addLayer({ id: route.id, type: "line", source: route.id, paint: { "line-color": route.color, "line-width": 2.4, "line-opacity": 0.58, "line-blur": route.dashed ? 0.35 : 0.1, "line-dasharray": route.dashed ? [2, 2] : [1, 0] } });
-        instance.on("mouseenter", route.id, () => { instance.getCanvas().style.cursor = "pointer"; setHoveredRoute(route.id); });
-        instance.on("mouseleave", route.id, () => { instance.getCanvas().style.cursor = ""; setHoveredRoute(null); });
-        instance.on("click", route.id, () => { setSelectedRoute(route.id); setShowDetails(true); setShowRoutes(false); });
+        instance.on("mouseenter", `${route.id}-hit`, (event) => { instance.getCanvas().style.cursor = "pointer"; setHoveredRoute({ id: route.id, x: event.point.x, y: event.point.y }); });
+        instance.on("mousemove", `${route.id}-hit`, (event) => setHoveredRoute({ id: route.id, x: event.point.x, y: event.point.y }));
+        instance.on("mouseleave", `${route.id}-hit`, () => { instance.getCanvas().style.cursor = ""; setHoveredRoute(null); });
+        instance.on("click", `${route.id}-hit`, () => { setSelectedRoute(route.id); setShowDetails(true); setShowRoutes(false); });
       });
       instance.addSource("current-fire", { type: "geojson", data: { type: "FeatureCollection", features: [] }, cluster: true, clusterMaxZoom: 4, clusterRadius: 52 });
       instance.addLayer({ id: "current-fire-clusters", type: "circle", source: "current-fire", filter: ["has", "point_count"], paint: { "circle-color": "#e76f2e", "circle-radius": ["step", ["get", "point_count"], 7, 100, 11, 1000, 16], "circle-opacity": 0.78, "circle-stroke-color": "#ffd18a", "circle-stroke-width": 0.75 } });
@@ -99,11 +101,13 @@ export default function PollinatorAtlas({ locale = "en" }) {
   useEffect(() => {
     if (!ready || !map.current) return;
     POLLINATOR_ROUTES.forEach((route) => {
+      if (!map.current.getLayer(`${route.id}-hit`) || !map.current.getLayer(route.id)) return;
+      map.current.setLayoutProperty(`${route.id}-hit`, "visibility", enabledRoutes.has(route.id) ? "visible" : "none");
       map.current.setLayoutProperty(route.id, "visibility", enabledRoutes.has(route.id) ? "visible" : "none");
-      map.current.setPaintProperty(route.id, "line-width", route.id === selectedRoute ? 4.25 : 2.2);
-      map.current.setPaintProperty(route.id, "line-opacity", route.id === selectedRoute ? 1 : 0.42);
+      map.current.setPaintProperty(route.id, "line-width", route.id === selectedRoute || route.id === hoveredRoute?.id ? 4.25 : 2.2);
+      map.current.setPaintProperty(route.id, "line-opacity", route.id === selectedRoute || route.id === hoveredRoute?.id ? 1 : 0.42);
     });
-  }, [enabledRoutes, ready, selectedRoute]);
+  }, [enabledRoutes, hoveredRoute, ready, selectedRoute]);
 
   useEffect(() => {
     if (!ready || !map.current) return;
@@ -120,8 +124,8 @@ export default function PollinatorAtlas({ locale = "en" }) {
 
   useEffect(() => {
     if (!ready || !map.current) return;
-    if (!activeLayers.fire || mapZoom < 5) { fireMarkers.current.forEach((marker) => marker.remove()); fireMarkers.current.clear(); return; }
-    const detections = (snapshot.currentDetections || []).filter((point) => map.current.getBounds().contains([point.longitude, point.latitude])).slice(0, 40);
+    if (!activeLayers.fire || mapZoom < 2.75) { fireMarkers.current.forEach((marker) => marker.remove()); fireMarkers.current.clear(); return; }
+    const detections = (snapshot.currentDetections || []).filter((point) => map.current.getBounds().contains([point.longitude, point.latitude])).slice(0, 24);
     const ids = new Set(detections.map((point) => point.eventId || `${point.longitude}:${point.latitude}`));
     fireMarkers.current.forEach((marker, id) => { if (!ids.has(id)) { marker.remove(); fireMarkers.current.delete(id); } });
     detections.forEach((point) => {
@@ -130,12 +134,16 @@ export default function PollinatorAtlas({ locale = "en" }) {
       const element = document.createElement("span");
       element.className = styles.fireMarker;
       element.setAttribute("aria-hidden", "true");
+      const flame = document.createElement("span");
+      flame.className = styles.fireFlame;
+      element.append(flame);
       fireMarkers.current.set(id, new Marker({ element, anchor: "bottom" }).setLngLat([point.longitude, point.latitude]).addTo(map.current));
     });
   }, [activeLayers.fire, mapZoom, ready, snapshot, viewVersion]);
 
   const route = selectedRoute ? POLLINATOR_ROUTES.find((item) => item.id === selectedRoute) : null;
-  const hovered = hoveredRoute ? POLLINATOR_ROUTES.find((item) => item.id === hoveredRoute) : null;
+  const hovered = hoveredRoute ? POLLINATOR_ROUTES.find((item) => item.id === hoveredRoute.id) : null;
+  const hoverCardStyle = hoveredRoute ? { left: `${Math.max(18, Math.min(hoveredRoute.x + 18, window.innerWidth - 440))}px`, top: `${Math.max(126, Math.min(hoveredRoute.y + 18, window.innerHeight - 210))}px` } : undefined;
   const source = route ? getAtlasSource(route.sourceId) : null;
   const toggleRoute = (id) => setEnabledRoutes((current) => { const next = new Set(current); if (next.has(id)) next.delete(id); else next.add(id); return next; });
   const chooseRoute = (id) => { setSelectedRoute(id); setShowDetails(true); setShowRoutes(false); };
@@ -149,7 +157,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
       <header className={styles.topbar}><div><h1>{t.title}</h1><p className={styles.intro}>{t.intro}</p><p className={styles.liveStatus}><Radio aria-hidden="true" />{status}</p></div><div className={styles.actions}><button type="button" className={showLayers ? styles.activeAction : ""} onClick={() => { setShowLayers((value) => !value); setShowRoutes(false); }} aria-expanded={showLayers}><Layers3 />{t.layers}</button><button type="button" className={showRoutes ? styles.activeAction : ""} onClick={() => { setShowRoutes((value) => !value); setShowLayers(false); }} aria-expanded={showRoutes}><Route />{t.routes}</button></div></header>
       {showLayers ? <aside className={styles.layersPanel} aria-label={t.layers}><div className={styles.panelHeading}><span>{t.layers}</span><button type="button" onClick={() => setShowLayers(false)} aria-label={t.close}><X /></button></div>{layers.map(({ id, Icon, label }) => <button type="button" key={id} className={activeLayers[id] ? styles.layerOn : ""} onClick={() => toggleLayer(id)} aria-pressed={activeLayers[id]}><Icon /><span>{label(t)}</span><i aria-hidden="true" /></button>)}</aside> : null}
       {showRoutes ? <aside className={styles.routePicker} aria-label={t.routeList}><div className={styles.panelHeading}><span>{t.routeList}</span><button type="button" onClick={() => setShowRoutes(false)} aria-label={t.close}><X /></button></div><div className={styles.routeList}>{POLLINATOR_ROUTES.map((item) => <div key={item.id} className={selectedRoute === item.id ? styles.activeRoute : ""}><label><input type="checkbox" checked={enabledRoutes.has(item.id)} onChange={() => toggleRoute(item.id)} /><span style={{ background: item.color }} /></label><button type="button" onClick={() => chooseRoute(item.id)}>{item.name[language]}</button></div>)}</div></aside> : null}
-      {hovered && !showDetails ? <aside className={styles.glimpse} aria-live="polite"><Image src={storyImage(hovered)} alt="" width={640} height={640} sizes="(max-width:760px) 32vw, 124px" /><div><span>{hovered.scientificName}</span><strong>{hovered.name[language]}</strong><p>{hovered.summary?.[language]}</p></div></aside> : null}
+      {hovered && !showDetails ? <aside className={styles.glimpse} style={hoverCardStyle} aria-live="polite"><Image src={storyImage(hovered)} alt="" width={640} height={640} sizes="(max-width:760px) 32vw, 124px" /><div><span>{hovered.scientificName}</span><strong>{hovered.name[language]}</strong><p>{hovered.summary?.[language]}</p></div></aside> : null}
       {route && showDetails ? <article className={styles.detail} aria-live="polite"><button type="button" className={styles.closeDetail} onClick={() => setShowDetails(false)} aria-label={t.close}><X /></button><p>{t.details}</p><h2>{route.name[language]}</h2><em>{route.scientificName}</em><span className={styles.routeKey}><i style={{ background: route.color }} />{route.method[language]}</span><strong className={styles.routeSeason}>{route.season?.[language]}</strong><span className={styles.routeSummary}>{route.summary?.[language]}</span><section className={styles.storyScenes} aria-label={`${route.name[language]} journey`}><div role="img" aria-label={`${storyStages[language][0]}: ${route.name[language]}`} style={{ backgroundImage: `url(${storyImage(route)})`, backgroundPosition: "0 0" }}><span>{storyStages[language][0]}</span></div><div role="img" aria-label={`${storyStages[language][1]}: ${route.name[language]}`} style={{ backgroundImage: `url(${storyImage(route)})`, backgroundPosition: "100% 0" }}><span>{storyStages[language][1]}</span></div><div role="img" aria-label={`${storyStages[language][2]}: ${route.name[language]}`} style={{ backgroundImage: `url(${storyImage(route)})`, backgroundPosition: "0 100%" }}><span>{storyStages[language][2]}</span></div><div role="img" aria-label={`${storyStages[language][3]}: ${route.name[language]}`} style={{ backgroundImage: `url(${storyImage(route)})`, backgroundPosition: "100% 100%" }}><span>{storyStages[language][3]}</span></div></section><span className={styles.routeCaveat}>{source.status}</span><a href={`/sources/${source.id}`}>{t.source} <span aria-hidden="true">-&gt;</span></a></article> : <p className={styles.mapPrompt}>{t.routes}</p>}
       <p className={styles.atmosphereSource}>{t.atmosphere}</p>
     </section>
