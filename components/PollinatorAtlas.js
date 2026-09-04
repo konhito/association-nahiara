@@ -78,7 +78,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
         instance.on("mouseenter", `${route.id}-hit`, (event) => { instance.getCanvas().style.cursor = "pointer"; setHoveredRoute({ id: route.id, x: event.point.x, y: event.point.y }); });
         instance.on("mousemove", `${route.id}-hit`, (event) => setHoveredRoute({ id: route.id, x: event.point.x, y: event.point.y }));
         instance.on("mouseleave", `${route.id}-hit`, () => { instance.getCanvas().style.cursor = ""; setHoveredRoute(null); });
-        instance.on("click", `${route.id}-hit`, () => { setSelectedRoute(route.id); setJourneyProgress(0); setJourneyPlaying(false); setShowDetails(true); setShowRoutes(false); });
+        instance.on("click", `${route.id}-hit`, () => { setSelectedRoute(route.id); setJourneyProgress(0); setJourneyPlaying(false); setShowDetails(false); setShowRoutes(false); });
       });
       instance.addSource("route-pulse", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
       instance.addLayer({ id: "route-pulse-halo", type: "circle", source: "route-pulse", paint: { "circle-color": "#d6b56d", "circle-radius": 11, "circle-opacity": 0.22, "circle-blur": 0.6 } });
@@ -182,7 +182,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
   const source = route ? getAtlasSource(route.sourceId) : null;
   const journeyStage = Math.min(storyStages[language].length - 1, Math.floor(journeyProgress * storyStages[language].length));
   const toggleRoute = (id) => setEnabledRoutes((current) => { const next = new Set(current); if (next.has(id)) next.delete(id); else next.add(id); return next; });
-  const chooseRoute = (id) => { setSelectedRoute(id); setJourneyProgress(0); setJourneyPlaying(false); setShowDetails(true); setShowRoutes(false); };
+  const chooseRoute = (id) => { setSelectedRoute(id); setJourneyProgress(0); setJourneyPlaying(false); setShowDetails(false); setShowRoutes(false); };
   const toggleLayer = (id) => setActiveLayers((current) => ({ ...current, [id]: !current[id] }));
   const status = snapshot.isDemo ? t.demo : snapshot.updatedAt ? `${snapshot.status || "Live data"} - ${t.updated} ${new Date(snapshot.updatedAt).toLocaleString(language)}` : t.noData;
 

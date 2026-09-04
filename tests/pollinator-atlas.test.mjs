@@ -27,6 +27,7 @@ assert.match(map, /route-pulse/);
 assert.match(map, /journeyRail/);
 assert.match(map, /routePreview/);
 assert.match(map, /useState\("eastern-monarch"\)/);
+assert.match(map, /setJourneyPlaying\(false\); setShowDetails\(false\); setShowRoutes\(false\)/);
 assert.match(map, /pointAlongRoute/);
 assert.match(map, /fireLens/);
 assert.match(map, /fireHours/);
