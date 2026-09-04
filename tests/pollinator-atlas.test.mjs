@@ -25,6 +25,8 @@ assert.match(map, /BlueMarble_ShadedRelief_Bathymetry/);
 assert.match(map, /current-fire-embers/);
 assert.match(map, /route-pulse/);
 assert.match(map, /journeyRail/);
+assert.match(map, /routePreview/);
+assert.match(map, /useState\("eastern-monarch"\)/);
 assert.match(map, /pointAlongRoute/);
 assert.match(map, /fireLens/);
 assert.match(map, /fireHours/);
