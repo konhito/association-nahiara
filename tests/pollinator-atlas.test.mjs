@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 
 const atlas = await readFile(new URL("../lib/pollinatorAtlas.js", import.meta.url), "utf8");
 const map = await readFile(new URL("../components/PollinatorAtlas.js", import.meta.url), "utf8");
@@ -26,6 +26,8 @@ assert.match(map, /current-fire-embers/);
 assert.match(map, /route-pulse/);
 assert.match(map, /journeyRail/);
 assert.match(map, /routePreview/);
+assert.match(map, /journeyImage/);
+assert.match(map, /journeyScenes/);
 assert.match(map, /useState\("eastern-monarch"\)/);
 assert.match(map, /setJourneyPlaying\(false\); setShowDetails\(false\); setShowRoutes\(false\)/);
 assert.match(map, /pointAlongRoute/);
@@ -59,4 +61,6 @@ assert.match(database, /CREATE TABLE IF NOT EXISTS atlas_sources/);
 assert.match(database, /CREATE TABLE IF NOT EXISTS pollinator_routes/);
 assert.match(database, /CREATE TABLE IF NOT EXISTS atlas_fire_snapshots/);
 assert.match(database, /ON CONFLICT \(id\) DO UPDATE/);
+const journeyAssets = await readdir(new URL("../public/pollinators/journeys/", import.meta.url));
+assert.deepEqual(journeyAssets.filter((name) => name.endsWith(".png")).sort(), ["convolvulus-hawkmoth.png", "deaths-head-hawkmoth.png", "eastern-monarch.png", "lesser-long-nosed-bat.png", "mexican-long-nosed-bat.png", "migrant-hoverflies.png", "painted-lady.png", "ruby-throated-hummingbird.png", "rufous-hummingbird.png", "silver-y-moth.png", "southern-giant-hummingbird.png", "straw-coloured-fruit-bat.png", "vanessa-cardui-2013.png", "wandering-glider.png", "western-monarch.png", "white-winged-dove.png"]);
 console.log("pollinator atlas source checks passed");
