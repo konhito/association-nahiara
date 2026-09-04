@@ -10,8 +10,8 @@ import { MOCK_FIRE_SNAPSHOT } from "./mockFireSnapshot";
 import styles from "./PollinatorAtlas.module.css";
 
 const copy = {
-  en: { title: "Pollinator Corridor Atlas", intro: "Follow the living routes across a changing planet.", layers: "Live data", routes: "Explore routes", routeList: "Choose a pollinator route", close: "Close", source: "Read the route source", details: "Pollinator corridor", fire: "Wildfire events", fieldLens: "Fire field lens", observed: "Observed", confidence: "Confidence", lastHours: "Last observed hours", journey: "Route journey", play: "Play journey", pause: "Pause journey", updated: "Updated", demo: "Demo fire data - not observed", noData: "Live fire data is unavailable.", atmosphere: "NASA Blue Marble surface · NASA FIRMS 24h detections" },
-  es: { title: "Atlas de corredores de polinizadores", intro: "Sigue las rutas vivas a traves de un planeta cambiante.", layers: "Datos en directo", routes: "Explorar rutas", routeList: "Elige una ruta de polinizadores", close: "Cerrar", source: "Leer la fuente de la ruta", details: "Corredor de polinizadores", fire: "Incendios forestales", fieldLens: "Lente de campo del incendio", observed: "Observado", confidence: "Confianza", lastHours: "Últimas horas observadas", journey: "Viaje de la ruta", play: "Reproducir viaje", pause: "Pausar viaje", updated: "Actualizado", demo: "Datos de incendios de demostracion", noData: "Los datos de incendios no estan disponibles.", atmosphere: "Superficie NASA Blue Marble · detecciones NASA FIRMS de 24 h" },
+  en: { title: "Pollinator Corridor Atlas", intro: "Follow the living routes across a changing planet.", layers: "Live data", routes: "Explore routes", routeList: "Choose a pollinator route", close: "Close", source: "Read the route source", details: "Pollinator corridor", fire: "Wildfire events", fieldLens: "Fire field lens", thermalAnomaly: "Satellite thermal anomaly", observed: "Observed", confidence: "Confidence", radiativePower: "Fire radiative power", lastHours: "Last observed hours", journey: "Route journey", play: "Play journey", pause: "Pause journey", updated: "Updated", demo: "Demo fire data - not observed", noData: "Live fire data is unavailable.", imagery: "Open NASA imagery", atmosphere: "NASA Blue Marble surface · NASA FIRMS 24h detections" },
+  es: { title: "Atlas de corredores de polinizadores", intro: "Sigue las rutas vivas a traves de un planeta cambiante.", layers: "Datos en directo", routes: "Explorar rutas", routeList: "Elige una ruta de polinizadores", close: "Cerrar", source: "Leer la fuente de la ruta", details: "Corredor de polinizadores", fire: "Incendios forestales", fieldLens: "Lente de campo del incendio", thermalAnomaly: "Anomalía térmica satelital", observed: "Observado", confidence: "Confianza", radiativePower: "Potencia radiativa del fuego", lastHours: "Últimas horas observadas", journey: "Viaje de la ruta", play: "Reproducir viaje", pause: "Pausar viaje", updated: "Actualizado", demo: "Datos de incendios de demostracion", noData: "Los datos de incendios no estan disponibles.", imagery: "Abrir imágenes de la NASA", atmosphere: "Superficie NASA Blue Marble · detecciones NASA FIRMS de 24 h" },
 };
 
 const emptySnapshot = { currentDetections: [] };
@@ -23,6 +23,8 @@ const storyStages = { en: ["Pollination", "Refuel", "Crossing", "Arrival"], es: 
 const storyImage = (route) => `/pollinators/stories/${route.id}.png`;
 const journeyImage = (route) => `/pollinators/journeys/${route.id}.png`;
 const fireTimestamp = (value) => Date.parse(String(value || "").replace(/^(\d{4}-\d{2}-\d{2}) (\d{2})(\d{2}) UTC$/, "$1T$2:$3:00Z"));
+const fireLocation = (point) => `${Math.abs(Number(point.latitude)).toFixed(3)}°${Number(point.latitude) >= 0 ? "N" : "S"}, ${Math.abs(Number(point.longitude)).toFixed(3)}°${Number(point.longitude) >= 0 ? "E" : "W"}`;
+const fireImageryUrl = (point) => `https://worldview.earthdata.nasa.gov/?v=${Number(point.longitude) - 0.3},${Number(point.latitude) - 0.2},${Number(point.longitude) + 0.3},${Number(point.latitude) + 0.2}`;
 const pointAlongRoute = (coordinates, progress) => {
   const segments = coordinates.slice(1).map((point, index) => ({ start: coordinates[index], end: point, length: Math.hypot(point[0] - coordinates[index][0], point[1] - coordinates[index][1]) }));
   const total = segments.reduce((sum, segment) => sum + segment.length, 0);
@@ -79,7 +81,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
         instance.on("mouseenter", `${route.id}-hit`, (event) => { instance.getCanvas().style.cursor = "pointer"; setHoveredRoute({ id: route.id, x: event.point.x, y: event.point.y }); });
         instance.on("mousemove", `${route.id}-hit`, (event) => setHoveredRoute({ id: route.id, x: event.point.x, y: event.point.y }));
         instance.on("mouseleave", `${route.id}-hit`, () => { instance.getCanvas().style.cursor = ""; setHoveredRoute(null); });
-        instance.on("click", `${route.id}-hit`, () => { setSelectedRoute(route.id); setJourneyProgress(0); setJourneyPlaying(false); setShowDetails(false); setShowRoutes(false); });
+        instance.on("click", `${route.id}-hit`, () => { setSelectedRoute(route.id); setJourneyProgress(0); setJourneyPlaying(false); setHoveredRoute(null); setShowDetails(false); setShowRoutes(false); });
       });
       instance.addSource("route-pulse", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
       instance.addLayer({ id: "route-pulse-halo", type: "circle", source: "route-pulse", paint: { "circle-color": "#d6b56d", "circle-radius": 11, "circle-opacity": 0.22, "circle-blur": 0.6 } });
@@ -90,13 +92,15 @@ export default function PollinatorAtlas({ locale = "en" }) {
       instance.on("click", "current-fire-clusters", async (event) => {
         const cluster = event.features?.[0];
         if (!cluster) return;
-        const leaves = await instance.getSource("current-fire").getClusterLeaves(cluster.properties.cluster_id, 1, 0);
-        if (leaves[0]) setSelectedFire(leaves[0].properties);
+        const source = instance.getSource("current-fire");
+        const zoom = await source.getClusterExpansionZoom(cluster.properties.cluster_id);
+        instance.easeTo({ center: cluster.geometry.coordinates, zoom: Math.min(zoom, 7), duration: 850, essential: false });
       });
       instance.on("click", "current-fire-embers", (event) => {
         const point = event.features?.[0];
         if (!point) return;
         setSelectedFire(point.properties);
+        instance.easeTo({ center: point.geometry.coordinates, zoom: Math.max(instance.getZoom(), 6), duration: 850, essential: false });
       });
       instance.on("mouseenter", "current-fire-embers", () => { instance.getCanvas().style.cursor = "pointer"; });
       instance.on("mouseleave", "current-fire-embers", () => { instance.getCanvas().style.cursor = ""; });
@@ -183,7 +187,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
   const source = route ? getAtlasSource(route.sourceId) : null;
   const journeyStage = Math.min(storyStages[language].length - 1, Math.floor(journeyProgress * storyStages[language].length));
   const toggleRoute = (id) => setEnabledRoutes((current) => { const next = new Set(current); if (next.has(id)) next.delete(id); else next.add(id); return next; });
-  const chooseRoute = (id) => { setSelectedRoute(id); setJourneyProgress(0); setJourneyPlaying(false); setShowDetails(false); setShowRoutes(false); };
+  const chooseRoute = (id) => { setSelectedRoute(id); setJourneyProgress(0); setJourneyPlaying(false); setHoveredRoute(null); setShowDetails(false); setShowRoutes(false); };
   const toggleLayer = (id) => setActiveLayers((current) => ({ ...current, [id]: !current[id] }));
   const status = snapshot.isDemo ? t.demo : snapshot.updatedAt ? `${snapshot.status || "Live data"} - ${t.updated} ${new Date(snapshot.updatedAt).toLocaleString(language)}` : t.noData;
 
@@ -193,7 +197,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
       <div className={`${styles.loading} ${loading ? "" : styles.loadingDone}`} aria-hidden="true"><b>Pollinator Corridor Atlas</b></div>
       <header className={styles.topbar}><div><h1>{t.title}</h1><p className={styles.intro}>{t.intro}</p><p className={styles.liveStatus}><Radio aria-hidden="true" />{status}</p></div><div className={styles.actions}><button type="button" className={showLayers ? styles.activeAction : ""} onClick={() => { setShowLayers((value) => !value); setShowRoutes(false); }} aria-label={t.layers} aria-expanded={showLayers}><Layers3 /><span>{t.layers}</span></button><button type="button" className={showRoutes ? styles.activeAction : ""} onClick={() => { setShowRoutes((value) => !value); setShowLayers(false); }} aria-label={t.routes} aria-expanded={showRoutes}><Route /><span>{t.routes}</span></button></div></header>
       {showLayers ? <aside className={styles.layersPanel} aria-label={t.layers}><div className={styles.panelHeading}><span>{t.layers}</span><button type="button" onClick={() => setShowLayers(false)} aria-label={t.close}><X /></button></div>{layers.map(({ id, Icon, label }) => <button type="button" key={id} className={activeLayers[id] ? styles.layerOn : ""} onClick={() => toggleLayer(id)} aria-pressed={activeLayers[id]}><Icon /><span>{label(t)}</span><i aria-hidden="true" /></button>)}</aside> : null}
-      {selectedFire ? <aside className={styles.fireLens} aria-live="polite"><button type="button" onClick={() => setSelectedFire(null)} aria-label={t.close}><X /></button><span>{t.fieldLens}</span><div className={styles.fireLensFlame} aria-hidden="true"><i /></div><strong>{selectedFire.title || t.fire}</strong><dl><div><dt>{t.observed}</dt><dd>{selectedFire.detectedAt || "—"}</dd></div><div><dt>{t.confidence}</dt><dd>{selectedFire.confidence || "—"}</dd></div></dl>{selectedFire.sourceUrl ? <a href={selectedFire.sourceUrl} target="_blank" rel="noreferrer">{selectedFire.dataSource || "NASA FIRMS"}</a> : null}</aside> : null}
+      {selectedFire ? <aside className={styles.fireLens} aria-live="polite"><button type="button" onClick={() => setSelectedFire(null)} aria-label={t.close}><X /></button><span>{t.fieldLens}</span><div className={styles.fireLensFlame} aria-hidden="true"><i /></div><strong>{fireLocation(selectedFire)}</strong><p>{t.thermalAnomaly} · {selectedFire.dataSource || "NASA FIRMS VIIRS"}</p><dl><div><dt>{t.observed}</dt><dd>{selectedFire.detectedAt || "—"}</dd></div><div><dt>{t.confidence}</dt><dd>{selectedFire.confidence || "—"}</dd></div>{selectedFire.frp ? <div><dt>{t.radiativePower}</dt><dd>{selectedFire.frp} MW</dd></div> : null}</dl><a href={fireImageryUrl(selectedFire)} target="_blank" rel="noreferrer">{t.imagery}</a></aside> : null}
       {showRoutes ? <aside className={styles.routePicker} aria-label={t.routeList}><div className={styles.panelHeading}><span>{t.routeList}</span><button type="button" onClick={() => setShowRoutes(false)} aria-label={t.close}><X /></button></div><div className={styles.routeList}>{POLLINATOR_ROUTES.map((item) => <div key={item.id} className={selectedRoute === item.id ? styles.activeRoute : ""}><label><input type="checkbox" checked={enabledRoutes.has(item.id)} onChange={() => toggleRoute(item.id)} /><span style={{ background: item.color }} /></label><button type="button" onClick={() => chooseRoute(item.id)}>{item.name[language]}</button></div>)}</div></aside> : null}
       {hovered && !showDetails ? <aside className={styles.glimpse} style={hoverCardStyle} aria-live="polite"><Image src={storyImage(hovered)} alt="" width={640} height={640} sizes="(max-width:760px) 32vw, 124px" /><div><span>{hovered.scientificName}</span><strong>{hovered.name[language]}</strong><p>{hovered.summary?.[language]}</p></div></aside> : null}
       {route && !showDetails ? <aside className={styles.routePreview} aria-live="polite"><div className={styles.journeyScenes} aria-label={`${storyStages[language][journeyStage]}: ${route.name[language]}`}>{[0, 1].map((variation) => <i key={variation} style={{ backgroundImage: `url(${journeyImage(route)})`, backgroundPosition: `${journeyStage * 33.333}% ${variation ? "100%" : "0%"}` }} />)}</div><div><span>{storyStages[language][journeyStage]} · {route.scientificName}</span><strong>{route.name[language]}</strong><p>{route.season?.[language]}</p><button type="button" onClick={() => setShowDetails(true)}>{t.details}</button></div></aside> : null}
