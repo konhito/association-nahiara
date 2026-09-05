@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import { parseFirms, pageFeed, PAGE_SIZE } from '../lib/fireFeed.js';
+import { loadFireFeed } from '../lib/loadFireFeed.js';
+import { distanceKm, routeDistanceKm, withinRouteKm } from '../lib/fireDistance.js';
+
+assert.ok(Math.abs(distanceKm([0, 0], [1, 0]) - 111.195) < 0.01);
+assert.ok(distanceKm([179.9, 0], [-179.9, 0]) < 23);
+assert.ok(routeDistanceKm([0, 0.1], [[-1, 0], [1, 0]]) < 12);
+assert.ok(routeDistanceKm([2, 0], [[-1, 0], [1, 0]]) > 111);
+assert.ok(routeDistanceKm([180, 0.1], [[179, 0], [-179, 0]]) < 12);
+const nearby = withinRouteKm([[179, 0], [-179, 0]], 50);
+assert.equal(nearby([180, 0.1]), true);
+assert.equal(nearby([0, 0]), false);
+const parsed = parseFirms('latitude,longitude,acq_date,acq_time,confidence,frp\n0,0,2026-09-05,7,nominal,2\n999,0,2026-09-05,7,nominal,2');
+assert.equal(parsed.length, 1);
+assert.equal(parsed[0].detectedAt, '2026-09-05T00:07:00Z');
+assert.throws(() => parseFirms('<html>Unavailable</html>'));
+const feed = { version: 'one', currentDetections: Array.from({length: PAGE_SIZE * 2 + 3}, (_, id) => ({ latitude: 0, longitude: id / 1000 })) };
+const fetched = await loadFireFeed(undefined, undefined, async url => ({ ok: true, json: async () => pageFeed(feed, Number(new URL(url, 'https://test').searchParams.get('page'))) }));
+assert.equal(fetched.currentDetections.length, feed.currentDetections.length);
+assert.equal(fetched.currentDetections.at(-1).longitude, feed.currentDetections.at(-1).longitude);
+assert.equal(new Set(fetched.currentDetections.map(p => p.eventId)).size, feed.currentDetections.length);
+await assert.rejects(loadFireFeed(undefined, undefined, async url => ({ ok: true, json: async () => ({ ...pageFeed(feed, Number(new URL(url, 'https://test').searchParams.get('page'))), version: url.includes('version=') ? 'two' : 'one' }) })));
+await assert.rejects(loadFireFeed(undefined, undefined, async () => ({ ok: false, status: 503 })));
+let starts = 0;
+const restarted = await loadFireFeed(undefined, undefined, async url => {
+  const page = Number(new URL(url, 'https://test').searchParams.get('page'));
+  if (page === 0) starts++;
+  if (page > 0 && starts === 1) return { ok: false, status: 409 };
+  return { ok: true, json: async () => pageFeed(feed, page) };
+});
+assert.equal(starts, 2);
+assert.equal(restarted.currentDetections.length, feed.currentDetections.length);
+assert.equal(parseFirms('latitude,longitude,acq_date,acq_time').length, 0);
+await assert.rejects(loadFireFeed(undefined, undefined, async () => ({ ok: true, json: async () => ({ ...pageFeed(feed, 0), pageCount: 1 }) })));
+console.log('Fire pagination, failure handling, parsing and geographic distances passed');

@@ -28,9 +28,9 @@ The script is safe to rerun. It creates the atlas tables and seeds the 15 cited 
 
 ## Pollinator atlas live fire feed
 
-The map is available at `/pollinator-corridor`. Its fire layer fetches NASA FIRMS' public global 24-hour VIIRS CSV directly, samples the response to at most 2,000 displayed detections, and caches the API response for five minutes. No Atlas-specific S3 bucket, scheduled refresh, or FIRMS API key is required.
+The map is available at `/pollinator-corridor` and `/corredor-de-los-polinizadores`. Its fire layer fetches NASA FIRMS' public global 24-hour Suomi-NPP VIIRS CSV directly. All valid detections load in version-checked pages of 5,000 and render as clustered map features; there is no sampling limit. The server reuses a download for five minutes per running instance, and the client refreshes every five minutes after completing its previous request. No Atlas-specific S3 bucket, scheduled refresh, or FIRMS API key is required. This is a single satellite feed, not the combined satellite layers available on NASA's map.
 
-If FIRMS is temporarily unavailable, the map falls back to NASA EONET's open-wildfire events and labels that source clearly.
+If FIRMS is temporarily unavailable, the map falls back to up to 100 NASA EONET open-wildfire events and labels that source clearly. These are not satellite detection counts. Failed refreshes retain the last complete download with an error message; no demo fires are substituted. Observation and download timestamps are shown separately. Nearby detection counts use a 50 km geodesic distance to the displayed route or selected point and follow the map's time filter; they are not ecological health scores or burned-area estimates.
 
 Cloud, rainfall, and aerosol overlays use public NASA Earthdata GIBS tiles directly in the map. Aerosols are shown as a smoke indicator, not a verified smoke-plume boundary.
 
