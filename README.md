@@ -26,23 +26,11 @@ psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f scripts/setup-atlas-db.sql
 
 The script is safe to rerun. It creates the atlas tables and seeds the 15 cited sources and 10 current preliminary route records. It does not invent or seed fire observations; those are inserted only from approved datasets.
 
-## Pollinator atlas fire refresh
+## Pollinator atlas live fire feed
 
-The map is available at `/corredor-de-los-polinizadores`. Its Vercel Cron job stores the latest approved fire snapshot in S3. Configure these production-only variables before enabling the live layer:
+The map is available at `/pollinator-corridor`. Its fire layer fetches NASA FIRMS' public global 24-hour VIIRS CSV directly, samples the response to at most 2,000 displayed detections, and caches the API response for five minutes. No Atlas-specific S3 bucket, scheduled refresh, or FIRMS API key is required.
 
-```
-CRON_SECRET=
-FIRMS_MAP_KEY=
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_REGION=ap-south-1
-ATLAS_S3_BUCKET=aquamundi-glb-models
-ATLAS_HISTORICAL_BURNED_AREA_URL=https://your-reviewed-data-host/burned-area.geojson
-ATLAS_FIRE_WEATHER_RISK_URL=https://your-reviewed-data-host/fire-weather-risk.json
-ATLAS_PROJECTED_BURNED_AREA_URL=https://your-reviewed-data-host/projected-burned-area.json
-```
-
-`ATLAS_HISTORICAL_BURNED_AREA_URL` is an approved GeoJSON `FeatureCollection`; each feature must have a `properties.date` value in `YYYY-MM-DD` form. Without the production variables, the map uses NASA EONET's public open-wildfire events as a clearly labelled real-event fallback; FIRMS remains the higher-detail active-fire feed.
+If FIRMS is temporarily unavailable, the map falls back to NASA EONET's open-wildfire events and labels that source clearly.
 
 Cloud, rainfall, and aerosol overlays use public NASA Earthdata GIBS tiles directly in the map. Aerosols are shown as a smoke indicator, not a verified smoke-plume boundary.
 

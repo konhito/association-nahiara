@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { FALLBACK_FIRE_SNAPSHOT } from "../../../lib/fireSnapshot";
-import { hasAtlasStorage, readAtlasSnapshot } from "../../../lib/atlasStorage";
 
 export const revalidate = 300;
 const FIRMS_24H_URL = "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_Global_24h.csv";
@@ -11,13 +10,8 @@ function sampleDetections(detections) {
   return step > 1 ? detections.filter((_, index) => index % step === 0).slice(0, MAX_DETECTIONS) : detections;
 }
 
-function compactSnapshot(snapshot) {
-  const detections = snapshot.currentDetections || [];
-  return { ...snapshot, currentDetections: sampleDetections(detections), totalDetections: snapshot.totalDetections || detections.length };
-}
-
 async function readFirmsWildfires() {
-  const response = await fetch(FIRMS_24H_URL, { next: { revalidate } });
+  const response = await fetch(FIRMS_24H_URL, { cache: "no-store" });
   if (!response.ok) throw new Error(`NASA FIRMS returned ${response.status}`);
   const [header, ...rows] = (await response.text()).trim().split(/\r?\n/).map((line) => line.split(","));
   const column = (name) => header.indexOf(name);
@@ -50,24 +44,10 @@ async function readEonetWildfires() {
 }
 
 export async function GET() {
-  if (!hasAtlasStorage()) {
-    try {
-      return NextResponse.json(await readFirmsWildfires(), { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400" } });
-    } catch (error) {
-      console.error("Atlas FIRMS fallback failed", error);
-      try {
-        return NextResponse.json(await readEonetWildfires(), { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400" } });
-      } catch (fallbackError) {
-        console.error("Atlas EONET fallback failed", fallbackError);
-        return NextResponse.json(FALLBACK_FIRE_SNAPSHOT);
-      }
-    }
-  }
-
   try {
-    return NextResponse.json(compactSnapshot(await readAtlasSnapshot()), { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400" } });
+    return NextResponse.json(await readFirmsWildfires(), { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400" } });
   } catch (error) {
-    console.error("Atlas snapshot read failed", error);
+    console.error("Atlas FIRMS fallback failed", error);
     try {
       return NextResponse.json(await readEonetWildfires(), { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400" } });
     } catch (fallbackError) {

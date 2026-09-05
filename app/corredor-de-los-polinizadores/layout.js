@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "Pollinator Corridor Atlas",
-  description: "An evidence-led atlas of pollinator corridors, observed fire records and clearly labelled future scenarios.",
-  alternates: { canonical: "/pollinator-corrdor" },
+  title: "Atlas de corredores de polinizadores",
+  description: "Atlas basado en evidencia sobre corredores de polinizadores, registros de incendios observados y escenarios futuros claramente identificados.",
+  alternates: { canonical: "/pollinator-corridor" },
 };
 
 export default function Layout({ children }) { return children; }
