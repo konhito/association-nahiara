@@ -40,8 +40,20 @@ const pointAlongRoute = (coordinates, progress) => {
 };
 const revealedRoute = (coordinates, progress) => {
   if (progress <= 0 || coordinates.length < 2) return [];
-  const lastIndex = Math.min(coordinates.length - 1, Math.max(1, Math.ceil(progress * (coordinates.length - 1))));
-  return coordinates.slice(0, lastIndex + 1);
+  const segments = coordinates.slice(1).map((end, index) => ({ start: coordinates[index], end, length: Math.hypot(end[0] - coordinates[index][0], end[1] - coordinates[index][1]) }));
+  let remaining = segments.reduce((sum, segment) => sum + segment.length, 0) * Math.min(1, progress);
+  const visible = [coordinates[0]];
+  for (const segment of segments) {
+    if (remaining >= segment.length) {
+      visible.push(segment.end);
+      remaining -= segment.length;
+      continue;
+    }
+    const ratio = segment.length ? remaining / segment.length : 0;
+    visible.push([segment.start[0] + (segment.end[0] - segment.start[0]) * ratio, segment.start[1] + (segment.end[1] - segment.start[1]) * ratio]);
+    break;
+  }
+  return visible;
 };
 const focusRoute = (instance, route, onComplete) => {
   const coordinates = route?.geometry?.geometry?.coordinates || [];
@@ -82,6 +94,9 @@ export default function PollinatorAtlas({ locale = "en" }) {
   const [selectedFire, setSelectedFire] = useState(null);
   const [insightPoint, setInsightPoint] = useState(null);
   const [fireHours, setFireHours] = useState(24);
+  const journeyProgressRef = useRef(0);
+
+  useEffect(() => { journeyProgressRef.current = journeyProgress; }, [journeyProgress]);
 
   useEffect(() => {
     let cancelled = false;
@@ -189,8 +204,19 @@ export default function PollinatorAtlas({ locale = "en" }) {
 
   useEffect(() => {
     if (!journeyPlaying || !selectedRoute || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
-    const timer = window.setInterval(() => setJourneyProgress((value) => value >= 1 ? 0 : value + 0.006), 45);
-    return () => window.clearInterval(timer);
+    let animationFrame;
+    let previousTime;
+    const journeyDuration = 18000;
+    const animateJourney = (now) => {
+      if (previousTime !== undefined) {
+        journeyProgressRef.current = (journeyProgressRef.current + (now - previousTime) / journeyDuration) % 1;
+        setJourneyProgress(journeyProgressRef.current);
+      }
+      previousTime = now;
+      animationFrame = window.requestAnimationFrame(animateJourney);
+    };
+    animationFrame = window.requestAnimationFrame(animateJourney);
+    return () => window.cancelAnimationFrame(animationFrame);
   }, [journeyPlaying, selectedRoute]);
 
   useEffect(() => {
@@ -294,6 +320,11 @@ export default function PollinatorAtlas({ locale = "en" }) {
     fires: (snapshot.currentDetections || []).filter((item) => nearestDistance([item.longitude, item.latitude], corridorCoordinates) <= 8),
     storms: (floodSnapshot.events || []).filter((item) => nearestDistance([item.longitude, item.latitude], corridorCoordinates) <= 12),
   } : null;
+  const corridorHealth = route ? (() => {
+    const score = Math.max(0, Math.round(100 - Math.min(35, corridorImpact.fires.length * 1.5) - Math.min(25, corridorImpact.storms.length * 5)));
+    const label = score >= 80 ? (language === "es" ? "Estable" : "Stable") : score >= 55 ? (language === "es" ? "Vigilar" : "Watch") : (language === "es" ? "Expuesto" : "Exposed");
+    return { score, label };
+  })() : null;
   const insight = insightPoint ? (() => {
     const point = [insightPoint.longitude, insightPoint.latitude];
     const nearbyRoute = POLLINATOR_ROUTES.map((item) => ({ item, distance: Math.min(...item.geometry.geometry.coordinates.map((coordinate) => distanceDegrees(point, coordinate))) })).sort((a, b) => a.distance - b.distance)[0];
@@ -307,7 +338,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
   const chooseRoute = (id) => { const selected = POLLINATOR_ROUTES.find((item) => item.id === id); setSelectedRoute(id); setJourneyProgress(0); setJourneyPlaying(false); setHoveredRoute(null); setInsightPoint(null); setShowDetails(true); setShowRoutes(false); if (map.current && selected) focusRoute(map.current, selected, () => setJourneyPlaying(true)); };
   const toggleLayer = (id) => setActiveLayers((current) => ({ ...current, [id]: !current[id] }));
   const status = snapshot.isDemo ? t.demo : snapshot.updatedAt ? `${snapshot.status || "Live data"} - ${t.updated} ${new Date(snapshot.updatedAt).toLocaleString(language)}` : t.noData;
-  const detailImpact = route && showDetails ? <section className={styles.detailImpact} aria-label={language === "es" ? "Impactos y coordenadas del corredor" : "Corridor impacts and coordinates"}><div className={styles.impactHeading}><span>{language === "es" ? "Qué afecta al corredor" : "What is affecting this corridor"}</span><small>{language === "es" ? "Feeds NASA en directo" : "Live NASA feeds"}</small></div><div className={styles.impactGrid}><div className={corridorImpact.fires.length ? styles.impactAlert : styles.impactClear}><Flame aria-hidden="true" /><span>{language === "es" ? "Incendios cercanos" : "Nearby fires"}</span><strong>{corridorImpact.fires.length}</strong></div><div className={corridorImpact.storms.length ? styles.impactAlert : styles.impactClear}><CloudLightning aria-hidden="true" /><span>{language === "es" ? "Tormentas cercanas" : "Nearby storms"}</span><strong>{corridorImpact.storms.length}</strong></div></div><div className={styles.coordinatePanel}><div className={styles.impactHeading}><span><MapPinned aria-hidden="true" />{language === "es" ? "Coordenadas detalladas" : "Detailed path coordinates"}</span><small>{corridorCoordinates.length} points · {timeline.monthRange}</small></div><details><summary>{language === "es" ? "Mostrar la ruta completa" : "Show full path"}</summary><code>{corridorCoordinates.map(([longitude, latitude]) => `[${longitude.toFixed(4)}, ${latitude.toFixed(4)}]`).join(" → ")}</code></details></div></section> : null;
+  const detailImpact = route && showDetails ? <section className={styles.detailImpact} aria-label={language === "es" ? "Impactos y coordenadas del corredor" : "Corridor impacts and coordinates"}><div className={styles.impactHeading}><span>{language === "es" ? "Qué afecta al corredor" : "What is affecting this corridor"}</span><small>{language === "es" ? "Feeds NASA en directo" : "Live NASA feeds"}</small></div><div className={styles.impactGrid}><div className={corridorImpact.fires.length ? styles.impactAlert : styles.impactClear}><Flame aria-hidden="true" /><span>{language === "es" ? "Incendios cercanos" : "Nearby fires"}</span><strong>{corridorImpact.fires.length}</strong></div><div className={corridorImpact.storms.length ? styles.impactAlert : styles.impactClear}><CloudLightning aria-hidden="true" /><span>{language === "es" ? "Tormentas cercanas" : "Nearby storms"}</span><strong>{corridorImpact.storms.length}</strong></div></div><div className={styles.corridorHealth}><div><span>{language === "es" ? "Salud del corredor" : "Corridor health score"}</span><small>{corridorHealth.label} · {language === "es" ? "señal de exposición en vivo" : "live exposure signal"}</small></div><strong>{corridorHealth.score}<small>/100</small></strong></div><div className={styles.coordinatePanel}><div className={styles.impactHeading}><span><MapPinned aria-hidden="true" />{language === "es" ? "Coordenadas detalladas" : "Detailed path coordinates"}</span><small>{corridorCoordinates.length} points · {timeline.monthRange}</small></div><details><summary>{language === "es" ? "Mostrar la ruta completa" : "Show full path"}</summary><code>{corridorCoordinates.map(([longitude, latitude]) => `[${longitude.toFixed(4)}, ${latitude.toFixed(4)}]`).join(" → ")}</code></details></div></section> : null;
   const corridorSlideshow = (detail = false) => route ? <aside className={`${styles.routePreview} ${detail ? styles.detailJourneyPreview : ""}`} aria-live="polite" aria-label={`${route.name[language]}, ${storyStages[language][journeyStage]}`}><div className={styles.journeyScenes} aria-hidden="true">{[0, 1].map((variation) => <i key={variation} style={{ backgroundImage: `url(${journeyImage(route)})`, backgroundPosition: `${journeyStage * 33.333}% ${variation ? "100%" : "0%"}` }} />)}</div><strong>{route.name[language]}</strong></aside> : null;
   const expandedJourney = route && showDetails ? <>{corridorSlideshow(true)}<section className={styles.journeyRail} aria-label={t.journey}><div><span>{t.journey}</span><strong>{route.name[language]}</strong></div><ol>{storyStages[language].map((stage, index) => <li key={stage} className={index === journeyStage ? styles.currentStage : ""}><button type="button" onClick={() => { setJourneyProgress(index / storyStages[language].length); setJourneyPlaying(false); }}><i style={{ background: route.color }} />{stage}</button></li>)}</ol><button type="button" className={styles.journeyToggle} onClick={() => { if (!journeyPlaying && journeyProgress >= 1) setJourneyProgress(0); setJourneyPlaying((value) => !value); }} aria-label={journeyPlaying ? t.pause : t.play}>{journeyPlaying ? <Pause /> : <Play />}<span>{journeyPlaying ? t.pause : t.play}</span></button></section></> : null;
 
@@ -315,7 +346,7 @@ export default function PollinatorAtlas({ locale = "en" }) {
     <section className={styles.atlas} aria-label={t.title}>
       {expandedJourney}
       <div className={styles.map} ref={mapNode} />
-      <div className={`${styles.loading} ${loading ? "" : styles.loadingDone}`} aria-hidden="true"><b>Pollinator Corridor Atlas</b></div>
+      <div className={`${styles.loading} ${loading ? "" : styles.loadingDone}`} aria-hidden="true"><i className={styles.loadingAura} /><b>Pollinator Corridor Atlas</b></div>
       <header className={styles.topbar}><div><h1>{t.title}</h1><p className={styles.intro}>{t.intro}</p><p className={styles.liveStatus}><Radio aria-hidden="true" />{status}</p></div><div className={styles.actions}><button type="button" className={showLayers ? styles.activeAction : ""} onClick={() => { setShowLayers((value) => !value); setShowRoutes(false); }} aria-label={t.layers} aria-expanded={showLayers}><Layers3 /><span>{t.layers}</span></button><button type="button" className={showRoutes ? styles.activeAction : ""} onClick={() => { setShowRoutes((value) => !value); setShowLayers(false); }} aria-label={t.routes} aria-expanded={showRoutes}><Route /><span>{t.routes}</span></button></div></header>
       {showLayers ? <aside className={styles.layersPanel} aria-label={t.layers}><div className={styles.panelHeading}><span>{t.layers}</span><button type="button" onClick={() => setShowLayers(false)} aria-label={t.close}><X /></button></div>{layers.map(({ id, Icon, label }) => <button type="button" key={id} className={activeLayers[id] ? styles.layerOn : ""} onClick={() => toggleLayer(id)} aria-pressed={activeLayers[id]}><Icon /><span>{label(t)}</span><i aria-hidden="true" /></button>)}</aside> : null}
       {insight ? <aside className={styles.insights} aria-live="polite"><button type="button" className={styles.closeInsight} onClick={() => setInsightPoint(null)} aria-label={t.close}><X /></button><span className={styles.insightsKicker}>Corridor insights</span><h2>{Math.abs(insightPoint.latitude).toFixed(2)}°{insightPoint.latitude >= 0 ? "N" : "S"}, {Math.abs(insightPoint.longitude).toFixed(2)}°{insightPoint.longitude >= 0 ? "E" : "W"}</h2><p className={styles.insightsNote}>A transparent map summary for this location. Select a route for its species and journey detail.</p><div className={styles.insightsScore}><span>Prototype corridor health</span><strong>{insight.healthScore === null ? "—" : insight.healthScore}<small>{insight.healthScore === null ? "No route signal" : "/100 signal"}</small></strong></div><dl className={styles.insightsGrid}><div><dt>Nearest corridor</dt><dd>{insight.nearbyRoute?.item.name?.[language] || "No mapped route"}</dd></div><div><dt>Route signal</dt><dd>{insight.nearbyRoute && insight.nearbyRoute.distance < 8 ? "Within mapped range" : "Outside mapped range"}</dd></div><div><dt>Nearby active fires</dt><dd>{insight.firesNearby}</dd></div><div><dt>Nearby storms</dt><dd>{insight.stormsNearby}</dd></div></dl><p className={styles.insightsSource}>Sources: mapped corridor geometry, NASA FIRMS, NASA EONET. No predictive model applied.</p></aside> : null}
