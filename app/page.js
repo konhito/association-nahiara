@@ -463,7 +463,7 @@ function Navbar({ scrolled, onContactClick, locale, t }) {
       id: "pollinator-atlas",
       label: "Atlas",
       type: "route",
-      href: "/corredor-de-los-polinizadores",
+      href: "/pollinator-corrdor",
     },
     {
       id: "contact",
