@@ -1,0 +1,80 @@
+.page { background: #f4f6f5; color: #13352d; min-height: 100vh; padding: calc(var(--site-banner-height) + 2rem) 1.25rem 4rem; }
+.shell { max-width: 1600px; margin: 0 auto; }
+.back { color: #355148; font-size: .9rem; text-decoration: underline; text-underline-offset: 4px; }
+.heading { padding: 1.25rem 0; }
+.private { font-size: .85rem; color: #355148; }
+.heading h1 { font-size: 1.9rem; line-height: 1.15; font-weight: 650; margin: .75rem 0; }
+.heading p { color: #355148; font-size: 1.1rem; }
+.shell h2 { font-size: 1.3rem; font-weight: 650; }
+.shell button, .shell input, .shell select, .shell textarea { font: inherit; }
+.shell button { border: 1px solid #9eafa5; border-radius: 6px; background: transparent; padding: .65rem 1rem; cursor: pointer; font-weight: 600; font-size: .9rem; min-height: 44px; }
+.shell button:hover { background: #e2e9e2; }
+.shell button:disabled { opacity: .55; cursor: wait; }
+.shell .primary { background: #166044; color: white; border-color: #166044; }
+.shell .primary:hover { background: #104a34; }
+.shell :is(button, input, select, textarea, a):focus-visible { outline: 3px solid #166044; outline-offset: 3px; }
+.shell label { display: grid; gap: .45rem; font-size: .9rem; font-weight: 600; }
+.shell :is(input, select, textarea) { width: 100%; min-width: 0; border: 1px solid #899e90; border-radius: 5px; padding: .7rem; color: #13352d; background: #fff; font-weight: 400; }
+.shell :is(input, textarea)::placeholder { color: #52665b; }
+.shell textarea { resize: vertical; line-height: 1.6; }
+.shell input:disabled { background: #edf0ec; color: #52665b; }
+.hint { font-size: .85rem; color: #355148; line-height: 1.6; }
+.login, .setup { max-width: 480px; background: #fff; padding: 2rem; border-radius: 10px; border: 1px solid #bcc8bd; }
+.login > p, .setup p { color: #355148; margin-top: .75rem; line-height: 1.6; }
+.login form { display: grid; gap: 1.25rem; margin: 1.5rem 0; }
+.toolbar, .actions, .listHeading { display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
+.toolbar { border-top: 1px solid #b6c3b8; border-bottom: 1px solid #b6c3b8; padding: 1rem 0; flex-wrap: wrap; margin-bottom: 1rem; }
+.actions { justify-content: flex-end; flex-wrap: wrap; }
+.listHeading { align-items: flex-end; margin-bottom: 1rem; }
+.search { width: min(100%, 320px); }
+.filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+.filters button { display: flex; align-items: center; gap: .65rem; border-color: transparent; }
+.filters button[aria-pressed='true'] { background: #dbe6da; border-color: #57765f; color: #13352d; }
+.filters span { font-size: .8rem; }
+.badge { font-size: .8rem; font-weight: 600; padding: .3rem .65rem; background: #edf0ec; color: #355148; border-radius: 4px; }
+.badge[data-status='In progress'] { background: #e0edf5; color: #204969; }
+.badge[data-status='Waiting'] { background: #fff0cf; color: #714b0b; }
+.badge[data-status='Completed'] { background: #dceedd; color: #205232; }
+.empty { padding: 1rem; color: #355148; }
+.error, .notice { padding: 1rem; margin-bottom: 1rem; border-radius: 6px; line-height: 1.6; }
+.error { background: #fbe9e6; color: #872f24; border: 1px solid #c68075; }
+.notice { background: #dceedd; color: #205232; }
+@media (max-width: 640px) {
+  .page { padding-inline: 1rem; }
+  .heading { padding: 1.5rem 0; }
+  .heading h1 { font-size: 2rem; }
+  .toolbar, .listHeading { align-items: stretch; flex-direction: column; }
+  .toolbar .actions { justify-content: flex-start; }
+  .search { width: 100%; }
+  .login, .setup { padding: 1.1rem; }
+  .filters { gap: .2rem; }
+  .filters button { padding-inline: .65rem; }
+}
+
+.sheetHint { color: #355148; font-size: .85rem; margin: .75rem 0; }
+.sheetScroll { overflow: auto; max-height: 65vh; background: white; border: 1px solid #aab8af; }
+.sheet { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 1448px; table-layout: fixed; font-size: .85rem; }
+.sheet th, .sheet td { border-right: 1px solid #d1d8d3; border-bottom: 1px solid #d1d8d3; text-align: left; vertical-align: top; }
+.sheet th:last-child, .sheet td:last-child { border-right: 0; }
+.sheet thead { position: sticky; top: 0; z-index: 2; }
+.sheet thead th { padding: .7rem .65rem; background: #e4eee8; color: #173f2c; font-weight: 650; }
+.sheet .letters th { background: #eef1ef; color: #52665b; text-align: center; padding: .3rem; font-weight: 400; font-size: .75rem; }
+.sheet .rowNumber { background: #eef1ef; color: #52665b; text-align: center; padding: .85rem .4rem; font-weight: 400; position: sticky; left: 0; z-index: 1; }
+.sheet td { padding: 0; background: white; }
+.sheet tr:hover td { background: #f6faf7; }
+.sheet .editing td { background: #f1f8f2; border-top: 2px solid #217346; border-bottom: 2px solid #217346; }
+.sheet .editing .rowNumber { background: #217346; color: white; }
+.shell .sheet .cellButton { display: block; width: 100%; height: 100%; min-height: 64px; border: 0; border-radius: 0; text-align: left; font-weight: 400; line-height: 1.6; padding: .75rem .65rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.shell .sheet :is(input, select, textarea) { border: 0; border-radius: 0; padding: .75rem .65rem; background: transparent; min-height: 64px; }
+.shell .sheet :is(input, select, textarea, button):focus-visible { outline: 2px solid #217346; outline-offset: -2px; background: #fff; }
+.shell .sheet textarea { min-height: 110px; }
+.sheet .updatedCell { padding: .75rem .65rem; color: #355148; }
+.updatedCell small { display: block; margin-top: .4rem; color: #52665b; }
+.rowActions { display: grid; gap: .3rem; padding: .4rem; }
+.shell .rowActions button { padding: .45rem; font-size: .8rem; }
+.blank { color: #60736a; }
+.sheetFooter { display: flex; align-items: center; justify-content: space-between; background: #e9eeeb; border: 1px solid #aab8af; border-top: 0; font-size: .8rem; color: #355148; }
+.sheetFooter span { padding: .65rem 1rem; }
+.sheetFooter span:first-child { background: white; border-bottom: 3px solid #217346; color: #166044; font-weight: 650; }
+.sync { color: #52665b; font-size: .8rem; margin-top: .75rem; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
