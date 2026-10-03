@@ -748,18 +748,18 @@ ${t("landing.visionText")}
 
   const recentEvents = [
     {
+      href: "/eventos/mercado-del-coleccionismo-2026",
+      label: t("landing.recentEvents.event2.label"),
+      title: t("landing.recentEvents.event2.title"),
+      location: t("landing.recentEvents.event2.location"),
+      description: t("landing.recentEvents.event2.description"),
+    },
+    {
       href: "/eventos/dia-de-los-polinizadores-2026",
       label: t("landing.recentEvents.event1.label"),
       title: t("landing.recentEvents.event1.title"),
       location: t("landing.recentEvents.event1.location"),
       description: t("landing.recentEvents.event1.description"),
-    },
-    {
-      href: "/eventos/guardianes-de-las-flores-2026",
-      label: t("landing.recentEvents.event2.label"),
-      title: t("landing.recentEvents.event2.title"),
-      location: t("landing.recentEvents.event2.location"),
-      description: t("landing.recentEvents.event2.description"),
     },
   ];
 
