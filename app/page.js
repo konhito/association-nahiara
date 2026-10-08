@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef, Suspense, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import {
   Download,
@@ -748,14 +749,18 @@ ${t("landing.visionText")}
 
   const recentEvents = [
     {
-      href: "/eventos/mercado-del-coleccionismo-2026",
+      href: "/eventos/fin-de-semana-vegueta-2026#flower-market",
+      poster: "/events/vegueta-weekend-2026/flower-market.jpeg",
+      posterAlt: t("landing.recentEvents.event2.posterAlt"),
       label: t("landing.recentEvents.event2.label"),
       title: t("landing.recentEvents.event2.title"),
       location: t("landing.recentEvents.event2.location"),
       description: t("landing.recentEvents.event2.description"),
     },
     {
-      href: "/eventos/dia-de-los-polinizadores-2026",
+      href: "/eventos/fin-de-semana-vegueta-2026#de-patas",
+      poster: "/events/vegueta-weekend-2026/de-patas-vegueta.png",
+      posterAlt: t("landing.recentEvents.event1.posterAlt"),
       label: t("landing.recentEvents.event1.label"),
       title: t("landing.recentEvents.event1.title"),
       location: t("landing.recentEvents.event1.location"),
@@ -1019,32 +1024,43 @@ ${t("landing.visionText")}
                   <Link
                     key={event.href}
                     href={event.href}
-                    className="group flex min-h-[13rem] flex-col justify-between border border-[#1a3a2f]/15 bg-[#f8f5f0] p-5 text-[#123a31] transition-colors hover:border-[#9b7b3d]/70 hover:bg-[#fffaf0] md:p-6"
+                    className="group flex min-h-[32rem] flex-col border border-[#1a3a2f]/15 bg-[#f8f5f0] text-[#123a31] transition-colors hover:border-[#9b7b3d]/70 hover:bg-[#fffaf0]"
                   >
-                    <article>
-                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9b7b3d]">
-                        {event.label}
-                      </p>
-                      <h4
-                        className="mt-3 text-xl leading-tight text-[#1a3a2f] md:text-2xl"
-                        style={{
-                          fontFamily:
-                            'Georgia, Cambria, "Times New Roman", Times, serif',
-                        }}
-                      >
-                        {event.title}
-                      </h4>
-                      <p className="mt-3 text-xs font-semibold uppercase tracking-[0.12em] text-[#b24f45]">
-                        {event.location}
-                      </p>
-                      <p className="mt-4 text-sm leading-6 text-[#3b5e4d]">
-                        {event.description}
-                      </p>
+                    <div className="relative h-72 w-full overflow-hidden bg-[#ece8de]">
+                      <Image
+                        src={event.poster}
+                        alt={event.posterAlt}
+                        fill
+                        sizes="(min-width: 1024px) 28vw, (min-width: 640px) 42vw, 100vw"
+                        className="object-contain"
+                      />
+                    </div>
+                    <article className="flex flex-1 flex-col justify-between p-5 md:p-6">
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9b7b3d]">
+                          {event.label}
+                        </p>
+                        <h4
+                          className="mt-3 text-xl leading-tight text-[#1a3a2f] md:text-2xl"
+                          style={{
+                            fontFamily:
+                              'Georgia, Cambria, "Times New Roman", Times, serif',
+                          }}
+                        >
+                          {event.title}
+                        </h4>
+                        <p className="mt-3 text-xs font-semibold uppercase tracking-[0.12em] text-[#b24f45]">
+                          {event.location}
+                        </p>
+                        <p className="mt-4 text-sm leading-6 text-[#3b5e4d]">
+                          {event.description}
+                        </p>
+                      </div>
+                      <span className="mt-6 inline-flex items-center text-xs font-bold uppercase tracking-[0.14em] text-[#1a3a2f]">
+                        {t("landing.recentEvents.cta")}
+                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </span>
                     </article>
-                    <span className="mt-6 inline-flex items-center text-xs font-bold uppercase tracking-[0.14em] text-[#1a3a2f]">
-                      {t("landing.recentEvents.cta")}
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
                   </Link>
                 ))}
               </div>

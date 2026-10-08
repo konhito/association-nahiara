@@ -75,16 +75,18 @@
       "intro": "快速进入 Universo Nahiara 最新的公共聚会、工作坊和社区活动页面。",
       "cta": "查看活动",
       "event1": {
-        "label": "2026年6月21日",
-        "title": "所有传粉者日",
-        "location": "La Blanca, Sardina del Sur",
-        "description": "一个围绕花朵、传粉者、工作坊和参与家庭作品展开的社区日。"
+        "label": "2026年10月11日（周日）· 10:00–15:00",
+        "title": "De patas por Vegueta · 家庭日",
+        "location": "Plaza de Santo Domingo · Vegueta, 大加那利岛",
+        "description": "家庭活动、工作坊和宠物领养走秀，帮助有需要的动物找到充满关爱的家。",
+        "posterAlt": "De patas por Vegueta 家庭日海报，展示动物和家庭活动。"
       },
       "event2": {
-        "label": "2026年10月4日（星期日）· 10:00–18:00",
-        "title": "Mercado del Coleccionismo 2026",
-        "location": "La Karpa · Vecindario, Gran Canaria",
-        "description": "一场支持哥伦比亚和委内瑞拉的家庭慈善市集，设有儿童活动、工作坊、世界舞蹈、现场音乐、美食餐车和慈善抽奖。所得款项将支持 Unión Canario-Venezolana de Gran Canaria、Asociación Sociocultural «Nuestro barrio, Nuestra Gente» 和 Cáritas Diocesana de Canarias。"
+        "label": "2026年10月10日（周六）· 10:00–16:00",
+        "title": "鲜花与二手服装市集",
+        "location": "Plaza de Santo Domingo · Vegueta, 大加那利岛",
+        "description": "通过工作坊、自然体验和环保意识活动，为我们的周围环境带回色彩与生机。",
+        "posterAlt": "鲜花与二手服装市集海报。"
       }
     },
     "santJordiTitle": "Sant Jordi 2026",
@@ -398,5 +400,85 @@
       }
     },
     "footerNote": "The Flower Archive is maintained as a long-horizon publication of the International Association for the Defense of Flowers."
+  },
+  "veguetaWeekend": {
+    "back": "协会主页",
+    "program": "活动安排",
+    "directions": "路线",
+    "languageLabel": "语言",
+    "publicEvent": "公众活动 · 免费入场",
+    "saturdayChip": "2026年10月10日（周六）",
+    "sundayChip": "2026年10月11日（周日）",
+    "locationChip": "Plaza de Santo Domingo · Vegueta",
+    "titleTop": "Vegueta",
+    "titleBottom": "周末活动 2026",
+    "eventLine": "鲜花市集 · De patas por Vegueta",
+    "heroSubtitle": "鲜花、传粉者与动物福利",
+    "heroIntro": "在Plaza de Santo Domingo举办的两天家庭活动，协会将设立官方展位。",
+    "saturdayLabel": "周六",
+    "saturdayPrimary": "10月10日 · 10:00–16:00",
+    "saturdaySecondary": "鲜花与二手服装市集",
+    "sundayLabel": "周日",
+    "sundayPrimary": "10月11日 · 10:00–15:00",
+    "sundaySecondary": "De patas por Vegueta · 家庭日",
+    "locationLabel": "地点",
+    "locationPrimary": "Plaza de Santo Domingo",
+    "locationSecondary": "Vegueta · 大加那利岛 · 路线",
+    "postersLabel": "官方活动海报",
+    "detailsLabel": "周末活动详情",
+    "loading": "正在加载活动详情…",
+    "marketPosterAlt": "鲜花与二手服装市集海报",
+    "animalsPosterAlt": "De patas por Vegueta 家庭日海报，展示动物和家庭活动",
+    "copy": {
+      "hook": "你想领养一位传粉者……还是改变一位忠实伙伴的生活？🌺🐾",
+      "intro": "本周末，Plaza de Santo Domingo 将成为可持续发展、植物与动物福利的中心。我们将在两场专为全家设计的特别活动中设立自己的协会展位：",
+      "saturdayLead": "10月10日（周六，10:00–16:00）：鲜花与二手服装市集。",
+      "saturdayBody": "通过工作坊、自然体验和环保意识活动，为我们的周围环境带回色彩与生机。",
+      "sundayLead": "10月11日（周日，10:00–15:00）：De patas por Vegueta（家庭日）。",
+      "sundayBody": "趣味活动、工作坊和特别的宠物领养走秀，帮助有需要的动物找到充满关爱的家。",
+      "booth": "欢迎来到我们的展位，了解《Nahiara》图书和卡牌游戏《Nahiara y los Guardianes de las Flores》，并发现我们每个人如何成为自然与野生动物的守护者。",
+      "admission": "免费入场。加入这项行动，本周末来Vegueta看看我们吧！"
+    },
+    "programDetails": {
+      "sectionTitle": "鲜花、家庭活动与动物福利的周末",
+      "marketTitle": "周六 · 鲜花与循环时尚",
+      "marketIntro": "市集将汇集鲜花和植物摊位、手作花束、手工艺品与二手服装。",
+      "marketActivities": [
+        "插花工作坊",
+        "旧衣再利用工作坊",
+        "探索鲜花、植物、花束和本地手工艺品"
+      ],
+      "familyTitle": "周日 · De patas por Vegueta",
+      "familyIntro": "面向家庭的活动，关注动物福利与负责任的领养。",
+      "familyActivities": [
+        "宠物走秀",
+        "脸部彩绘与涂色区",
+        "狗狗身体协调体验活动",
+        "气球造型与故事分享",
+        "动物保护组织信息展位"
+      ],
+      "advice": "市政府专业人员将提供负责任领养和动物护理方面的咨询。",
+      "runwayTitle": "为爱而走的宠物秀",
+      "runwayIntro": "宠物走秀免费报名，共设四个奖项：",
+      "protectorsLabel": "参与的动物保护组织",
+      "protectors": [
+        "ADA Gran Canaria",
+        "Salva un Podenco",
+        "Adopta un Amigo",
+        "Canariconejos",
+        "Tutela Felina"
+      ],
+      "sourceLabel": "阅读市政府官方活动公告",
+      "runwayAwardsLabel": "奖项",
+      "runwayAwards": [
+        "最可爱的宠物",
+        "最像主人的宠物",
+        "最萌幼犬",
+        "最年长宠物"
+      ],
+      "adviceTitle": "动物护理与负责任领养咨询",
+      "context": "属于Vegueta 2026年玫瑰圣母节活动。",
+      "festivalSourceLabel": "查看玫瑰圣母节活动安排"
+    }
   }
 }

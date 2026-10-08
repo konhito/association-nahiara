@@ -75,16 +75,18 @@
       "intro": "Un acceso breve a los ultimos encuentros publicos, talleres y paginas comunitarias de Universo Nahiara.",
       "cta": "Ver evento",
       "event1": {
-        "label": "21 de junio de 2026",
-        "title": "Dia de Todos los Polinizadores",
-        "location": "La Blanca, Sardina del Sur",
-        "description": "Una jornada comunitaria de flores, polinizadores, talleres y obras creadas por las familias participantes."
+        "label": "Domingo 11 de octubre de 2026 · 10:00–15:00 h",
+        "title": "De patas por Vegueta · Día de la Familia",
+        "location": "Plaza de Santo Domingo · Vegueta, Gran Canaria",
+        "description": "Actividades lúdicas, talleres y la gran Pasarela de Adopción para dar un hogar a quienes más lo necesitan.",
+        "posterAlt": "Cartel de De patas por Vegueta, día de la familia con animales y actividades."
       },
       "event2": {
-        "label": "Domingo, 4 de octubre de 2026 · 10:00–18:00",
-        "title": "Mercado del Coleccionismo 2026",
-        "location": "La Karpa · Vecindario, Gran Canaria",
-        "description": "Un mercado solidario y familiar por Colombia y Venezuela, con actividades infantiles, talleres, bailes del mundo, música en directo, puestos de comida y sorteos benéficos. La recaudación apoya a la Unión Canario-Venezolana de Gran Canaria, la Asociación Sociocultural «Nuestro barrio, Nuestra Gente» y Cáritas Diocesana de Canarias."
+        "label": "Sábado 10 de octubre de 2026 · 10:00–16:00 h",
+        "title": "Mercadillo de Flores y Ropa de Segunda Mano",
+        "location": "Plaza de Santo Domingo · Vegueta, Gran Canaria",
+        "description": "Talleres, naturaleza y conciencia ecológica para devolverle el color a nuestro entorno.",
+        "posterAlt": "Cartel del Mercadillo de Flores y Ropa de Segunda Mano."
       }
     },
     "santJordiTitle": "Sant Jordi 2026",
@@ -634,6 +636,86 @@
       "body": "Nahiara y los Guardianes de las Flores, en colaboracion con AA.VV. Vereda El Canario y el Ayuntamiento de Santa Lucia de Tirajana.",
       "info": "Informacion",
       "website": "Sitio web"
+    }
+  },
+  "veguetaWeekend": {
+    "back": "Inicio de la asociación",
+    "program": "Programa",
+    "directions": "Cómo llegar",
+    "languageLabel": "Idioma",
+    "publicEvent": "Evento público · Entrada libre",
+    "saturdayChip": "Sábado 10 de octubre de 2026",
+    "sundayChip": "Domingo 11 de octubre de 2026",
+    "locationChip": "Plaza de Santo Domingo · Vegueta",
+    "titleTop": "Vegueta",
+    "titleBottom": "Fin de semana 2026",
+    "eventLine": "Mercadillo de flores · De patas por Vegueta",
+    "heroSubtitle": "Flores, polinizadores y bienestar animal",
+    "heroIntro": "Dos jornadas familiares en la Plaza de Santo Domingo, con stand propio de la asociación.",
+    "saturdayLabel": "Sábado",
+    "saturdayPrimary": "10 de octubre · 10:00–16:00",
+    "saturdaySecondary": "Mercadillo de Flores y Ropa de Segunda Mano",
+    "sundayLabel": "Domingo",
+    "sundayPrimary": "11 de octubre · 10:00–15:00",
+    "sundaySecondary": "De patas por Vegueta · Día de la Familia",
+    "locationLabel": "Ubicación",
+    "locationPrimary": "Plaza de Santo Domingo",
+    "locationSecondary": "Vegueta · Gran Canaria · Cómo llegar",
+    "postersLabel": "Carteles oficiales",
+    "detailsLabel": "Detalles del fin de semana",
+    "loading": "Cargando los detalles del evento…",
+    "marketPosterAlt": "Cartel del Mercadillo de Flores y Ropa de Segunda Mano",
+    "animalsPosterAlt": "Cartel de De patas por Vegueta, día familiar con animales y actividades",
+    "copy": {
+      "hook": "¿Te gustaría adoptar un polinizador... o cambiarle la vida a un compañero fiel? 🌺🐾",
+      "intro": "Este fin de semana, la Plaza de Santo Domingo se convierte en el epicentro de la sostenibilidad, la flora y el bienestar animal. Estaremos presentes con stand propio en dos jornadas únicas pensadas para toda la familia:",
+      "saturdayLead": "Sábado 10 de octubre (10:00 a 16:00 h): Mercadillo de Flores y Ropa de Segunda Mano.",
+      "saturdayBody": "Talleres, naturaleza y conciencia ecológica para devolverle el color a nuestro entorno.",
+      "sundayLead": "Domingo 11 de octubre (10:00 a 15:00 h): De patas por Vegueta.",
+      "sundayBody": "Actividades lúdicas, talleres y la gran Pasarela de Adopción para darle un hogar a quienes más lo necesitan.",
+      "booth": "Acércate a nuestro stand, conoce el libro Nahiara y el juego de cartas Nahiara y los Guardianes de las Flores, y descubre cómo cada uno de nosotros puede convertirse en un guardián de las flores y de los animales.",
+      "admission": "Entrada libre. ¡Súmate al cambio y acompáñanos este fin de semana en Vegueta!"
+    },
+    "programDetails": {
+      "sectionTitle": "Un fin de semana de flores, familias y bienestar animal",
+      "marketTitle": "Sábado · Flores y moda circular",
+      "marketIntro": "El mercadillo reunirá puestos de flores y plantas, ramos artesanales, artesanía y ropa de segunda mano.",
+      "marketActivities": [
+        "Taller de arreglos florales",
+        "Taller de reciclaje de ropa usada",
+        "Puestos de flores, plantas, ramos y artesanía"
+      ],
+      "familyTitle": "Domingo · De patas por Vegueta",
+      "familyIntro": "Una jornada familiar para acercarse al bienestar animal y a la adopción responsable.",
+      "familyActivities": [
+        "Pasarela de mascotas",
+        "Pintacaras y espacio para colorear",
+        "Actividades de propiocepción canina",
+        "Globoflexia y cuentacuentos",
+        "Estands informativos de protectoras de animales"
+      ],
+      "advice": "Profesionales del Ayuntamiento ofrecerán información y resolverán dudas sobre adopción responsable y cuidados animales.",
+      "runwayTitle": "Una pasarela con propósito",
+      "runwayIntro": "La inscripción para participar en la pasarela es gratuita. Cuatro categorías de premios:",
+      "protectorsLabel": "Protectoras participantes",
+      "protectors": [
+        "ADA Gran Canaria",
+        "Salva un Podenco",
+        "Adopta un Amigo",
+        "Canariconejos",
+        "Tutela Felina"
+      ],
+      "sourceLabel": "Consulta la nota oficial del Ayuntamiento",
+      "runwayAwardsLabel": "Premios",
+      "runwayAwards": [
+        "Mascota más simpática",
+        "Mascota más parecida a su dueño",
+        "Cachorro más tierno",
+        "Súper abuelete"
+      ],
+      "adviceTitle": "Información sobre cuidados y adopción responsable",
+      "context": "Dentro del programa de las Fiestas del Rosario 2026 en Vegueta.",
+      "festivalSourceLabel": "Consulta el programa de las Fiestas del Rosario"
     }
   }
 }

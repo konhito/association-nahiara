@@ -15,6 +15,7 @@ export default function sitemap() {
     { path: '/reloj-dia-de-todos-los-polinizadores', freq: 'daily', priority: 0.9 },
     { path: '/eventos/dia-de-los-polinizadores-2026', freq: 'weekly', priority: 0.9 },
     { path: '/eventos/mercado-del-coleccionismo-2026', freq: 'weekly', priority: 0.9 },
+    { path: '/eventos/fin-de-semana-vegueta-2026', freq: 'weekly', priority: 0.9 },
     { path: '/galeria-dibujos', freq: 'monthly', priority: 0.8 },
     { path: '/evento-dibuja-flor', freq: 'monthly', priority: 0.8 },
     { path: '/dibuja-la-flor-de-tu-pais', freq: 'monthly', priority: 0.8 },

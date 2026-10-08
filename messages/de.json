@@ -75,16 +75,18 @@
       "intro": "Ein kurzer Weg zu den neuesten oeffentlichen Treffen, Workshops und Gemeinschaftsseiten von Universo Nahiara.",
       "cta": "Veranstaltung ansehen",
       "event1": {
-        "label": "21. Juni 2026",
-        "title": "Tag aller Bestaeuber",
-        "location": "La Blanca, Sardina del Sur",
-        "description": "Ein Gemeinschaftstag mit Blumen, Bestaeubern, Workshops und Kunstwerken der teilnehmenden Familien."
+        "label": "Sonntag, 11. Oktober 2026 · 10:00–15:00 Uhr",
+        "title": "De patas por Vegueta · Familientag",
+        "location": "Plaza de Santo Domingo · Vegueta, Gran Canaria",
+        "description": "Familienaktivitäten, Workshops und eine Adoptions-Modenschau helfen Tieren, ein liebevolles Zuhause zu finden.",
+        "posterAlt": "Plakat zum Familientag De patas por Vegueta mit Tieren und Aktivitäten."
       },
       "event2": {
-        "label": "Sonntag, 4. Oktober 2026 · 10:00–18:00 Uhr",
-        "title": "Mercado del Coleccionismo 2026",
-        "location": "La Karpa · Vecindario, Gran Canaria",
-        "description": "Ein öffentlicher Familien-Benefizmarkt für Kolumbien und Venezuela mit Kinderangeboten, Workshops, Tänzen aus aller Welt, Live-Musik, Foodtrucks und Benefizverlosungen. Die Erlöse unterstützen die Unión Canario-Venezolana de Gran Canaria, die Asociación Sociocultural «Nuestro barrio, Nuestra Gente» und Cáritas Diocesana de Canarias."
+        "label": "Samstag, 10. Oktober 2026 · 10:00–16:00 Uhr",
+        "title": "Blumen- und Secondhand-Kleidermarkt",
+        "location": "Plaza de Santo Domingo · Vegueta, Gran Canaria",
+        "description": "Workshops, Natur und Umweltbewusstsein bringen Farbe und Leben in unsere Umgebung zurück.",
+        "posterAlt": "Plakat des Blumen- und Secondhand-Kleidermarkts."
       }
     },
     "santJordiTitle": "Sant Jordi 2026",
@@ -428,5 +430,85 @@
     "success": "Kunstwerk erfolgreich erhalten!",
     "galleryCta": "Globale Galerie ansehen",
     "error": "Beim Hochladen ist ein Fehler aufgetreten."
+  },
+  "veguetaWeekend": {
+    "back": "Zur Vereinsseite",
+    "program": "Programm",
+    "directions": "Wegbeschreibung",
+    "languageLabel": "Sprache",
+    "publicEvent": "Öffentliche Veranstaltung · Eintritt frei",
+    "saturdayChip": "Samstag, 10. Oktober 2026",
+    "sundayChip": "Sonntag, 11. Oktober 2026",
+    "locationChip": "Plaza de Santo Domingo · Vegueta",
+    "titleTop": "Vegueta",
+    "titleBottom": "Wochenende 2026",
+    "eventLine": "Blumenmarkt · De patas por Vegueta",
+    "heroSubtitle": "Blumen, Bestäuber und Tierschutz",
+    "heroIntro": "Zwei Familientage auf der Plaza de Santo Domingo, mit einem eigenen Stand unseres Vereins.",
+    "saturdayLabel": "Samstag",
+    "saturdayPrimary": "10. Oktober · 10:00–16:00",
+    "saturdaySecondary": "Blumen- und Secondhand-Kleidermarkt",
+    "sundayLabel": "Sonntag",
+    "sundayPrimary": "11. Oktober · 10:00–15:00",
+    "sundaySecondary": "De patas por Vegueta · Familientag",
+    "locationLabel": "Ort",
+    "locationPrimary": "Plaza de Santo Domingo",
+    "locationSecondary": "Vegueta · Gran Canaria · Wegbeschreibung",
+    "postersLabel": "Offizielle Veranstaltungsplakate",
+    "detailsLabel": "Details zum Wochenende",
+    "loading": "Veranstaltungsdetails werden geladen…",
+    "marketPosterAlt": "Plakat des Blumen- und Secondhand-Kleidermarkts",
+    "animalsPosterAlt": "Plakat zum Familientag De patas por Vegueta mit Tieren und Aktivitäten",
+    "copy": {
+      "hook": "Möchtest du einen Bestäuber adoptieren ... oder das Leben eines treuen Begleiters verändern? 🌺🐾",
+      "intro": "Dieses Wochenende wird die Plaza de Santo Domingo zum Mittelpunkt für Nachhaltigkeit, Pflanzenwelt und Tierschutz. Wir sind an zwei besonderen Tagen für die ganze Familie mit einem eigenen Stand dabei:",
+      "saturdayLead": "Samstag, 10. Oktober (10:00–16:00 Uhr): Blumen- und Secondhand-Kleidermarkt.",
+      "saturdayBody": "Workshops, Natur und Umweltbewusstsein bringen Farbe und Leben in unsere Umgebung zurück.",
+      "sundayLead": "Sonntag, 11. Oktober (10:00–15:00 Uhr): De patas por Vegueta (Familientag).",
+      "sundayBody": "Familienaktivitäten, Workshops und eine besondere Adoptions-Modenschau helfen Tieren, ein liebevolles Zuhause zu finden.",
+      "booth": "Besuche unseren Stand, entdecke das Buch Nahiara und das Kartenspiel Nahiara y los Guardianes de las Flores und erfahre, wie jede und jeder von uns die Natur und Tierwelt schützen kann.",
+      "admission": "Eintritt frei. Unterstütze die Initiative und besuche uns dieses Wochenende in Vegueta!"
+    },
+    "programDetails": {
+      "sectionTitle": "Ein Wochenende voller Blumen, Familienaktivitäten und Tierschutz",
+      "marketTitle": "Samstag · Blumen und nachhaltige Mode",
+      "marketIntro": "Der Markt vereint Blumen- und Pflanzenstände, handgebundene Sträuße, Kunsthandwerk und Secondhand-Kleidung.",
+      "marketActivities": [
+        "Workshop für Blumenarrangements",
+        "Workshop zur Wiederverwendung getragener Kleidung",
+        "Blumen, Pflanzen, Sträuße und lokales Kunsthandwerk entdecken"
+      ],
+      "familyTitle": "Sonntag · De patas por Vegueta",
+      "familyIntro": "Ein Familienprogramm rund um Tierwohl und verantwortungsvolle Adoption.",
+      "familyActivities": [
+        "Laufsteg für Haustiere",
+        "Kinderschminken und Malbereich",
+        "Übungen zur Körperwahrnehmung für Hunde",
+        "Ballonmodellieren und Geschichten",
+        "Infostände von Tierschutzorganisationen"
+      ],
+      "advice": "Fachleute der Stadt beantworten Fragen zu verantwortungsvoller Adoption und Tierpflege.",
+      "runwayTitle": "Ein Laufsteg mit gutem Zweck",
+      "runwayIntro": "Die Anmeldung für den Laufsteg ist kostenlos. Vier Preiskategorien:",
+      "protectorsLabel": "Teilnehmende Tierschutzorganisationen",
+      "protectors": [
+        "ADA Gran Canaria",
+        "Salva un Podenco",
+        "Adopta un Amigo",
+        "Canariconejos",
+        "Tutela Felina"
+      ],
+      "sourceLabel": "Offizielle Mitteilung der Stadt lesen",
+      "runwayAwardsLabel": "Preise",
+      "runwayAwards": [
+        "Charmantestes Haustier",
+        "Haustier mit der größten Ähnlichkeit zu seinem Menschen",
+        "Niedlichster Welpe",
+        "Ältester Senior"
+      ],
+      "adviceTitle": "Beratung zu Tierpflege und verantwortungsvoller Adoption",
+      "context": "Teil der Fiestas del Rosario 2026 in Vegueta.",
+      "festivalSourceLabel": "Zum Programm der Fiestas del Rosario"
+    }
   }
 }
