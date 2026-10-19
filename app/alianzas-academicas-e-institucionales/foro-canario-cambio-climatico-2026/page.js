@@ -12,6 +12,7 @@ const teideSource = "https://www.hellocanaryislands.com/nature-spaces/tenerife/t
 const nubloSource = "https://www.hellocanaryislands.com/hiking/gran-canaria/roque-nublo/";
 const pageUrl = "https://asociacionnahiara.org/alianzas-academicas-e-institucionales/foro-canario-cambio-climatico-2026";
 const poster = "/events/foro-canario-2026/poster-v9.png";
+const englishPoster = "/events/foro-canario-2026/poster-en-v1.png";
 
 export const metadata = {
   title: esMessages.forumCanario.metadataTitle,
@@ -68,7 +69,7 @@ export default async function ForoCanarioPage() {
               <div aria-hidden="true" className="absolute bottom-[8%] left-[-8%] h-36 w-36 rounded-full bg-[#d66152]/18 blur-2xl md:h-52 md:w-52" />
               <div aria-hidden="true" className="absolute right-[-10%] top-[20%] h-44 w-44 rounded-full bg-[#8b5cf6]/14 blur-3xl md:h-64 md:w-64" />
               <span className="absolute right-[-1rem] top-[-1rem] z-20 rounded-full bg-[#d6b56d]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#efc85f]">{copy.posterLabel}</span>
-              <div className="relative z-10 overflow-hidden rounded-2xl border border-[#e8d3a3]/25 bg-[#08251f] shadow-[0_28px_70px_-35px_rgba(0,0,0,0.85)]"><Image src={poster} alt={copy.posterAlt} width={1080} height={1350} sizes="(max-width: 1024px) 90vw, 448px" priority unoptimized className="h-auto w-full" /></div>
+              <div className="relative z-10 overflow-hidden rounded-2xl border border-[#e8d3a3]/25 bg-[#08251f] shadow-[0_28px_70px_-35px_rgba(0,0,0,0.85)]"><Image src={locale === "es" ? poster : englishPoster} alt={copy.posterAlt} width={1122} height={1402} sizes="(max-width: 1024px) 90vw, 448px" priority unoptimized className="h-auto w-full" /></div>
               <figcaption className="relative z-10 mt-3 text-xs leading-5 text-[#d7ded8]">{copy.landscapeCaption} <a href={teideSource} target="_blank" rel="noreferrer" className="underline underline-offset-2">{copy.teideSourceLabel}</a> · <a href={nubloSource} target="_blank" rel="noreferrer" className="underline underline-offset-2">{copy.nubloSourceLabel}</a></figcaption>
             </figure>
           </div>
