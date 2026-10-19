@@ -1000,8 +1000,12 @@ ${t("landing.visionText")}
               </h2>
             </header>
 
-            <div className="mb-8 grid overflow-hidden bg-[#10392d] text-white md:grid-cols-[1fr_1.3fr]">
-              <Image src={locale === "es" ? "/events/foro-canario-2026/poster-v9.png" : "/events/foro-canario-2026/poster-en-v1.png"} alt={locale === "es" ? "Cartel del taller de cambio climático de Asociación Nahiara" : "Asociación Nahiara climate change workshop poster"} width={1122} height={1402} className="h-full max-h-80 w-full bg-[#10392d] object-contain" />
+            <div className="mb-8 grid items-center overflow-hidden bg-[#10392d] text-white md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)]">
+              <div className="mx-auto w-full max-w-[26rem] p-5 md:p-8">
+                <div className="rounded-xl ring-2 ring-[#d6b56d] ring-offset-4 ring-offset-[#10392d]">
+                  <Image src={locale === "es" ? "/events/foro-canario-2026/poster-v9.png" : "/events/foro-canario-2026/poster-en-v1.png"} alt={locale === "es" ? "Cartel del taller de cambio climático de Asociación Nahiara" : "Asociación Nahiara climate change workshop poster"} width={1122} height={1402} className="block h-auto w-full rounded-xl" />
+                </div>
+              </div>
               <div className="p-6 md:p-9">
                 <p className="text-sm font-semibold text-[#f4d485]">I Foro Canario de Cambio Climático · 4 y 5 de noviembre · Telde</p>
                 <h3 className="mt-4 font-serif text-3xl leading-tight md:text-4xl">El Cambio Climático no juega solo. <span className="block mt-2 text-base font-normal">(Climate Change doesn&apos;t play alone.)</span></h3>
