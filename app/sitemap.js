@@ -20,6 +20,7 @@ export default function sitemap() {
     { path: '/evento-dibuja-flor', freq: 'monthly', priority: 0.8 },
     { path: '/dibuja-la-flor-de-tu-pais', freq: 'monthly', priority: 0.8 },
     { path: '/alianzas-academicas-e-institucionales', freq: 'monthly', priority: 0.7 },
+    { path: '/alianzas-academicas-e-institucionales/foro-canario-cambio-climatico-2026', freq: 'weekly', priority: 0.8 },
     { path: '/territories', freq: 'monthly', priority: 0.8 },
     { path: '/press', freq: 'monthly', priority: 0.75 },
     { path: '/sant-jordi-2026', freq: 'monthly', priority: 0.75 },

@@ -36,6 +36,13 @@ function AlliancesPageContent() {
       </section>
 
       <section className="py-16 px-6">
+        <div className="max-w-5xl mx-auto mb-10 bg-[#e6efe5] p-8 md:p-10">
+          <p className="text-sm font-semibold text-[#23644b]">4 y 5 de noviembre · Telde</p>
+          <h2 className="mt-3 text-2xl md:text-3xl text-[#1a3a2f]" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>El Cambio Climático no juega solo.</h2>
+          <p className="mt-2 text-[#2d4f40]">Tú también eres un guardián.</p>
+          <p className="mt-4 text-[#2d4f40]">Taller para niños a partir de 5 años en el I Foro Canario de Cambio Climático. Inscripción hasta el 28 de octubre. <a href="https://oficinasverdes.es/foro-canario-de-cambio-climatico/" target="_blank" rel="noreferrer" className="underline underline-offset-4">Fuente: programa oficial</a></p>
+          <Link href="/alianzas-academicas-e-institucionales/foro-canario-cambio-climatico-2026" className="mt-6 inline-flex font-semibold text-[#1a3a2f] underline underline-offset-4">Ver nuestra participación <ArrowRight className="ml-2 w-5 h-5" /></Link>
+        </div>
         <div className="max-w-5xl mx-auto grid lg:grid-cols-[1.2fr_0.8fr] gap-8 items-stretch">
           <article className="bg-white border border-[#1a3a2f]/15 p-8 md:p-10">
             <p className="text-[#2d4f40] text-lg leading-relaxed mb-6">{t("alliances.body1")}</p>

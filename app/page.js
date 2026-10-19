@@ -1000,6 +1000,17 @@ ${t("landing.visionText")}
               </h2>
             </header>
 
+            <div className="mb-8 grid overflow-hidden bg-[#10392d] text-white md:grid-cols-[1fr_1.3fr]">
+              <Image src="/pollinators/bumblebee.jpg" alt="Una abeja se acerca a una flor rosa" width={1200} height={800} className="h-full max-h-80 w-full object-cover" />
+              <div className="p-6 md:p-9">
+                <p className="text-sm font-semibold text-[#f4d485]">I Foro Canario de Cambio Climático · 4 y 5 de noviembre · Telde</p>
+                <h3 className="mt-4 font-serif text-3xl leading-tight md:text-4xl">El Cambio Climático no juega solo. <span className="block mt-2 text-base font-normal">(Climate Change doesn&apos;t play alone.)</span></h3>
+                <p className="mt-4 text-lg font-semibold">Tú también eres un guardián. <span className="block text-sm font-normal">(You too are a guardian.)</span></p>
+                <p className="mt-5 text-sm leading-6">{locale === "es" ? "Taller para niños a partir de 5 años. Inscripción hasta el 28 de octubre." : "Workshop for children aged 5 and over. Registration open until 28 October."} <a href="https://oficinasverdes.es/foro-canario-de-cambio-climatico/" target="_blank" rel="noreferrer" className="underline underline-offset-4">{locale === "es" ? "Fuente oficial" : "Official source"}</a></p>
+                <Link href="/alianzas-academicas-e-institucionales/foro-canario-cambio-climatico-2026" className="mt-6 inline-flex bg-[#f4d485] px-5 py-3 text-sm font-bold text-[#10392d] hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">{locale === "es" ? "Información e inscripción" : "Information and registration"}</Link>
+              </div>
+            </div>
+
             <div
               id="recent-events"
               className="mb-14 grid gap-6 border-y border-[#1a3a2f]/15 py-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start"
