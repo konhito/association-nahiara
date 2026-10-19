@@ -1001,7 +1001,7 @@ ${t("landing.visionText")}
             </header>
 
             <div className="mb-8 grid overflow-hidden bg-[#10392d] text-white md:grid-cols-[1fr_1.3fr]">
-              <Image src="/pollinators/bumblebee.jpg" alt="Una abeja se acerca a una flor rosa" width={1200} height={800} className="h-full max-h-80 w-full object-cover" />
+              <Image src={locale === "es" ? "/events/foro-canario-2026/poster-v9.png" : "/events/foro-canario-2026/poster-en-v1.png"} alt={locale === "es" ? "Cartel del taller de cambio climático de Asociación Nahiara" : "Asociación Nahiara climate change workshop poster"} width={1122} height={1402} className="h-full max-h-80 w-full bg-[#10392d] object-contain" />
               <div className="p-6 md:p-9">
                 <p className="text-sm font-semibold text-[#f4d485]">I Foro Canario de Cambio Climático · 4 y 5 de noviembre · Telde</p>
                 <h3 className="mt-4 font-serif text-3xl leading-tight md:text-4xl">El Cambio Climático no juega solo. <span className="block mt-2 text-base font-normal">(Climate Change doesn&apos;t play alone.)</span></h3>
